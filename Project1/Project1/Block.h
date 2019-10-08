@@ -14,7 +14,16 @@ public:
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
+
+	void SetScrooll(float s) { m_scroll = s; }
+	float GetScroll() { return m_scroll; }
+
+	void SetYScrooll(float s) { l_scroll = s; }
+	float GetYScroll() { return l_scroll; }
 private:
-	int m_map[10][10];
+	int m_map[10][100];
+
+	float m_scroll;//左右スクロール用変数
+	float l_scroll;//上下スクロール用変数
 
 };

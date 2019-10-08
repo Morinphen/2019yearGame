@@ -9,18 +9,32 @@ using namespace GameL;
 
 CObjHero::CObjHero()
 {
-	m_x = 0;
-	m_y = 0;
-	m_vx = 0;
-	m_vy = 0;
+
 }
 
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_x = 0;
+	m_x = 100;
+	m_y = 300;
+	m_vx = 0;
+	m_vy = 0;
+	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
 
+	jamptime = 0;
+	jamppower = 0.0f;
+
+	m_ani_time = 0;
+	m_ani_frame = 1;//静止フレーム初期化
+
+	m_speed_power = 0.5f;//通常速度
+	m_ani_max_time = 4;//アニメーション感覚幅
+
+	//blockとの衝突状態確認用
+	m_hit_up = false;
 	m_hit_down = false;
+	m_hit_left = false;
+	m_hit_right = false;
 }
 //アクション
 void CObjHero::Action()
@@ -33,29 +47,36 @@ void CObjHero::Action()
 		m_vx -= 1.0f;
 	}
 
-	if (Input::GetVKey('X'))
+	if (Input::GetVKey('X') && m_hit_down == true)
 	{
-		if(m_hit_down==false){
-			m_vy = -20.0f;
-			m_y += m_vy;
-			m_hit_down = true;
-		}
+		if(jamptime==0)
+			jamptime++;
+
+		jamppower += 4.0f;
 	}
-	else
+
+	if (jamptime != 0)
 	{
-		m_hit_down = false;
+		jamptime++;
+		if (jamptime == 5)
+		{
+			m_vy = -jamppower;
+			m_y += m_vy;
+			jamptime = 0;
+			jamppower = 0.0f;
+		}
 	}
 
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
 	//重力
-	m_vy += 9.8f / 16.0f;
+	if(m_vy<10)
+		m_vy += 9.8f / 16.0f;
 
 	m_x += m_vx;
 
-	if (m_y<300)
-		m_y += m_vy;
+	m_y += m_vy;
 }
 //ドロー
 void CObjHero::Draw()
