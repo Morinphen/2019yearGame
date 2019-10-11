@@ -1,6 +1,7 @@
 #pragma once
 //使用するヘッダー
 #include "GameL\SceneObjManager.h"
+#include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -21,6 +22,8 @@ private:
 	float m_vy;
 	float m_posture;//姿勢
 
+	CHitBox* hit;
+
 	int jamptime;
 	float jamppower;
 
@@ -30,10 +33,7 @@ private:
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
 
-						 //blockとの衝突確認用
-	bool m_hit_up;
-	bool m_hit_down;
-	bool m_hit_left;
-	bool m_hit_right;
-
+	//壁に当たったとき、アニメーションをさせる
+	bool Animation;
+	float spen;
 };

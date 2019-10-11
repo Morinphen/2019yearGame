@@ -72,6 +72,9 @@
     <ClCompile Include="syuriken.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Scroll.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -129,6 +132,9 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="syuriken.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scroll.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

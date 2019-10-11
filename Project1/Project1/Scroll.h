@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjBlock :public CObj
+class CObjScroll :public CObj
 {
 public:
-	CObjBlock(int x,int y);
-	~CObjBlock() {};
+	CObjScroll() {};
+	~CObjScroll() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー

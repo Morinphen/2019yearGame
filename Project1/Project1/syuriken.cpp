@@ -17,9 +17,11 @@ CObjSyuriken::CObjSyuriken(int x,int y)
 //イニシャライズ
 void CObjSyuriken::Init()
 {
-	m_vx = 0;
+	m_vx = 7;
 	m_vy = 0;
 	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
+
+	spen = 0;
 
 	jamptime = 0;
 	jamppower = 0.0f;
@@ -30,24 +32,34 @@ void CObjSyuriken::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
-					   //blockとの衝突状態確認用
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
-	m_hit_right = false;
+	Animation = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_PLAYER, OBJ_SYURIKEN, 1);
 }
 //アクション
 void CObjSyuriken::Action()
 {
-	m_x += 7.0f;
+	m_x += m_vx;
 	m_y += m_vy;
 
-	//弾丸のヒットボックス更新
-	CHitBox* hit = Hits::GetHitBox(this);
+	if(Animation==false)
+		hit = Hits::GetHitBox(this);
 
-	if (hit->CheckObjNameHit(OBJ_BLOCK)!=nullptr)
+	else {
+		m_vy += 9.8f / 16.0f;
+		spen += 7.0f;
+	}
+
+	if (hit->CheckObjNameHit(OBJ_BLOCK)!=nullptr && Animation==false)
+	{
+		Animation = true;
+
+		m_vx = -4.0f;
+		m_vy = -10.0f;
+		m_y += m_vy;
+	}
+
+	if (m_x > 2000 || m_y > 700)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
@@ -72,5 +84,5 @@ void CObjSyuriken::Draw()
 	dst.m_right = 64.0f + m_x;
 	dst.m_bottom = 64.0f + m_y;
 
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+	Draw::Draw(3, &src, &dst, c, spen);
 }
