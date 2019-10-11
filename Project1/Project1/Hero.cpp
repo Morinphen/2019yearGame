@@ -21,7 +21,7 @@ void CObjHero::Init()
 	m_y = 300;
 	m_vx = 0;
 	m_vy = 0;
-	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
+	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
 
 	jamptime = 0;
 	jamppower = 0.0f;
@@ -29,10 +29,10 @@ void CObjHero::Init()
 	s_atack = false;
 
 	m_ani_time = 0;
-	m_ani_frame = 1;//静止フレーム初期化
+	m_ani_frame = 0;//静止フレーム初期化
 
 	m_speed_power = 0.5f;//通常速度
-	m_ani_max_time = 4;//アニメーション感覚幅
+	m_ani_max_time = 2;//アニメーション感覚幅
 
 	//blockとの衝突状態確認用
 	m_hit_up = false;
@@ -45,18 +45,50 @@ void CObjHero::Init()
 void CObjHero::Action()
 {
 	if (Input::GetVKey(VK_RIGHT) == true) {
+		//Cボタンを押しているとダッシュ
+		if (Input::GetVKey('C') == true) {
+			m_vx += 1.0f;
+			m_ani_time++;
+		}
 		m_vx += 1.0f;
+
+		m_ani_time++;
+		m_posture = 0.0f;
 	}
 
-	if (Input::GetVKey(VK_LEFT) == true) {
+	else if (Input::GetVKey(VK_LEFT) == true) {
+		//Cボタンを押しているとダッシュ
+		if (Input::GetVKey('C') == true) {
+			m_vx -= 1.0f;
+			m_ani_time++;
+		}
 		m_vx -= 1.0f;
+		m_ani_time++;
+		m_posture = 1.0f;
+	}
+
+	else
+	{
+		m_ani_frame = 0;
+		m_ani_time = 0;
+	}
+
+	//アニメーション
+	if (m_ani_time >= 8)
+	{
+		m_ani_time = 0;
+		m_ani_frame++;
+		if (m_ani_frame == 2)
+		{
+			m_ani_frame = 0;
+		}
 	}
 
 	//攻撃
 	if (Input::GetVKey('Z'))
 	{
 		if (s_atack == false) {
-			CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y);
+			CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
 			Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
 			s_atack = true;
 		}
@@ -113,15 +145,15 @@ void CObjHero::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_top = 64.0f;
+	src.m_left = 64.0f*m_ani_frame;
+	src.m_right = 64.0f*(m_ani_frame + 1);
+	src.m_bottom = 128.0f;
 
 	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
-	dst.m_right = 64.0f + m_x;
+	dst.m_left = (64.0f*m_posture) + m_x;
+	dst.m_right = (64.0f - 64.0f*m_posture) + m_x;
 	dst.m_bottom = 64.0f + m_y;
 
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(4, &src, &dst, c, 0.0f);
 }

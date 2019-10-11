@@ -8,16 +8,21 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjSyuriken::CObjSyuriken(int x,int y)
+CObjSyuriken::CObjSyuriken(int x,int y,int m)
 {
 	m_x = x;
 	m_y = y;
+	m_muki = -m;
+
+	if (m == 0) {
+		m_muki = 1;
+	}
 }
 
 //イニシャライズ
 void CObjSyuriken::Init()
 {
-	m_vx = 7;
+	m_vx = 15 * m_muki;
 	m_vy = 0;
 	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
 
@@ -42,24 +47,26 @@ void CObjSyuriken::Action()
 	m_x += m_vx;
 	m_y += m_vy;
 
-	if(Animation==false)
+	if (Animation == false) {
+		//m_vx += 1.0f;
 		hit = Hits::GetHitBox(this);
+	}
 
 	else {
 		m_vy += 9.8f / 16.0f;
-		spen += 7.0f;
+		spen += 30.0f;
 	}
 
 	if (hit->CheckObjNameHit(OBJ_BLOCK)!=nullptr && Animation==false)
 	{
 		Animation = true;
 
-		m_vx = -4.0f;
+		m_vx = -4.0f*m_muki;
 		m_vy = -10.0f;
 		m_y += m_vy;
 	}
 
-	if (m_x > 2000 || m_y > 700)
+	if (m_x > 2000 || m_x<-200 || m_y > 700)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

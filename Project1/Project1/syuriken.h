@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjSyuriken :public CObj
 {
 public:
-	CObjSyuriken(int x,int y);
+	CObjSyuriken(int x,int y,int m);
 	~CObjSyuriken() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
@@ -29,6 +29,7 @@ private:
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
+	int m_muki;//手裏剣の方向
 
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
