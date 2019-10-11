@@ -21,6 +21,9 @@ public:
 	void SetYScrooll(float s) { l_scroll = s; }
 	float GetYScroll() { return l_scroll; }
 private:
+	int m_x;
+	int m_y;
+
 	int m_map[10][100];
 
 	float m_scroll;//左右スクロール用変数

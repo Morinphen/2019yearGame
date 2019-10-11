@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjHero :public CObj
 {
 public:
-	CObjHero();
+	CObjHero(int x,int y);
 	~CObjHero() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
@@ -38,6 +38,8 @@ private:
 
 	int jamptime;
 	float jamppower;
+
+	bool s_atack;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム

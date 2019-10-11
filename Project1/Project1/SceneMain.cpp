@@ -31,9 +31,10 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
 	Draw::LoadImage(L"block.png", 1, TEX_SIZE_512);
 	Draw::LoadImage(L"field.jpg", 2, TEX_SIZE_512);
+	Draw::LoadImage(L"syuriken.png", 3, TEX_SIZE_512);
 
 	//主人公オブジェクト作成
-	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
+	CObjHero*obj = new CObjHero(100,300);//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 3);
 
 	//blockオブジェクト作成

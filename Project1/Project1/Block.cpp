@@ -5,6 +5,7 @@
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
 #include"Block.h"
+#include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -58,7 +59,7 @@ void CObjBlock::Action()
 	}
 
 	//下方スクロールライン
-	if (hy > 500)
+	if (hy > 500 && l_scroll>-100)
 	{
 		hero->SetY(500);//主人公はラインを超えないように
 		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす

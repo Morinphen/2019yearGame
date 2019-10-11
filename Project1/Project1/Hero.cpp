@@ -3,13 +3,15 @@
 #include"GameL\WinInputs.h"
 #include"GameHead.h"
 #include"Hero.h"
+#include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjHero::CObjHero()
+CObjHero::CObjHero(int x,int y)
 {
-
+	m_x = x;
+	m_y = y;
 }
 
 //イニシャライズ
@@ -24,6 +26,8 @@ void CObjHero::Init()
 	jamptime = 0;
 	jamppower = 0.0f;
 
+	s_atack = false;
+
 	m_ani_time = 0;
 	m_ani_frame = 1;//静止フレーム初期化
 
@@ -35,6 +39,7 @@ void CObjHero::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_PLAYER, OBJ_HERO,1);
 }
 //アクション
 void CObjHero::Action()
@@ -47,6 +52,21 @@ void CObjHero::Action()
 		m_vx -= 1.0f;
 	}
 
+	//攻撃
+	if (Input::GetVKey('Z'))
+	{
+		if (s_atack == false) {
+			CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y);
+			Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+			s_atack = true;
+		}
+	}
+
+	else {
+		s_atack = false;
+	}
+
+	//ジャンプ
 	if (Input::GetVKey('X') && m_hit_down == true)
 	{
 		if(jamptime==0)
@@ -67,6 +87,11 @@ void CObjHero::Action()
 		}
 	}
 
+	if (m_y > 700.0f)
+	{
+		Scene::SetScene(new CSceneMain);
+	}
+
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
@@ -77,6 +102,9 @@ void CObjHero::Action()
 	m_x += m_vx;
 
 	m_y += m_vy;
+	//弾丸のヒットボックス更新
+	CHitBox* hit = Hits::GetHitBox(this);
+	hit->SetPos(m_x, m_y);
 }
 //ドロー
 void CObjHero::Draw()
