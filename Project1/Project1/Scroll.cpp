@@ -10,6 +10,11 @@
 //使用するネームスペース
 using namespace GameL;
 
+CObjScroll::CObjScroll(int map[10][100])
+{
+	memcpy(m_map, map, sizeof(int)*(10 * 100));
+}
+
 //イニシャライズ
 void CObjScroll::Init()
 {
@@ -57,7 +62,6 @@ void CObjScroll::Action()
 	hero->SetDown(false);
 	hero->SetLeft(false);
 	hero->SetRight(false);
-
 }
 //ドロー
 void CObjScroll::Draw()

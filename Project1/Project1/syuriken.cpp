@@ -28,9 +28,6 @@ void CObjSyuriken::Init()
 
 	spen = 0;
 
-	jamptime = 0;
-	jamppower = 0.0f;
-
 	m_ani_time = 0;
 	m_ani_frame = 1;//Ã~ƒtƒŒ[ƒ€‰Šú‰»
 

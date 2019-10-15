@@ -10,6 +10,7 @@ enum OBJ_NAME
 	OBJ_BLOCK,
 	OBJ_SYURIKEN,
 	OBJ_SCROLL,
+	OBJ_DONDEN,
 };
 //------------------------------------------------
 
@@ -57,6 +58,7 @@ struct UserData
 #include"Block.h"
 #include"syuriken.h"
 #include"Scroll.h"
+#include"Dondengaesi.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
