@@ -15,6 +15,8 @@ public:
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
+
+	int Pworp;
 private:
 
 	int Worp(int a);
@@ -26,6 +28,9 @@ private:
 	float l_scroll;//上下スクロール用変数
 
 	float red;
+	//ワープする際にアニメーションをさせる
+	bool Wanimation;
+	bool Wanimation2;
 
 	int D_tag[10][2];//ペアのどんでん返しを探す
 

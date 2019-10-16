@@ -29,6 +29,13 @@ public:
 	void SetDown(bool b) { m_hit_down = b; }
 	void SetLeft(bool b) { m_hit_left = b; }
 	void SetRight(bool b) { m_hit_right = b; }
+
+	bool Sworp;//ワープ制御用変数
+
+	//ワープする際の画像切り取り位置
+	float W_cat;
+	float W_cat2;
+
 private:
 	float m_x;
 	float m_vx;
