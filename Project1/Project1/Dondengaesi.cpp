@@ -85,7 +85,7 @@ void CObjDonden::Action()
 			h->SetX(D_tag[Pworp][1] * 64);
 			h->SetY(D_tag[Pworp][0] * 64);
 
-			scroll->SetScrooll(-(h->GetX() - (300)));
+			scroll->SetScrooll(-(h->GetX() - (400)));
 			if (h->GetY() < 80)
 				scroll->SetYScrooll(-(h->GetY() - (80)));
 			else if (h->GetY() > 500)
