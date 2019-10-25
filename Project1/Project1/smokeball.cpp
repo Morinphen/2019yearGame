@@ -103,5 +103,5 @@ void CObjSmokeball::Draw()
 	dst.m_right = 64.0f + m_x;
 	dst.m_bottom = 64.0f + m_y;
 
-	Draw::Draw(5, &src, &dst, c, 0);
+	Draw::Draw(6, &src, &dst, c, 0);
 }
