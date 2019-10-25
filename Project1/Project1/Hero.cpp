@@ -130,16 +130,15 @@ void CObjHero::Action()
 			jamppower += 4.0f;
 		}
 
-		if (jamptime != 0)
+	if (jamptime != 0)
+	{
+		jamptime++;
+		if (jamptime == 5)
 		{
-			jamptime++;
-			if (jamptime == 5)
-			{
-				m_vy = -jamppower;
-				m_y += m_vy;
-				jamptime = 0;
-				jamppower = 0.0f;
-			}
+			m_vy = -jamppower;
+			m_y += m_vy;
+			jamptime = 0;
+			jamppower = 0.0f;
 		}
 	}
 
