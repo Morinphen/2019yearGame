@@ -21,6 +21,8 @@ void CObjDonden::Init()
 	m_ani_frame = 1;//静止フレーム初期化
 
 	red = 1.0f;
+	Wanimation = false;
+	Wanimation2 = false;
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -33,6 +35,7 @@ void CObjDonden::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
@@ -50,16 +53,59 @@ void CObjDonden::Action()
 		}
 	}
 
-	Worp((a));
+	Pworp = Worp((a));
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		red = 0.0f;
+		if (Input::GetVKey(VK_UP) == true)
+		{
+			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+
+				h->W_cat = 0.0f;
+				h->W_cat2 -= 6.4f;
+				h->Sworp = true;
+
+				Wanimation = true;
+			}
+		}
 	}
 
 	else
 	{
 		red = 1.0f;
+	}
+
+	if (Wanimation == true)
+	{
+		h->W_cat2 -= 6.4f;
+		h->Sworp = true;
+		if (h->W_cat2 <= -64.0f)
+		{
+			h->SetX(D_tag[Pworp][1] * 64);
+			h->SetY(D_tag[Pworp][0] * 64);
+
+			scroll->SetScrooll(-(h->GetX() - (400)));
+			if (h->GetY() < 80)
+				scroll->SetYScrooll(-(h->GetY() - (80)));
+			else if (h->GetY() > 500)
+				scroll->SetYScrooll(-(h->GetY() - (500)));
+
+			h->W_cat2 = -64.0f;
+			Wanimation = false;
+			Wanimation2 = true;
+		}
+	}
+
+	if (Wanimation2 == true)
+	{
+		h->W_cat2 += 6.4f;
+		h->Sworp = true;
+		if (h->W_cat2 >= 0.0f) {
+			h->W_cat2 = 0.0f;
+			h->W_cat = 1.0f;
+			Wanimation2 = false;
+		}
 	}
 
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
@@ -81,38 +127,52 @@ void CObjDonden::Draw()
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(5, &src, &dst, c, 0.0f);
 }
 
+//どんでん返しのタッグを決める関数
 int CObjDonden::Worp(int a)
 {
 	int data[10];
+	int data2[10];
 
 	int base;
+	int aa = 0;
 
 	//どんでん返しがある場所のデータを保存
-	for (int i = 0; i < a; i++)
+	for (int i = 0; i < a ; i++)
 	{
-		if(D_tag[i][0] * 64 != m_y&&D_tag[i][1] * 64 != m_x)
-			data[i] = D_tag[i][0] + D_tag[i][1];
+		if ((D_tag[i][0] * 64) != m_y || (D_tag[i][1] * 64) != m_x) {
+			data[aa] = D_tag[i][0] + D_tag[i][1];
+			data2[aa] = i;
+			aa++;
+		}
 		else
 			base = D_tag[i][0] + D_tag[i][1];
 	}
 
-	//バブルソート
-	for (int i = 0; i < a - 1; i++)
-	{
+	//どんでん返しの距離を求めるため、絶対値化
+	for (int i = 0; i < aa; i++) {
 		data[i] = abs(data[i] - base);
-		for (int j = a - 1; j > i; j--)
+	}
+
+	//バブルソート
+	for (int i = 0; i < aa - 1; i++)
+	{
+		for (int j = aa - 1; j > i; j--)
 		{
 			if (data[j] < data[j - 1])
 			{
 				int a = data[j - 1];
 				data[j - 1] = data[j];
 				data[j] = a;
+
+				a = data2[j - 1];
+				data2[j - 1] = data2[j];
+				data2[j] = a;
 			}
 		}
 	}
 
-	return data[0];
+	return data2[0];
 }

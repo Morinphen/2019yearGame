@@ -30,16 +30,16 @@ void CObjScroll::Action()
 	float hy = hero->GetY();
 
 	//後方スクロールライン
-	if (hx < 80)
+	if (hx < 250)
 	{
-		hero->SetX(80);//主人公はラインを超えないように
+		hero->SetX(250);//主人公はラインを超えないように
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
 	//前方スクロールライン
-	if (hx > 300)
+	if (hx > 400)
 	{
-		hero->SetX(300);//主人公はラインを超えないように
+		hero->SetX(400);//主人公はラインを超えないように
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
