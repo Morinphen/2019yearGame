@@ -72,6 +72,11 @@ void CSceneMain::InitScene()
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(block_data);
 	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
+
+	//Test用　敵オブジェクト作成
+	CObjEnemy* obje = new CObjEnemy();
+	Objs::InsertObj(obje, OBJ_ENEMY, 6);
+
 }
 
 //ゲームメイン実行中メソッド

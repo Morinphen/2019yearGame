@@ -32,6 +32,11 @@ void CObjBlock::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
+	//敵の位置を取得
+	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	float ex = enemy->GetX();
+	float ey = enemy->GetY();
+
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
@@ -91,6 +96,62 @@ void CObjBlock::Action()
 				if (hero->GetVY() < 0)
 				{
 					hero->SetVY(0.0f);
+				}
+			}
+		}
+	}
+
+	//主人公とブロックの当たり判定
+	if ((ex + (-m_scroll) + 64.0f > x) && (ex + (-m_scroll) < x + 64.0f) && (ey + (-l_scroll) + 64.0f > y) && (ey + (-l_scroll) < y + 64.0f))
+	{
+		//上下左右判定
+
+		//vectorの作成
+		float evx = (ex + (-m_scroll)) - x;
+		float evy = (ey + (-l_scroll)) - y;
+		//長さを求める
+		float elen = sqrt(evx*evx + evy*evy);
+
+		//角度を求める
+		float er = atan2(evy, evx);
+		er = er * 180 / 3.14;
+		if (er <= 0.0f)
+			er = abs(er);
+		else
+			er = 360.0f - abs(er);
+
+		//lenがある一定の長さのより短い場合判定に入る
+		if (elen < 88.0f) {
+			//角度で上下左右を判定
+			if ((er < 45 && er >= 0) || er > 315)
+			{
+				//右
+			    enemy->SetRight(true);//敵の左の部分が衝突している
+				enemy->SetX(x + 64.0f + (m_scroll));//ブロックの位置+主人公の幅
+				enemy->SetVX(-enemy->GetVX()*0.1f);//-VX*反発係数
+			}
+			else if (er > 45 && er < 135)
+			{
+				//上
+				enemy->SetDown(true);//敵から見て下の部分が衝突している
+				enemy->SetY(y - 64.0f + (l_scroll));//ブロックの位置-主人公の幅
+				enemy->SetVY(0.0f);
+			}
+			else if (er > 135 && er < 225)
+			{
+				//左
+				enemy->SetLeft(true);//敵の右の部分が衝突している
+			    enemy->SetX(x - 64.0f + (m_scroll));//ブロックの位置+主人公の幅
+				enemy->SetVX(-enemy->GetVX()*0.1f);//-VX*反発係数
+			}
+			else if (er > 225 && er < 315)
+			{
+				//下
+				enemy->SetUP(true);//敵から見て上の部分が当たっている
+				enemy->SetY(y + 64.0f + (l_scroll));//ブロックの位置+主人公の幅
+				if (enemy->GetVY() < 0)
+				{
+					enemy->SetVY(0.0f);
 				}
 			}
 		}
