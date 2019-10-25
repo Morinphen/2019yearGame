@@ -31,6 +31,8 @@ void CObjHero::Init()
 	s_atack = false;
 	Sworp = false;
 
+	ball = false;
+
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
 
@@ -47,14 +49,20 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	if (W_cat == 1.0f) {
-		if (Input::GetVKey(VK_RIGHT) == true) {
-			//Cボタンを押しているとダッシュ
-			if (Input::GetVKey('C') == true) {
-				m_vx += 1.0f;
-				m_ani_time++;
-			}
+	//ブロックとの当たり判定
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_x, &m_y,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right,false,
+		&m_vx, &m_vy
+	);
+
+	if (Input::GetVKey(VK_RIGHT) == true) {
+		//Cボタンを押しているとダッシュ
+		if (Input::GetVKey('C') == true) {
 			m_vx += 1.0f;
+			m_ani_time++;
+		}
+		m_vx += 1.0f;
 
 			m_ani_time++;
 			m_posture = 0.0f;
@@ -88,19 +96,30 @@ void CObjHero::Action()
 			}
 		}
 
-		//攻撃
-		if (Input::GetVKey('Z'))
-		{
-			if (s_atack == false) {
-				CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
-				Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
-				s_atack = true;
-			}
+	//攻撃
+	if (Input::GetVKey('Z'))
+	{
+		if (s_atack == false) {
+			CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
+			Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+			s_atack = true;
 		}
+	}
+	else 
+	{
+		s_atack = false;
+	}
 
-		else {
-			s_atack = false;
+	//煙玉
+	if (Input::GetVKey('A'))
+	{
+		if (ball == false) 
+		{
+			CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
+			Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+			ball = true;
 		}
+	}
 
 		//ジャンプ
 		if (Input::GetVKey('X') && m_hit_down == true)
@@ -149,6 +168,7 @@ void CObjHero::Action()
 	m_x += m_vx;
 
 	m_y += m_vy;
+
 	//弾丸のヒットボックス更新
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x, m_y);

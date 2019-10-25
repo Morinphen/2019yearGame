@@ -63,11 +63,6 @@ void CObjScroll::Action()
 		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
 	}
 
-	//主人公の衝突状態確認用ﾌﾗｸﾞの初期化
-	hero->SetUP(false);
-	hero->SetDown(false);
-	hero->SetLeft(false);
-	hero->SetRight(false);
 }
 //ドロー
 void CObjScroll::Draw()

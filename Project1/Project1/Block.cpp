@@ -10,10 +10,10 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlock::CObjBlock(int x, int y)
+CObjBlock::CObjBlock(int map[10][100])
 {
-	m_x = x;
-	m_y = y;
+	//マップデータをコピー
+	memcpy(m_map, map, sizeof(int)*(10 * 100));
 }
 
 //イニシャライズ
@@ -27,138 +27,11 @@ void CObjBlock::Init()
 //アクション
 void CObjBlock::Action()
 {
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
-	//敵の位置を取得
-	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
-	float ex = enemy->GetX();
-	float ey = enemy->GetY();
-
+	
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
-	//要素番号を安俵に変更
-	float x = m_x;
-	float y = m_y;
-
-	//主人公とブロックの当たり判定
-	if ((hx + (-m_scroll) + 64.0f > x) && (hx + (-m_scroll) < x + 64.0f) && (hy + (-l_scroll) + 64.0f > y) && (hy + (-l_scroll) < y + 64.0f))
-	{
-		//上下左右判定
-
-		//vectorの作成
-		float vx = (hx + (-m_scroll)) - x;
-		float vy = (hy + (-l_scroll)) - y;
-		//長さを求める
-		float len = sqrt(vx*vx + vy*vy);
-
-		//角度を求める
-		float r = atan2(vy, vx);
-		r = r * 180 / 3.14;
-		if (r <= 0.0f)
-			r = abs(r);
-		else
-			r = 360.0f - abs(r);
-
-		//lenがある一定の長さのより短い場合判定に入る
-		if (len < 88.0f) {
-			//角度で上下左右を判定
-			if ((r < 45 && r>=0) || r > 315)
-			{
-				//右
-				hero->SetRight(true);//主人公の左の部分が衝突している
-				hero->SetX(x + 64.0f + (m_scroll));//ブロックの位置+主人公の幅
-				hero->SetVX(-hero->GetVX()*0.1f);//-VX*反発係数
-			}
-			else if (r > 45 && r < 135)
-			{
-				//上
-				hero->SetDown(true);//主人公から見て下の部分が衝突している
-				hero->SetY(y - 64.0f + (l_scroll));//ブロックの位置-主人公の幅
-				hero->SetVY(0.0f);
-			}
-			else if (r > 135 && r < 225)
-			{
-				//左
-				hero->SetLeft(true);//主人公の右の部分が衝突している
-				hero->SetX(x - 64.0f + (m_scroll));//ブロックの位置+主人公の幅
-				hero->SetVX(-hero->GetVX()*0.1f);//-VX*反発係数
-			}
-			else if (r > 225 && r < 315)
-			{
-				//下
-				hero->SetUP(true);//主人公から見て上の部分が当たっている
-				hero->SetY(y + 64.0f + (l_scroll));//ブロックの位置+主人公の幅
-				if (hero->GetVY() < 0)
-				{
-					hero->SetVY(0.0f);
-				}
-			}
-		}
-	}
-
-	//主人公とブロックの当たり判定
-	if ((ex + (-m_scroll) + 64.0f > x) && (ex + (-m_scroll) < x + 64.0f) && (ey + (-l_scroll) + 64.0f > y) && (ey + (-l_scroll) < y + 64.0f))
-	{
-		//上下左右判定
-
-		//vectorの作成
-		float evx = (ex + (-m_scroll)) - x;
-		float evy = (ey + (-l_scroll)) - y;
-		//長さを求める
-		float elen = sqrt(evx*evx + evy*evy);
-
-		//角度を求める
-		float er = atan2(evy, evx);
-		er = er * 180 / 3.14;
-		if (er <= 0.0f)
-			er = abs(er);
-		else
-			er = 360.0f - abs(er);
-
-		//lenがある一定の長さのより短い場合判定に入る
-		if (elen < 88.0f) {
-			//角度で上下左右を判定
-			if ((er < 45 && er >= 0) || er > 315)
-			{
-				//右
-			    enemy->SetRight(true);//敵の左の部分が衝突している
-				enemy->SetX(x + 64.0f + (m_scroll));//ブロックの位置+主人公の幅
-				enemy->SetVX(-enemy->GetVX()*0.1f);//-VX*反発係数
-			}
-			else if (er > 45 && er < 135)
-			{
-				//上
-				enemy->SetDown(true);//敵から見て下の部分が衝突している
-				enemy->SetY(y - 64.0f + (l_scroll));//ブロックの位置-主人公の幅
-				enemy->SetVY(0.0f);
-			}
-			else if (er > 135 && er < 225)
-			{
-				//左
-				enemy->SetLeft(true);//敵の右の部分が衝突している
-			    enemy->SetX(x - 64.0f + (m_scroll));//ブロックの位置+主人公の幅
-				enemy->SetVX(-enemy->GetVX()*0.1f);//-VX*反発係数
-			}
-			else if (er > 225 && er < 315)
-			{
-				//下
-				enemy->SetUP(true);//敵から見て上の部分が当たっている
-				enemy->SetY(y + 64.0f + (l_scroll));//ブロックの位置+主人公の幅
-				if (enemy->GetVY() < 0)
-				{
-					enemy->SetVY(0.0f);
-				}
-			}
-		}
-	}
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
 void CObjBlock::Draw()
@@ -167,18 +40,172 @@ void CObjBlock::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	//ブロック表示
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			//ブロック表示
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 64.0f;
+			src.m_bottom = 64.0f;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
-	Draw::Draw(1, &src, &dst, c, 0.0f);
+			dst.m_top = i*64.0f + l_scroll;
+			dst.m_left = j*64.0f + m_scroll;
+			dst.m_right = dst.m_left + 64.0f;
+			dst.m_bottom = dst.m_top + 64.0f;
+
+			if (m_map[i][j] == 1)
+			{
+				Draw::Draw(1, &src, &dst, c, 0.0f);
+			}
+		}
+	}
 }
+
+
+//ブロックとの当たり判定関数(BlockHit関数)
+//引数1  float* x          ;判定を行うobjectのx位置
+//引数2  float* y          ;判定を行うobjectのy位置
+//引数3  bool*  up         ;上下左右判定の上部分に当たっているかどうかを返す
+//引数4  bool*  down       ;上下左右判定の下部分に当たっているかどうかを返す
+//引数5  bool*  left       ;上下左右判定の左部分に当たっているかどうかを返す
+//引数6  bool*  right      ;上下左右判定の右部分に当たっているかどうかを返す
+//引数7  bool   smoke      ;煙玉かを判定する(true:煙玉)
+//引数8  float* vx         ;左右判定時の反発による移動方向・力の値変えて返す
+//引数9  float* vy         ;上下判定時による自由落下運動の移動方向・力の値変えて返す
+//判定を行うobjectとブロック64＊64限定で、当たり判定と上下左右半手を行う
+//その結果は引数3～8に返す
+void CObjBlock::BlockHit
+(
+	float* x, float* y,
+	bool*up, bool* down, bool* left, bool* right,bool smoke,
+	float *vx, float *vy
+)
+{
+	//主人公の衝突確認用フラグの初期化
+	*up = false;
+	*down = false;
+	*left = false;
+	*right = false;
+
+	//m_mapの全要素にアクセス
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (m_map[i][j] > 0)
+			{
+				//要素番号を座標に変更
+				float bx = j*64.0f;
+				float by = i*64.0f;
+
+				//オブジェクトとブロックの当たり判定
+				if ((*x + (-m_scroll) + 64.0f > bx) && (*x + (-m_scroll)<bx + 64.0f) && (*y + (-l_scroll) + 64.0f>by) && (*y + (-l_scroll)<by + 64.0f))
+				{
+					//上下左右判定
+
+					//vectorの作成
+					float rvx = (*x + (-m_scroll)) - bx;
+					float rvy = (*y + (-l_scroll)) - by;
+
+					//長さを求める
+					float len = sqrt(rvx*rvx + rvy * rvy);
+
+					//角度を求める
+					float r = atan2(rvy, rvx);
+					r = r*180.0f / 3.14f;
+
+					if (r <= 0.0f)
+						r = abs(r);
+					else
+						r = 360.0f - abs(r);
+
+					//lenがある一定の長さのより短い場合判定に入る
+					if (len < 88.0f)
+					{
+						//煙玉か判定
+						if (smoke == false)
+						{
+							//角度で上下左右を判定
+							if ((r < 45 && r>0) || r > 315)
+							{
+								//右
+								*right = true;//主人公の左の部分が衝突しているか
+								*x = bx + 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+								*vx = -(*vx)*0.1f;//-VX*反発係数
+							}
+
+							if (r > 45 && r < 135)
+							{
+								//上
+								*down = true;//主人公の下の部分が衝突しているか
+								*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+								*vy = 0.0f;
+							}
+
+							if (r > 135 && r < 225)
+							{
+								//左
+								*left = true;//主人公の右の部分が衝突しているか
+								*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+								*vx = -(*vx)*0.1f;//-VX*反発係数
+							}
+
+							if (r > 225 && r < 315)
+							{
+								//下
+								*up = true;//主人公の上の部分が衝突しているか
+								*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
+							}
+						}
+						else
+						{
+							//角度で上下左右を判定
+							if ((r < 45 && r>0) || r > 315)
+							{
+								//右
+								*right = true;//煙玉の左の部分が衝突しているか
+								*x = bx + 64.0f + (m_scroll);//ブロックに位置-煙玉の幅
+								*vx = -(*vx)*0.0f;//-VX*反発係数
+							}
+
+							if (r > 45 && r < 135)
+							{
+								CObjSmokeball* smokeball = (CObjSmokeball*)Objs::GetObj(OBJ_SMOKEBALL);
+								smokeball->SetDelete(true);
+							}
+
+							if (r > 135 && r < 225)
+							{
+								//左
+								*left = true;//煙玉の右の部分が衝突しているか
+								*x = bx - 64.0f + (m_scroll);//ブロックに位置-煙玉の幅
+								*vx = -(*vx)*0.0f;//-VX*反発係数
+							}
+
+							if (r > 225 && r < 315)
+							{
+								//下
+								*up = true;//煙玉の上の部分が衝突しているか
+								*y = by + 64.0f + (l_scroll);//ブロックの位置+煙玉の幅
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 
 ////内積関数
 ////引数1,2float ax,ay:Aベクトル

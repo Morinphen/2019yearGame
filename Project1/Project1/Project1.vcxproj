@@ -130,6 +130,7 @@
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="Scroll.cpp" />
+    <ClCompile Include="smokeball.cpp" />
     <ClCompile Include="syuriken.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Scroll.h" />
+    <ClInclude Include="smokeball.h" />
     <ClInclude Include="syuriken.h" />
   </ItemGroup>
   <ItemGroup>
