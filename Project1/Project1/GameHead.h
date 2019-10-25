@@ -11,6 +11,7 @@ enum OBJ_NAME
 	OBJ_SYURIKEN,
 	OBJ_SCROLL,
 	OBJ_DONDEN,
+	OBJ_SMOKEBALL,
 };
 //------------------------------------------------
 
@@ -54,11 +55,12 @@ struct UserData
 //------------------------------------------------
 
 //ゲームシーンオブジェクトヘッダ------------------
-#include "Hero.h"
+#include"Hero.h"
 #include"Block.h"
 #include"syuriken.h"
 #include"Scroll.h"
 #include"Dondengaesi.h"
+#include"smokeball.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

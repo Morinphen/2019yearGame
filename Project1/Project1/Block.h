@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjBlock :public CObj
 {
 public:
-	CObjBlock(int x,int y);
+	CObjBlock(int map[10][100]);
 	~CObjBlock() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
@@ -20,6 +20,15 @@ public:
 
 	void SetYScrooll(float s) { l_scroll = s; }
 	float GetYScroll() { return l_scroll; }
+
+	void SetHitSmokeBall(bool h) { hit_smokeball = h; }
+
+	void CObjBlock::BlockHit
+	(
+		float* x, float* y,
+		bool*up, bool* down, bool* left, bool* right,bool smoke,
+		float *vx, float *vy
+	);
 
 	////主人公と壁の交差判定
 	//bool HeroBlockCrossPoint(
@@ -32,6 +41,8 @@ private:
 	int m_y;
 
 	int m_map[10][100];
+
+	bool hit_smokeball;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
