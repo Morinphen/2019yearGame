@@ -34,6 +34,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"syuriken.png", 3, TEX_SIZE_512);
 	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
 	Draw::LoadImage(L"mon.png", 5, TEX_SIZE_512);
+	Draw::LoadImage(L"kemuridama.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"target.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
 	Draw::LoadImage(L"tokei.jpg", 8, TEX_SIZE_512);
@@ -55,11 +56,11 @@ void CSceneMain::InitScene()
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 100; j++)
-		{
-			if (block_data[i][j] == 1) {
+		{	
+			/*if (block_data[i][j] == 1) {
 				CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 				Objs::InsertObj(objb, OBJ_BLOCK, 2);
-			}
+			}*/
 
 			if (block_data[i][j] == 5) {
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64);
@@ -80,6 +81,15 @@ void CSceneMain::InitScene()
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(block_data);
 	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
+
+	//Test用　敵オブジェクト作成
+	CObjEnemy* obje = new CObjEnemy();
+	Objs::InsertObj(obje, OBJ_ENEMY, 6);
+
+
+	//Blockオブジェクト作成
+	CObjBlock* objb = new CObjBlock(block_data);
+	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 }
 
 //ゲームメイン実行中メソッド

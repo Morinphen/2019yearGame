@@ -33,6 +33,8 @@ void CObjHero::Init()
 	Sworp = false;
 	nawa_ido = false;
 
+	ball = false;
+
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
 
@@ -49,6 +51,20 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//ブロックとの当たり判定
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_x, &m_y,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right,false,
+		&m_vx, &m_vy
+	);
+
+	if (Input::GetVKey(VK_RIGHT) == true) {
+		//Cボタンを押しているとダッシュ
+		if (Input::GetVKey('C') == true) {
+			m_vx += 1.0f;
+			m_ani_time++;
+		}
+		m_vx += 1.0f;
 	if (W_cat == 1.0f&&nawa_ido == false) {
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
@@ -111,9 +127,16 @@ void CObjHero::Action()
 			}
 		}
 
-		else {
-			s_atack = false;
+	//煙玉
+	if (Input::GetVKey('A'))
+	{
+		if (ball == false) 
+		{
+			CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
+			Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+			ball = true;
 		}
+	}
 
 		//ジャンプ
 		if (Input::GetVKey('X') && m_hit_down == true)
