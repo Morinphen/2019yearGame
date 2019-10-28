@@ -111,7 +111,7 @@ void CObjHero::Action()
 	}
 
 	//‰Œ‹Ê
-	if (Input::GetVKey('A'))
+	if (Input::GetVKey('D'))
 	{
 		if (ball == false) 
 		{

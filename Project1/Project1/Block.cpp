@@ -176,8 +176,12 @@ void CObjBlock::BlockHit
 
 							if (r > 45 && r < 135)
 							{
+								//上
+								*down = true;//主人公の下の部分が衝突しているか
+								*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+								*vy = 0.0f;
 								CObjSmokeball* smokeball = (CObjSmokeball*)Objs::GetObj(OBJ_SMOKEBALL);
-								smokeball->SetDelete(true);
+								smokeball->Setmodecheck(true);
 							}
 
 							if (r > 135 && r < 225)

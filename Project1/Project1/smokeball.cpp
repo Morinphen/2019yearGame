@@ -46,8 +46,6 @@ void CObjSmokeball::Action()
 	if (modecheck == false)
 	{
 
-		hit = Hits::GetHitBox(this);
-
 		//ブロックとの当たり判定
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 		pb->BlockHit(&m_x, &m_y,
@@ -55,19 +53,27 @@ void CObjSmokeball::Action()
 			&m_vx, &m_vy
 		);
 
+		m_x += m_vx;
+		m_y += m_vy;
+
 		//重力
 		if (m_vy < 20)
 			m_vy += 9.8f / 16.0f;
 
 	}
-	////煙の状態
-	//else
-	//{
+	//煙の状態
+	else
+	{
+		smoke_time++;
+		if (smoke_time / 60 == 5)
+		{
+			modecheck = false;
+			smoke_time = 0;
+			smokeball_delete = true;
+		}
+	}
 
-	//}
-
-	m_x += m_vx;
-	m_y += m_vy;
+	hit = Hits::GetHitBox(this);
 
 	//主人公情報取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -81,7 +87,7 @@ void CObjSmokeball::Action()
 	}
 
 	//削除範囲
-	if (m_y > 700)
+	if (m_y > 800)
 		smokeball_delete = true;
 
 	hit->SetPos(m_x, m_y);
@@ -93,15 +99,40 @@ void CObjSmokeball::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	//玉の状態
+	if (modecheck == false)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
 
-	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
-	dst.m_right = 64.0f + m_x;
-	dst.m_bottom = 64.0f + m_y;
+		dst.m_top = 0.0f + m_y;
+		dst.m_left = 0.0f + m_x;
+		dst.m_right = 64.0f + m_x;
+		dst.m_bottom = 64.0f + m_y;
 
-	Draw::Draw(6, &src, &dst, c, 0);
+		Draw::Draw(6, &src, &dst, c, 0);
+	}
+	//煙の状態
+	else
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = -4; j < 5; j++)
+			{
+				src.m_top = 0.0f;
+				src.m_left = 0.0f;
+				src.m_right = 200.0f;
+				src.m_bottom = 200.0f;
+
+				dst.m_top = (0.0f + m_y)-(64.0f*i);
+				dst.m_left = (0.0f + m_x)+(64.0f*j);
+				dst.m_right = (64.0f + m_x)+(64.0f*j);
+				dst.m_bottom = (64.0f + m_y)-(64.0f*i);
+
+				Draw::Draw(1, &src, &dst, c, 0);
+			}
+		}
+	}
 }
