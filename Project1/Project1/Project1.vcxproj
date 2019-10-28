@@ -127,6 +127,9 @@
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="Kaginawa.cpp" />
+    <ClCompile Include="Nagenawa.cpp" />
+    <ClCompile Include="NawaBlock.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="Scroll.cpp" />
     <ClCompile Include="syuriken.cpp" />
@@ -150,6 +153,9 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="Kaginawa.h" />
+    <ClInclude Include="Nagenawa.h" />
+    <ClInclude Include="NawaBlock.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Scroll.h" />

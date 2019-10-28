@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjBlock :public CObj
+class CObjNBlock :public CObj
 {
 public:
-	CObjBlock(int x,int y);
-	~CObjBlock() {};
+	CObjNBlock(int x, int y);
+	~CObjNBlock() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
@@ -39,9 +39,9 @@ private:
 
 	float Dot(float ax, float ay, float bx, float by);//内積
 	float Cross(float ax, float ay, float bx, float by);//外積
-	/*bool CObjBlock::LineCrossPoint(
-		float a1x, float a1y, float a2x, float a2y,
-		float b1x, float b1y, float b2x, float b2y,
-		float* out_px, float* out_py
-	);*/
+														/*bool CObjBlock::LineCrossPoint(
+														float a1x, float a1y, float a2x, float a2y,
+														float b1x, float b1y, float b2x, float b2y,
+														float* out_px, float* out_py
+														);*/
 };

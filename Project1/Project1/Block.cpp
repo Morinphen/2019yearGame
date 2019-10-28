@@ -21,7 +21,7 @@ void CObjBlock::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
-
+	aaa = 0;
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_BLOCK, 1);
 }
 //ƒAƒNƒVƒ‡ƒ“
@@ -95,7 +95,7 @@ void CObjBlock::Action()
 			}
 		}
 	}
-
+	aaa++;
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }

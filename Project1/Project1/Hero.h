@@ -25,6 +25,11 @@ public:
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
 
+	void NawaIdo(bool b) { nawa_ido = b; }
+	void ReSetN(bool b) { nawa_stop = b; }
+	void SetNX(float x) { n_x = x; }
+	void SetNY(float y) { n_y = y; }
+
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
 	void SetLeft(bool b) { m_hit_left = b; }
@@ -46,7 +51,14 @@ private:
 	int jamptime;
 	float jamppower;
 
+	//攻撃等の制限用変数
 	bool s_atack;
+	bool nawa_stop;
+
+	//縄移動用変数
+	bool nawa_ido;
+	float n_x;
+	float n_y;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム

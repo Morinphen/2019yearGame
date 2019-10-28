@@ -11,6 +11,9 @@ enum OBJ_NAME
 	OBJ_SYURIKEN,
 	OBJ_SCROLL,
 	OBJ_DONDEN,
+	OBJ_KAGINAWA,
+	OBJ_NAGENAWA,
+	OBJ_NBLOCK,
 };
 //------------------------------------------------
 
@@ -59,6 +62,9 @@ struct UserData
 #include"syuriken.h"
 #include"Scroll.h"
 #include"Dondengaesi.h"
+#include"Kaginawa.h"
+#include"Nagenawa.h"
+#include"NawaBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

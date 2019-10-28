@@ -29,7 +29,9 @@ void CObjHero::Init()
 	W_cat2 = 0.0f;
 
 	s_atack = false;
+	nawa_stop = false;
 	Sworp = false;
+	nawa_ido = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
@@ -47,10 +49,10 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	if (W_cat == 1.0f) {
+	if (W_cat == 1.0f&&nawa_ido == false) {
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
-			if (Input::GetVKey('C') == true) {
+			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx += 1.0f;
 				m_ani_time++;
 			}
@@ -62,7 +64,7 @@ void CObjHero::Action()
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
 			//Cボタンを押しているとダッシュ
-			if (Input::GetVKey('C') == true) {
+			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx -= 1.0f;
 				m_ani_time++;
 			}
@@ -98,6 +100,17 @@ void CObjHero::Action()
 			}
 		}
 
+		//鉤縄
+		else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
+		{
+			if (s_atack == false) {
+				CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
+				Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
+				s_atack = true;
+				nawa_stop = true;
+			}
+		}
+
 		else {
 			s_atack = false;
 		}
@@ -122,6 +135,13 @@ void CObjHero::Action()
 				jamppower = 0.0f;
 			}
 		}
+
+		//摩擦
+		m_vx += -(m_vx*0.098);
+
+		//重力
+		if (m_vy<10)
+			m_vy += 9.8f / 16.0f;
 	}
 
 	if (m_y > 700.0f)
@@ -139,18 +159,30 @@ void CObjHero::Action()
 		Sworp = false;
 	}
 
-	//摩擦
-	m_vx += -(m_vx*0.098);
+	//弾丸のヒットボックス更新
+	CHitBox* hit = Hits::GetHitBox(this);
 
-	//重力
-	if(m_vy<10)
-		m_vy += 9.8f / 16.0f;
+	//縄移動
+	if (nawa_ido == true)
+	{
+		s_atack = true;
+		nawa_stop = true;
+		m_vx = n_x / 30;
+		m_vy = -n_y / 30;
+		
+		if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
+		{
+			nawa_ido = false;
+			nawa_stop = false;
+			n_x = 0;
+			n_y = 0;
+		}
+	}
 
 	m_x += m_vx;
 
 	m_y += m_vy;
-	//弾丸のヒットボックス更新
-	CHitBox* hit = Hits::GetHitBox(this);
+
 	hit->SetPos(m_x, m_y);
 }
 //ドロー
