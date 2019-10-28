@@ -35,9 +35,9 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
 	Draw::LoadImage(L"mon.png", 5, TEX_SIZE_512);
 	Draw::LoadImage(L"kemuridama.png", 6, TEX_SIZE_512);
-	Draw::LoadImage(L"target.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
 	Draw::LoadImage(L"tokei.jpg", 8, TEX_SIZE_512);
+	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	int block_data[10][100] = {

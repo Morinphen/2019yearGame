@@ -54,17 +54,10 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_x, &m_y,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right,false,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
 
-	if (Input::GetVKey(VK_RIGHT) == true) {
-		//Cボタンを押しているとダッシュ
-		if (Input::GetVKey('C') == true) {
-			m_vx += 1.0f;
-			m_ani_time++;
-		}
-		m_vx += 1.0f;
 	if (W_cat == 1.0f&&nawa_ido == false) {
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
@@ -127,16 +120,21 @@ void CObjHero::Action()
 			}
 		}
 
-	//煙玉
-	if (Input::GetVKey('A'))
-	{
-		if (ball == false) 
+		else
 		{
-			CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
-			Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
-			ball = true;
+			s_atack = false;
 		}
-	}
+
+		//煙玉
+		if (Input::GetVKey('A'))
+		{
+			if (ball == false)
+			{
+				CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
+				Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+				ball = true;
+			}
+		}
 
 		//ジャンプ
 		if (Input::GetVKey('X') && m_hit_down == true)
@@ -163,7 +161,7 @@ void CObjHero::Action()
 		m_vx += -(m_vx*0.098);
 
 		//重力
-		if (m_vy<10)
+		if (m_vy < 10)
 			m_vy += 9.8f / 16.0f;
 	}
 
@@ -173,11 +171,11 @@ void CObjHero::Action()
 	}
 
 	//上入力制御
-	if (Input::GetVKey(VK_UP) == true || W_cat!=1.0f)
+	if (Input::GetVKey(VK_UP) == true || W_cat != 1.0f)
 	{
 		;
 	}
-	else 
+	else
 	{
 		Sworp = false;
 	}
@@ -192,7 +190,7 @@ void CObjHero::Action()
 		nawa_stop = true;
 		m_vx = n_x / 30;
 		m_vy = -n_y / 30;
-		
+
 		if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
 		{
 			nawa_ido = false;
@@ -208,6 +206,7 @@ void CObjHero::Action()
 
 	hit->SetPos(m_x, m_y);
 }
+
 //ドロー
 void CObjHero::Draw()
 {
