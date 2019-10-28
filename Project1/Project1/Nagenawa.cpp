@@ -44,7 +44,16 @@ void CObjNagenawa::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
-	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_x, &m_y,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
+	if (m_hit_up    == true ||
+		m_hit_down  == true || 
+		m_hit_left  == true || 
+		m_hit_right == true )
 	{
 		CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		h->ReSetN(false);

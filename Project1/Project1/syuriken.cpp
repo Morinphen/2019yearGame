@@ -64,10 +64,11 @@ void CObjSyuriken::Action()
 		);
 	}
 
-	if (m_hit_left == true || m_hit_right == true)
+	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
 	{
 		m_hit_left = false;
 		m_hit_right = false;
+		m_hit_up = false;
 		Animation = true;
 
 		m_vx = -4.0f*m_muki;
