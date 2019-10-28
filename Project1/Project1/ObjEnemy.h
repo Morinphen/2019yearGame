@@ -36,6 +36,8 @@ private:
 	float m_vy;
 	float m_posture; //姿勢
 
+	bool m_move;
+
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム
 

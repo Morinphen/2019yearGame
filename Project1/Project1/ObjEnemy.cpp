@@ -26,6 +26,8 @@ void CObjEnemy::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション間隔幅
 
+	m_move = true;    //true=右　false=左
+
 					   //blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
@@ -50,23 +52,33 @@ void CObjEnemy::Action()
 		;
 	}
 
+	//ブロック衝突で向きを変更
+	if (m_hit_left == true)
+	{
+		m_move = true;
+	}
+	if (m_hit_right == true)
+	{
+		m_move = false;
+	}
+
 	//通常速度
 	m_speed_power = 0.5f;
 	m_ani_max_time = 2;
 
 	//方向
-	if (m_px<800)
+	if (m_move==false)
 	{
 		m_vx += m_speed_power;
 		m_posture = 1.0f;
 		m_ani_time += 1;
 	}
-	/*else if (m_px>800)
+	else if (m_move==true)
 	{
 		m_vx -= m_speed_power;
 		m_posture = 0.0f;
 		m_ani_time += 1;
-	}*/
+	}
 	else
 	{
 		m_ani_frame = 1;
