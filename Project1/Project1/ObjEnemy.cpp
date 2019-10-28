@@ -24,7 +24,7 @@ void CObjEnemy::Init()
 	m_ani_frame = 1; //静止フレームを初期にする
 
 	m_speed_power = 0.5f;//通常速度
-	m_ani_max_time = 2;//アニメーション間隔幅
+	m_ani_max_time = 4;//アニメーション間隔幅
 
 					   //blockとの衝突状態確認用
 	m_hit_up = false;
@@ -37,6 +37,13 @@ void CObjEnemy::Init()
 //アクション
 void CObjEnemy::Action()
 {
+	//ブロックとの当たり判定
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_px, &m_py,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
 	//落下
 	if (m_py > 1000.0f)
 	{
@@ -72,7 +79,7 @@ void CObjEnemy::Action()
 		m_ani_time = 0;
 	}
 
-	if (m_ani_frame == 2)
+	if (m_ani_frame == 4)
 	{
 		m_ani_frame = 0;
 	}
@@ -96,9 +103,9 @@ void CObjEnemy::Action()
 //ドロー
 void CObjEnemy::Draw()
 {
-	int AniData[2] =
+	int AniData[4] =
 	{
-		0,1,
+		0,1,0,1,
 	};
 
 	//描画カラー情報
