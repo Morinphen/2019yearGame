@@ -13,6 +13,9 @@ enum OBJ_NAME
 	OBJ_DONDEN,
 	OBJ_SMOKEBALL,
 	OBJ_ENEMY,
+	OBJ_KAGINAWA,
+	OBJ_NAGENAWA,
+	OBJ_NBLOCK,
 };
 //------------------------------------------------
 
@@ -63,6 +66,9 @@ struct UserData
 #include"Dondengaesi.h"
 #include"smokeball.h"
 #include"ObjEnemy.h"
+#include"Kaginawa.h"
+#include"Nagenawa.h"
+#include"NawaBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
