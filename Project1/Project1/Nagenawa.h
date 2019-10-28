@@ -39,4 +39,10 @@ private:
 
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
+
+	//blockとの衝突確認用
+	bool m_hit_up;
+	bool m_hit_down;
+	bool m_hit_left;
+	bool m_hit_right;
 };
