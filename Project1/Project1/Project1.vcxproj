@@ -128,6 +128,9 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
+    <ClCompile Include="Kaginawa.cpp" />
+    <ClCompile Include="Nagenawa.cpp" />
+    <ClCompile Include="NawaBlock.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="Scroll.cpp" />
     <ClCompile Include="smokeball.cpp" />
@@ -153,6 +156,9 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="ObjEnemy.h" />
+    <ClInclude Include="Kaginawa.h" />
+    <ClInclude Include="Nagenawa.h" />
+    <ClInclude Include="NawaBlock.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Scroll.h" />
