@@ -117,16 +117,16 @@ void CObjHero::Action()
 			s_atack = false;
 		}
 
-		//‰Œ‹Ê
-		if (Input::GetVKey('A'))
+	//‰Œ‹Ê
+	if (Input::GetVKey('D'))
+	{
+		if (ball == false) 
 		{
-			if (ball == false)
-			{
-				CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
-				Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
-				ball = true;
-			}
+			CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
+			Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+			ball = true;
 		}
+	}
 
 		//ƒWƒƒƒ“ƒv
 		if (Input::GetVKey('X') && m_hit_down == true)

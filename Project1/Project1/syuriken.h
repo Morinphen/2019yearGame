@@ -34,4 +34,10 @@ private:
 	//壁に当たったとき、アニメーションをさせる
 	bool Animation;
 	float spen;
+
+	//blockとの衝突確認用
+	bool m_hit_up;
+	bool m_hit_down;
+	bool m_hit_left;
+	bool m_hit_right;
 };

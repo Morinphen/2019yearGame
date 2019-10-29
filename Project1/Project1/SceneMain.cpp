@@ -93,7 +93,6 @@ void CSceneMain::InitScene()
 	CObjEnemy* obje = new CObjEnemy();
 	Objs::InsertObj(obje, OBJ_ENEMY, 6);
 
-
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(block_data);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);

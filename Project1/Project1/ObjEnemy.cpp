@@ -24,23 +24,42 @@ void CObjEnemy::Init()
 	m_ani_frame = 1; //静止フレームを初期にする
 
 	m_speed_power = 0.5f;//通常速度
-	m_ani_max_time = 2;//アニメーション間隔幅
+	m_ani_max_time = 4;//アニメーション間隔幅
+
+	m_move = true;    //true=右　false=左
 
 					   //blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-	Hits::SetHitBox(this, m_vx, m_vy, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
 void CObjEnemy::Action()
 {
+	//ブロックとの当たり判定
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_px, &m_py,false,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
 	//落下
 	if (m_py > 1000.0f)
 	{
 		;
+	}
+
+	//ブロック衝突で向きを変更
+	if (m_hit_left == true)
+	{
+		m_move = true;
+	}
+	if (m_hit_right == true)
+	{
+		m_move = false;
 	}
 
 	//通常速度
@@ -48,18 +67,18 @@ void CObjEnemy::Action()
 	m_ani_max_time = 2;
 
 	//方向
-	if (m_px<800)
+	if (m_move==false)
 	{
 		m_vx += m_speed_power;
 		m_posture = 1.0f;
 		m_ani_time += 1;
 	}
-	/*else if (m_px>800)
+	else if (m_move==true)
 	{
 		m_vx -= m_speed_power;
 		m_posture = 0.0f;
 		m_ani_time += 1;
-	}*/
+	}
 	else
 	{
 		m_ani_frame = 1;
@@ -72,7 +91,7 @@ void CObjEnemy::Action()
 		m_ani_time = 0;
 	}
 
-	if (m_ani_frame == 2)
+	if (m_ani_frame == 4)
 	{
 		m_ani_frame = 0;
 	}
@@ -89,16 +108,19 @@ void CObjEnemy::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px, m_py);
+	hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 }
 
 //ドロー
 void CObjEnemy::Draw()
 {
-	int AniData[2] =
+	int AniData[4] =
 	{
-		0,1,
+		0,1,0,1,
 	};
 
 	//描画カラー情報
@@ -113,11 +135,14 @@ void CObjEnemy::Draw()
 	src.m_right = 448.0f*AniData[m_ani_frame];
 	src.m_bottom = 128.0f;
 
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (64 - 64.0f*m_posture) + m_px;
-	dst.m_right = (64.0f*m_posture) + m_px;
-	dst.m_bottom = 64.0f + m_py;
+	dst.m_top = 0.0f + m_py + block->GetYScroll();
+	dst.m_left = (64 - 64.0f*m_posture) + m_px + block->GetScroll();
+	dst.m_right = (64.0f*m_posture) + m_px + block->GetScroll();
+	dst.m_bottom = 64.0f + m_py + block->GetYScroll();
 
 	//描画
 	Draw::Draw(4, &src, &dst, c, 0.0f);

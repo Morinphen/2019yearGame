@@ -78,7 +78,7 @@ void CObjBlock::Draw()
 //その結果は引数3～8に返す
 void CObjBlock::BlockHit
 (
-	float* x, float* y,
+	float* x, float* y, bool s,
 	bool*up, bool* down, bool* left, bool* right,bool smoke,
 	float *vx, float *vy
 )
@@ -100,14 +100,24 @@ void CObjBlock::BlockHit
 				float bx = j*64.0f;
 				float by = i*64.0f;
 
+				float m_s=0;
+				float l_s=0;
+
+				if (s == true)
+				{
+					CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+					m_s = scroll->GetScroll();
+					l_s = scroll->GetYScroll();
+				}
+
 				//オブジェクトとブロックの当たり判定
-				if ((*x + (-m_scroll) + 64.0f > bx) && (*x + (-m_scroll)<bx + 64.0f) && (*y + (-l_scroll) + 64.0f>by) && (*y + (-l_scroll)<by + 64.0f))
+				if ((*x + (-m_s) + 64.0f > bx) && (*x + (-m_s)<bx + 64.0f) && (*y + (-l_s) + 64.0f>by) && (*y + (-l_s)<by + 64.0f))
 				{
 					//上下左右判定
 
 					//vectorの作成
-					float rvx = (*x + (-m_scroll)) - bx;
-					float rvy = (*y + (-l_scroll)) - by;
+					float rvx = (*x + (-m_s)) - bx;
+					float rvy = (*y + (-l_s)) - by;
 
 					//長さを求める
 					float len = sqrt(rvx*rvx + rvy * rvy);
@@ -132,7 +142,7 @@ void CObjBlock::BlockHit
 							{
 								//右
 								*right = true;//主人公の左の部分が衝突しているか
-								*x = bx + 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+								*x = bx + 64.0f + (m_s);//ブロックに位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 							}
 
@@ -140,7 +150,7 @@ void CObjBlock::BlockHit
 							{
 								//上
 								*down = true;//主人公の下の部分が衝突しているか
-								*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+								*y = by - 64.0f + (l_s);//ブロックに位置-主人公の幅
 								*vy = 0.0f;
 							}
 
@@ -148,7 +158,7 @@ void CObjBlock::BlockHit
 							{
 								//左
 								*left = true;//主人公の右の部分が衝突しているか
-								*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+								*x = bx - 64.0f + (m_s);//ブロックに位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 							}
 
@@ -156,7 +166,7 @@ void CObjBlock::BlockHit
 							{
 								//下
 								*up = true;//主人公の上の部分が衝突しているか
-								*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
+								*y = by + 64.0f + (l_s);//ブロックの位置+主人公の幅
 								if (*vy < 0)
 								{
 									*vy = 0.0f;
@@ -170,21 +180,25 @@ void CObjBlock::BlockHit
 							{
 								//右
 								*right = true;//煙玉の左の部分が衝突しているか
-								*x = bx + 64.0f + (m_scroll);//ブロックに位置-煙玉の幅
+								*x = bx + 64.0f + (m_s);//ブロックに位置-煙玉の幅
 								*vx = -(*vx)*0.0f;//-VX*反発係数
 							}
 
 							if (r > 45 && r < 135)
 							{
+								//上
+								*down = true;//主人公の下の部分が衝突しているか
+								*y = by - 64.0f + (l_s);//ブロックに位置-主人公の幅
+								*vy = 0.0f;
 								CObjSmokeball* smokeball = (CObjSmokeball*)Objs::GetObj(OBJ_SMOKEBALL);
-								smokeball->SetDelete(true);
+								smokeball->Setmodecheck(true);
 							}
 
 							if (r > 135 && r < 225)
 							{
 								//左
 								*left = true;//煙玉の右の部分が衝突しているか
-								*x = bx - 64.0f + (m_scroll);//ブロックに位置-煙玉の幅
+								*x = bx - 64.0f + (m_s);//ブロックに位置-煙玉の幅
 								*vx = -(*vx)*0.0f;//-VX*反発係数
 							}
 
@@ -192,7 +206,7 @@ void CObjBlock::BlockHit
 							{
 								//下
 								*up = true;//煙玉の上の部分が衝突しているか
-								*y = by + 64.0f + (l_scroll);//ブロックの位置+煙玉の幅
+								*y = by + 64.0f + (l_s);//ブロックの位置+煙玉の幅
 								if (*vy < 0)
 								{
 									*vy = 0.0f;

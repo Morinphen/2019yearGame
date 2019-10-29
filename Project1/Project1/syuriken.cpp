@@ -54,8 +54,21 @@ void CObjSyuriken::Action()
 		spen += 30.0f;
 	}
 
-	if (hit->CheckObjNameHit(OBJ_BLOCK)!=nullptr && Animation==false)
+	//ƒuƒƒbƒN‚Æ‚Ì“–‚½‚è”»’è
+	if (Animation == false)
 	{
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+		pb->BlockHit(&m_x, &m_y,true,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+			&m_vx, &m_vy
+		);
+	}
+
+	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
+	{
+		m_hit_left = false;
+		m_hit_right = false;
+		m_hit_up = false;
 		Animation = true;
 
 		m_vx = -4.0f*m_muki;

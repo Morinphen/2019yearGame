@@ -16,13 +16,13 @@ public:
 
 	float GetX() { return m_px; }
 	float GetY() { return m_py; }
-	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
+	float GetVY() { return m_vy; }
 
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
-	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
+	void SetVY(float vy) { m_vy = vy; }
 
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
@@ -35,6 +35,8 @@ private:
 	float m_vx; //移動ベクトル
 	float m_vy;
 	float m_posture; //姿勢
+
+	bool m_move;
 
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム

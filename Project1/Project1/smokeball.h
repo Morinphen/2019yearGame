@@ -30,6 +30,7 @@ public:
 	void SetRight(bool b) { m_hit_right = b; }
 
 	void SetDelete(bool d) { smokeball_delete = d; }
+	void Setmodecheck(bool c) { modecheck = c; }
 
 private:
 	float m_x;
@@ -47,6 +48,7 @@ private:
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
 
+	int smoke_time;//煙を出している時間
 	bool smokeball_delete;//ボールの削除
 
 	float m_scroll;//左右スクロール用変数
