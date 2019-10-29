@@ -16,6 +16,7 @@ enum OBJ_NAME
 	OBJ_KAGINAWA,
 	OBJ_NAGENAWA,
 	OBJ_NBLOCK,
+	OBJ_UTIKAGI,
 };
 //------------------------------------------------
 
@@ -69,6 +70,7 @@ struct UserData
 #include"Kaginawa.h"
 #include"Nagenawa.h"
 #include"NawaBlock.h"
+#include"Utikagi.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

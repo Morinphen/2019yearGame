@@ -30,6 +30,8 @@ public:
 	void SetNX(float x) { n_x = x; }
 	void SetNY(float y) { n_y = y; }
 
+	void Uflag(bool b) { U_flag = b; }
+
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
 	void SetLeft(bool b) { m_hit_left = b; }
@@ -63,6 +65,9 @@ private:
 	bool nawa_ido;
 	float n_x;
 	float n_y;
+
+	//うちかぎフラグ
+	bool U_flag;
 
 	bool ball;//煙玉フラグ
 

@@ -87,10 +87,13 @@
     <ClCompile Include="NawaBlock.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjEnemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="smokeball.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemy.cpp">
+    <ClCompile Include="Utikagi.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,12 +161,6 @@
     <ClInclude Include="Dondengaesi.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="smokeball.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Kaginawa.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -171,6 +168,15 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="NawaBlock.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="smokeball.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Utikagi.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

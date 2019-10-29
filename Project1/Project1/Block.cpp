@@ -94,7 +94,7 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0)
+			if (m_map[i][j] == 1)
 			{
 				//要素番号を座標に変更
 				float bx = j*64.0f;
@@ -199,6 +199,97 @@ void CObjBlock::BlockHit
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void CObjBlock::UBlockHit
+(
+	float* x, float* y,
+	bool*up, bool* down, bool* left, bool* right,
+	float *vx, float *vy
+)
+{
+	//主人公の衝突確認用フラグの初期化
+	*up = false;
+	*down = false;
+	*left = false;
+	*right = false;
+
+	//m_mapの全要素にアクセス
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (m_map[i][j] != 7)
+			{
+				//要素番号を座標に変更
+				float bx = j*64.0f;
+				float by = i*64.0f;
+
+				//オブジェクトとブロックの当たり判定
+				if ((*x + (-m_scroll) + 64.0f > bx) && (*x + (-m_scroll) < bx + 64.0f) && (*y + (-l_scroll) + 64.0f > by) && (*y + (-l_scroll) < by + 64.0f))
+				{
+					//上下左右判定
+
+					//vectorの作成
+					float rvx = (*x + (-m_scroll)) - bx;
+					float rvy = (*y + (-l_scroll)) - by;
+
+					//長さを求める
+					float len = sqrt(rvx*rvx + rvy * rvy);
+
+					//角度を求める
+					float r = atan2(rvy, rvx);
+					r = r*180.0f / 3.14f;
+
+					if (r <= 0.0f)
+						r = abs(r);
+					else
+						r = 360.0f - abs(r);
+
+					//lenがある一定の長さのより短い場合判定に入る
+					if (len < 88.0f)
+					{
+						//角度で上下左右を判定
+						if ((r < 45 && r>=0) || r > 315)
+						{
+							//右
+							*right = true;//主人公の左の部分が衝突しているか
+							*x = bx + 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+							*vx = -(*vx)*0.1f;//-VX*反発係数
+						}
+
+						if (r > 45 && r < 135)
+						{
+							//上
+							*down = true;//主人公の下の部分が衝突しているか
+							*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+							*vy = 0.0f;
+						}
+
+						if (r > 135 && r < 225)
+						{
+							//左
+							*left = true;//主人公の右の部分が衝突しているか
+							*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+							*vx = -(*vx)*0.1f;//-VX*反発係数
+						}
+
+						if (r > 225 && r < 315)
+						{
+							//下
+							*up = true;//主人公の上の部分が衝突しているか
+							*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
+							if (*vy < 0)
+							{
+								*vy = 0.0f;
+							}
+						}
+
 					}
 				}
 			}

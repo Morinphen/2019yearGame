@@ -136,6 +136,7 @@
     <ClCompile Include="smokeball.cpp" />
     <ClCompile Include="syuriken.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="Utikagi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Scroll.h" />
     <ClInclude Include="smokeball.h" />
     <ClInclude Include="syuriken.h" />
+    <ClInclude Include="Utikagi.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\DirectXTex.inl" />

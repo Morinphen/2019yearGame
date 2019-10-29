@@ -30,6 +30,13 @@ public:
 		float *vx, float *vy
 	);
 
+	void CObjBlock::UBlockHit
+	(
+		float* x, float* y,
+		bool*up, bool* down, bool* left, bool* right,
+		float *vx, float *vy
+	);
+
 	////ålŒö‚Æ•Ç‚ÌŒğ·”»’è
 	//bool HeroBlockCrossPoint(
 	//	float x, float y, float vx, float vy,
