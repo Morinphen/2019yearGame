@@ -58,7 +58,7 @@ void CObjSyuriken::Action()
 	if (Animation == false)
 	{
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y,
+		pb->BlockHit(&m_x, &m_y,true,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 			&m_vx, &m_vy
 		);

@@ -25,7 +25,7 @@ public:
 
 	void CObjBlock::BlockHit
 	(
-		float* x, float* y,
+		float* x, float* y,bool s,
 		bool*up, bool* down, bool* left, bool* right,bool smoke,
 		float *vx, float *vy
 	);

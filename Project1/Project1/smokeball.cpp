@@ -48,7 +48,7 @@ void CObjSmokeball::Action()
 
 		//ブロックとの当たり判定
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y,
+		pb->BlockHit(&m_x, &m_y,true,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, true,
 			&m_vx, &m_vy
 		);
@@ -90,6 +90,8 @@ void CObjSmokeball::Action()
 	if (m_y > 800)
 		smokeball_delete = true;
 
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	hit->SetPos(m_x, m_y);
 }
 //ドロー
@@ -98,6 +100,9 @@ void CObjSmokeball::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
+
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//玉の状態
 	if (modecheck == false)
@@ -117,6 +122,7 @@ void CObjSmokeball::Draw()
 	//煙の状態
 	else
 	{
+		
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = -4; j < 5; j++)
@@ -127,8 +133,8 @@ void CObjSmokeball::Draw()
 				src.m_bottom = 200.0f;
 
 				dst.m_top = (0.0f + m_y)-(64.0f*i);
-				dst.m_left = (0.0f + m_x)+(64.0f*j);
-				dst.m_right = (64.0f + m_x)+(64.0f*j);
+				dst.m_left = (0.0f*m_posture + m_x)+(64.0f*j);
+				dst.m_right = (64.0f*m_posture + m_x)+(64.0f*j);
 				dst.m_bottom = (64.0f + m_y)-(64.0f*i);
 
 				Draw::Draw(1, &src, &dst, c, 0);
