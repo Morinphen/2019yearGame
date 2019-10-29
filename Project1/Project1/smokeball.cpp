@@ -92,7 +92,7 @@ void CObjSmokeball::Action()
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	hit->SetPos(m_x, m_y);
+	hit->SetPos(m_x + block->GetScroll(), m_y);
 }
 //ドロー
 void CObjSmokeball::Draw()
@@ -122,7 +122,6 @@ void CObjSmokeball::Draw()
 	//煙の状態
 	else
 	{
-		
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = -4; j < 5; j++)
@@ -133,8 +132,8 @@ void CObjSmokeball::Draw()
 				src.m_bottom = 200.0f;
 
 				dst.m_top = (0.0f + m_y)-(64.0f*i);
-				dst.m_left = (0.0f*m_posture + m_x)+(64.0f*j);
-				dst.m_right = (64.0f*m_posture + m_x)+(64.0f*j);
+				dst.m_left = (0.0f*m_posture + m_x)+(64.0f*j) + block->GetScroll();
+				dst.m_right = (64.0f*m_posture + m_x)+(64.0f*j) + block->GetScroll();
 				dst.m_bottom = (64.0f + m_y)-(64.0f*i);
 
 				Draw::Draw(1, &src, &dst, c, 0);
