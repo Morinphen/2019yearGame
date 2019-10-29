@@ -57,7 +57,7 @@ void CObjHero::Action()
 
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false) {
 
-		pb->BlockHit(&m_x, &m_y,
+		pb->BlockHit(&m_x, &m_y,true,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 			&m_vx, &m_vy
 		);
