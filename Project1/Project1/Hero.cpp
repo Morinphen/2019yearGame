@@ -271,3 +271,21 @@ void CObjHero::Draw()
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
 }
+
+float CObjHero::GetGX()
+{
+	//スクロール情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	g_x = m_x - scroll->GetScroll();
+
+	return g_x;
+}
+
+float CObjHero::GetGY()
+{
+	//スクロール情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	g_y = m_y + scroll->GetYScroll();
+
+	return g_y;
+}

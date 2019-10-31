@@ -19,6 +19,8 @@ public:
 	float GetY() { return m_y; }
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
+	float GetGX();
+	float GetGY();
 
 	void SetX(float x) { m_x = x; }
 	void SetY(float y) { m_y = y; }
@@ -43,7 +45,6 @@ public:
 	float W_cat;
 	float W_cat2;
 
-
 	bool GetBallFlag() { return ball; }
 	void SetBallFlag(bool f) { ball = f; }
 
@@ -53,6 +54,9 @@ private:
 	float m_y;
 	float m_vy;
 	float m_posture;//姿勢
+
+	float g_x;//グローバルX位置
+	float g_y;//グローバルY位置
 
 	int jamptime;
 	float jamppower;

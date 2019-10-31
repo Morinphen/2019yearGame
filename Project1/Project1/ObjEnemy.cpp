@@ -108,11 +108,11 @@ void CObjEnemy::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//スクロール情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
+	hit->SetPos(m_px + scroll->GetScroll(), m_py + scroll->GetYScroll());
 }
 
 //ドロー
@@ -136,13 +136,13 @@ void CObjEnemy::Draw()
 	src.m_bottom = 128.0f;
 
 	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetYScroll();
-	dst.m_left = (64 - 64.0f*m_posture) + m_px + block->GetScroll();
-	dst.m_right = (64.0f*m_posture) + m_px + block->GetScroll();
-	dst.m_bottom = 64.0f + m_py + block->GetYScroll();
+	dst.m_top = 0.0f + m_py + scroll->GetYScroll();
+	dst.m_left = (64 - 64.0f*m_posture) + m_px + scroll->GetScroll();
+	dst.m_right = (64.0f*m_posture) + m_px + scroll->GetScroll();
+	dst.m_bottom = 64.0f + m_py + scroll->GetYScroll();
 
 	//描画
 	Draw::Draw(4, &src, &dst, c, 0.0f);

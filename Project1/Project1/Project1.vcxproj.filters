@@ -170,13 +170,13 @@
     <ClInclude Include="NawaBlock.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Utikagi.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="smokeball.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Utikagi.h">
+    <ClInclude Include="ObjEnemy.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

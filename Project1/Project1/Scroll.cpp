@@ -26,19 +26,13 @@ void CObjScroll::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//敵の位置を取得
-	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
-
-	float vx = hero->GetVX();
-	float vy = hero->GetVY();
 
 	//後方スクロールライン
 	if (hx < 250)
 	{
 		hero->SetX(250);//主人公はラインを超えないように
-		//enemy->SetVX(-vx);
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
@@ -46,7 +40,6 @@ void CObjScroll::Action()
 	if (hx > 400)
 	{
 		hero->SetX(400);//主人公はラインを超えないように
-		//enemy->SetVX(vx);
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
@@ -54,7 +47,6 @@ void CObjScroll::Action()
 	if (hy < 80)
 	{
 		hero->SetY(80);//主人公はラインを超えないように
-		//enemy->SetVY(-vy);
 		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
 	}
 
@@ -62,7 +54,6 @@ void CObjScroll::Action()
 	if (hy > 500 && l_scroll>-100)
 	{
 		hero->SetY(500);//主人公はラインを超えないように
-		//enemy->SetVY(vy);
 		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
 	}
 

@@ -100,9 +100,6 @@ void CObjKaginawa::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
-
 	hit->SetPos(m_x, m_y);
 }
 //ƒhƒ[
