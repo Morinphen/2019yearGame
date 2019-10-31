@@ -52,9 +52,10 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//敵の位置を取得
+	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false) {
 
 		pb->BlockHit(&m_x, &m_y,true,
@@ -208,7 +209,7 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
-	//弾丸のヒットボックス更新
+	//ヒットボックス更新
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//縄移動
@@ -233,6 +234,13 @@ void CObjHero::Action()
 	m_y += m_vy;
 
 	hit->SetPos(m_x, m_y);
+
+	//敵と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	{
+		//enemy->SetF(true);
+		Scene::SetScene(new CSceneMain);
+	}
 }
 
 //ドロー

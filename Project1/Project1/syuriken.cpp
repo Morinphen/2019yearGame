@@ -36,11 +36,12 @@ void CObjSyuriken::Init()
 
 	Animation = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_UTIKAGI, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_PLAYER, OBJ_SYURIKEN, 1);
 }
 //ƒAƒNƒVƒ‡ƒ“
 void CObjSyuriken::Action()
 {
+	
 	m_x += m_vx;
 	m_y += m_vy;
 

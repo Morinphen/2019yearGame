@@ -26,7 +26,7 @@ void CObjUtikagi::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_DONDEN, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_UTIKAGI, 1);
 }
 //アクション
 void CObjUtikagi::Action()
