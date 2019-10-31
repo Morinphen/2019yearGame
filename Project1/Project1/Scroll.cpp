@@ -26,8 +26,6 @@ void CObjScroll::Action()
 {
 	//ŽålŒö‚ÌˆÊ’u‚ðŽæ“¾
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//“G‚ÌˆÊ’u‚ðŽæ“¾
-	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
