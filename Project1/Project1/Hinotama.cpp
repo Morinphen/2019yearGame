@@ -2,13 +2,13 @@
 #include"GameL\DrawTexture.h"
 #include"GameL\WinInputs.h"
 #include"GameHead.h"
-#include"syuriken.h"
+#include"Hinotama.h"
 #include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjSyuriken::CObjSyuriken(int x,int y,int m)
+CObjHinotama::CObjHinotama(int x, int y, int m)
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_scroll = scroll->GetScroll();
@@ -24,7 +24,7 @@ CObjSyuriken::CObjSyuriken(int x,int y,int m)
 }
 
 //イニシャライズ
-void CObjSyuriken::Init()
+void CObjHinotama::Init()
 {
 	m_vx = 15 * m_muki;
 	m_vy = 0;
@@ -43,7 +43,7 @@ void CObjSyuriken::Init()
 	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
 }
 //アクション
-void CObjSyuriken::Action()
+void CObjHinotama::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_scroll = scroll->GetScroll();
@@ -66,7 +66,7 @@ void CObjSyuriken::Action()
 	if (Animation == false)
 	{
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y,false,
+		pb->BlockHit(&m_x, &m_y, false,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 			&m_vx, &m_vy
 		);
@@ -93,7 +93,7 @@ void CObjSyuriken::Action()
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
-void CObjSyuriken::Draw()
+void CObjHinotama::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;

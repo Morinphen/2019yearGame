@@ -28,6 +28,9 @@ private:
 	int m_ani_frame;//描画フレーム
 	int m_muki;//手裏剣の方向
 
+	float m_scroll;
+	float l_scroll;
+
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
 

@@ -40,6 +40,8 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
 	Draw::LoadImage(L"kagidume.jpg",10, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya.png", 11, TEX_SIZE_512);
+	Draw::LoadImage(L"hinotama.png", 12, TEX_SIZE_512);
+	Draw::LoadImage(L"enzyou.png", 13, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	int block_data[10][100] = {
@@ -82,7 +84,7 @@ void CSceneMain::InitScene()
 	}
 
 	//主人公オブジェクト作成
-	CObjHero*obj = new CObjHero(100, 300);//主人公オブジェクト作成
+	CObjHero*obj = new CObjHero(1919, 514);//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
 
 	//Scrollオブジェクト追加

@@ -43,6 +43,7 @@ void CObjNagenawa::Action()
 {
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_x, &m_y,true,
@@ -55,7 +56,6 @@ void CObjNagenawa::Action()
 		m_hit_left  == true || 
 		m_hit_right == true )
 	{
-		CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		h->ReSetN(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
@@ -63,12 +63,18 @@ void CObjNagenawa::Action()
 
 	else if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
 	{
-		CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
 		h->NawaIdo(true);
 		h->SetNX(m_x - h->GetX());
 		h->SetNY(a-20);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	else if (h->Ninzyutu == true)
+	{
+		h->ReSetN(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
