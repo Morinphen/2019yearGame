@@ -40,7 +40,11 @@ void CObjUtikagi::Action()
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Input::GetVKey(VK_UP))
 	{
-		if (Bflag == false) {
+		bool stop;
+		stop = h->GetNawa();
+		float h_vx = h->GetVX();
+
+		if (stop == false && Bflag == false) {
 			flag = flag ? false : true;
 			h->Uflag(flag);
 			Bflag = true;
@@ -72,4 +76,17 @@ void CObjUtikagi::Draw()
 	dst.m_bottom = dst.m_top + 64.0f;
 
 	Draw::Draw(10, &src, &dst, c, 0.0f);
+}
+
+void CObjUtikagi::Refresh()
+{
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	h->SetX(m_x);
+
+	if (h->GetX()>400)
+	scroll->SetScrooll(-(h->GetX() - (400)));
+	else if (h->GetX()>250)
+	scroll->SetScrooll(-(h->GetX() - (250)));
 }

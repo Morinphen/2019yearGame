@@ -17,6 +17,10 @@ CObjKaginawa::CObjKaginawa(int x, int y,int a)
 	}
 
 	sm_x = m_x = x + (300 * m_muki);
+	if (m_x <= 50)
+	{
+		m_x = 50;
+	}
 	sm_y = m_y = y;
 }
 
@@ -99,6 +103,16 @@ void CObjKaginawa::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
+
+	else if (h->Ninzyutu == true)
+	{
+		h->ReSetN(false);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	m_scroll = scroll->GetScroll();
+	l_scroll = scroll->GetYScroll();
 
 	hit->SetPos(m_x, m_y);
 }

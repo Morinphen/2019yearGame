@@ -15,6 +15,8 @@ public:
 	void Init();//Ç¢Ç…ÇµÇ·ÇÁÇ¢Ç∏
 	void Action();//Ç†Ç≠ÇµÇÂÇÒ
 	void Draw();//Ç«ÇÎÅ[
+
+	void Refresh();//ÇŒÇµÇÂÇ±Ç§ÇµÇÒ
 private:
 	float m_x;
 	float m_y;
