@@ -57,9 +57,10 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//敵の位置を取得
+	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false) {
 		Ninzyutu = false;
 		U_scroll = false;
@@ -225,7 +226,7 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
-	//弾丸のヒットボックス更新
+	//ヒットボックス更新
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//縄移動
@@ -252,6 +253,13 @@ void CObjHero::Action()
 	m_y += m_vy;
 
 	hit->SetPos(m_x, m_y);
+
+	//敵と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	{
+		//enemy->SetF(true);
+		Scene::SetScene(new CSceneMain);
+	}
 }
 
 //ドロー
@@ -289,4 +297,22 @@ void CObjHero::Draw()
 	dst.m_bottom = 64.0f + m_y;
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
+}
+
+float CObjHero::GetGX()
+{
+	//スクロール情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	g_x = m_x - scroll->GetScroll();
+
+	return g_x;
+}
+
+float CObjHero::GetGY()
+{
+	//スクロール情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	g_y = m_y + scroll->GetYScroll();
+
+	return g_y;
 }

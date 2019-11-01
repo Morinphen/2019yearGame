@@ -39,6 +39,9 @@ private:
 	float m_vy;
 	float m_posture;//姿勢
 
+	float g_x;
+	float g_y;
+
 	CHitBox* hit;
 
 	int m_ani_time;//アニメーションフレーム
