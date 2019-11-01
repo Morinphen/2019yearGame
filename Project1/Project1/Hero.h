@@ -74,7 +74,7 @@ private:
 	bool U_flag;
 
 	bool ball;//煙玉フラグ
-
+	bool smokeh;//煙との衝突確認用
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
 

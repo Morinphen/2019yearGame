@@ -70,7 +70,7 @@ void CObjSmokeball::Action()
 		if (smoke_time == 0)
 		{
 			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*9, 64*2, ELEMENT_PLAYER, OBJ_SMOKEBALL, 1);
+			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*9, 64*2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
 		}
 		//ヒットボックス更新
 		hit = Hits::GetHitBox(this);
