@@ -82,11 +82,29 @@ void CSceneMain::InitScene()
 			//	Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			//}
 
-			if (map[i][j] == 5) {
-		{	
+			if (map[i][j] == 5)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
+			
+
+			if (map[i][j] == 6) 
+			{
+				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
+				Objs::InsertObj(objn, OBJ_DONDEN, 3);
+			}
+
+			if (map[i][j] == 7)
+			{
+				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_DONDEN, 3);
+
+			}
+
 			/*if (block_data[i][j] == 1) {
-				CObjBlock*objb = new CObjBlock(j * 64, i * 64);
-				Objs::InsertObj(objb, OBJ_BLOCK, 2);
+			CObjBlock*objb = new CObjBlock(j * 64, i * 64);
+			Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			}*/
 			if (block_data[i][j] == 3)
 			{
@@ -98,29 +116,32 @@ void CSceneMain::InitScene()
 				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
 				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
 			}
-			else if (block_data[i][j] == 5) {
+			else if (block_data[i][j] == 5) 
+			{
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 
-			if (map[i][j] == 6) {
-			else if (block_data[i][j] == 6) {
+			else if (block_data[i][j] == 6)
+			{
 				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
 				Objs::InsertObj(objn, OBJ_DONDEN, 3);
 				block_data[i][j] = 0;
 			}
 
-			else if (block_data[i][j] == 7) {
-			if (map[i][j] == 7) {
+			else if (block_data[i][j] == 7)
+			{
 				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
 				Objs::InsertObj(obju, OBJ_DONDEN, 3);
-
 			}
+			
 
-			else if (block_data[i][j] == 8) {
+			else if (block_data[i][j] == 8)
+			{
 				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
 				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
 			}
+
 		}
 	}
 

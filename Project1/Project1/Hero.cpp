@@ -242,7 +242,7 @@ void CObjHero::Action()
 
 		Ninzyutu = true;
 
-		scroll->UtikagiScroll(&m_x, &m_y);
+		scroll->SetUtikagiScroll(&m_x, &m_y);
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			m_vx += 0.5f;
