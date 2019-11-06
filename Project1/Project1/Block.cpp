@@ -32,6 +32,8 @@ void CObjBlock::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+
+
 }
 //ÉhÉçÅ[
 void CObjBlock::Draw()
@@ -303,7 +305,6 @@ void CObjBlock::UBlockHit
 								*vy = 0.0f;
 							}
 						}
-
 					}
 				}
 			}

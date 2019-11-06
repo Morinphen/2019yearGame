@@ -43,13 +43,13 @@ void CObjEnemy::Init()
 //アクション
 void CObjEnemy::Action()
 {
-	if (crhitbox = true && m_move == true)
+	if (crhitbox == true && m_move == true)
 	{
 		Hits::DeleteHitBox(this);
 		Hits::SetHitBox(this,m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 		crhitbox = false;
 	}
-	else if (crhitbox = true && m_move == false)
+	else if (crhitbox == true && m_move == false)
 	{
 		Hits::DeleteHitBox(this);
 		Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
@@ -61,8 +61,6 @@ void CObjEnemy::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
-
-
 
 	//落下
 	if (m_py > 1000.0f)
@@ -185,10 +183,10 @@ void CObjEnemy::Draw()
 		src.m_bottom = 64.0f;
 
 		//表示位置の設定
-		dst.m_top = 0.0f + m_py + block->GetYScroll()+64;
-		dst.m_left = (64 - 64.0f*m_posture) + m_px + block->GetScroll();
-		dst.m_right = (64.0f*m_posture) + m_px + block->GetScroll();
-		dst.m_bottom = 64.0f + m_py + block->GetYScroll()+64;
+		dst.m_top = 0.0f + m_py + scroll->GetYScroll()+64;
+		dst.m_left = (64 - 64.0f*m_posture) + m_px + scroll->GetScroll();
+		dst.m_right = (64.0f*m_posture) + m_px + scroll->GetScroll();
+		dst.m_bottom = 64.0f + m_py + scroll->GetYScroll()+64;
 
 		//描画
 		Draw::Draw(9, &src, &dst, c, 0.0f);

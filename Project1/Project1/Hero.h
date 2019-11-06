@@ -19,8 +19,6 @@ public:
 	float GetY() { return m_y; }
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
-	float GetGX();
-	float GetGY();
 
 	void SetX(float x) { m_x = x; }
 	void SetY(float y) { m_y = y; }

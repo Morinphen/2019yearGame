@@ -54,6 +54,8 @@ void CObjHero::Action()
 {
 	//敵の位置を取得
 	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	//スクロール情報取得
+	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false) {
@@ -164,8 +166,9 @@ void CObjHero::Action()
 			&m_vx, &m_vy
 		);
 
+		scroll->UtikagiScroll(&m_x, &m_y);
+
 		if (Input::GetVKey(VK_RIGHT) == true) {
-			//Cボタンを押しているとダッシュ
 			m_vx += 0.5f;
 
 			m_ani_time++;
@@ -173,7 +176,6 @@ void CObjHero::Action()
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
-			//Cボタンを押しているとダッシュ
 			m_vx -= 0.5f;
 			m_ani_time++;
 			m_posture = 1.0f;
@@ -278,22 +280,4 @@ void CObjHero::Draw()
 	dst.m_bottom = 64.0f + m_y;
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
-}
-
-float CObjHero::GetGX()
-{
-	//スクロール情報を持ってくる
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	g_x = m_x - scroll->GetScroll();
-
-	return g_x;
-}
-
-float CObjHero::GetGY()
-{
-	//スクロール情報を持ってくる
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	g_y = m_y + scroll->GetYScroll();
-
-	return g_y;
 }

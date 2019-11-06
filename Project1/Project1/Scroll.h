@@ -21,6 +21,8 @@ public:
 	void SetYScrooll(float s) { l_scroll = s; }
 	float GetYScroll() { return l_scroll; }
 
+	void SetUtikagiScroll(float *hx, float *hy);
+
 	int m_map[10][100];
 private:
 	int m_x;
