@@ -23,6 +23,8 @@ CObjSyuriken::CObjSyuriken(int x,int y,int m)
 	}
 }
 
+
+
 //イニシャライズ
 void CObjSyuriken::Init()
 {
@@ -86,7 +88,7 @@ void CObjSyuriken::Action()
 		m_y += m_vy;
 	}
 
-	if (m_x > 20000 || m_x<-200 || m_y > 700)
+	if (m_x > 2000 || m_x<-200 || m_y > 700|| hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

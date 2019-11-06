@@ -39,6 +39,7 @@ void CObjHero::Init()
 	idocount = 0;
 
 	ball = false;
+	smokeh = false;
 	U_flag = false;
 
 	Ninzyutu = false;
@@ -295,13 +296,22 @@ void CObjHero::Action()
 	m_y += m_vy;
 
 	hit->SetPos(m_x, m_y);
+	//煙玉の煙と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr)
+	{
+		smokeh = true;
+	}
+	else
+	{
+		smokeh = false;
+	}
 
 	//敵と当たっているかどうか確認
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		//enemy->SetF(true);
 		Scene::SetScene(new CSceneMain);
 	}
+
 }
 
 //ドロー
