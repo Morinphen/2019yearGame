@@ -84,6 +84,11 @@ private:
 	bool U_flag;
 	bool U_scroll;
 
+	//実験用シノビチェンジ
+	bool change;
+	bool c_stop;
+	float green;
+
 	bool ball;//煙玉フラグ
 
 	int m_ani_time;//アニメーションフレーム

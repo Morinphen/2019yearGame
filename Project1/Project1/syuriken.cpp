@@ -72,7 +72,9 @@ void CObjSyuriken::Action()
 		);
 	}
 
-	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
+	if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
+		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
+		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
 	{
 		m_hit_left = false;
 		m_hit_right = false;
@@ -84,7 +86,7 @@ void CObjSyuriken::Action()
 		m_y += m_vy;
 	}
 
-	if (m_x > 2000 || m_x<-200 || m_y > 700)
+	if (m_x > 20000 || m_x<-200 || m_y > 700)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

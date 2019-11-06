@@ -20,27 +20,29 @@ CObjHinotama::CObjHinotama(int x, int y, int m)
 
 	if (m == 0) {
 		m_muki = 1;
+		spen = 90;
+	}
+	else {
+		spen = 270;
 	}
 }
 
 //イニシャライズ
 void CObjHinotama::Init()
 {
-	m_vx = 15 * m_muki;
+	m_vx = 5 * m_muki;
 	m_vy = 0;
 	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
 
-	spen = 0;
-
 	m_ani_time = 0;
-	m_ani_frame = 1;//静止フレーム初期化
+	m_ani_frame = 0;//静止フレーム初期化
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
 	Animation = false;
 
-	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
+	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_HINOTAMA, 1);
 }
 //アクション
 void CObjHinotama::Action()
@@ -51,6 +53,16 @@ void CObjHinotama::Action()
 
 	m_x += m_vx;
 	m_y += m_vy;
+
+	m_ani_time++;
+
+	if (m_ani_time == 4)
+	{
+		m_ani_frame++;
+		m_ani_time = 0;
+		if (m_ani_frame == 4)
+			m_ani_frame = 0;
+	}
 
 	if (Animation == false) {
 		//m_vx += 1.0f;
@@ -72,19 +84,15 @@ void CObjHinotama::Action()
 		);
 	}
 
-	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
+	if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
+		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
+		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
 	{
-		m_hit_left = false;
-		m_hit_right = false;
-		m_hit_up = false;
-		Animation = true;
-
-		m_vx = -4.0f*m_muki;
-		m_vy = -10.0f;
-		m_y += m_vy;
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
 	}
 
-	if (m_x > 2000 || m_x<-200 || m_y > 700)
+	if (m_x > 10000 || m_x<-200 || m_y > 700)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
@@ -99,15 +107,15 @@ void CObjHinotama::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_top = 0.0f + (m_ani_frame*64.0f);
+	src.m_left = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 64.0f + (m_ani_frame*64.0f);
 
 	dst.m_top = m_y + l_scroll;
 	dst.m_left = m_x + m_scroll;
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(3, &src, &dst, c, spen);
+	Draw::Draw(12, &src, &dst, c, spen);
 }

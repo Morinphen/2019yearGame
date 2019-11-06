@@ -18,6 +18,8 @@ enum OBJ_NAME
 	OBJ_NBLOCK,
 	OBJ_UTIKAGI,
 	OBJ_HINOTAMA,
+	OBJ_HONOBLOCK,
+	OBJ_MIZUBLOCK,
 };
 //------------------------------------------------
 
@@ -73,6 +75,8 @@ struct UserData
 #include"NawaBlock.h"
 #include"Utikagi.h"
 #include"Hinotama.h"
+#include"HonoBlock.h"
+#include"MizuBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
