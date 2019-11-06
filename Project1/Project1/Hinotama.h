@@ -7,39 +7,40 @@
 using namespace GameL;
 
 //オブジェクト手裏剣
-class CObjDonden :public CObj
+class CObjHinotama :public CObj
 {
 public:
-	CObjDonden(int x, int y);
-	~CObjDonden() {};
+	CObjHinotama(int x, int y, int m);
+	~CObjHinotama() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
-
-	int Pworp;
 private:
-
-	int Worp(int a);
-
 	float m_x;
+	float m_vx;
 	float m_y;
+	float m_vy;
+	float m_posture;//姿勢
 
-	float m_scroll;//左右スクロール用変数
-	float l_scroll;//上下スクロール用変数
-
-	float red;
-	//ワープする際にアニメーションをさせる
-	bool Wanimation;
-	bool Wanimation2;
-
-	//主人公の位置の確認
-	bool s_down;
-
-	int D_tag[10][2];//ペアのどんでん返しを探す
+	CHitBox* hit;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
+	int m_muki;//手裏剣の方向
+
+	float m_scroll;
+	float l_scroll;
 
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
+
+						 //壁に当たったとき、アニメーションをさせる
+	bool Animation;
+	float spen;
+
+	//blockとの衝突確認用
+	bool m_hit_up;
+	bool m_hit_down;
+	bool m_hit_left;
+	bool m_hit_right;
 };

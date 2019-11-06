@@ -10,8 +10,10 @@ using namespace GameL;
 
 CObjSmokeball::CObjSmokeball(int x, int y, int m)
 {
-	m_x = x;
-	m_y = y;
+	//ブロック情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	m_x = x-scroll->GetScroll();
+	m_y = y-scroll->GetYScroll();
 	m_muki = -m;
 
 	if (m == 0) {
@@ -36,19 +38,21 @@ void CObjSmokeball::Init()
 
 	modecheck = false;//モード切替
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_PLAYER, OBJ_SYURIKEN, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_PLAYER, OBJ_SMOKEBALL, 1);
 }
 
 //アクション
 void CObjSmokeball::Action()
 {
+	//スクロール情報を持ってくる
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+
 	//玉の状態
 	if (modecheck == false)
 	{
-
 		//ブロックとの当たり判定
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y,true,
+		pb->BlockHit(&m_x, &m_y,false,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, true,
 			&m_vx, &m_vy
 		);
@@ -59,11 +63,18 @@ void CObjSmokeball::Action()
 		//重力
 		if (m_vy < 20)
 			m_vy += 9.8f / 16.0f;
-
 	}
 	//煙の状態
 	else
 	{
+		if (smoke_time == 0)
+		{
+			Hits::DeleteHitBox(this);
+			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*9, 64*2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
+		}
+		//ヒットボックス更新
+		hit = Hits::GetHitBox(this);
+		hit->SetPos(m_x - 64 * 4 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
 		smoke_time++;
 		if (smoke_time / 60 == 5)
 		{
@@ -73,7 +84,7 @@ void CObjSmokeball::Action()
 		}
 	}
 
-	hit = Hits::GetHitBox(this);
+	
 
 	//主人公情報取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -90,10 +101,9 @@ void CObjSmokeball::Action()
 	if (m_y > 800)
 		smokeball_delete = true;
 
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	hit->SetPos(m_x + block->GetScroll(), m_y);
+	
 }
+
 //ドロー
 void CObjSmokeball::Draw()
 {
@@ -102,7 +112,7 @@ void CObjSmokeball::Draw()
 	RECT_F dst;
 
 	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
 	//玉の状態
 	if (modecheck == false)
@@ -112,10 +122,10 @@ void CObjSmokeball::Draw()
 		src.m_right = 64.0f;
 		src.m_bottom = 64.0f;
 
-		dst.m_top = 0.0f + m_y;
-		dst.m_left = 0.0f + m_x;
-		dst.m_right = 64.0f + m_x;
-		dst.m_bottom = 64.0f + m_y;
+		dst.m_top = 0.0f + m_y + scroll->GetYScroll();
+		dst.m_left = 0.0f + m_x + scroll->GetScroll();
+		dst.m_right = 64.0f + m_x + scroll->GetScroll();
+		dst.m_bottom = 64.0f + m_y + scroll->GetYScroll();
 
 		Draw::Draw(6, &src, &dst, c, 0);
 	}
@@ -131,10 +141,10 @@ void CObjSmokeball::Draw()
 				src.m_right = 200.0f;
 				src.m_bottom = 200.0f;
 
-				dst.m_top = (0.0f + m_y)-(64.0f*i);
-				dst.m_left = (0.0f*m_posture + m_x)+(64.0f*j) + block->GetScroll();
-				dst.m_right = (64.0f*m_posture + m_x)+(64.0f*j) + block->GetScroll();
-				dst.m_bottom = (64.0f + m_y)-(64.0f*i);
+				dst.m_top = (0.0f + m_y + scroll->GetYScroll())-(64.0f*i);
+				dst.m_left = (0.0f*m_posture + m_x + scroll->GetScroll())+(64.0f*j);
+				dst.m_right = (64.0f*m_posture + m_x + scroll->GetScroll())+(64.0f*j);
+				dst.m_bottom = (64.0f + m_y + scroll->GetYScroll())-(64.0f*i);
 
 				Draw::Draw(1, &src, &dst, c, 0);
 			}

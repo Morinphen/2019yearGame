@@ -17,6 +17,10 @@ CObjKaginawa::CObjKaginawa(int x, int y,int a)
 	}
 
 	sm_x = m_x = x + (300 * m_muki);
+	if (m_x <= 50)
+	{
+		m_x = 50;
+	}
 	sm_y = m_y = y;
 }
 
@@ -96,6 +100,13 @@ void CObjKaginawa::Action()
 		float b = abs(m_y - h->GetY());
 		CObjNagenawa* obj_s = new CObjNagenawa(h->GetX(), h->GetY(), m_muki, a, b);
 		Objs::InsertObj(obj_s, OBJ_NAGENAWA, 10);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	else if (h->Ninzyutu == true)
+	{
+		h->ReSetN(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

@@ -9,17 +9,20 @@
 //使用するネームスペース
 using namespace GameL;
 
-
+CObjEnemy::CObjEnemy(int x, int y)
+{
+	m_px = x;
+	m_py = y;
+}
 
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	m_px = 200.0f;//位置
-	m_py = 500.0f;
+	
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;//右向き0.0f　左向き1.0f
-
+	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする
 
@@ -28,17 +31,30 @@ void CObjEnemy::Init()
 
 	m_move = true;    //true=右　false=左
 
-					   //blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-	Hits::SetHitBox(this, m_px, m_py, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	crhitbox = true;
+	de = false;
 }
 
 //アクション
 void CObjEnemy::Action()
 {
+	if (crhitbox == true && m_move == true)
+	{
+		Hits::DeleteHitBox(this);
+		Hits::SetHitBox(this,m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+		crhitbox = false;
+	}
+	else if (crhitbox == true && m_move == false)
+	{
+		Hits::DeleteHitBox(this);
+		Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+		crhitbox = false;
+	}
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py,false,
@@ -53,13 +69,17 @@ void CObjEnemy::Action()
 	}
 
 	//ブロック衝突で向きを変更
-	if (m_hit_left == true)
+	if (m_hit_left == true&& m_hit_right == false||m_posture_time>150&& m_move == false)
 	{
 		m_move = true;
+		crhitbox = true;
+		m_posture_time = 0;
 	}
-	if (m_hit_right == true)
+	if (m_hit_right == true&&m_hit_left == false ||m_posture_time>150 && m_move == true)
 	{
 		m_move = false;
+		crhitbox = true;
+		m_posture_time = 0;
 	}
 
 	//通常速度
@@ -97,7 +117,7 @@ void CObjEnemy::Action()
 	}
 
 
-
+	m_posture_time += 1;
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
@@ -107,12 +127,24 @@ void CObjEnemy::Action()
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
-
+	CHitBox* hit = Hits::GetHitBox(this);
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
+	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
+	{
+		CObjDonden*objn = new CObjDonden(m_px, m_py);
+		Objs::InsertObj(objn, OBJ_DONDEN, 3);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+	if (m_move == true)
+	{
+		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
+	}
+	else if (m_move == false)
+	{
+		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
+	}
 }
 
 //ドロー
@@ -136,14 +168,31 @@ void CObjEnemy::Draw()
 	src.m_bottom = 128.0f;
 
 	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetYScroll();
-	dst.m_left = (64 - 64.0f*m_posture) + m_px + block->GetScroll();
-	dst.m_right = (64.0f*m_posture) + m_px + block->GetScroll();
-	dst.m_bottom = 64.0f + m_py + block->GetYScroll();
+	dst.m_top = 0.0f + m_py + scroll->GetYScroll();
+	dst.m_left = (64 - 64.0f*m_posture) + m_px + scroll->GetScroll();
+	dst.m_right = (64.0f*m_posture) + m_px + scroll->GetScroll();
+	dst.m_bottom = 64.0f + m_py + scroll->GetYScroll();
 
 	//描画
 	Draw::Draw(4, &src, &dst, c, 0.0f);
+	if(find==true)
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + scroll->GetYScroll()+64;
+		dst.m_left = (64 - 64.0f*m_posture) + m_px + scroll->GetScroll();
+		dst.m_right = (64.0f*m_posture) + m_px + scroll->GetScroll();
+		dst.m_bottom = 64.0f + m_py + scroll->GetYScroll()+64;
+
+		//描画
+		Draw::Draw(9, &src, &dst, c, 0.0f);
+	}
 }

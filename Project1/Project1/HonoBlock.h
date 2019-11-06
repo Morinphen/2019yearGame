@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjScroll :public CObj
+class CObjHonoBlock :public CObj
 {
 public:
-	CObjScroll(int map[10][100]);
-	~CObjScroll() {};
+	CObjHonoBlock(int x, int y);
+	~CObjHonoBlock() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
@@ -21,14 +21,24 @@ public:
 	void SetYScrooll(float s) { l_scroll = s; }
 	float GetYScroll() { return l_scroll; }
 
-	void SetUtikagiScroll(float *hx, float *hy);
+	////主人公と壁の交差判定
+	//bool HeroBlockCrossPoint(
+	//	float x, float y, float vx, float vy,
+	//	float *out_px, float *out_py, float* out_len
+	//);
 
-	int m_map[10][100];
 private:
 	int m_x;
 	int m_y;
+	int aaa;
+
+	int m_map[10][100];
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
+	int m_ani_time;//アニメーションフレーム
+	int m_ani_frame;//描画フレーム
+
+	bool enzyou;
 };

@@ -8,7 +8,7 @@ using namespace GameL;
 class CObjEnemy :public CObj
 {
 public:
-	CObjEnemy() {};
+	CObjEnemy(int x,int y);
 	~CObjEnemy() {};
 	void Init(); //イニシャライズ
 	void Action();//アクション
@@ -28,7 +28,8 @@ public:
 	void SetDown(bool b) { m_hit_down = b; }
 	void SetLeft(bool b) { m_hit_left = b; }
 	void SetRight(bool b) { m_hit_right = b; }
-
+	void SetF(bool b) { find = b; }
+	void SetD(bool b) { de = b; }
 private:
 	float m_px; //位置
 	float m_py;
@@ -36,11 +37,15 @@ private:
 	float m_vy;
 	float m_posture; //姿勢
 
+	bool find;
 	bool m_move;
+	bool de;
 
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム
+	int m_posture_time;//姿勢変えるまでの時間
 
+	bool crhitbox;
 	float m_speed_power; //スピードパワー
 	float m_ani_max_time; //アニメーション動作間隔最大値
 

@@ -32,6 +32,8 @@ void CObjBlock::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+
+
 }
 //ドロー
 void CObjBlock::Draw()
@@ -222,7 +224,7 @@ void CObjBlock::BlockHit
 
 void CObjBlock::UBlockHit
 (
-	float* x, float* y,
+	float* x, float* y, bool* flag,
 	bool*up, bool* down, bool* left, bool* right,
 	float *vx, float *vy
 )
@@ -262,48 +264,58 @@ void CObjBlock::UBlockHit
 
 					if (r <= 0.0f)
 						r = abs(r);
+
 					else
 						r = 360.0f - abs(r);
 
 					//lenがある一定の長さのより短い場合判定に入る
 					if (len < 88.0f)
 					{
+						CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 						//角度で上下左右を判定
 						if ((r < 45 && r>=0) || r > 315)
 						{
 							//右
 							*right = true;//主人公の左の部分が衝突しているか
 							*x = bx + 64.0f + (m_scroll);//ブロックに位置-主人公の幅
-							*vx = -(*vx)*0.1f;//-VX*反発係数
+
+							if (*flag == false)
+							{
+								scroll->SetScrooll(m_scroll - 64);
+								*flag = true;
+							}
+							else
+							{
+								*vx = -(*vx)*0.0f;//-VX*反発係数
+							}
 						}
 
-						if (r > 45 && r < 135)
-						{
-							//上
-							*down = true;//主人公の下の部分が衝突しているか
-							*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
-							*vy = 0.0f;
-						}
+						//if (r > 45 && r < 135)
+						//{
+						//	//上
+						//	*down = true;//主人公の下の部分が衝突しているか
+						//	*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+						//	*vy = 0.0f;
+						//}
 
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;//主人公の右の部分が衝突しているか
-							*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
-							*vx = -(*vx)*0.1f;//-VX*反発係数
-						}
 
-						if (r > 225 && r < 315)
-						{
-							//下
-							*up = true;//主人公の上の部分が衝突しているか
-							*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
-							if (*vy < 0)
+							if (*flag == false)
 							{
-								*vy = 0.0f;
+								scroll->SetScrooll(m_scroll + 64);
+								*flag = true;
 							}
-						}
 
+							else
+							{
+								*vx = -(*vx)*0.0f;//-VX*反発係数
+							}
+
+							*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+						}
 					}
 				}
 			}

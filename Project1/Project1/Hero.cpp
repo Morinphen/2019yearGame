@@ -16,8 +16,8 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_x = -2000;
-	m_y = -5000;
+	//m_x = 100;
+	//m_y = 300;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
@@ -27,13 +27,23 @@ void CObjHero::Init()
 	W_cat = 1.0f;
 	W_cat2 = 0.0f;
 
+	green = 1.0f;
+	change = false;
+	c_stop = false;
+
 	s_atack = false;
 	nawa_stop = false;
 	Sworp = false;
 	nawa_ido = false;
+	idocount = 0;
 
 	ball = false;
+	smokeh = false;
 	U_flag = false;
+
+	Ninzyutu = false;
+
+	U_scroll = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
@@ -46,15 +56,20 @@ void CObjHero::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_PLAYER, OBJ_HERO,1);
+	Hits::SetHitBox(this, m_x, m_y,64,64, ELEMENT_PLAYER, OBJ_HERO,1);
 }
 //アクション
 void CObjHero::Action()
 {
+	//敵の位置を取得
+	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	//スクロール情報取得
+	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false) {
+		Ninzyutu = false;
+		U_scroll = false;
 
 		pb->BlockHit(&m_x, &m_y,true,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
@@ -90,42 +105,89 @@ void CObjHero::Action()
 			m_ani_time = 0;
 		}
 
-		//攻撃
-		if (Input::GetVKey('Z'))
+		//ジャンプ
+		if (Input::GetVKey('X') && m_hit_down == true)
 		{
-			if (s_atack == false) {
-				CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
-				Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
-				s_atack = true;
+			if (jamptime == 0)
+				jamptime++;
+
+			jamppower += 4.0f;
+		}
+
+		if (jamptime != 0)
+		{
+			jamptime++;
+			if (jamptime == 5)
+			{
+				m_vy = -jamppower;
+				m_y += m_vy;
+				jamptime = 0;
+				jamppower = 0.0f;
 			}
 		}
 
-		//鉤縄
-		else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
-		{
-			if (s_atack == false) {
-				CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
-				Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
-				s_atack = true;
-				nawa_stop = true;
+		//重力
+		if (m_vy < 10)
+			m_vy += 9.8f / 16.0f;
+
+		if (nawa_stop == false) {
+
+			//シノビチェンジ
+			if (Input::GetVKey('Q'))
+			{
+				if (c_stop == false) {
+					if(green!=0.0f)
+						green = 0.0f;
+					else
+						green = 1.0f;
+					change = change ? false : true;
+					c_stop = true;
+				}
 			}
-		}
+			else
+			{
+				c_stop = false;
+			}
 
-		else
-		{
-			s_atack = false;
-		}
+			//忍具モード時
+			if (change == false) {
+				//攻撃
+				if (Input::GetVKey('Z'))
+				{
+					if (s_atack == false) {
+						CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+						s_atack = true;
+					}
+				}
 
-	//煙玉
-	if (Input::GetVKey('D'))
-	{
-		if (ball == false) 
-		{
-			CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
-			Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
-			ball = true;
-		}
-	}
+				//鉤縄
+				else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
+				{
+					if (s_atack == false) {
+						CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
+						s_atack = true;
+						nawa_stop = true;
+					}
+				}
+
+				else
+				{
+					s_atack = false;
+				}
+
+				//煙玉
+				if (Input::GetVKey('D'))
+				{
+					if (ball == false)
+					{
+						CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+						ball = true;
+					}
+				}
+			}
 
 		//ジャンプ
 		if (Input::GetVKey('X') && m_hit_down == true)
@@ -149,23 +211,40 @@ void CObjHero::Action()
 				jamppower = 0.0f;
 			}
 		}
+			else {
+				//火遁
+				if (Input::GetVKey('Z'))
+				{
+					if (s_atack == false) {
+						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
+						s_atack = true;
+					}
+				}
+				else
+				{
+					s_atack = false;
+				}
+			}
 
-		//重力
-		if (m_vy < 10)
-			m_vy += 9.8f / 16.0f;
+		}
 	}
 
 	//うちかぎを使用しているとき
 	else if (U_flag == true)
 	{
-
-		pb->UBlockHit(&m_x, &m_y,
+		pb->UBlockHit(&m_x, &m_y,&U_scroll,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right,
 			&m_vx, &m_vy
 		);
 
+		m_vy = 0;
+
+		Ninzyutu = true;
+
+		scroll->UtikagiScroll(&m_x, &m_y);
+
 		if (Input::GetVKey(VK_RIGHT) == true) {
-			//Cボタンを押しているとダッシュ
 			m_vx += 0.5f;
 
 			m_ani_time++;
@@ -173,11 +252,15 @@ void CObjHero::Action()
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
-			//Cボタンを押しているとダッシュ
 			m_vx -= 0.5f;
 			m_ani_time++;
 			m_posture = 1.0f;
 		}
+	}
+
+	else
+	{
+		Ninzyutu = true;
 	}
 
 	if (m_y > 700.0f)
@@ -209,23 +292,25 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
-	//弾丸のヒットボックス更新
+	//ヒットボックス更新
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//縄移動
 	if (nawa_ido == true)
 	{
+		idocount++;
 		s_atack = true;
 		nawa_stop = true;
 		m_vx = n_x / 30;
 		m_vy = -n_y / 30;
 
-		if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
+		if (idocount==30)
 		{
 			nawa_ido = false;
 			nawa_stop = false;
 			n_x = 0;
 			n_y = 0;
+			idocount = 0;
 		}
 	}
 
@@ -234,13 +319,29 @@ void CObjHero::Action()
 	m_y += m_vy;
 
 	hit->SetPos(m_x, m_y);
+	//煙玉の煙と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr)
+	{
+		smokeh = true;
+	}
+	else
+	{
+		smokeh = false;
+	}
+
+	//敵と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
+	{
+		Scene::SetScene(new CSceneMain);
+	}
+
 }
 
 //ドロー
 void CObjHero::Draw()
 {
 	float aa = (W_cat2/50);
-	float c[4] = {1.0f,1.0f,1.0f,1.0f + aa };
+	float c[4] = { green,1.0f,green,1.0f + aa };
 	RECT_F src;
 	RECT_F dst;
 
