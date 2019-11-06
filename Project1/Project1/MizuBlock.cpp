@@ -37,9 +37,59 @@ void CObjMBlock::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
-	//要素番号を安俵に変更
+	//上下左右判定
 	float x = m_x;
 	float y = m_y;
+
+	//vectorの作成
+	float vx = (hx + (-m_scroll)) - x;
+	float vy = (hy + (-l_scroll)) - y;
+	//長さを求める
+	float len = sqrt(vx*vx + vy*vy);
+
+	//角度を求める
+	float r = atan2(vy, vx);
+	r = r * 180 / 3.14;
+	if (r <= 0.0f)
+		r = abs(r);
+	else
+		r = 360.0f - abs(r);
+
+	//lenがある一定の長さのより短い場合判定に入る
+	if (len < 88.0f) {
+		//角度で上下左右を判定
+		if ((r < 45 && r >= 0) || r > 315)
+		{
+			//右
+			hero->SetRight(true);//主人公の左の部分が衝突している
+			hero->SetX(x + 64.0f + (m_scroll));//ブロックの位置+主人公の幅
+			hero->SetVX(-hero->GetVX()*0.1f);//-VX*反発係数
+		}
+		else if (r > 45 && r < 135)
+		{
+			//上
+			hero->SetDown(true);//主人公から見て下の部分が衝突している
+			hero->SetY(y - 64.0f + (l_scroll));//ブロックの位置-主人公の幅
+			hero->SetVY(0.0f);
+		}
+		else if (r > 135 && r < 225)
+		{
+			//左
+			hero->SetLeft(true);//主人公の右の部分が衝突している
+			hero->SetX(x - 64.0f + (m_scroll));//ブロックの位置+主人公の幅
+			hero->SetVX(-hero->GetVX()*0.1f);//-VX*反発係数
+		}
+		else if (r > 225 && r < 315)
+		{
+			//下
+			hero->SetUP(true);//主人公から見て上の部分が当たっている
+			hero->SetY(y + 64.0f + (l_scroll));//ブロックの位置+主人公の幅
+			if (hero->GetVY() < 0)
+			{
+				hero->SetVY(0.0f);
+			}
+		}
+	}
 
 	m_ani_time++;
 	if (m_ani_time == 16)
@@ -74,4 +124,9 @@ void CObjMBlock::Draw()
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 	Draw::Draw(14, &src, &dst, c, 0.0f);
+}
+
+void CObjMBlock::Worp()
+{
+
 }

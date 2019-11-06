@@ -15,6 +15,8 @@ public:
 	void Action();//Ç†Ç≠ÇµÇÂÇÒ
 	void Draw();//Ç«ÇÎÅ[
 
+	void Worp();
+
 	void SetScrooll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
 
