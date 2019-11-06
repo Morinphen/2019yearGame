@@ -31,13 +31,22 @@ public:
 	void SetNY(float y) { n_y = y; }
 
 	void Uflag(bool b) { U_flag = b; }
+	bool GetNawa() { return nawa_stop; }
 
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
 	void SetLeft(bool b) { m_hit_left = b; }
 	void SetRight(bool b) { m_hit_right = b; }
 
+	bool GetUP() { return m_hit_up; }
+	bool GetDown() { return m_hit_down; }
+	bool GetLeft() { return m_hit_left; }
+	bool GetRight() { return m_hit_right; }
+
 	bool Sworp;//ワープ制御用変数
+
+	//忍術フラグ
+	bool Ninzyutu;
 
 	//ワープする際の画像切り取り位置
 	float W_cat;
@@ -67,12 +76,14 @@ private:
 	bool nawa_ido;
 	float n_x;
 	float n_y;
+	int idocount;
 
 	//うちかぎフラグ
 	bool U_flag;
+	bool U_scroll;
 
 	bool ball;//煙玉フラグ
-
+	bool smokeh;//煙との衝突確認用
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
 

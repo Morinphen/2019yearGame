@@ -127,6 +127,7 @@
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="Hinotama.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="Kaginawa.cpp" />
     <ClCompile Include="Nagenawa.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="Hinotama.h" />
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="Kaginawa.h" />
     <ClInclude Include="Nagenawa.h" />

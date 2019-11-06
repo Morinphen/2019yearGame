@@ -22,7 +22,7 @@ void CObjEnemy::Init()
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;//右向き0.0f　左向き1.0f
-
+	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする
 
@@ -69,15 +69,17 @@ void CObjEnemy::Action()
 	}
 
 	//ブロック衝突で向きを変更
-	if (m_hit_left == true&& m_hit_right == false)
+	if (m_hit_left == true&& m_hit_right == false||m_posture_time>150&& m_move == false)
 	{
 		m_move = true;
 		crhitbox = true;
+		m_posture_time = 0;
 	}
-	if (m_hit_right == true&&m_hit_left == false)
+	if (m_hit_right == true&&m_hit_left == false ||m_posture_time>150 && m_move == true)
 	{
 		m_move = false;
 		crhitbox = true;
+		m_posture_time = 0;
 	}
 
 	//通常速度
@@ -115,7 +117,7 @@ void CObjEnemy::Action()
 	}
 
 
-
+	m_posture_time += 1;
 	//摩擦
 	m_vx += -(m_vx*0.098);
 
@@ -128,6 +130,13 @@ void CObjEnemy::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
+	{
+		CObjDonden*objn = new CObjDonden(m_px, m_py);
+		Objs::InsertObj(objn, OBJ_DONDEN, 3);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	if (m_move == true)
 	{
 		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
@@ -135,11 +144,6 @@ void CObjEnemy::Action()
 	else if (m_move == false)
 	{
 		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
-	}
-	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
 	}
 }
 

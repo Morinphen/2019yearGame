@@ -32,7 +32,7 @@ public:
 
 	void CObjBlock::UBlockHit
 	(
-		float* x, float* y,
+		float* x, float* y, bool* flag,
 		bool*up, bool* down, bool* left, bool* right,
 		float *vx, float *vy
 	);

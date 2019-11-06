@@ -23,6 +23,7 @@ void CObjDonden::Init()
 	red = 1.0f;
 	Wanimation = false;
 	Wanimation2 = false;
+	s_down = false;
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -38,6 +39,8 @@ void CObjDonden::Action()
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
+
+	s_down = h->GetDown();
 
 	int a = 0;
 	for (int i = 0; i < 10; i++)
@@ -58,7 +61,9 @@ void CObjDonden::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		red = 0.0f;
-		if (Input::GetVKey(VK_UP) == true)
+		bool stop;
+		stop = h->GetNawa();
+		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false)
 		{
 			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 
