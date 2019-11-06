@@ -74,7 +74,9 @@ void CObjSyuriken::Action()
 		);
 	}
 
-	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
+	if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
+		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
+		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
 	{
 		m_hit_left = false;
 		m_hit_right = false;

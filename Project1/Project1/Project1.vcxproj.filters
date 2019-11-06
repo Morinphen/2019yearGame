@@ -105,6 +105,12 @@
     <ClCompile Include="Hinotama.cpp">
       <Filter>ソース ファイル\Ninzya</Filter>
     </ClCompile>
+    <ClCompile Include="HonoBlock.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="MizuBlock.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -190,6 +196,12 @@
     </ClInclude>
     <ClInclude Include="Hinotama.h">
       <Filter>ソース ファイル\Ninzya</Filter>
+    </ClInclude>
+    <ClInclude Include="HonoBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="MizuBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

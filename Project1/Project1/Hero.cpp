@@ -28,6 +28,10 @@ void CObjHero::Init()
 	W_cat = 1.0f;
 	W_cat2 = 0.0f;
 
+	green = 1.0f;
+	change = false;
+	c_stop = false;
+
 	s_atack = false;
 	nawa_stop = false;
 	Sworp = false;
@@ -128,42 +132,80 @@ void CObjHero::Action()
 			m_vy += 9.8f / 16.0f;
 
 		if (nawa_stop == false) {
-			//çUåÇ
-			if (Input::GetVKey('Z'))
+
+			//ÉVÉmÉrÉ`ÉFÉìÉW
+			if (Input::GetVKey('Q'))
 			{
-				if (s_atack == false) {
-					CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
-					Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
-					s_atack = true;
+				if (c_stop == false) {
+					if(green!=0.0f)
+						green = 0.0f;
+					else
+						green = 1.0f;
+					change = change ? false : true;
+					c_stop = true;
 				}
 			}
-
-			//ÁÍìÍ
-			else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
-			{
-				if (s_atack == false) {
-					CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
-					Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
-					s_atack = true;
-					nawa_stop = true;
-				}
-			}
-
 			else
 			{
-				s_atack = false;
+				c_stop = false;
 			}
 
-			//âåã 
-			if (Input::GetVKey('D'))
-			{
-				if (ball == false)
+			//îEãÔÉÇÅ[Éhéû
+			if (change == false) {
+				//çUåÇ
+				if (Input::GetVKey('Z'))
 				{
-					CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
-					Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
-					ball = true;
+					if (s_atack == false) {
+						CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+						s_atack = true;
+					}
+				}
+
+				//ÁÍìÍ
+				else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
+				{
+					if (s_atack == false) {
+						CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
+						s_atack = true;
+						nawa_stop = true;
+					}
+				}
+
+				else
+				{
+					s_atack = false;
+				}
+
+				//âåã 
+				if (Input::GetVKey('D'))
+				{
+					if (ball == false)
+					{
+						CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+						ball = true;
+					}
 				}
 			}
+
+			else {
+				//âŒìŸ
+				if (Input::GetVKey('Z'))
+				{
+					if (s_atack == false) {
+						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
+						s_atack = true;
+					}
+				}
+				else
+				{
+					s_atack = false;
+				}
+			}
+
 		}
 	}
 
@@ -278,7 +320,7 @@ void CObjHero::Action()
 void CObjHero::Draw()
 {
 	float aa = (W_cat2/50);
-	float c[4] = {1.0f,1.0f,1.0f,1.0f + aa };
+	float c[4] = { green,1.0f,green,1.0f + aa };
 	RECT_F src;
 	RECT_F dst;
 
