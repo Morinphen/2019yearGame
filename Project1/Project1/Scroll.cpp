@@ -59,7 +59,7 @@ void CObjScroll::Action()
 	}
 
 	//下方スクロールライン
-	if (hy > 500 && l_scroll>-100)
+	if (hy > 500 && l_scroll>-64*46)
 	{
 		hero->SetY(500);//主人公はラインを超えないように
 		//enemy->SetVY(vy);

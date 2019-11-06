@@ -8,17 +8,16 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjHero::CObjHero(int x,int y)
+CObjHero::CObjHero()
 {
-	m_x = x;
-	m_y = y;
+	
 }
 
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_x = 100;
-	m_y = 300;
+	m_x = -2000;
+	m_y = -5000;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
@@ -39,7 +38,7 @@ void CObjHero::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
 
-	m_speed_power = 0.5f;//通常速度
+	m_speed_power = 0.3f;//通常速度
 	m_ani_max_time = 2;//アニメーション感覚幅
 
 	//blockとの衝突状態確認用
@@ -65,10 +64,10 @@ void CObjHero::Action()
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
-				m_vx += 1.0f;
+				m_vx += 0.5f;
 				m_ani_time++;
 			}
-			m_vx += 1.0f;
+			m_vx += 0.5f;
 
 			m_ani_time++;
 			m_posture = 0.0f;
@@ -77,10 +76,10 @@ void CObjHero::Action()
 		else if (Input::GetVKey(VK_LEFT) == true) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
-				m_vx -= 1.0f;
+				m_vx -= 0.5f;
 				m_ani_time++;
 			}
-			m_vx -= 1.0f;
+			m_vx -= 0.5f;
 			m_ani_time++;
 			m_posture = 1.0f;
 		}
@@ -134,8 +133,10 @@ void CObjHero::Action()
 			if (jamptime == 0)
 				jamptime++;
 
-			jamppower += 4.0f;
+			jamppower += 3.5f;
 		}
+
+		
 
 		if (jamptime != 0)
 		{
