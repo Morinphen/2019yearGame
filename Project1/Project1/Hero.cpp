@@ -8,10 +8,9 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjHero::CObjHero(int x,int y)
+CObjHero::CObjHero()
 {
-	m_x = x;
-	m_y = y;
+	
 }
 
 //イニシャライズ
@@ -58,7 +57,7 @@ void CObjHero::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
 
-	m_speed_power = 0.5f;//通常速度
+	m_speed_power = 0.3f;//通常速度
 	m_ani_max_time = 2;//アニメーション感覚幅
 
 	//blockとの衝突状態確認用
@@ -73,6 +72,8 @@ void CObjHero::Action()
 {
 	//敵の位置を取得
 	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	//スクロール情報取得
+	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
@@ -89,10 +90,10 @@ void CObjHero::Action()
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
-				m_vx += 1.0f;
+				m_vx += 0.5f;
 				m_ani_time++;
 			}
-			m_vx += 1.0f;
+			m_vx += 0.5f;
 
 			m_ani_time++;
 			m_posture = 0.0f;
@@ -101,10 +102,10 @@ void CObjHero::Action()
 		else if (Input::GetVKey(VK_LEFT) == true) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
-				m_vx -= 1.0f;
+				m_vx -= 0.5f;
 				m_ani_time++;
 			}
-			m_vx -= 1.0f;
+			m_vx -= 0.5f;
 			m_ani_time++;
 			m_posture = 1.0f;
 		}
@@ -199,6 +200,28 @@ void CObjHero::Action()
 				}
 			}
 
+		//ジャンプ
+		if (Input::GetVKey('X') && m_hit_down == true)
+		{
+			if (jamptime == 0)
+				jamptime++;
+
+			jamppower += 3.5f;
+		}
+
+		
+
+		if (jamptime != 0)
+		{
+			jamptime++;
+			if (jamptime == 5)
+			{
+				m_vy = -jamppower;
+				m_y += m_vy;
+				jamptime = 0;
+				jamppower = 0.0f;
+			}
+		}
 			else {
 				//火遁
 				if (Input::GetVKey('Z'))
@@ -230,8 +253,9 @@ void CObjHero::Action()
 
 		Ninzyutu = true;
 
+		scroll->SetUtikagiScroll(&m_x, &m_y);
+
 		if (Input::GetVKey(VK_RIGHT) == true) {
-			//Cボタンを押しているとダッシュ
 			m_vx += 0.5f;
 
 			m_ani_time++;
@@ -239,7 +263,6 @@ void CObjHero::Action()
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
-			//Cボタンを押しているとダッシュ
 			m_vx -= 0.5f;
 			m_ani_time++;
 			m_posture = 1.0f;
@@ -389,22 +412,4 @@ void CObjHero::Draw()
 	}
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
-}
-
-float CObjHero::GetGX()
-{
-	//スクロール情報を持ってくる
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	g_x = m_x - scroll->GetScroll();
-
-	return g_x;
-}
-
-float CObjHero::GetGY()
-{
-	//スクロール情報を持ってくる
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	g_y = m_y + scroll->GetYScroll();
-
-	return g_y;
 }

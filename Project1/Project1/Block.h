@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjBlock :public CObj
 {
 public:
-	CObjBlock(int map[10][100]);
+	CObjBlock(int map[46][100]);
 	~CObjBlock() {};
 	void Init();//‚¢‚É‚µ‚á‚ç‚¢‚¸
 	void Action();//‚ ‚­‚µ‚å‚ñ
@@ -50,7 +50,7 @@ private:
 	int m_y;
 	int aaa;
 
-	int m_map[10][100];
+	int m_map[46][100];
 
 	bool hit_smokeball;
 

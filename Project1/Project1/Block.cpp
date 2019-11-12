@@ -10,10 +10,10 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlock::CObjBlock(int map[10][100])
+CObjBlock::CObjBlock(int map[46][100])
 {
 	//マップデータをコピー
-	memcpy(m_map, map, sizeof(int)*(10 * 100));
+	memcpy(m_map, map, sizeof(int)*(46 * 100));
 }
 
 //イニシャライズ
@@ -32,6 +32,8 @@ void CObjBlock::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+
+
 }
 //ドロー
 void CObjBlock::Draw()
@@ -40,7 +42,7 @@ void CObjBlock::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
@@ -90,7 +92,7 @@ void CObjBlock::BlockHit
 	*right = false;
 
 	//m_mapの全要素にアクセス
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
@@ -234,7 +236,7 @@ void CObjBlock::UBlockHit
 	*right = false;
 
 	//m_mapの全要素にアクセス
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
@@ -314,18 +316,6 @@ void CObjBlock::UBlockHit
 
 							*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
 						}
-
-						//if (r > 225 && r < 315)
-						//{
-						//	//下
-						//	*up = true;//主人公の上の部分が衝突しているか
-						//	*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
-						//	if (*vy < 0)
-						//	{
-						//		*vy = 0.0f;
-						//	}
-						//}
-
 					}
 				}
 			}

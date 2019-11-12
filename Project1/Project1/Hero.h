@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjHero :public CObj
 {
 public:
-	CObjHero(int x,int y);
+	CObjHero();
 	~CObjHero() {};
 	void Init();//‚¢‚É‚µ‚á‚ç‚¢‚¸
 	void Action();//‚ ‚­‚µ‚å‚ñ
