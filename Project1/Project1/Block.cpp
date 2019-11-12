@@ -332,8 +332,6 @@ void CObjBlock::UBlockHit
 		}
 	}
 }
-
-
 ////内積関数
 ////引数1,2float ax,ay:Aベクトル
 ////引数3,4float bx,by:Bベクトル

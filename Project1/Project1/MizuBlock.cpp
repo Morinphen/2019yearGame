@@ -23,7 +23,10 @@ void CObjMBlock::Init()
 	m_ani_time = 0;
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_MIZUBLOCK, 1);
+	h_flag = false;
+	deadtime = 0;
+	Fdead = false;
+	Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_MIZUBLOCK, 1);
 }
 //アクション
 void CObjMBlock::Action()
@@ -32,6 +35,10 @@ void CObjMBlock::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
+
+	h_flag = hero->GetMode();
+
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_scroll = scroll->GetScroll();
@@ -56,7 +63,7 @@ void CObjMBlock::Action()
 		r = 360.0f - abs(r);
 
 	//lenがある一定の長さのより短い場合判定に入る
-	if (len < 88.0f) {
+	if (len < 88.0f && h_flag == true) {
 		//角度で上下左右を判定
 		if ((r < 45 && r >= 0) || r > 315)
 		{
@@ -91,6 +98,45 @@ void CObjMBlock::Action()
 		}
 	}
 
+	//ヒットボックス更新
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Fdead == false)
+	{
+		Fdead = true;
+		hero->WDflag(true);
+	}
+
+	if (Fdead == true)
+	{
+		hero->SetVX(0);
+		hero->SetVY(0);
+		deadtime++;
+		if (deadtime == 79)
+		{
+			hero->SetX(hero->GetWX());
+			hero->SetY(hero->GetWY());
+
+			scroll->SetScrooll(-(hero->GetX() - (400)));
+			if (hero->GetY() < 80) {
+				scroll->SetYScrooll(-(hero->GetY() - (80)));
+			}
+			else if (hero->GetY() > 500) {
+				scroll->SetYScrooll(-(hero->GetY() - (500)));
+			}
+
+		}
+
+		if (deadtime == 80)
+		{
+			deadtime = 0;
+			Fdead = false;
+			hero->WDflag(false);
+			hero->Dflag(false);
+		}
+
+	}
+
 	m_ani_time++;
 	if (m_ani_time == 16)
 	{
@@ -103,8 +149,7 @@ void CObjMBlock::Action()
 	}
 
 	aaa++;
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 48);
 }
 //ドロー
 void CObjMBlock::Draw()
@@ -124,9 +169,4 @@ void CObjMBlock::Draw()
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 	Draw::Draw(14, &src, &dst, c, 0.0f);
-}
-
-void CObjMBlock::Worp()
-{
-
 }
