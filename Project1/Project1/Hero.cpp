@@ -76,16 +76,17 @@ void CObjHero::Action()
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	pb->BlockHit(&m_x, &m_y, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
 		d_ani_time = 0;
-
-		pb->BlockHit(&m_x, &m_y,true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-			&m_vx, &m_vy
-		);
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
