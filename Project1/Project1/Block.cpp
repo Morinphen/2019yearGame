@@ -10,10 +10,10 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlock::CObjBlock(int map[46][100])
+CObjBlock::CObjBlock(int map[10][100])
 {
 	//マップデータをコピー
-	memcpy(m_map, map, sizeof(int)*(46 * 100));
+	memcpy(m_map, map, sizeof(int)*(10 * 100));
 }
 
 //イニシャライズ
@@ -96,7 +96,7 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1)
+			if (m_map[i][j] == 1||m_map[i][j]==10)
 			{
 				//要素番号を座標に変更
 				float bx = j*64.0f;

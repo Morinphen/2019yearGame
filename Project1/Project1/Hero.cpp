@@ -362,6 +362,11 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain);
 	}
 
+	//天井と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&smokeh == false)
+	{
+		Scene::SetScene(new CSceneMain);
+	}
 }
 
 //ドロー

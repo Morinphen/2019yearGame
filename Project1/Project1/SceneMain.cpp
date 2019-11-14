@@ -100,6 +100,12 @@ void CSceneMain::InitScene()
 				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
 				Objs::InsertObj(obju, OBJ_DONDEN, 3);
 
+			}
+			if (map[i][j] == 8)
+			{
+				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
+			}*/
 			}*/
 
 			/*if (block_data[i][j] == 1) {
@@ -142,6 +148,21 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
 			}
 
+			else if (block_data[i][j] == 9)
+			{
+				CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
+				Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
+			}
+			else if (block_data[i][j] == 10)
+			{
+				CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
+				Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
+			}
+			else if (block_data[i][j] == 11)
+			{
+				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
+				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
+			}
 		}
 	}
 
