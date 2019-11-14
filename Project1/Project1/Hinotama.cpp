@@ -92,7 +92,7 @@ void CObjHinotama::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	if (m_x > 10000 || m_x<-200 || m_y > 700)
+	if (m_x > 10000 || m_x<-200 || m_y > 7000)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
