@@ -61,7 +61,7 @@ void CObjNagenawa::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	else if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
+	else if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr || m_y > 700.0f)
 	{
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);

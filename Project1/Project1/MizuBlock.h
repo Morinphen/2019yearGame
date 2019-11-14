@@ -35,7 +35,12 @@ private:
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
 
-	int m_map[10][100];
+	//主人公の状態確認変数
+	bool h_flag;
+
+	//水につかった際の変数
+	float Fdead;
+	int deadtime;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数

@@ -57,12 +57,14 @@ void CObjDonden::Action()
 	}
 
 	Pworp = Worp((a));
-
+	
+	//主人公が触れたとき
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		red = 0.0f;
 		bool stop;
 		stop = h->GetNawa();
+		//↑入力をされたとき、アニメーションを開始
 		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false)
 		{
 			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
@@ -81,31 +83,44 @@ void CObjDonden::Action()
 		red = 1.0f;
 	}
 
+	//アニメーション前半開始時
 	if (Wanimation == true)
 	{
+		//主人公をアニメーションさせ、ワープしている扱いに変更
 		h->W_cat2 -= 6.4f;
 		h->Sworp = true;
+		//一定のアニメーションが終わったとき
 		if (h->W_cat2 <= -64.0f)
 		{
+			//主人公の座標をワープ先に変更
 			h->SetX(D_tag[Pworp][1] * 64);
 			h->SetY(D_tag[Pworp][0] * 64);
 
-			scroll->SetScrooll(-(h->GetX() - (400)));
-			if (h->GetY() < 80)
-				scroll->SetYScrooll(-(h->GetY() - (80)));
-			else if (h->GetY() > 500)
-				scroll->SetYScrooll(-(h->GetY() - (500)));
+			//主人公のリスタート位置変更
+			h->SetWX(D_tag[Pworp][1] * 64);
+			h->SetWY(D_tag[Pworp][0] * 64);
 
+			scroll->SetScrooll(-(h->GetX() - (400)));
+			if (h->GetY() < 80) {
+				scroll->SetYScrooll(-(h->GetY() - (80)));
+			}
+			else if (h->GetY() > 500) {
+				scroll->SetYScrooll(-(h->GetY() - (500)));
+			}
+
+			//アニメーション後半開始
 			h->W_cat2 = -64.0f;
 			Wanimation = false;
 			Wanimation2 = true;
 		}
 	}
 
+	//アニメーション後半開始時
 	if (Wanimation2 == true)
 	{
 		h->W_cat2 += 6.4f;
 		h->Sworp = true;
+		//アニメーションが終わったとき
 		if (h->W_cat2 >= 0.0f) {
 			h->W_cat2 = 0.0f;
 			h->W_cat = 1.0f;
@@ -166,6 +181,7 @@ int CObjDonden::Worp(int a)
 	{
 		for (int j = aa - 1; j > i; j--)
 		{
+			//自身に最も近いどんでん返しの位置を調べ、ソートさせる
 			if (data[j] < data[j - 1])
 			{
 				int a = data[j - 1];
