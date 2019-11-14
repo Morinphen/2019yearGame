@@ -106,6 +106,7 @@ void CSceneMain::InitScene()
 			CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 			Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			}*/
+
 			if (block_data[i][j] == 3)
 			{
 				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
@@ -135,7 +136,6 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(obju, OBJ_DONDEN, 3);
 			}
 			
-
 			else if (block_data[i][j] == 8)
 			{
 				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);

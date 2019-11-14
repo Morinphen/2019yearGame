@@ -20,6 +20,8 @@ public:
 private:
 	//カーソル移動用変数
 	float direction;
+
+	//上下に移動するカーソル用変数
 	int D_Count;
 	bool D_Suiti;
 

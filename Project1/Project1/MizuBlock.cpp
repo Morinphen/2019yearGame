@@ -107,11 +107,13 @@ void CObjMBlock::Action()
 		hero->WDflag(true);
 	}
 
+	//主人公が着水したとき
 	if (Fdead == true)
 	{
 		hero->SetVX(0);
 		hero->SetVY(0);
 		deadtime++;
+		//主人公を中間ポイントに戻す
 		if (deadtime == 79)
 		{
 			hero->SetX(hero->GetWX());
@@ -126,7 +128,7 @@ void CObjMBlock::Action()
 			}
 
 		}
-
+		//主人公のミス判定をリセット
 		if (deadtime == 80)
 		{
 			deadtime = 0;

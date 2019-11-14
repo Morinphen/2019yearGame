@@ -38,6 +38,7 @@ void CObjUtikagi::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+	//うちかぎブロックに触れた状態で、上入力をしたとき
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Input::GetVKey(VK_UP))
 	{
 		bool stop;

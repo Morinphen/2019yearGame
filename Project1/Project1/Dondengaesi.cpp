@@ -24,6 +24,7 @@ void CObjDonden::Init()
 	Wanimation = false;
 	Wanimation2 = false;
 	s_down = false;
+	N_stop = false;
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -41,6 +42,8 @@ void CObjDonden::Action()
 	l_scroll = scroll->GetYScroll();
 
 	s_down = h->GetDown();
+
+	N_stop = h->GetINawa();
 
 	int a = 0;
 	for (int i = 0; i < 10; i++)
@@ -65,7 +68,7 @@ void CObjDonden::Action()
 		bool stop;
 		stop = h->GetNawa();
 		//↑入力をされたとき、アニメーションを開始
-		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false)
+		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false && N_stop == false)
 		{
 			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 

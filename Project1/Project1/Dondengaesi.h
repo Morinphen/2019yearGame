@@ -32,6 +32,9 @@ private:
 	bool Wanimation;
 	bool Wanimation2;
 
+	//鉤縄移動制御用変数
+	bool N_stop;
+
 	//主人公の位置の確認
 	bool s_down;
 

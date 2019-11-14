@@ -15,44 +15,57 @@ public:
 	void Action();//あくしょん
 	void Draw();//どろー
 
+	//現在の座標を渡す
 	float GetX() { return m_x; }
 	float GetY() { return m_y; }
+	//加速度を渡す
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
-	float GetGX();
-	float GetGY();
+	//リスタート用の変数を渡す
 	float GetWX() { return w_x; }
 	float GetWY() { return w_y; }
 
-
+	//主人公の座標を外部から変更する
 	void SetX(float x) { m_x = x; }
 	void SetY(float y) { m_y = y; }
+
+	//主人公の加速度を外部から変更する
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
 
+	//主人公のリスタート位置を外部から変更する
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
 
+	//主人公の鉤縄使用状態を外部から変更する
 	void NawaIdo(bool b) { nawa_ido = b; }
 	void ReSetN(bool b) { nawa_stop = b; }
 	void SetNX(float x) { n_x = x; }
 	void SetNY(float y) { n_y = y; }
+	//主人公の鉤縄を使用している状態を渡す
+	bool GetNawa() { return nawa_stop; }
+	bool GetINawa() { return nawa_ido; }
+
 
 	void Uflag(bool b) { U_flag = b; }
+
+	//主人公の死亡フラグを外部から変更する
 	void Dflag(bool b) { dead = b; }
 	void WDflag(bool b) { Wdead = b; }
-	bool GetNawa() { return nawa_stop; }
 
+	//主人公の当たり判定の状態を外部から変更する
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
 	void SetLeft(bool b) { m_hit_left = b; }
 	void SetRight(bool b) { m_hit_right = b; }
 
+	//主人公の当たり判定の状態を外部に渡す
 	bool GetUP() { return m_hit_up; }
 	bool GetDown() { return m_hit_down; }
 	bool GetLeft() { return m_hit_left; }
 	bool GetRight() { return m_hit_right; }
 
+	//主人公の戦闘スタイルを外部に渡す
 	bool GetMode() { return change; }
 
 	bool Sworp;//ワープ制御用変数

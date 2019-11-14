@@ -51,6 +51,7 @@ void CObjKaginawa::Action()
 
 	float r = 3.14f / 180.0f;
 
+	//ƒXƒNƒ[ƒ‹‚µ‚½•ª‚¾‚¯
 	float bm_x = m_x - (h->GetX() + 200);
 	float bm_y = m_y - (h->GetY());
 
