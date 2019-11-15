@@ -58,6 +58,8 @@ void CObjKaginawa::Action()
 	m_x = h->GetX() + 200;
 	m_y = h->GetY();
 
+	//一定の時間の間だけ上下に動かす
+	//falseなら上に、trueなら下に移動
 	if (D_Suiti == false) {
 		m_vx = m_vx*cos(r) - m_vy*sin(r);
 		m_vy = m_vy*cos(r) + m_vx*sin(r);
@@ -76,6 +78,7 @@ void CObjKaginawa::Action()
 
 	D_Count++;
 
+	//一定の時間が過ぎると、スイッチを切り替えさせる
 	if (D_Count == 1) {
 		if (D_Suiti == false)
 			direction++;
@@ -87,6 +90,7 @@ void CObjKaginawa::Action()
 
 	if (direction >= 120)
 		D_Suiti = true;
+
 	else if (direction <= 0) {
 		m_x = sm_x;
 		m_y = sm_y;
@@ -94,7 +98,9 @@ void CObjKaginawa::Action()
 		m_vy = 1.0f;
 		D_Suiti = false;
 	}
+	////////////////////////////////////////////////////////
 
+	//Aボタンをクリックしたとき、鍵縄を発射する
 	if (Input::GetVKey('A'))
 	{
 		float a = abs(m_x - h->GetX());
@@ -105,6 +111,7 @@ void CObjKaginawa::Action()
 		Hits::DeleteHitBox(this);
 	}
 
+	//カーソル出現時に、一定の行動を行うと、カーソルを消滅させる
 	else if (h->Ninzyutu == true)
 	{
 		h->ReSetN(false);

@@ -41,8 +41,8 @@ void CObjDonden::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+	//ŽålŒö‚Ìó‘Ô‚ðŽ‚Á‚Ä‚­‚é
 	s_down = h->GetDown();
-
 	N_stop = h->GetINawa();
 
 	int a = 0;
