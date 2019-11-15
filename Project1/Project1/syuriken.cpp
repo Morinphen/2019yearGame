@@ -42,7 +42,7 @@ void CObjSyuriken::Init()
 
 	Animation = false;
 
-	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
+	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 16, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
 }
 //アクション
 void CObjSyuriken::Action()
@@ -74,9 +74,7 @@ void CObjSyuriken::Action()
 		);
 	}
 
-	if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
-		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
-		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
+	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
 	{
 		m_hit_left = false;
 		m_hit_right = false;
@@ -94,7 +92,7 @@ void CObjSyuriken::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
 }
 //ドロー
 void CObjSyuriken::Draw()
