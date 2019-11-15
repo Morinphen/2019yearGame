@@ -131,14 +131,13 @@ void CSceneMain::InitScene()
 			else if (block_data[i][j] == 6)
 			{
 				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-				Objs::InsertObj(objn, OBJ_DONDEN, 3);
-				block_data[i][j] = 0;
+				Objs::InsertObj(objn, OBJ_NBLOCK, 3);
 			}
 
 			else if (block_data[i][j] == 7)
 			{
 				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_DONDEN, 3);
+				Objs::InsertObj(obju, OBJ_UTIKAGI, 3);
 			}
 
 			else if (block_data[i][j] == 8)

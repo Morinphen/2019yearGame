@@ -77,6 +77,11 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+	pb->BlockHit(&m_x, &m_y, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
 	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
 		Ninzyutu = false;
@@ -113,14 +118,26 @@ void CObjHero::Action()
 			m_ani_time = 0;
 		}
 
-		////ジャンプ
-		//if (Input::GetVKey('X') && m_hit_down == true)
-		//{
-		//	if (jamptime == 0)
-		//		jamptime++;
+		//ジャンプ
+		if (Input::GetVKey('X') && m_hit_down == true)
+		{
+			if (jamptime == 0)
+				jamptime++;
 
-		//	jamppower += 4.0f;
-		//}
+			jamppower += 8.0f;
+		}
+
+		if (jamptime != 0)
+		{
+			jamptime++;
+			if (jamptime == 5)
+			{
+				m_vy = -jamppower;
+				m_y += m_vy;
+				jamptime = 0;
+				jamppower = 0.0f;
+			}
+		}
 
 		if (jamptime != 0)
 		{
@@ -295,32 +312,6 @@ void CObjHero::Action()
 
 	//ヒットボックス更新
 	CHitBox* hit = Hits::GetHitBox(this);
-
-	//ジャンプ
-	if (Input::GetVKey('X') && m_hit_down == true)
-	{
-		if (jamptime == 0)
-			jamptime++;
-
-		jamppower += 15.0f;
-	}
-
-	if (jamptime != 0)
-	{
-		jamptime++;
-		if (jamptime == 5)
-		{
-			m_vy = -jamppower;
-			m_y += m_vy;
-			jamptime = 0;
-			jamppower = 0.0f;
-		}
-	}
-
-	pb->BlockHit(&m_x, &m_y, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-		&m_vx, &m_vy
-	);
 
 	//縄移動
 	if (nawa_ido == true)
