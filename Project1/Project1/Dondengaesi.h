@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjDonden :public CObj
 {
 public:
-	CObjDonden(int x, int y);
+	CObjDonden(int x, int y,bool b);
 	~CObjDonden() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
@@ -37,6 +37,9 @@ private:
 
 	//主人公の位置の確認
 	bool s_down;
+
+	//どんでん返しで隠す
+	bool hide;
 
 	int D_tag[10][2];//ペアのどんでん返しを探す
 

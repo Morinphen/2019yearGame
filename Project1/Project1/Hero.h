@@ -65,6 +65,9 @@ public:
 	bool GetLeft() { return m_hit_left; }
 	bool GetRight() { return m_hit_right; }
 
+	//土遁の術確認
+	bool GetDoton() { return doton; }
+
 	//主人公の戦闘スタイルを外部に渡す
 	bool GetMode() { return change; }
 
@@ -119,6 +122,8 @@ private:
 	//死亡フラグ
 	bool dead;
 	bool Wdead;
+
+	bool doton;
 
 	int d_ani_time;
 	int d_ani_frame;

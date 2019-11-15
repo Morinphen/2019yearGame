@@ -8,10 +8,11 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjDonden::CObjDonden(int x, int y)
+CObjDonden::CObjDonden(int x, int y,bool b)
 {
 	m_x = x;
 	m_y = y;
+	hide = b;
 }
 
 //イニシャライズ
@@ -56,34 +57,43 @@ void CObjDonden::Action()
 				D_tag[a][1] = j;
 				a++;
 			}
+			else if(scroll->m_map[i][j] == 12)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
 		}
 	}
 
 	Pworp = Worp((a));
 	
-	//主人公が触れたとき
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	//種類確認
+	if (hide == false || hide == true && h->GetDoton() == true)
 	{
-		red = 0.0f;
-		bool stop;
-		stop = h->GetNawa();
-		//↑入力をされたとき、アニメーションを開始
-		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false && N_stop == false)
+		//主人公が触れたとき
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+			red = 0.0f;
+			bool stop;
+			stop = h->GetNawa();
+			//↑入力をされたとき、アニメーションを開始
+			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false)
+			{
+				if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 
-				h->W_cat = 0.0f;
-				h->W_cat2 -= 6.4f;
-				h->Sworp = true;
+					h->W_cat = 0.0f;
+					h->W_cat2 -= 6.4f;
+					h->Sworp = true;
 
-				Wanimation = true;
+					Wanimation = true;
+				}
 			}
 		}
-	}
-
-	else
-	{
-		red = 1.0f;
+		else
+		{
+			red = 1.0f;
+		}
 	}
 
 	//アニメーション前半開始時
@@ -136,21 +146,26 @@ void CObjDonden::Action()
 //ドロー
 void CObjDonden::Draw()
 {
-	float c[4] = { 1.0f,red,red,1.0f };
-	RECT_F src;
-	RECT_F dst;
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	if (hide == false || hide == true && h->GetDoton() == true)
+	{
+		float c[4] = { 1.0f,red,red,1.0f };
+		RECT_F src;
+		RECT_F dst;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
 
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+		dst.m_top = m_y + l_scroll;
+		dst.m_left = m_x + m_scroll;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
+
+		Draw::Draw(5, &src, &dst, c, 0.0f);
+	}
 }
 
 //どんでん返しのタッグを決める関数

@@ -51,6 +51,8 @@ void CObjHero::Init()
 	d_ani_time = 0;
 	d_ani_frame = 0;
 
+	doton=false;
+
 	w_x = 0.0f;
 	w_y = 0.0f;
 
@@ -197,22 +199,34 @@ void CObjHero::Action()
 				}
 			}
 
+			else {
+				//‰Î“Ù
+				if (Input::GetVKey('Z'))
+				{
+					if (s_atack == false) {
+						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
+						s_atack = true;
+					}
+				}
+				else
+				{
+					s_atack = false;
+				}
 
-		else {
-			//‰Î“Ù
-			if (Input::GetVKey('Z'))
-			{
-				if (s_atack == false) {
-					CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
-					Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
-					s_atack = true;
+				if (Input::GetVKey('S'))
+				{
+					if (s_atack == false)
+					{
+						doton = doton ? false : true;
+						s_atack = true;
+					}
+				}
+				else
+				{
+					s_atack = false;
 				}
 			}
-			else
-			{
-				s_atack = false;
-			}
-		}
 
 		}
 	}

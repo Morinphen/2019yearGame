@@ -134,7 +134,7 @@ void CObjEnemy::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
-		CObjDonden*objn = new CObjDonden(m_px, m_py);
+		CObjDonden*objn = new CObjDonden(m_px, m_py,false);
 		Objs::InsertObj(objn, OBJ_DONDEN, 3);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
