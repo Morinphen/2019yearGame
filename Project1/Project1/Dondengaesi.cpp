@@ -39,6 +39,12 @@ void CObjDonden::Init()
 				D_tag[a][1] = j;
 				a++;
 			}
+			if (scroll->m_map[i][j] == 12)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
 		}
 	}
 
@@ -69,15 +75,19 @@ void CObjDonden::Action()
 		red = 0.0f;
 		bool stop;
 		stop = h->GetNawa();
-		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false)
+		//土遁チェック
+		if (hide == false || hide == true && h->GetDoton() == true)
 		{
-			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false)
+			{
+				if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 
 					h->W_cat = 0.0f;
 					h->W_cat2 -= 6.4f;
 					h->Sworp = true;
 
-				Wanimation = true;
+					Wanimation = true;
+				}
 			}
 		}
 	}

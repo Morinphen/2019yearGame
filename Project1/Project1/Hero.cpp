@@ -235,37 +235,13 @@ void CObjHero::Action()
 				//土遁（仮）
 				if (Input::GetVKey('S'))
 				{
-					if (s_atack == false) 
-					{
-						doton = doton ? false : true;
-					}
+					doton = true;
 				}
 				else
 				{
-					s_atack = false;
+					doton = false;
 				}
 			}
-
-			//ジャンプ
-			if (Input::GetVKey('X') && m_hit_down == true)
-			{
-				if (jamptime == 0)
-					jamptime++;
-	
-				jamppower += 3.5f;
-			}
-
-			if (jamptime != 0)
-			{
-				jamptime++;
-				if (jamptime == 5)
-				{
-					m_vy = -jamppower;
-					m_y += m_vy;
-					jamptime = 0;
-					jamppower = 0.0f;
-				}
-			}	
 
 		}
 	}

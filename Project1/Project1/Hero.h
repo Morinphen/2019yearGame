@@ -123,8 +123,6 @@ private:
 	bool dead;
 	bool Wdead;
 
-	bool doton;
-
 	int d_ani_time;
 	int d_ani_frame;
 
