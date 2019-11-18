@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjBlock :public CObj
+class CObjTBlock :public CObj
 {
 public:
-	CObjBlock(int map[46][100]);
-	~CObjBlock() {};
+	CObjTBlock(int x, int y);
+	~CObjTBlock() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
@@ -20,24 +20,6 @@ public:
 
 	void SetYScrooll(float s) { l_scroll = s; }
 	float GetYScroll() { return l_scroll; }
-
-	void SetHitSmokeBall(bool h) { hit_smokeball = h; }
-
-	void CObjBlock::BlockHit
-	(
-		float* x, float* y,bool s,
-		bool*up, bool* down, bool* left, bool* right,bool smoke,
-		float *vx, float *vy
-	);
-
-	void CObjBlock::UBlockHit
-	(
-		float* x, float* y, bool* flag,
-		bool*up, bool* down, bool* left, bool* right,
-		float *vx, float *vy
-	);
-
-	void Worp(int x,int y);
 
 	////主人公と壁の交差判定
 	//bool HeroBlockCrossPoint(
@@ -50,18 +32,21 @@ private:
 	int m_y;
 	int aaa;
 
-	int m_map[46][100];
+	int m_ani_time;//アニメーションフレーム
+	int m_ani_frame;//描画フレーム
 
-	bool hit_smokeball;
+	int m_map[10][100];
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
+	bool modecheck;//モードチェンジ
+
 	float Dot(float ax, float ay, float bx, float by);//内積
 	float Cross(float ax, float ay, float bx, float by);//外積
-	/*bool CObjBlock::LineCrossPoint(
-		float a1x, float a1y, float a2x, float a2y,
-		float b1x, float b1y, float b2x, float b2y,
-		float* out_px, float* out_py
-	);*/
+														/*bool CObjBlock::LineCrossPoint(
+														float a1x, float a1y, float a2x, float a2y,
+														float b1x, float b1y, float b2x, float b2y,
+														float* out_px, float* out_py
+														);*/
 };

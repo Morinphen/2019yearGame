@@ -46,6 +46,17 @@ void CObjHero::Init()
 
 	U_scroll = false;
 
+	dead = false;
+	Wdead = false;
+
+	d_ani_time = 0;
+	d_ani_frame = 0;
+
+	doton=false;
+
+	w_x = 0.0f;
+	w_y = 0.0f;
+
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
 
@@ -68,14 +79,18 @@ void CObjHero::Action()
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false) {
+
+	pb->BlockHit(&m_x, &m_y, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
+	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
+	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
 		Ninzyutu = false;
 		U_scroll = false;
-
-		pb->BlockHit(&m_x, &m_y,true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-			&m_vx, &m_vy
-		);
+		d_ani_frame = 0;
+		d_ani_time = 0;
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
@@ -112,7 +127,19 @@ void CObjHero::Action()
 			if (jamptime == 0)
 				jamptime++;
 
-			jamppower += 4.0f;
+			jamppower += 8.0f;
+		}
+
+		if (jamptime != 0)
+		{
+			jamptime++;
+			if (jamptime == 5)
+			{
+				m_vy = -jamppower;
+				m_y += m_vy;
+				jamptime = 0;
+				jamppower = 0.0f;
+			}
 		}
 
 		if (jamptime != 0)
@@ -276,6 +303,20 @@ void CObjHero::Action()
 		Ninzyutu = true;
 	}
 
+	//死亡したとき
+	if (Wdead == true) {
+		dead = true;
+		if (d_ani_frame < 4) {
+			d_ani_time++;
+			m_ani_frame = 0;
+		}
+		if (d_ani_time == 8)
+		{
+			d_ani_time = 0;
+			d_ani_frame++;
+		}
+	}
+
 	if (m_y > 700.0f)
 	{
 		Scene::SetScene(new CSceneMain);
@@ -348,6 +389,11 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain);
 	}
 
+	//天井と当たっているかどうか確認
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&smokeh == false)
+	{
+		Scene::SetScene(new CSceneMain);
+	}
 }
 
 //ドロー
@@ -358,11 +404,18 @@ void CObjHero::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	if (U_flag == false) {
+	if (U_flag == false && Wdead == false) {
 		src.m_top = 64.0f;
 		src.m_left = 64.0f*(m_ani_frame*W_cat);
 		src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
 		src.m_bottom = 128.0f;
+	}
+
+	else if (Wdead == true) {
+		src.m_top = 128.0f;
+		src.m_left = 64.0f*(d_ani_frame*W_cat);
+		src.m_right = 64.0f*((d_ani_frame*W_cat + 1));
+		src.m_bottom = 196.0f;
 	}
 
 	else {
@@ -372,7 +425,16 @@ void CObjHero::Draw()
 		src.m_bottom = 64.0f;
 	}
 
-	dst.m_top = 0.0f + m_y;
+	if (Wdead == false) {
+		dst.m_top = 0.0f + m_y;
+		dst.m_bottom = 64.0f + m_y;
+	}
+
+	else {
+		dst.m_top = 0.0f + m_y - 48;
+		dst.m_bottom = 64.0f + m_y - 48;
+	}
+
 	if (m_posture == 0) {
 		dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
 		dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
@@ -382,7 +444,6 @@ void CObjHero::Draw()
 		dst.m_left = (64.0f*m_posture) + W_cat2 + m_x;
 		dst.m_right = (64.0f - 64.0f*m_posture) - W_cat2 + m_x;
 	}
-	dst.m_bottom = 64.0f + m_y;
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
 }

@@ -8,10 +8,11 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjDonden::CObjDonden(int x, int y)
+CObjDonden::CObjDonden(int x, int y,bool b)
 {
 	m_x = x;
 	m_y = y;
+	hide = b;
 }
 
 //イニシャライズ
@@ -24,6 +25,7 @@ void CObjDonden::Init()
 	Wanimation = false;
 	Wanimation2 = false;
 	s_down = false;
+	N_stop = false;
 
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	int a = 0;
@@ -57,7 +59,9 @@ void CObjDonden::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+	//主人公の状態を持ってくる
 	s_down = h->GetDown();
+	N_stop = h->GetINawa();
 
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -69,9 +73,9 @@ void CObjDonden::Action()
 		{
 			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 
-				h->W_cat = 0.0f;
-				h->W_cat2 -= 6.4f;
-				h->Sworp = true;
+					h->W_cat = 0.0f;
+					h->W_cat2 -= 6.4f;
+					h->Sworp = true;
 
 				Wanimation = true;
 			}
@@ -82,31 +86,44 @@ void CObjDonden::Action()
 		red = 1.0f;
 	}
 
+	//アニメーション前半開始時
 	if (Wanimation == true)
 	{
+		//主人公をアニメーションさせ、ワープしている扱いに変更
 		h->W_cat2 -= 6.4f;
 		h->Sworp = true;
+		//一定のアニメーションが終わったとき
 		if (h->W_cat2 <= -64.0f)
 		{
+			//主人公の座標をワープ先に変更
 			h->SetX(D_tag[Pworp][1] * 64);
 			h->SetY(D_tag[Pworp][0] * 64);
 
-			scroll->SetScrooll(-(h->GetX() - (400)));
-			if (h->GetY() < 80)
-				scroll->SetYScrooll(-(h->GetY() - (80)));
-			else if (h->GetY() > 500)
-				scroll->SetYScrooll(-(h->GetY() - (500)));
+			//主人公のリスタート位置変更
+			h->SetWX(D_tag[Pworp][1] * 64);
+			h->SetWY(D_tag[Pworp][0] * 64);
 
+			scroll->SetScrooll(-(h->GetX() - (400)));
+			if (h->GetY() < 80) {
+				scroll->SetYScrooll(-(h->GetY() - (80)));
+			}
+			else if (h->GetY() > 500) {
+				scroll->SetYScrooll(-(h->GetY() - (500)));
+			}
+
+			//アニメーション後半開始
 			h->W_cat2 = -64.0f;
 			Wanimation = false;
 			Wanimation2 = true;
 		}
 	}
 
+	//アニメーション後半開始時
 	if (Wanimation2 == true)
 	{
 		h->W_cat2 += 6.4f;
 		h->Sworp = true;
+		//アニメーションが終わったとき
 		if (h->W_cat2 >= 0.0f) {
 			h->W_cat2 = 0.0f;
 			h->W_cat = 1.0f;
@@ -119,21 +136,26 @@ void CObjDonden::Action()
 //ドロー
 void CObjDonden::Draw()
 {
-	float c[4] = { 1.0f,red,red,1.0f };
-	RECT_F src;
-	RECT_F dst;
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	if (hide == false || hide == true && h->GetDoton() == true)
+	{
+		float c[4] = { 1.0f,red,red,1.0f };
+		RECT_F src;
+		RECT_F dst;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
 
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+		dst.m_top = m_y + l_scroll;
+		dst.m_left = m_x + m_scroll;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
+
+		Draw::Draw(5, &src, &dst, c, 0.0f);
+	}
 }
 
 //どんでん返しのタッグを決める関数
@@ -167,6 +189,7 @@ int CObjDonden::Worp(int a)
 	{
 		for (int j = aa - 1; j > i; j--)
 		{
+			//自身に最も近いどんでん返しの位置を調べ、ソートさせる
 			if (data[j] < data[j - 1])
 			{
 				int a = data[j - 1];

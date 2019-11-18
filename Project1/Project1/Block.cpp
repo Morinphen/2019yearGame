@@ -95,7 +95,7 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1)
+			if (m_map[i][j] == 1 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j]==10)
 			{
 				//要素番号を座標に変更
 				float bx = j*64.0f;
@@ -306,8 +306,6 @@ void CObjBlock::UBlockHit
 		}
 	}
 }
-
-
 ////内積関数
 ////引数1,2float ax,ay:Aベクトル
 ////引数3,4float bx,by:Bベクトル

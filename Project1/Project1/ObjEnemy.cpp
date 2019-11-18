@@ -75,6 +75,7 @@ void CObjEnemy::Action()
 		crhitbox = true;
 		m_posture_time = 0;
 	}
+
 	if (m_hit_right == true&&m_hit_left == false ||m_posture_time>150 && m_move == true)
 	{
 		m_move = false;
@@ -93,12 +94,14 @@ void CObjEnemy::Action()
 		m_posture = 1.0f;
 		m_ani_time += 1;
 	}
+
 	else if (m_move==true)
 	{
 		m_vx -= m_speed_power;
 		m_posture = 0.0f;
 		m_ani_time += 1;
 	}
+
 	else
 	{
 		m_ani_frame = 1;
@@ -116,7 +119,6 @@ void CObjEnemy::Action()
 		m_ani_frame = 0;
 	}
 
-
 	m_posture_time += 1;
 	//–€ŽC
 	m_vx += -(m_vx*0.098);
@@ -132,7 +134,7 @@ void CObjEnemy::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
-		CObjDonden*objn = new CObjDonden(m_px, m_py);
+		CObjDonden*objn = new CObjDonden(m_px, m_py,false);
 		Objs::InsertObj(objn, OBJ_DONDEN, 3);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
