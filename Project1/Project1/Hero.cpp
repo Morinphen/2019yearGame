@@ -37,6 +37,7 @@ void CObjHero::Init()
 	nawa_ido = false;
 	idocount = 0;
 
+	doton = false;
 	ball = false;
 	smokeh = false;
 	U_flag = false;
@@ -189,28 +190,6 @@ void CObjHero::Action()
 				}
 			}
 
-		//ジャンプ
-		if (Input::GetVKey('X') && m_hit_down == true)
-		{
-			if (jamptime == 0)
-				jamptime++;
-
-			jamppower += 3.5f;
-		}
-
-		
-
-		if (jamptime != 0)
-		{
-			jamptime++;
-			if (jamptime == 5)
-			{
-				m_vy = -jamppower;
-				m_y += m_vy;
-				jamptime = 0;
-				jamppower = 0.0f;
-			}
-		}
 			else {
 				//火遁
 				if (Input::GetVKey('Z'))
@@ -225,7 +204,41 @@ void CObjHero::Action()
 				{
 					s_atack = false;
 				}
+
+				//土遁（仮）
+				if (Input::GetVKey('S'))
+				{
+					if (s_atack == false) 
+					{
+						doton = doton ? false : true;
+					}
+				}
+				else
+				{
+					s_atack = false;
+				}
 			}
+
+			//ジャンプ
+			if (Input::GetVKey('X') && m_hit_down == true)
+			{
+				if (jamptime == 0)
+					jamptime++;
+	
+				jamppower += 3.5f;
+			}
+
+			if (jamptime != 0)
+			{
+				jamptime++;
+				if (jamptime == 5)
+				{
+					m_vy = -jamppower;
+					m_y += m_vy;
+					jamptime = 0;
+					jamppower = 0.0f;
+				}
+			}	
 
 		}
 	}
@@ -238,11 +251,11 @@ void CObjHero::Action()
 			&m_vx, &m_vy
 		);
 
+		/*scroll->SetUtikagiScroll(&m_x, &m_y);*/
+
 		m_vy = 0;
 
 		Ninzyutu = true;
-
-		scroll->SetUtikagiScroll(&m_x, &m_y);
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			m_vx += 0.5f;
@@ -354,8 +367,8 @@ void CObjHero::Draw()
 
 	else {
 		src.m_top = 0.0f;
-		src.m_left = 64.0f*(m_ani_frame*W_cat);
-		src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
+		src.m_left = 64.0f*(m_ani_frame*W_cat+1);
+		src.m_right = 64.0f*((m_ani_frame*W_cat));
 		src.m_bottom = 64.0f;
 	}
 

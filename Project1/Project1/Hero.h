@@ -87,6 +87,9 @@ private:
 	bool c_stop;
 	float green;
 
+	//土遁の術
+	bool doton;
+
 	bool ball;//煙玉フラグ
 	bool smokeh;//煙との衝突確認用
 	int m_ani_time;//アニメーションフレーム

@@ -23,12 +23,10 @@ CObjSyuriken::CObjSyuriken(int x,int y,int m)
 	}
 }
 
-
-
 //イニシャライズ
 void CObjSyuriken::Init()
 {
-	m_vx = 15 * m_muki;
+	m_vx = 8 * m_muki;
 	m_vy = 0;
 	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
 
@@ -44,6 +42,7 @@ void CObjSyuriken::Init()
 
 	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
 }
+
 //アクション
 void CObjSyuriken::Action()
 {
@@ -78,6 +77,7 @@ void CObjSyuriken::Action()
 		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
 		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
 	{
+		Hits::DeleteHitBox(this);
 		m_hit_left = false;
 		m_hit_right = false;
 		m_hit_up = false;
@@ -91,11 +91,11 @@ void CObjSyuriken::Action()
 	if (m_x > 2000 || m_x<-200 || m_y > 700|| hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
 	{
 		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
 	}
 
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
+
 //ドロー
 void CObjSyuriken::Draw()
 {

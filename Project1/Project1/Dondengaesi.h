@@ -32,6 +32,9 @@ private:
 	bool Wanimation;
 	bool Wanimation2;
 
+	//土遁用
+	bool doton_flag;
+
 	//主人公の位置の確認
 	bool s_down;
 

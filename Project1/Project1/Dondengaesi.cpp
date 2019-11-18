@@ -25,6 +25,23 @@ void CObjDonden::Init()
 	Wanimation2 = false;
 	s_down = false;
 
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	int a = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (scroll->m_map[i][j] == 5)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
+		}
+	}
+
+	Pworp = Worp((a));
+
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
@@ -42,21 +59,6 @@ void CObjDonden::Action()
 
 	s_down = h->GetDown();
 
-	int a = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			if (scroll->m_map[i][j] == 5)
-			{
-				D_tag[a][0] = i;
-				D_tag[a][1] = j;
-				a++;
-			}
-		}
-	}
-
-	Pworp = Worp((a));
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
@@ -75,7 +77,6 @@ void CObjDonden::Action()
 			}
 		}
 	}
-
 	else
 	{
 		red = 1.0f;

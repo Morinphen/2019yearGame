@@ -10,10 +10,10 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlock::CObjBlock(int map[46][100])
+CObjBlock::CObjBlock(int map[10][100])
 {
 	//マップデータをコピー
-	memcpy(m_map, map, sizeof(int)*(46 * 100));
+	memcpy(m_map, map, sizeof(int)*(10 * 100));
 }
 
 //イニシャライズ
@@ -24,6 +24,7 @@ void CObjBlock::Init()
 	aaa = 0;
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_BLOCK, 1);
 }
+
 //アクション
 void CObjBlock::Action()
 {
@@ -31,10 +32,8 @@ void CObjBlock::Action()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
-
-
-
 }
+
 //ドロー
 void CObjBlock::Draw()
 {
@@ -271,50 +270,35 @@ void CObjBlock::UBlockHit
 					//lenがある一定の長さのより短い場合判定に入る
 					if (len < 88.0f)
 					{
-						CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 						//角度で上下左右を判定
 						if ((r < 45 && r>=0) || r > 315)
 						{
 							//右
 							*right = true;//主人公の左の部分が衝突しているか
 							*x = bx + 64.0f + (m_scroll);//ブロックに位置-主人公の幅
-
-							if (*flag == false)
-							{
-								scroll->SetScrooll(m_scroll - 64);
-								*flag = true;
-							}
-							else
-							{
-								*vx = -(*vx)*0.0f;//-VX*反発係数
-							}
+							*vx = -(*vx)*0.1f;//-VX*反発係数
 						}
 
-						//if (r > 45 && r < 135)
-						//{
-						//	//上
-						//	*down = true;//主人公の下の部分が衝突しているか
-						//	*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
-						//	*vy = 0.0f;
-						//}
+						if (r > 45 && r < 135)
+						{
+							//上
+							*down = true;//主人公の下の部分が衝突しているか
+							*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+						}
 
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;//主人公の右の部分が衝突しているか
-
-							if (*flag == false)
-							{
-								scroll->SetScrooll(m_scroll + 64);
-								*flag = true;
-							}
-
-							else
-							{
-								*vx = -(*vx)*0.0f;//-VX*反発係数
-							}
-
 							*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+							*vx = -(*vx)*0.1f;//-VX*反発係数
+						}
+
+						if (r > 225 && r < 315)
+						{
+							//下
+							*up = true;//主人公の上の部分が衝突しているか
+							*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
 						}
 					}
 				}
