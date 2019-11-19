@@ -113,7 +113,7 @@ void CSceneMain::InitScene()
 
 			else if (map[i][j] == 5)
 			{
-				CObjDonden*objd = new CObjDonden(j * 64, i * 64,false);
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64, map[i][j],false);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 			
@@ -150,6 +150,11 @@ void CSceneMain::InitScene()
 			{
 				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
 				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
+			}
+			else if (map[i][j] == 12)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64, 12, true);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 			else if (map[i][j] == 13)
 			{
