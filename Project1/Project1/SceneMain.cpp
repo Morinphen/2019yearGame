@@ -64,6 +64,10 @@ void CSceneMain::InitScene()
 	int size;               //ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"NinNin.csv", &size);//外部データ読み込み
 
+	//Scrollオブジェクト追加
+	CObjScroll* obj_s = new CObjScroll(block_data);
+	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
+
 	int map[46][100];
 	int count = 1;
 	for (int i = 0; i < 46; i++)
@@ -76,48 +80,44 @@ void CSceneMain::InitScene()
 			map[i][j] = w;
 			count += 2;
 
-
 			//if (map[i][j] == 1) {
 			//	CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 			//	Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			//}
 
-			/*if (map[i][j] == 5)
-			{
-				CObjDonden*objd = new CObjDonden(j * 64, i * 64);
-				Objs::InsertObj(objd, OBJ_DONDEN, 3);
-			}
+			//if (map[i][j] == 5)
+			//{
+			//	CObjDonden*objd = new CObjDonden(j * 64, i * 64);
+			//	Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			//}
+			//
 
+			//if (map[i][j] == 6) 
+			//{
+			//	CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
+			//	Objs::InsertObj(objn, OBJ_DONDEN, 3);
+			//}
 
-			if (map[i][j] == 6)
-			{
-				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-				Objs::InsertObj(objn, OBJ_DONDEN, 3);
-			}
+			//if (map[i][j] == 7)
+			//{
+			//	CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
+			//	Objs::InsertObj(obju, OBJ_DONDEN, 3);
 
-			if (map[i][j] == 7)
-			{
-				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_DONDEN, 3);
-
-			}
+			/*}
 			if (map[i][j] == 8)
 			{
 				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
 				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
 			}*/
-
 			/*if (block_data[i][j] == 1) {
 			CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 			Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			}*/
-
-			if (block_data[i][j] == 3)
+			/*if (block_data[i][j] == 3)
 			{
 				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
 				Objs::InsertObj(obje, OBJ_ENEMY, 6);
-			}
-
+			}*/
 			if (block_data[i][j] == 4)
 			{
 				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
@@ -172,17 +172,9 @@ void CSceneMain::InitScene()
 		}
 	}
 
-	
-
-
 	//主人公オブジェクト作成
 	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
-
-	//Scrollオブジェクト追加
-	CObjScroll* obj_s = new CObjScroll(block_data);
-	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
-
 
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(block_data);

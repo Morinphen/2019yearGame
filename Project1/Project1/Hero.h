@@ -126,10 +126,11 @@ private:
 	bool dead;
 	bool Wdead;
 
-	bool doton;
-
 	int d_ani_time;
 	int d_ani_frame;
+
+	//土遁の術
+	bool doton;
 
 	bool ball;//煙玉フラグ
 	bool smokeh;//煙との衝突確認用

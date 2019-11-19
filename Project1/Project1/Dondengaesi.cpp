@@ -28,6 +28,30 @@ void CObjDonden::Init()
 	s_down = false;
 	N_stop = false;
 
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	int a = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (scroll->m_map[i][j] >= 30)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				D_tag[a][2] = scroll->m_map[i][j];
+				a++;
+			}
+			if (scroll->m_map[i][j] == 12)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
+		}
+	}
+
+	Pworp = Worp((a));
+
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
@@ -47,27 +71,16 @@ void CObjDonden::Action()
 	s_down = h->GetDown();
 	N_stop = h->GetINawa();
 
-	int a = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			if (scroll->m_map[i][j] >= 30)
-			{
-				D_tag[a][0] = i;
-				D_tag[a][1] = j;
-				D_tag[a][2] = scroll->m_map[i][j];
-				a++;
-			}
-			else if(scroll->m_map[i][j] == 12)
-			{
-				D_tag[a][0] = i;
-				D_tag[a][1] = j;
-				a++;
-			}
-		}
-	}
 
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		red = 0.0f;
+		bool stop;
+		stop = h->GetNawa();
+		//土遁チェック
+		if (hide == false || hide == true && h->GetDoton() == true)
+		{
+			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false)
 	//どんでん返しの種類によって関数を変更
 	if (hide == true)
 		Pworp = Worp((a));
@@ -97,10 +110,10 @@ void CObjDonden::Action()
 				}
 			}
 		}
-		else
-		{
-			red = 1.0f;
-		}
+	}
+	else
+	{
+		red = 1.0f;
 	}
 
 	//アニメーション前半開始時

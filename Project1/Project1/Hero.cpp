@@ -37,6 +37,7 @@ void CObjHero::Init()
 	nawa_ido = false;
 	idocount = 0;
 
+	doton = false;
 	ball = false;
 	smokeh = false;
 	U_flag = false;
@@ -251,7 +252,7 @@ void CObjHero::Action()
 
 				else
 				{
-					s_atack = false;
+					doton = false;
 				}
 			}
 
@@ -266,11 +267,11 @@ void CObjHero::Action()
 			&m_vx, &m_vy
 		);
 
+		/*scroll->SetUtikagiScroll(&m_x, &m_y);*/
+
 		m_vy = 0;
 
 		Ninzyutu = true;
-
-		scroll->SetUtikagiScroll(&m_x, &m_y);
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			m_vx += 0.5f;
@@ -408,8 +409,8 @@ void CObjHero::Draw()
 
 	else {
 		src.m_top = 0.0f;
-		src.m_left = 64.0f*(m_ani_frame*W_cat);
-		src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
+		src.m_left = 64.0f*(m_ani_frame*W_cat+1);
+		src.m_right = 64.0f*((m_ani_frame*W_cat));
 		src.m_bottom = 64.0f;
 	}
 

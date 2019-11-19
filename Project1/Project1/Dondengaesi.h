@@ -38,6 +38,9 @@ private:
 	//鉤縄移動制御用変数
 	bool N_stop;
 
+	//土遁用
+	bool doton_flag;
+
 	//主人公の位置の確認
 	bool s_down;
 
