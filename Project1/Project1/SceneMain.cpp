@@ -44,6 +44,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"hinotama.png", 12, TEX_SIZE_512);
 	Draw::LoadImage(L"enzyou.png", 13, TEX_SIZE_512);
 	Draw::LoadImage(L"mizu.jpg", 14, TEX_SIZE_512);
+	Draw::LoadImage(L"makimono.png", 15, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	int block_data[10][100] = {
@@ -62,7 +63,7 @@ void CSceneMain::InitScene()
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NinNin.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(block_data);
@@ -78,37 +79,78 @@ void CSceneMain::InitScene()
 			swscanf_s(&p.get()[count], L"%d", &w);
 
 			map[i][j] = w;
-			count += 2;
+			if (w < 10)
+			{
+				count += 2;
+			}
+			else
+			{
+				count += 3;
+			}
 
 			//if (map[i][j] == 1) {
 			//	CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 			//	Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			//}
 
-			//if (map[i][j] == 5)
-			//{
-			//	CObjDonden*objd = new CObjDonden(j * 64, i * 64);
-			//	Objs::InsertObj(objd, OBJ_DONDEN, 3);
-			//}
-			//
+			if (map[i][j] == 3)
+			{
+				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+			}
+			/*else if (map[i][j] == 4)
+			{
+				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
+				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
+			}*/
 
-			//if (map[i][j] == 6) 
-			//{
-			//	CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objn, OBJ_DONDEN, 3);
-			//}
+			else if (map[i][j] == 5)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
+			
 
-			//if (map[i][j] == 7)
-			//{
-			//	CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-			//	Objs::InsertObj(obju, OBJ_DONDEN, 3);
+			else if (map[i][j] == 6) 
+			{
+				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
+				Objs::InsertObj(objn, OBJ_DONDEN, 3);
+			}
 
-			/*}
-			if (map[i][j] == 8)
+			else if (map[i][j] == 7)
+			{
+				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_DONDEN, 3);
+
+			}
+			else if (map[i][j] == 8)
 			{
 				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
 				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
+			}
+
+			/*else if (map[i][j] == 9)
+			{
+				CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
+				Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
 			}*/
+			else if (map[i][j] == 10)
+			{
+				CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
+				Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
+			}
+			else if (map[i][j] == 11)
+			{
+				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
+				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
+			}
+			else if (map[i][j] == 13)
+			{
+				CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
+				Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
+			}
+
+
 			/*if (block_data[i][j] == 1) {
 			CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 			Objs::InsertObj(objb, OBJ_BLOCK, 2);
@@ -177,7 +219,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(obj, OBJ_HERO, 4);
 
 	//Blockオブジェクト作成
-	CObjBlock* objb = new CObjBlock(block_data);
+	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 }
 

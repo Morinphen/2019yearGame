@@ -130,6 +130,7 @@
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Hinotama.cpp" />
     <ClCompile Include="HonoBlock.cpp" />
+    <ClCompile Include="Makimono.cpp" />
     <ClCompile Include="MizuBlock.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="Kaginawa.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Hinotama.h" />
     <ClInclude Include="HonoBlock.h" />
+    <ClInclude Include="Makimono.h" />
     <ClInclude Include="MizuBlock.h" />
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="Kaginawa.h" />

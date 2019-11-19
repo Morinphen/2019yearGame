@@ -24,6 +24,7 @@ enum OBJ_NAME
 	OBJ_TURIBLOCK2,
 	OBJ_UGUBLOCK,
 	OBJ_OTOSIANA,
+	OBJ_MAKIMONO,
 	OBJ_HAMUTARO,
 };
 //------------------------------------------------
@@ -85,6 +86,7 @@ struct UserData
 #include"TuriBlock.h"
 #include"UguBlock.h"
 #include"Otosiana.h"
+#include"Makimono.h"
 #include"Hamutaro.h"
 //------------------------------------------------
 
