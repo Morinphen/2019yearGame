@@ -4,32 +4,30 @@
 #include"GameL\SceneManager.h"
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
-#include"HonoBlock.h"
+#include"Makimono.h"
 #include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjUguBlock::CObjUguBlock(int x, int y)
+CObjMakimono::CObjMakimono(int x, int y)
 {
 	m_x = x;
 	m_y = y;
 }
 
 //イニシャライズ
-void CObjUguBlock::Init()
+void CObjMakimono::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
-	uguisu = false;
 
-	m_ani_time = 0;
-	m_ani_frame = 0;
+	getflag = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_UGUBLOCK, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_MAKIMONO, 1);
 }
 //アクション
-void CObjUguBlock::Action()
+void CObjMakimono::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -45,7 +43,7 @@ void CObjUguBlock::Action()
 	float y = m_y;
 
 	//主人公とブロックの当たり判定
-	if ((hx + (-m_scroll) + 64.0f > x) && (hx + (-m_scroll) < x + 64.0f) && (hy + (-l_scroll) + 64.0f > y) && (hy + (-l_scroll) < y + 64.0f) )
+	if ((hx + (-m_scroll) + 64.0f > x) && (hx + (-m_scroll) < x + 64.0f) && (hy + (-l_scroll) + 64.0f > y) && (hy + (-l_scroll) < y + 64.0f))
 	{
 		//上下左右判定
 
@@ -79,8 +77,6 @@ void CObjUguBlock::Action()
 				hero->SetDown(true);//主人公から見て下の部分が衝突している
 				hero->SetY(y - 64.0f + (l_scroll));//ブロックの位置-主人公の幅
 				hero->SetVY(0.0f);
-				uguisu = true;
-				hero->Dflag(true);
 			}
 			else if (r > 135 && r < 225)
 			{
@@ -104,42 +100,39 @@ void CObjUguBlock::Action()
 
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	if (uguisu == true)
+
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		m_ani_time++;
-		if (m_ani_time == 6) {
-			m_ani_time = 0;
-			m_ani_frame++;
-		}
-		
+		//主人公と当たったらフラグをオンに
+		getflag = true;
 	}
 
-	if (m_ani_frame == 12)
+	if (getflag == true)
 	{
-		Scene::SetScene(new CSceneMain);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
 	}
 
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
-void CObjUguBlock::Draw()
+void CObjMakimono::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
 	//ブロック表示
-	src.m_top = 0.0f + ((m_ani_frame % 4)*64.0f);
-	src.m_left = 64.0f * 4;
-	src.m_right = 64.0f * 5;
-	src.m_bottom = 64.0f + ((m_ani_frame % 4)*64.0f);
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 64.0f;
 
 	dst.m_top = m_y + l_scroll;
 	dst.m_left = m_x + m_scroll;
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(0, &src, &dst, c, 0.0f);
-	if (uguisu == true)
-		Draw::Draw(13, &src, &dst, c, 0.0f);
+	Draw::Draw(15, &src, &dst, c, 0.0f);
+	
 }
