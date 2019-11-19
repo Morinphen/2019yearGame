@@ -41,7 +41,7 @@ void CObjBlock::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
