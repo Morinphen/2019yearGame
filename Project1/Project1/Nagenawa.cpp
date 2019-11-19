@@ -47,13 +47,26 @@ void CObjNagenawa::Action()
 
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+	float aa, bb;
 	//ブロックの当たり判定を行う当たれば消滅させる
-	pb->BlockHit(&m_x, &m_y,true,
+	pb->BlockHit(&aa, &bb,true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
 
-	if (m_hit_up    == true ||
+	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
+	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr || m_y > 700.0f)
+	{
+		float a = abs(m_y - h->GetY());
+		h->ReSetN(false);
+		h->NawaIdo(true);
+		h->SetNX(m_x - h->GetX());
+		h->SetNY(a - 20);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	else if (m_hit_up    == true ||
 		m_hit_down  == true || 
 		m_hit_left  == true || 
 		m_hit_right == true ||
@@ -65,18 +78,6 @@ void CObjNagenawa::Action()
 		Hits::DeleteHitBox(this);
 	}
 	///////////////////////////////////////////////////////
-
-	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
-	else if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr || m_y > 700.0f)
-	{
-		float a = abs(m_y - h->GetY());
-		h->ReSetN(false);
-		h->NawaIdo(true);
-		h->SetNX(m_x - h->GetX());
-		h->SetNY(a-20);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
 
 	//縄が出現しているときに一定の行動を行った場合、消滅させる
 	else if (h->Ninzyutu == true)

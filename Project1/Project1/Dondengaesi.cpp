@@ -50,7 +50,11 @@ void CObjDonden::Init()
 		}
 	}
 
-	Pworp = Worp((a));
+	if (hide == true)
+		Pworp = Worp((a));
+
+	else
+		Pworp = TagWorp((a));
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -71,23 +75,6 @@ void CObjDonden::Action()
 	s_down = h->GetDown();
 	N_stop = h->GetINawa();
 
-
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		red = 0.0f;
-		bool stop;
-		stop = h->GetNawa();
-		//土遁チェック
-		if (hide == false || hide == true && h->GetDoton() == true)
-		{
-			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false)
-	//どんでん返しの種類によって関数を変更
-	if (hide == true)
-		Pworp = Worp((a));
-
-	else
-		Pworp = TagWorp((a));
-	
 	//種類確認
 	if (hide == false || hide == true && h->GetDoton() == true)
 	{
@@ -110,10 +97,11 @@ void CObjDonden::Action()
 				}
 			}
 		}
-	}
-	else
-	{
-		red = 1.0f;
+
+		else
+		{
+			red = 1.0f;
+		}
 	}
 
 	//アニメーション前半開始時

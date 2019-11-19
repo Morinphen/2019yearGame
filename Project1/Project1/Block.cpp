@@ -306,6 +306,15 @@ void CObjBlock::UBlockHit
 		}
 	}
 }
+
+void CObjBlock::Deletemap(int x, int y)
+{
+	int ax = x / 64;
+	int bx = y / 64;
+
+	m_map[bx][ax] = 0;
+}
+
 ////内積関数
 ////引数1,2float ax,ay:Aベクトル
 ////引数3,4float bx,by:Bベクトル

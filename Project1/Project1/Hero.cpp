@@ -16,8 +16,8 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	//m_x = 100;
-	//m_y = 300;
+	m_x = 100;
+	m_y = 300;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
@@ -252,6 +252,7 @@ void CObjHero::Action()
 
 				else
 				{
+					s_atack = false;
 					doton = false;
 				}
 			}

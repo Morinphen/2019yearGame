@@ -59,6 +59,8 @@ void CObjHonoBlock::Action()
 	//ˆê’è‚ÌŽžŠÔ‚ª‚½‚Â‚ÆÁ–Å
 	if (m_ani_frame == 6)
 	{
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+		pb->Deletemap(m_x, m_y);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
