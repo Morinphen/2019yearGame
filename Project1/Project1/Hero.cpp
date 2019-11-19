@@ -52,6 +52,7 @@ void CObjHero::Init()
 	d_ani_frame = 0;
 
 	doton=false;
+	nezumi = false;
 
 	w_x = 0.0f;
 	w_y = 0.0f;
@@ -216,6 +217,7 @@ void CObjHero::Action()
 				}
 			}
 
+			//ódèpÉÇÅ[Éh
 			else {
 				//âŒìŸ
 				if (Input::GetVKey('Z'))
@@ -226,12 +228,8 @@ void CObjHero::Action()
 						s_atack = true;
 					}
 				}
-				else
-				{
-					s_atack = false;
-				}
 
-				if (Input::GetVKey('S'))
+				else if (Input::GetVKey('S'))
 				{
 					if (s_atack == false)
 					{
@@ -239,6 +237,18 @@ void CObjHero::Action()
 						s_atack = true;
 					}
 				}
+
+				else if (Input::GetVKey('D'))
+				{
+					if (s_atack == false && nezumi == false)
+					{
+						CObjNezumi* obj_n = new CObjNezumi(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_n, OBJ_HAMUTARO, 10);
+						s_atack = true;
+						nezumi = true;
+					}
+				}
+
 				else
 				{
 					s_atack = false;

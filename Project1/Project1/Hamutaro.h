@@ -7,44 +7,25 @@
 using namespace GameL;
 
 //オブジェクト手裏剣
-class CObjDonden :public CObj
+class CObjNezumi :public CObj
 {
 public:
-	CObjDonden(int x, int y, int namber, bool b);
-	~CObjDonden() {};
+	CObjNezumi(int x, int y, int muki);
+	~CObjNezumi() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
-
-	int Pworp;
 private:
-
-	int Worp(int a);
-	int TagWorp(int a);
-
-	int Wnamber;//ワープ先の番号を保存する
-
 	float m_x;
 	float m_y;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
-	float red;
-	//ワープする際にアニメーションをさせる
-	bool Wanimation;
-	bool Wanimation2;
+	float m_posture;//姿勢
 
-	//鉤縄移動制御用変数
-	bool N_stop;
-
-	//主人公の位置の確認
-	bool s_down;
-
-	//どんでん返しで隠す
-	bool hide;
-
-	int D_tag[10][3];//ペアのどんでん返しを探す
+	bool flag;
+	bool Bflag;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム

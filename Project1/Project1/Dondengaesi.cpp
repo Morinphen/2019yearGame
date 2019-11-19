@@ -8,11 +8,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjDonden::CObjDonden(int x, int y,bool b)
+CObjDonden::CObjDonden(int x, int y, int namber, bool b)
 {
 	m_x = x;
 	m_y = y;
 	hide = b;
+	Wnamber = namber;
 }
 
 //イニシャライズ
@@ -51,10 +52,11 @@ void CObjDonden::Action()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (scroll->m_map[i][j] == 5)
+			if (scroll->m_map[i][j] >= 30)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
+				D_tag[a][2] = scroll->m_map[i][j];
 				a++;
 			}
 			else if(scroll->m_map[i][j] == 12)
@@ -66,7 +68,12 @@ void CObjDonden::Action()
 		}
 	}
 
-	Pworp = Worp((a));
+	//どんでん返しの種類によって関数を変更
+	if (hide == true)
+		Pworp = Worp((a));
+
+	else
+		Pworp = TagWorp((a));
 	
 	//種類確認
 	if (hide == false || hide == true && h->GetDoton() == true)
@@ -113,7 +120,17 @@ void CObjDonden::Action()
 			h->SetWX(D_tag[Pworp][1] * 64);
 			h->SetWY(D_tag[Pworp][0] * 64);
 
-			scroll->SetScrooll(-(h->GetX() - (400)));
+			//前方スクロールライン
+			if (h->GetX() > 400)
+			{
+				scroll->SetScrooll(-(h->GetX() - (400)));
+			}
+
+			else if (h->GetX() < 250)
+			{
+				scroll->SetScrooll(-(h->GetX() - (250)));
+			}
+
 			if (h->GetY() < 80) {
 				scroll->SetYScrooll(-(h->GetY() - (80)));
 			}
@@ -210,6 +227,40 @@ int CObjDonden::Worp(int a)
 				data2[j - 1] = data2[j];
 				data2[j] = a;
 			}
+		}
+	}
+
+	return data2[0];
+}
+
+int CObjDonden::TagWorp(int a)
+{
+	int data[10];
+	int data2[10];
+	int data3[10];
+
+	int base;
+	int aa = 0;
+
+	//どんでん返しがある場所のデータを保存
+	for (int i = 0; i < a; i++)
+	{
+		if ((D_tag[i][0] * 64) != m_y || (D_tag[i][1] * 64) != m_x) {
+			data[aa] = D_tag[i][0] + D_tag[i][1];
+			data2[aa] = i;
+			data3[aa] = D_tag[i][2];
+			aa++;
+		}
+		else
+			base = D_tag[i][0] + D_tag[i][1];
+	}
+
+	for (int i = 0; i < aa - 1; i++)
+	{
+		if (data3[i] == Wnamber)
+		{
+			data2[0] = data2[i];
+			break;
 		}
 	}
 
