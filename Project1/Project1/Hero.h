@@ -119,6 +119,9 @@ private:
 	bool c_stop;
 	float green;
 
+	//’b“Ù—p•Ï”
+	bool nezumi;
+
 	//€–Sƒtƒ‰ƒO
 	bool dead;
 	bool Wdead;
