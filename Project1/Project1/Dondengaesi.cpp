@@ -8,10 +8,11 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjDonden::CObjDonden(int x, int y)
+CObjDonden::CObjDonden(int x, int y,bool b)
 {
 	m_x = x;
 	m_y = y;
+	hide = b;
 }
 
 //イニシャライズ
@@ -24,6 +25,30 @@ void CObjDonden::Init()
 	Wanimation = false;
 	Wanimation2 = false;
 	s_down = false;
+	N_stop = false;
+
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	int a = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (scroll->m_map[i][j] == 5)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
+			if (scroll->m_map[i][j] == 12)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
+		}
+	}
+
+	Pworp = Worp((a));
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -40,44 +65,32 @@ void CObjDonden::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+	//主人公の状態を持ってくる
 	s_down = h->GetDown();
+	N_stop = h->GetINawa();
 
-	int a = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			if (scroll->m_map[i][j] == 5)
-			{
-				D_tag[a][0] = i;
-				D_tag[a][1] = j;
-				a++;
-			}
-		}
-	}
 
-	Pworp = Worp((a));
-	
-	//主人公が触れたとき
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		red = 0.0f;
 		bool stop;
 		stop = h->GetNawa();
-		//↑入力をされたとき、アニメーションを開始
-		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false)
+		//土遁チェック
+		if (hide == false || hide == true && h->GetDoton() == true)
 		{
-			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false)
+			{
+				if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 
-				h->W_cat = 0.0f;
-				h->W_cat2 -= 6.4f;
-				h->Sworp = true;
+					h->W_cat = 0.0f;
+					h->W_cat2 -= 6.4f;
+					h->Sworp = true;
 
-				Wanimation = true;
+					Wanimation = true;
+				}
 			}
 		}
 	}
-
 	else
 	{
 		red = 1.0f;
@@ -133,21 +146,26 @@ void CObjDonden::Action()
 //ドロー
 void CObjDonden::Draw()
 {
-	float c[4] = { 1.0f,red,red,1.0f };
-	RECT_F src;
-	RECT_F dst;
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	if (hide == false || hide == true && h->GetDoton() == true)
+	{
+		float c[4] = { 1.0f,red,red,1.0f };
+		RECT_F src;
+		RECT_F dst;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
 
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+		dst.m_top = m_y + l_scroll;
+		dst.m_left = m_x + m_scroll;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
+
+		Draw::Draw(5, &src, &dst, c, 0.0f);
+	}
 }
 
 //どんでん返しのタッグを決める関数

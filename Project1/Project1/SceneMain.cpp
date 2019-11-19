@@ -65,6 +65,10 @@ void CSceneMain::InitScene()
 	int size;               //ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
+	//Scrollオブジェクト追加
+	CObjScroll* obj_s = new CObjScroll(block_data);
+	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
+
 	int map[46][100];
 	int count = 1;
 	for (int i = 0; i < 46; i++)
@@ -155,31 +159,29 @@ void CSceneMain::InitScene()
 			{
 				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
 				Objs::InsertObj(obje, OBJ_ENEMY, 6);
-			}
+			}*/
 			if (block_data[i][j] == 4)
 			{
 				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
 				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
 			}
-			else if (block_data[i][j] == 5) 
+			else if (block_data[i][j] == 5)
 			{
-				CObjDonden*objd = new CObjDonden(j * 64, i * 64);
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64, false);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 
 			else if (block_data[i][j] == 6)
 			{
 				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-				Objs::InsertObj(objn, OBJ_DONDEN, 3);
-				block_data[i][j] = 0;
+				Objs::InsertObj(objn, OBJ_NBLOCK, 3);
 			}
 
 			else if (block_data[i][j] == 7)
 			{
 				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_DONDEN, 3);
+				Objs::InsertObj(obju, OBJ_UTIKAGI, 3);
 			}
-			
 
 			else if (block_data[i][j] == 8)
 			{
@@ -201,21 +203,19 @@ void CSceneMain::InitScene()
 			{
 				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
 				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
-			}*/
+			}
+
+			else if (block_data[i][j] == 12)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64, true);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
 		}
 	}
-
-	
-
 
 	//主人公オブジェクト作成
 	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
-
-	//Scrollオブジェクト追加
-	CObjScroll* obj_s = new CObjScroll(map);
-	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
-
 
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);

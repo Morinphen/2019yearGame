@@ -37,6 +37,7 @@ void CObjHero::Init()
 	nawa_ido = false;
 	idocount = 0;
 
+	doton = false;
 	ball = false;
 	smokeh = false;
 	U_flag = false;
@@ -50,6 +51,8 @@ void CObjHero::Init()
 
 	d_ani_time = 0;
 	d_ani_frame = 0;
+
+	doton=false;
 
 	w_x = 0.0f;
 	w_y = 0.0f;
@@ -76,16 +79,18 @@ void CObjHero::Action()
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	pb->BlockHit(&m_x, &m_y, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+		&m_vx, &m_vy
+	);
+
+	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
 	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
 		d_ani_time = 0;
-
-		pb->BlockHit(&m_x, &m_y,true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-			&m_vx, &m_vy
-		);
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
@@ -122,7 +127,19 @@ void CObjHero::Action()
 			if (jamptime == 0)
 				jamptime++;
 
-			jamppower += 4.0f;
+			jamppower += 8.0f;
+		}
+
+		if (jamptime != 0)
+		{
+			jamptime++;
+			if (jamptime == 5)
+			{
+				m_vy = -jamppower;
+				m_y += m_vy;
+				jamptime = 0;
+				jamppower = 0.0f;
+			}
 		}
 
 		if (jamptime != 0)
@@ -200,28 +217,6 @@ void CObjHero::Action()
 				}
 			}
 
-		//ジャンプ
-		if (Input::GetVKey('X') && m_hit_down == true)
-		{
-			if (jamptime == 0)
-				jamptime++;
-
-			jamppower += 3.5f;
-		}
-
-		
-
-		if (jamptime != 0)
-		{
-			jamptime++;
-			if (jamptime == 5)
-			{
-				m_vy = -jamppower;
-				m_y += m_vy;
-				jamptime = 0;
-				jamppower = 0.0f;
-			}
-		}
 			else {
 				//火遁
 				if (Input::GetVKey('Z'))
@@ -236,6 +231,16 @@ void CObjHero::Action()
 				{
 					s_atack = false;
 				}
+
+				//土遁（仮）
+				if (Input::GetVKey('S'))
+				{
+					doton = true;
+				}
+				else
+				{
+					doton = false;
+				}
 			}
 
 		}
@@ -249,11 +254,11 @@ void CObjHero::Action()
 			&m_vx, &m_vy
 		);
 
+		/*scroll->SetUtikagiScroll(&m_x, &m_y);*/
+
 		m_vy = 0;
 
 		Ninzyutu = true;
-
-		scroll->SetUtikagiScroll(&m_x, &m_y);
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			m_vx += 0.5f;
@@ -391,8 +396,8 @@ void CObjHero::Draw()
 
 	else {
 		src.m_top = 0.0f;
-		src.m_left = 64.0f*(m_ani_frame*W_cat);
-		src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
+		src.m_left = 64.0f*(m_ani_frame*W_cat+1);
+		src.m_right = 64.0f*((m_ani_frame*W_cat));
 		src.m_bottom = 64.0f;
 	}
 

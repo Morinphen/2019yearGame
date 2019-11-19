@@ -30,6 +30,7 @@ public:
 	void SetRight(bool b) { m_hit_right = b; }
 	void SetF(bool b) { find = b; }
 	void SetD(bool b) { de = b; }
+
 private:
 	float m_px; //ˆÊ’u
 	float m_py;

@@ -10,9 +10,9 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjScroll::CObjScroll(int map[10][100])
+CObjScroll::CObjScroll(int map[46][100])
 {
-	memcpy(m_map, map, sizeof(int)*(10 * 100));
+	memcpy(m_map, map, sizeof(int)*(46 * 100));
 }
 
 //イニシャライズ
@@ -76,47 +76,4 @@ void CObjScroll::Draw()
 	dst.m_right = 800.0f;
 	dst.m_bottom = 800.0f;
 	Draw::Draw(2, &src, &dst, c, 0.0f);
-}
-
-void CObjScroll::SetUtikagiScroll(float *hx, float *hy)
-{
-	//後方スクロールライン
-	if (*hx < 250)
-	{
-		while (*hx < 250)
-		{
-			m_scroll += 64;//1ブロックづつ調整する（スクロール）
-			*hx += 64;//1ブロックづつ調整（主人公）
-		}
-	}
-
-	//前方スクロールライン
-	if (*hx > 400)
-	{
-		while (*hx > 400)
-		{
-			m_scroll -= 64;//1ブロックづつ調整する（スクロール）
-			*hx -= 64;//1ブロックづつ調整（主人公）
-		}
-	}
-
-	//上方スクロールライン
-	if (*hy < 80)
-	{
-		while (*hy < 80)
-		{
-			l_scroll -= 64;//1ブロックづつ調整する（スクロール）
-			*hy -= 64;//1ブロックづつ調整（主人公）
-		}
-	}
-
-	//下方スクロールライン
-	if (*hy > 500 && l_scroll>-100)
-	{
-		while (*hy > 500)
-		{
-			l_scroll += 64;//1ブロックづつ調整する（スクロール）
-			*hy += 64;//1ブロックづつ調整（主人公）
-		}
-	}
 }

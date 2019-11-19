@@ -24,6 +24,7 @@ private:
 	float m_vx;
 	float m_vy;
 
+	//“ê‚ÌŒü‚«
 	float m_muki;
 	//“ê‚Ìd—Í—p•Ï”
 	float grabty;
