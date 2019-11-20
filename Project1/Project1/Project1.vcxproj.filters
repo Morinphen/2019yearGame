@@ -120,6 +120,9 @@
     <ClCompile Include="Otosiana.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
+    <ClCompile Include="Karakuri.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -219,6 +222,9 @@
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
     <ClInclude Include="Otosiana.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Karakuri.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>

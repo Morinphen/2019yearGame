@@ -70,6 +70,7 @@ void CObjHero::Init()
 	m_hit_right = false;
 	Hits::SetHitBox(this, m_x, m_y,64,64, ELEMENT_PLAYER, OBJ_HERO,1);
 }
+
 //アクション
 void CObjHero::Action()
 {
@@ -98,10 +99,7 @@ void CObjHero::Action()
 				m_vx += 0.5f;
 				m_ani_time++;
 			}
-			m_vx += 0.5f;
-
-			m_ani_time++;
-			m_posture = 0.0f;
+			Rightwalk();
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
@@ -110,9 +108,7 @@ void CObjHero::Action()
 				m_vx -= 0.5f;
 				m_ani_time++;
 			}
-			m_vx -= 0.5f;
-			m_ani_time++;
-			m_posture = 1.0f;
+			Leftwalk();
 		}
 
 		else
@@ -261,16 +257,11 @@ void CObjHero::Action()
 		Ninzyutu = true;
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
-			m_vx += 0.5f;
-
-			m_ani_time++;
-			m_posture = 0.0f;
+			Rightwalk();
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
-			m_vx -= 0.5f;
-			m_ani_time++;
-			m_posture = 1.0f;
+			Leftwalk();
 		}
 	}
 
@@ -422,4 +413,22 @@ void CObjHero::Draw()
 	}
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
+}
+
+//右に歩かせる
+void CObjHero::Rightwalk()
+{
+	m_vx += 0.5f;
+
+	m_ani_time++;
+	m_posture = 0.0f;
+}
+
+//左に歩かせる
+void CObjHero::Leftwalk()
+{
+	m_vx -= 0.5f;
+
+	m_ani_time++;
+	m_posture = 1.0f;
 }

@@ -46,7 +46,6 @@ public:
 	bool GetNawa() { return nawa_stop; }
 	bool GetINawa() { return nawa_ido; }
 
-
 	void Uflag(bool b) { U_flag = b; }
 
 	//主人公の死亡フラグを外部から変更する
@@ -70,6 +69,10 @@ public:
 
 	//主人公の戦闘スタイルを外部に渡す
 	bool GetMode() { return change; }
+
+	//右に歩く
+	void Rightwalk();
+	void Leftwalk();
 
 	bool Sworp;//ワープ制御用変数
 

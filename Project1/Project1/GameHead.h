@@ -24,6 +24,7 @@ enum OBJ_NAME
 	OBJ_TURIBLOCK2,
 	OBJ_UGUBLOCK,
 	OBJ_OTOSIANA,
+	OBJ_KARAKURI,
 };
 //------------------------------------------------
 
@@ -84,6 +85,7 @@ struct UserData
 #include"TuriBlock.h"
 #include"UguBlock.h"
 #include"Otosiana.h"
+#include"Karakuri.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
