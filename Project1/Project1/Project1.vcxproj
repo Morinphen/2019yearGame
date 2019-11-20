@@ -134,7 +134,11 @@
     <ClCompile Include="Kaginawa.cpp" />
     <ClCompile Include="Nagenawa.cpp" />
     <ClCompile Include="NawaBlock.cpp" />
+    <ClCompile Include="ObjGameOver.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="Scroll.cpp" />
     <ClCompile Include="smokeball.cpp" />
     <ClCompile Include="syuriken.cpp" />
@@ -166,8 +170,12 @@
     <ClInclude Include="Kaginawa.h" />
     <ClInclude Include="Nagenawa.h" />
     <ClInclude Include="NawaBlock.h" />
+    <ClInclude Include="ObjGameOver.h" />
+    <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="Scroll.h" />
     <ClInclude Include="smokeball.h" />
     <ClInclude Include="syuriken.h" />

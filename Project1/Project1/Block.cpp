@@ -33,7 +33,6 @@ void CObjBlock::Action()
 	l_scroll = scroll->GetYScroll();
 
 
-
 }
 //ƒhƒ[
 void CObjBlock::Draw()

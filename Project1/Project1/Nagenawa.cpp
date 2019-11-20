@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Nagenawa.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -63,6 +64,7 @@ void CObjNagenawa::Action()
 
 	else if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr || m_y > 700.0f)
 	{
+		Audio::Start(12);
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
 		h->NawaIdo(true);

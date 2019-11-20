@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Utikagi.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -45,6 +46,7 @@ void CObjUtikagi::Action()
 		float h_vx = h->GetVX();
 
 		if (stop == false && Bflag == false) {
+			Audio::Start(12);
 			flag = flag ? false : true;
 			h->Uflag(flag);
 			Bflag = true;

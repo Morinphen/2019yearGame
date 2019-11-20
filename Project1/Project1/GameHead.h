@@ -20,6 +20,9 @@ enum OBJ_NAME
 	OBJ_HINOTAMA,
 	OBJ_HONOBLOCK,
 	OBJ_MIZUBLOCK,
+
+	OBJ_TITLE,
+	OBJ_GAMEOVER,
 };
 //------------------------------------------------
 
@@ -77,14 +80,19 @@ struct UserData
 #include"Hinotama.h"
 #include"HonoBlock.h"
 #include"MizuBlock.h"
+
+#include"ObjTitle.h"
+#include"ObjGameOver.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
+#include"SceneTitle.h"
+#include"SceneGameOver.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneTitle
 //#define SET_GAME_START  
 //-----------------------------------------------

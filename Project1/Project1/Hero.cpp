@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Hero.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -16,8 +17,8 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	//m_x = 100;
-	//m_y = 300;
+	m_x = 100;
+	m_y = 300;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
@@ -121,7 +122,7 @@ void CObjHero::Action()
 		{
 			if (jamptime == 0)
 				jamptime++;
-
+			Audio::Start(2);
 			jamppower += 4.0f;
 		}
 
@@ -166,6 +167,7 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
+						Audio::Start(1);
 						CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
 						s_atack = true;
@@ -227,6 +229,7 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
+						Audio::Start(5);
 						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
 						s_atack = true;
@@ -290,7 +293,7 @@ void CObjHero::Action()
 
 	if (m_y > 700.0f)
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneGameOver);
 	}
 
 	//上入力制御
@@ -357,7 +360,7 @@ void CObjHero::Action()
 	//敵と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneGameOver);
 	}
 
 }

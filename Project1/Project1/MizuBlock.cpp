@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"MizuBlock.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -103,6 +104,7 @@ void CObjMBlock::Action()
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Fdead == false)
 	{
+		Audio::Start(15);
 		Fdead = true;
 		hero->WDflag(true);
 	}
