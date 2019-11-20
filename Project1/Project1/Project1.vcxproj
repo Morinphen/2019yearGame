@@ -126,9 +126,11 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="Hamutaro.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Hinotama.cpp" />
     <ClCompile Include="HonoBlock.cpp" />
+    <ClCompile Include="Makimono.cpp" />
     <ClCompile Include="Karakuri.cpp" />
     <ClCompile Include="MizuBlock.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
@@ -162,9 +164,11 @@
     <ClInclude Include="GameL\UserData.h" />
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
+    <ClInclude Include="Hamutaro.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Hinotama.h" />
     <ClInclude Include="HonoBlock.h" />
+    <ClInclude Include="Makimono.h" />
     <ClInclude Include="Karakuri.h" />
     <ClInclude Include="MizuBlock.h" />
     <ClInclude Include="ObjEnemy.h" />

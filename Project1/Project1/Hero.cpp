@@ -16,8 +16,8 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	//m_x = 100;
-	//m_y = 300;
+	m_x = 100;
+	m_y = 300;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
@@ -53,6 +53,7 @@ void CObjHero::Init()
 	d_ani_frame = 0;
 
 	doton=false;
+	nezumi = false;
 
 	w_x = 0.0f;
 	w_y = 0.0f;
@@ -213,6 +214,7 @@ void CObjHero::Action()
 				}
 			}
 
+			//妖術モード
 			else {
 				//火遁
 				if (Input::GetVKey('Z'))
@@ -223,18 +225,30 @@ void CObjHero::Action()
 						s_atack = true;
 					}
 				}
+
+				else if (Input::GetVKey('S'))
+				{
+					if (s_atack == false)
+					{
+						doton = doton ? false : true;
+						s_atack = true;
+					}
+				}
+
+				else if (Input::GetVKey('D'))
+				{
+					if (s_atack == false && nezumi == false)
+					{
+						CObjNezumi* obj_n = new CObjNezumi(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_n, OBJ_HAMUTARO, 10);
+						s_atack = true;
+						nezumi = true;
+					}
+				}
+
 				else
 				{
 					s_atack = false;
-				}
-
-				//土遁（仮）
-				if (Input::GetVKey('S'))
-				{
-					doton = true;
-				}
-				else
-				{
 					doton = false;
 				}
 			}
