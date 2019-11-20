@@ -136,8 +136,8 @@ void CObjEnemy::Action()
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
 		Audio::Start(14);
-		CObjDonden*objn = new CObjDonden(m_px, m_py);
-		Objs::InsertObj(objn, OBJ_DONDEN, 3);
+		/*CObjDonden*objn = new CObjDonden(m_px, m_py);
+		Objs::InsertObj(objn, OBJ_DONDEN, 3);*/
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
