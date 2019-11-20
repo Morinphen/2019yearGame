@@ -9,10 +9,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjDonden::CObjDonden(int x, int y)
+CObjDonden::CObjDonden(int x, int y, int namber, bool b)
 {
 	m_x = x;
 	m_y = y;
+	hide = b;
+	Wnamber = namber;
 }
 
 //イニシャライズ
@@ -25,6 +27,37 @@ void CObjDonden::Init()
 	Wanimation = false;
 	Wanimation2 = false;
 	s_down = false;
+	N_stop = false;
+
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	int a = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (scroll->m_map[i][j] >= 30)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				D_tag[a][2] = scroll->m_map[i][j];
+				a++;
+			}
+			if (scroll->m_map[i][j] == 12)
+			{
+				D_tag[a][0] = i;
+				D_tag[a][1] = j;
+				a++;
+			}
+		}
+	}
+	if (hide == true)
+	{
+		Pworp = Worp((a));
+	}
+	else
+	{
+		Pworp = TagWorp((a));
+	}
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -41,47 +74,37 @@ void CObjDonden::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
+	//主人公の状態を持ってくる
 	s_down = h->GetDown();
+	N_stop = h->GetINawa();
 
-	int a = 0;
-	for (int i = 0; i < 10; i++)
+	//種類確認
+	if (hide == false || hide == true && h->GetDoton() == true)
 	{
-		for (int j = 0; j < 100; j++)
+		//主人公が触れたとき
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			if (scroll->m_map[i][j] == 5)
+			red = 0.0f;
+			bool stop;
+			stop = h->GetNawa();
+			//↑入力をされたとき、アニメーションを開始
+			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false)
 			{
-				D_tag[a][0] = i;
-				D_tag[a][1] = j;
-				a++;
+				if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+
+					h->W_cat = 0.0f;
+					h->W_cat2 -= 6.4f;
+					h->Sworp = true;
+
+					Wanimation = true;
+				}
 			}
 		}
-	}
 
-	Pworp = Worp((a));
-	
-	//主人公が触れたとき
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		red = 0.0f;
-		bool stop;
-		stop = h->GetNawa();
-		//↑入力をされたとき、アニメーションを開始
-		if (Input::GetVKey(VK_UP) == true && s_down == true && stop==false)
+		else
 		{
-			if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
-				Audio::Start(4);
-				h->W_cat = 0.0f;
-				h->W_cat2 -= 6.4f;
-				h->Sworp = true;
-
-				Wanimation = true;
-			}
+			red = 1.0f;
 		}
-	}
-
-	else
-	{
-		red = 1.0f;
 	}
 
 	//アニメーション前半開始時
@@ -101,7 +124,17 @@ void CObjDonden::Action()
 			h->SetWX(D_tag[Pworp][1] * 64);
 			h->SetWY(D_tag[Pworp][0] * 64);
 
-			scroll->SetScrooll(-(h->GetX() - (400)));
+			//前方スクロールライン
+			if (h->GetX() > 400)
+			{
+				scroll->SetScrooll(-(h->GetX() - (400)));
+			}
+
+			else if (h->GetX() < 250)
+			{
+				scroll->SetScrooll(-(h->GetX() - (250)));
+			}
+
 			if (h->GetY() < 80) {
 				scroll->SetYScrooll(-(h->GetY() - (80)));
 			}
@@ -134,21 +167,26 @@ void CObjDonden::Action()
 //ドロー
 void CObjDonden::Draw()
 {
-	float c[4] = { 1.0f,red,red,1.0f };
-	RECT_F src;
-	RECT_F dst;
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	if (hide == false || hide == true && h->GetDoton() == true)
+	{
+		float c[4] = { 1.0f,red,red,1.0f };
+		RECT_F src;
+		RECT_F dst;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
 
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+		dst.m_top = m_y + l_scroll;
+		dst.m_left = m_x + m_scroll;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
+
+		Draw::Draw(5, &src, &dst, c, 0.0f);
+	}
 }
 
 //どんでん返しのタッグを決める関数
@@ -193,6 +231,40 @@ int CObjDonden::Worp(int a)
 				data2[j - 1] = data2[j];
 				data2[j] = a;
 			}
+		}
+	}
+
+	return data2[0];
+}
+
+int CObjDonden::TagWorp(int a)
+{
+	int data[10];
+	int data2[10];
+	int data3[10];
+
+	int base;
+	int aa = 0;
+
+	//どんでん返しがある場所のデータを保存
+	for (int i = 0; i < a; i++)
+	{
+		if ((D_tag[i][0] * 64) != m_y || (D_tag[i][1] * 64) != m_x) {
+			data[aa] = D_tag[i][0] + D_tag[i][1];
+			data2[aa] = i;
+			data3[aa] = D_tag[i][2];
+			aa++;
+		}
+		else
+			base = D_tag[i][0] + D_tag[i][1];
+	}
+
+	for (int i = 0; i < aa - 1; i++)
+	{
+		if (data3[i] == Wnamber)
+		{
+			data2[0] = data2[i];
+			break;
 		}
 	}
 

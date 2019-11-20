@@ -47,6 +47,8 @@ void CObjSmokeball::Action()
 {
 	//スクロール情報を持ってくる
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	//主人公情報取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//玉の状態
 	if (modecheck == false)
@@ -85,11 +87,6 @@ void CObjSmokeball::Action()
 			smokeball_delete = true;
 		}
 	}
-
-	
-
-	//主人公情報取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//削除処理
 	if (smokeball_delete == true)

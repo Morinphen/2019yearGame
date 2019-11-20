@@ -7,38 +7,25 @@
 using namespace GameL;
 
 //オブジェクト手裏剣
-class CObjKaginawa :public CObj
+class CObjNezumi :public CObj
 {
 public:
-	CObjKaginawa(int x, int y,int a);
-	~CObjKaginawa() {};
+	CObjNezumi(int x, int y, int muki);
+	~CObjNezumi() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
-
-	int Pworp;
 private:
-	//カーソル移動用変数
-	float direction;
-
-	//上下に移動するカーソル用変数
-	int D_Count;
-	bool D_Suiti;
-
 	float m_x;
 	float m_y;
-
-	float sm_x;
-	float sm_y;
-
-	float m_vx;
-	float m_vy;
-
-	float m_muki;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
+	float m_posture;//姿勢
+
+	bool flag;
+	bool Bflag;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム

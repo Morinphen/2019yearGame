@@ -111,6 +111,24 @@
     <ClCompile Include="MizuBlock.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
+    <ClCompile Include="TuriBlock.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="UguBlock.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="Otosiana.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="Hamutaro.cpp">
+      <Filter>ソース ファイル\Ninzya</Filter>
+    </ClCompile>
+    <ClCompile Include="Makimono.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="Karakuri.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -213,6 +231,24 @@
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
     <ClInclude Include="MizuBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="TuriBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="UguBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Otosiana.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Makimono.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Hamutaro.h">
+      <Filter>ソース ファイル\Ninzya</Filter>
+    </ClInclude>
+    <ClInclude Include="Karakuri.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
     <ClInclude Include="SceneTitle.h">

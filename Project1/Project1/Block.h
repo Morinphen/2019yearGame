@@ -39,6 +39,8 @@ public:
 
 	void Worp(int x,int y);
 
+	void Deletemap(int x, int y);
+
 	////ålŒö‚Æ•Ç‚ÌŒğ·”»’è
 	//bool HeroBlockCrossPoint(
 	//	float x, float y, float vx, float vy,

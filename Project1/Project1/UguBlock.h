@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjHonoBlock :public CObj
+class CObjUguBlock :public CObj
 {
 public:
-	CObjHonoBlock(int x, int y);
-	~CObjHonoBlock() {};
+	CObjUguBlock(int x, int y);
+	~CObjUguBlock() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
@@ -28,8 +28,6 @@ public:
 	//);
 
 private:
-	
-
 	int m_x;
 	int m_y;
 	int aaa;
@@ -42,5 +40,5 @@ private:
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
 
-	bool enzyou;
+	bool uguisu;
 };

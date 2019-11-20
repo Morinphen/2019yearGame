@@ -77,13 +77,16 @@ void CObjHinotama::Action()
 	//ブロックとの当たり判定
 	if (Animation == false)
 	{
+		float aa;
+		float bb;
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y, false,
+		pb->BlockHit(&aa, &bb, false,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 			&m_vx, &m_vy
 		);
 	}
 
+	//ブロックに当たった時、消滅させる
 	if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
 		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
 		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
@@ -92,7 +95,8 @@ void CObjHinotama::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	if (m_x > 10000 || m_x<-200 || m_y > 700)
+	//一定の区間を超えたとき、時、消滅させる
+	if (m_x > 10000 || m_x<-200 || m_y > 7000)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

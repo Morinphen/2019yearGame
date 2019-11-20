@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjHonoBlock :public CObj
+class CObjMakimono :public CObj
 {
 public:
-	CObjHonoBlock(int x, int y);
-	~CObjHonoBlock() {};
+	CObjMakimono(int x, int y);
+	~CObjMakimono() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
@@ -28,19 +28,11 @@ public:
 	//);
 
 private:
-	
-
 	int m_x;
 	int m_y;
-	int aaa;
-
-	int m_map[10][100];
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
-	int m_ani_time;//アニメーションフレーム
-	int m_ani_frame;//描画フレーム
-
-	bool enzyou;
+	bool getflag;
 };

@@ -20,6 +20,13 @@ enum OBJ_NAME
 	OBJ_HINOTAMA,
 	OBJ_HONOBLOCK,
 	OBJ_MIZUBLOCK,
+	OBJ_TURIBLOCK,
+	OBJ_TURIBLOCK2,
+	OBJ_UGUBLOCK,
+	OBJ_OTOSIANA,
+	OBJ_MAKIMONO,
+	OBJ_HAMUTARO,
+	OBJ_KARAKURI,
 
 	OBJ_TITLE,
 	OBJ_GAMEOVER,
@@ -80,6 +87,12 @@ struct UserData
 #include"Hinotama.h"
 #include"HonoBlock.h"
 #include"MizuBlock.h"
+#include"TuriBlock.h"
+#include"UguBlock.h"
+#include"Otosiana.h"
+#include"Makimono.h"
+#include"Hamutaro.h"
+#include"Karakuri.h"
 
 #include"ObjTitle.h"
 #include"ObjGameOver.h"

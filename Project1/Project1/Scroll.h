@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjScroll :public CObj
 {
 public:
-	CObjScroll(int map[10][100]);
+	CObjScroll(int map[46][100]);
 	~CObjScroll() {};
 	void Init();//‚¢‚É‚µ‚á‚ç‚¢‚¸
 	void Action();//‚ ‚­‚µ‚å‚ñ
@@ -23,7 +23,7 @@ public:
 
 	void SetUtikagiScroll(float *hx, float *hy);
 
-	int m_map[10][100];
+	int m_map[46][100];
 private:
 	int m_x;
 	int m_y;

@@ -2,21 +2,25 @@
 #include"GameL\DrawTexture.h"
 #include"GameL\WinInputs.h"
 #include"GameHead.h"
-#include"Utikagi.h"
+#include"Hamutaro.h"
 #include"GameL\HitBoxManager.h"
-#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjUtikagi::CObjUtikagi(int x, int y)
+CObjNezumi::CObjNezumi(int x, int y, int muki)
 {
-	m_x = x;
-	m_y = y;
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	m_scroll = scroll->GetScroll();
+	l_scroll = scroll->GetYScroll();
+
+	m_x = x - m_scroll;
+	m_y = y - l_scroll;
+	m_posture = muki;
 }
 
 //イニシャライズ
-void CObjUtikagi::Init()
+void CObjNezumi::Init()
 {
 	m_ani_time = 0;
 	m_ani_frame = 1;//静止フレーム初期化
@@ -27,42 +31,31 @@ void CObjUtikagi::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_UTIKAGI, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_HAMUTARO, 1);
 }
 //アクション
-void CObjUtikagi::Action()
+void CObjNezumi::Action()
 {
 	CHitBox* hit = Hits::GetHitBox(this);
-
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
-	//うちかぎブロックに触れた状態で、上入力をしたとき
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Input::GetVKey(VK_UP))
+	if (m_posture == 0)
 	{
-		bool stop;
-		stop = h->GetNawa();
-		float h_vx = h->GetVX();
-
-		if (stop == false && Bflag == false) {
-			Audio::Start(12);
-			flag = flag ? false : true;
-			h->Uflag(flag);
-			Bflag = true;
-		}
+		m_x += 2.0f;
 	}
 
 	else
 	{
-		Bflag = false;
+		m_x -= 2.0f;
 	}
 
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
-void CObjUtikagi::Draw()
+void CObjNezumi::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
@@ -78,18 +71,5 @@ void CObjUtikagi::Draw()
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(10, &src, &dst, c, 0.0f);
-}
-
-void CObjUtikagi::Refresh()
-{
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	h->SetX(m_x);
-
-	if (h->GetX()>400)
-	scroll->SetScrooll(-(h->GetX() - (400)));
-	else if (h->GetX()>250)
-	scroll->SetScrooll(-(h->GetX() - (250)));
+	Draw::Draw(0, &src, &dst, c, 0.0f);
 }

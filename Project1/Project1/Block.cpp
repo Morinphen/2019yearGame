@@ -24,6 +24,7 @@ void CObjBlock::Init()
 	aaa = 0;
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_BLOCK, 1);
 }
+
 //アクション
 void CObjBlock::Action()
 {
@@ -34,6 +35,7 @@ void CObjBlock::Action()
 
 
 }
+
 //ドロー
 void CObjBlock::Draw()
 {
@@ -95,7 +97,7 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1)
+			if (m_map[i][j] == 1 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j]==10)
 			{
 				//要素番号を座標に変更
 				float bx = j*64.0f;
@@ -270,50 +272,35 @@ void CObjBlock::UBlockHit
 					//lenがある一定の長さのより短い場合判定に入る
 					if (len < 88.0f)
 					{
-						CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 						//角度で上下左右を判定
 						if ((r < 45 && r>=0) || r > 315)
 						{
 							//右
 							*right = true;//主人公の左の部分が衝突しているか
 							*x = bx + 64.0f + (m_scroll);//ブロックに位置-主人公の幅
-
-							if (*flag == false)
-							{
-								scroll->SetScrooll(m_scroll - 64);
-								*flag = true;
-							}
-							else
-							{
-								*vx = -(*vx)*0.0f;//-VX*反発係数
-							}
+							*vx = -(*vx)*0.1f;//-VX*反発係数
 						}
 
-						//if (r > 45 && r < 135)
-						//{
-						//	//上
-						//	*down = true;//主人公の下の部分が衝突しているか
-						//	*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
-						//	*vy = 0.0f;
-						//}
+						if (r > 45 && r < 135)
+						{
+							//上
+							*down = true;//主人公の下の部分が衝突しているか
+							*y = by - 64.0f + (l_scroll);//ブロックに位置-主人公の幅
+						}
 
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;//主人公の右の部分が衝突しているか
-
-							if (*flag == false)
-							{
-								scroll->SetScrooll(m_scroll + 64);
-								*flag = true;
-							}
-
-							else
-							{
-								*vx = -(*vx)*0.0f;//-VX*反発係数
-							}
-
 							*x = bx - 64.0f + (m_scroll);//ブロックに位置-主人公の幅
+							*vx = -(*vx)*0.1f;//-VX*反発係数
+						}
+
+						if (r > 225 && r < 315)
+						{
+							//下
+							*up = true;//主人公の上の部分が衝突しているか
+							*y = by + 64.0f + (l_scroll);//ブロックの位置+主人公の幅
 						}
 					}
 				}
@@ -321,6 +308,15 @@ void CObjBlock::UBlockHit
 		}
 	}
 }
+
+void CObjBlock::Deletemap(int x, int y)
+{
+	int ax = x / 64;
+	int bx = y / 64;
+
+	m_map[bx][ax] = 0;
+}
+
 ////内積関数
 ////引数1,2float ax,ay:Aベクトル
 ////引数3,4float bx,by:Bベクトル
