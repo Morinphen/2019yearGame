@@ -54,7 +54,7 @@ void CObjGameOver::Draw()
 	//ï\é¶à íuÇÃê›íË
 	dst.m_top = 0.0f;
 	dst.m_left =0.0f;
-	dst.m_right = 800.0f;
+	dst.m_right = 1200.0f;
 	dst.m_bottom = 600.0f;
 
 	//ï`âÊ
