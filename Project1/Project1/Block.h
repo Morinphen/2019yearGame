@@ -50,7 +50,6 @@ public:
 private:
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_map[46][100];
 

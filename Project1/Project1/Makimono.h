@@ -34,4 +34,7 @@ private:
 	float l_scroll;//上下スクロール用変数
 
 	bool getflag;
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

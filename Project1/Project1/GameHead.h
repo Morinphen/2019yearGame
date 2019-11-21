@@ -26,6 +26,11 @@ enum OBJ_NAME
 	OBJ_OTOSIANA,
 	OBJ_MAKIMONO,
 	OBJ_HAMUTARO,
+	OBJ_KARAKURI,
+	OBJ_DSYURIKEN,
+	OBJ_PSYURIKEN,
+	OBJ_TITLE,
+	OBJ_GAMEOVER,
 	OBJ_EXIT,
 };
 //------------------------------------------------
@@ -89,15 +94,23 @@ struct UserData
 #include"Otosiana.h"
 #include"Makimono.h"
 #include"Hamutaro.h"
+#include"Karakuri.h"
+#include"Psyuriken.h"
+#include"Dsyuriken.h"
+
+#include"ObjTitle.h"
+#include"ObjGameOver.h"
 #include"Exit.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
+#include"SceneTitle.h"
+#include"SceneGameOver.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneTitle
 //#define SET_GAME_START  
 //-----------------------------------------------

@@ -30,7 +30,6 @@ public:
 private:
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_map[10][100];
 
@@ -38,4 +37,7 @@ private:
 	float l_scroll;//上下スクロール用変数
 
 	bool ana;
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

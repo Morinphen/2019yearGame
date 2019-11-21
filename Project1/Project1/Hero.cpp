@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Hero.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -51,14 +52,16 @@ void CObjHero::Init()
 	dead = false;
 	Wdead = false;
 
+	psyuriken = 5;
+
 	d_ani_time = 0;
 	d_ani_frame = 0;
 
 	doton=false;
 	nezumi = false;
 
-	w_x = 0.0f;
-	w_y = 0.0f;
+	w_x = m_x;
+	w_y = m_y;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
@@ -73,6 +76,7 @@ void CObjHero::Init()
 	m_hit_right = false;
 	Hits::SetHitBox(this, m_x, m_y,64,64, ELEMENT_PLAYER, OBJ_HERO,1);
 }
+
 //アクション
 void CObjHero::Action()
 {
@@ -101,10 +105,7 @@ void CObjHero::Action()
 				m_vx += 0.5f;
 				m_ani_time++;
 			}
-			m_vx += 0.5f;
-
-			m_ani_time++;
-			m_posture = 0.0f;
+			Rightwalk();
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
@@ -113,9 +114,7 @@ void CObjHero::Action()
 				m_vx -= 0.5f;
 				m_ani_time++;
 			}
-			m_vx -= 0.5f;
-			m_ani_time++;
-			m_posture = 1.0f;
+			Leftwalk();
 		}
 
 		else
@@ -130,6 +129,7 @@ void CObjHero::Action()
 			if (jamptime == 0)
 				jamptime++;
 
+			Audio::Start(2);
 			jamppower += 8.0f;
 		}
 
@@ -186,9 +186,13 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
-						CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
-						Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
-						s_atack = true;
+						if (psyuriken > 0) {
+							Audio::Start(1);
+							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
+							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+							s_atack = true;
+							psyuriken -= 1;
+						}
 					}
 				}
 
@@ -277,16 +281,11 @@ void CObjHero::Action()
 		Ninzyutu = true;
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
-			m_vx += 0.5f;
-
-			m_ani_time++;
-			m_posture = 0.0f;
+			Rightwalk();
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
-			m_vx -= 0.5f;
-			m_ani_time++;
-			m_posture = 1.0f;
+			Leftwalk();
 		}
 	}
 
@@ -378,7 +377,7 @@ void CObjHero::Action()
 	//敵と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneGameOver);
 	}
 
 	//天井と当たっているかどうか確認
@@ -439,4 +438,22 @@ void CObjHero::Draw()
 	}
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
+}
+
+//右に歩かせる
+void CObjHero::Rightwalk()
+{
+	m_vx += 0.5f;
+
+	m_ani_time++;
+	m_posture = 0.0f;
+}
+
+//左に歩かせる
+void CObjHero::Leftwalk()
+{
+	m_vx -= 0.5f;
+
+	m_ani_time++;
+	m_posture = 1.0f;
 }

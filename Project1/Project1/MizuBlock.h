@@ -30,7 +30,6 @@ public:
 private:
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
@@ -44,6 +43,9 @@ private:
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 
 	float Dot(float ax, float ay, float bx, float by);//内積
 	float Cross(float ax, float ay, float bx, float by);//外積
