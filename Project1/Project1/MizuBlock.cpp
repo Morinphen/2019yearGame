@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"MizuBlock.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -112,11 +113,12 @@ void CObjMBlock::Action()
 		//ヒットボックス更新
 		CHitBox* hit = Hits::GetHitBox(this);
 
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Fdead == false)
-		{
-			Fdead = true;
-			hero->WDflag(true);
-		}
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Fdead == false)
+	{
+		Audio::Start(15);
+		Fdead = true;
+		hero->WDflag(true);
+	}
 
 		//主人公が着水したとき
 		if (Fdead == true)

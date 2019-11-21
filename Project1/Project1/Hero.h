@@ -33,6 +33,11 @@ public:
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
 
+	//主人公の手裏剣の所持数を渡す
+	float GetPS() { return psyuriken; }
+	//主人公の手裏剣の所持数を外部から変更する
+	void SetPS(float x) { psyuriken = psyuriken+x; }
+
 	//主人公のリスタート位置を外部から変更する
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
@@ -76,6 +81,8 @@ public:
 
 	bool Sworp;//ワープ制御用変数
 
+
+
 	//忍術フラグ
 	bool Ninzyutu;
 
@@ -102,6 +109,9 @@ private:
 
 	int jamptime;
 	float jamppower;
+
+	//手裏剣の所持数
+	int psyuriken;
 
 	//攻撃等の制限用変数
 	bool s_atack;

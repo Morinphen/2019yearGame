@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Hero.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -48,6 +49,8 @@ void CObjHero::Init()
 
 	dead = false;
 	Wdead = false;
+
+	psyuriken = 5;
 
 	d_ani_time = 0;
 	d_ani_frame = 0;
@@ -124,6 +127,7 @@ void CObjHero::Action()
 			if (jamptime == 0)
 				jamptime++;
 
+			Audio::Start(2);
 			jamppower += 8.0f;
 		}
 
@@ -180,9 +184,13 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
-						CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
-						Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
-						s_atack = true;
+						if (psyuriken > 0) {
+							Audio::Start(1);
+							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
+							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+							s_atack = true;
+							psyuriken -= 1;
+						}
 					}
 				}
 
@@ -300,7 +308,7 @@ void CObjHero::Action()
 
 	if (m_y > 700.0f)
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneGameOver);
 	}
 
 	//上入力制御
@@ -367,7 +375,7 @@ void CObjHero::Action()
 	//敵と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneGameOver);
 	}
 
 	//天井と当たっているかどうか確認
