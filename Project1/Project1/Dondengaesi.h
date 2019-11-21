@@ -47,7 +47,7 @@ private:
 	//どんでん返しで隠す
 	bool hide;
 
-	int D_tag[10][3];//ペアのどんでん返しを探す
+	int D_tag[50][3];//ペアのどんでん返しを探す
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム

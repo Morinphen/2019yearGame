@@ -76,6 +76,9 @@ public:
 	//忍術フラグ
 	bool Ninzyutu;
 
+	//クリア用フラグ
+	bool Cflag;
+
 	//ワープする際の画像切り取り位置
 	float W_cat;
 	float W_cat2;

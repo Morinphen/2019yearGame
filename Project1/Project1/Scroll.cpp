@@ -19,8 +19,8 @@ CObjScroll::CObjScroll(int map[46][100])
 void CObjScroll::Init()
 {
 	m_scroll = 0.0f;
-	l_scroll = 0.0f;
-	//l_scroll = 64.0f*-36.0f;
+	//l_scroll = 0.0f;
+	l_scroll = 64.0f*-36.0f;
 }
 //アクション
 void CObjScroll::Action()
@@ -32,16 +32,16 @@ void CObjScroll::Action()
 
 
 	//後方スクロールライン
-	if (hx < 250)
+	if (hx < 500)
 	{
-		hero->SetX(250);//主人公はラインを超えないように
+		hero->SetX(500);//主人公はラインを超えないように
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
 	//前方スクロールライン
-	if (hx > 400)
+	if (hx > 600)
 	{
-		hero->SetX(400);//主人公はラインを超えないように
+		hero->SetX(600);//主人公はラインを超えないように
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 

@@ -49,7 +49,7 @@ void CObjTBlock::Action()
 
 	
 
-	m_ani_time++;
+	/*m_ani_time++;
 	if (m_ani_time == 16)
 	{
 		m_ani_time = 0;
@@ -58,7 +58,7 @@ void CObjTBlock::Action()
 		{
 			m_ani_frame = 0;
 		}
-	}
+	}*/
 
 	aaa++;
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -89,10 +89,15 @@ void CObjTBlock::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	//ブロック表示
+	////ブロック表示
+	//src.m_top = 0.0f;
+	//src.m_left = 0.0f + (m_ani_frame*64.0f);
+	//src.m_right = 64.0f + (m_ani_frame*64.0f);
+	//src.m_bottom = 64.0f;
+
 	src.m_top = 0.0f;
-	src.m_left = 0.0f + (m_ani_frame*64.0f);
-	src.m_right = 64.0f + (m_ani_frame*64.0f);
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
 
 	dst.m_top = m_y + l_scroll;

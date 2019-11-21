@@ -4,30 +4,28 @@
 #include"GameL\SceneManager.h"
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
-#include"Makimono.h"
+#include"Exit.h"
 #include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjMakimono::CObjMakimono(int x, int y)
+CObjExit::CObjExit(int x, int y)
 {
 	m_x = x;
 	m_y = y;
 }
 
 //イニシャライズ
-void CObjMakimono::Init()
+void CObjExit::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
 
-	getflag = false;
-
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_MAKIMONO, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_EXIT, 1);
 }
 //アクション
-void CObjMakimono::Action()
+void CObjExit::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -100,26 +98,23 @@ void CObjMakimono::Action()
 
 	CHitBox* hit = Hits::GetHitBox(this);
 
-
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	//巻物を取った状態でで主人公と当たったら削除する
+	if (hero->Cflag== true)
 	{
-		//主人公と当たったらフラグをオンに
-		getflag = true;
-		hero->Cflag=true;
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
 	}
-
-	if (getflag == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
 
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
-void CObjMakimono::Draw()
+void CObjExit::Draw()
 {
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,0.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
@@ -134,6 +129,6 @@ void CObjMakimono::Draw()
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(15, &src, &dst, c, 0.0f);
-	
+	Draw::Draw(1, &src, &dst, c, 0.0f);
+
 }

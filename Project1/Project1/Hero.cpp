@@ -16,8 +16,8 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_x = 100;
-	m_y = 300;
+	m_x = 400;
+	m_y = 600;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
@@ -43,6 +43,8 @@ void CObjHero::Init()
 	U_flag = false;
 
 	Ninzyutu = false;
+
+	Cflag = false;
 
 	U_scroll = false;
 
@@ -307,10 +309,10 @@ void CObjHero::Action()
 		}
 	}
 
-	if (m_y > 700.0f)
+	/*if (m_y > 700.0f)
 	{
 		Scene::SetScene(new CSceneMain);
-	}
+	}*/
 
 	//上入力制御
 	if (Input::GetVKey(VK_UP) == true || W_cat != 1.0f)
@@ -384,6 +386,7 @@ void CObjHero::Action()
 	{
 		Scene::SetScene(new CSceneMain);
 	}
+
 }
 
 //ドロー

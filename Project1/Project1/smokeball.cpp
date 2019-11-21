@@ -95,7 +95,7 @@ void CObjSmokeball::Action()
 	}
 
 	//íœ”ÍˆÍ
-	if (m_y > 800)
+	if (m_y > 3000)
 		smokeball_delete = true;
 
 	

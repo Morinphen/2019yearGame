@@ -126,6 +126,9 @@
     <ClCompile Include="Makimono.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -232,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="Hamutaro.h">
       <Filter>ソース ファイル\Ninzya</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

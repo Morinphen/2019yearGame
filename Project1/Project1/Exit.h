@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト主人公
-class CObjMakimono :public CObj
+class CObjExit :public CObj
 {
 public:
-	CObjMakimono(int x, int y);
-	~CObjMakimono() {};
+	CObjExit(int x, int y);
+	~CObjExit() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
@@ -26,6 +26,7 @@ public:
 	//	float x, float y, float vx, float vy,
 	//	float *out_px, float *out_py, float* out_len
 	//);
+
 private:
 	int m_x;
 	int m_y;
@@ -33,5 +34,4 @@ private:
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
-	bool getflag;
 };

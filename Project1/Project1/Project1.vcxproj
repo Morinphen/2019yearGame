@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Dondengaesi.cpp" />
+    <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Dondengaesi.h" />
+    <ClInclude Include="Exit.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />

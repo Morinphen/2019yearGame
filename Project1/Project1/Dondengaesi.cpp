@@ -30,7 +30,7 @@ void CObjDonden::Init()
 
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	int a = 0;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
@@ -124,14 +124,14 @@ void CObjDonden::Action()
 			h->SetWY(D_tag[Pworp][0] * 64);
 
 			//前方スクロールライン
-			if (h->GetX() > 400)
+			if (h->GetX() > 600)
 			{
-				scroll->SetScrooll(-(h->GetX() - (400)));
+				scroll->SetScrooll(-(h->GetX() - (600)));
 			}
 
-			else if (h->GetX() < 250)
+			else if (h->GetX() < 500)
 			{
-				scroll->SetScrooll(-(h->GetX() - (250)));
+				scroll->SetScrooll(-(h->GetX() - (500)));
 			}
 
 			if (h->GetY() < 80) {
@@ -238,9 +238,9 @@ int CObjDonden::Worp(int a)
 
 int CObjDonden::TagWorp(int a)
 {
-	int data[10];
-	int data2[10];
-	int data3[10];
+	int data[50];
+	int data2[50];
+	int data3[50];
 
 	int base;
 	int aa = 0;
@@ -258,7 +258,7 @@ int CObjDonden::TagWorp(int a)
 			base = D_tag[i][0] + D_tag[i][1];
 	}
 
-	for (int i = 0; i < aa - 1; i++)
+	for (int i = 0; i < aa; i++)
 	{
 		if (data3[i] == Wnamber)
 		{
