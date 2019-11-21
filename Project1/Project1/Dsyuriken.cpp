@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"Dsyuriken.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -102,6 +103,7 @@ void CObjDsyuriken::Action()
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
+		Audio::Start(11);
 		//敵の位置を取得
 		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		hero->SetPS(1);
