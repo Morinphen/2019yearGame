@@ -32,7 +32,6 @@ private:
 
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_map[10][100];
 
@@ -43,4 +42,7 @@ private:
 	int m_ani_frame;//描画フレーム
 
 	bool enzyou;
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

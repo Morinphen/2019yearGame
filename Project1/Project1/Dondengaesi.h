@@ -54,4 +54,7 @@ private:
 
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

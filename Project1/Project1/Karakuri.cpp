@@ -26,42 +26,63 @@ void CObjKarakuri::Init()
 	on_off = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
+	HitBox_ON = true;
 }
 
 //アクション
 void CObjKarakuri::Action()
 {
+	//表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
-
-	CHitBox* hit = Hits::GetHitBox(this);
-
-	if (on_off == false)
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP))
+		//ヒットボックス生成
+		if (HitBox_ON == false)
 		{
-			Hits::DeleteHitBox(this);
-
-			if (num == 1)
-			{
-				//こ↑こ↓にマップに変更処理
-				on_off = true;
-			}
-			else if (num == 2)
-			{
-				//こ↑こ↓にマップに変更処理
-				on_off = true;
-			}
-			else if (num == 3)
-			{
-				//こ↑こ↓にマップに変更処理
-				on_off = true;
-			}
+			HitBox_ON = true;
+			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_MIZUBLOCK, 1);
 		}
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-	}
 
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
+
+		CHitBox* hit = Hits::GetHitBox(this);
+
+		if (on_off == false)
+		{
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP))
+			{
+				Hits::DeleteHitBox(this);
+
+				if (num == 1)
+				{
+					//こ↑こ↓にマップに変更処理
+					on_off = true;
+				}
+				else if (num == 2)
+				{
+					//こ↑こ↓にマップに変更処理
+					on_off = true;
+				}
+				else if (num == 3)
+				{
+					//こ↑こ↓にマップに変更処理
+					on_off = true;
+				}
+			}
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+		}
+	}
+	//表示画面外の時
+	else
+	{
+		//ヒットボックス削除
+		if (HitBox_ON == true)
+		{
+			HitBox_ON = false;
+			Hits::DeleteHitBox(this);
+		}
+	}
 	
 }
 
@@ -72,28 +93,34 @@ void CObjKarakuri::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	if (on_off == false)
+	// 表示画面内の時
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-		//ブロック表示
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
-		
-	}
-	else
-	{
-		//ブロック表示
-		src.m_top = 64.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 0.0f;
-	}
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+		if (on_off == false)
+		{
+			//ブロック表示
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 64.0f;
+			src.m_bottom = 64.0f;
 
-	Draw::Draw(16, &src, &dst, c, 0.0f);
+		}
+		else
+		{
+			//ブロック表示
+			src.m_top = 64.0f;
+			src.m_left = 0.0f;
+			src.m_right = 64.0f;
+			src.m_bottom = 0.0f;
+		}
+
+		dst.m_top = m_y + l_scroll;
+		dst.m_left = m_x + m_scroll;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
+
+		Draw::Draw(16, &src, &dst, c, 0.0f);
+	}
 }

@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"Scroll.h"
 #include"GameL\HitBoxManager.h"
+#include"main.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -19,8 +20,8 @@ CObjScroll::CObjScroll(int map[46][100])
 void CObjScroll::Init()
 {
 	m_scroll = 0.0f;
-	l_scroll = 0.0f;
-	//l_scroll = 64.0f*-36.0f;
+	//l_scroll = 0.0f;
+	l_scroll = 64.0f*-36.0f;
 }
 //アクション
 void CObjScroll::Action()
@@ -77,4 +78,16 @@ void CObjScroll::Draw()
 	dst.m_right = 800.0f;
 	dst.m_bottom = 800.0f;
 	Draw::Draw(2, &src, &dst, c, 0.0f);
+}
+
+//表示画面の中にいるか調べる
+bool CObjScroll::Inscrooll_check(int x, int y)
+{
+	if (x+64 >= -m_scroll&&
+		x    <= WINDOW_SIZE_W-m_scroll&&
+		y+64 >= -l_scroll&&
+		y    <= WINDOW_SIZE_H-l_scroll)
+		return true;
+	else
+		false;
 }

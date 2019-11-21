@@ -25,4 +25,7 @@ private:
 	int num;
 
 	bool on_off;
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

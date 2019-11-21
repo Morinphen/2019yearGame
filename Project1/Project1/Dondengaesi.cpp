@@ -62,129 +62,157 @@ void CObjDonden::Init()
 	m_ani_max_time = 4;//アニメーション感覚幅
 
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_DONDEN, 1);
+	HitBox_ON = true;
 }
 //アクション
 void CObjDonden::Action()
 {
-	CHitBox* hit = Hits::GetHitBox(this);
-
+	//表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
-
-	//主人公の状態を持ってくる
-	s_down = h->GetDown();
-	N_stop = h->GetINawa();
-
-	//種類確認
-	if (hide == false || hide == true && h->GetDoton() == true)
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-		//主人公が触れたとき
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		//ヒットボックス生成
+		if (HitBox_ON == false)
 		{
-			red = 0.0f;
-			bool stop;
-			stop = h->GetNawa();
-			//↑入力をされたとき、アニメーションを開始
-			if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false)
+			HitBox_ON = true;
+			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_DONDEN, 1);
+		}
+
+		CHitBox* hit = Hits::GetHitBox(this);
+
+		CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
+
+		//主人公の状態を持ってくる
+		s_down = h->GetDown();
+		N_stop = h->GetINawa();
+
+		//種類確認
+		if (hide == false || hide == true && h->GetDoton() == true)
+		{
+			//主人公が触れたとき
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 			{
-				if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+				red = 0.0f;
+				bool stop;
+				stop = h->GetNawa();
+				//↑入力をされたとき、アニメーションを開始
+				if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false)
+				{
+					if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 
-					h->W_cat = 0.0f;
-					h->W_cat2 -= 6.4f;
-					h->Sworp = true;
+						h->W_cat = 0.0f;
+						h->W_cat2 -= 6.4f;
+						h->Sworp = true;
 
-					Wanimation = true;
+						Wanimation = true;
+					}
 				}
 			}
-		}
 
-		else
-		{
-			red = 1.0f;
-		}
-	}
-
-	//アニメーション前半開始時
-	if (Wanimation == true)
-	{
-		//主人公をアニメーションさせ、ワープしている扱いに変更
-		h->W_cat2 -= 6.4f;
-		h->Sworp = true;
-		//一定のアニメーションが終わったとき
-		if (h->W_cat2 <= -64.0f)
-		{
-			//主人公の座標をワープ先に変更
-			h->SetX(D_tag[Pworp][1] * 64);
-			h->SetY(D_tag[Pworp][0] * 64);
-
-			//主人公のリスタート位置変更
-			h->SetWX(D_tag[Pworp][1] * 64);
-			h->SetWY(D_tag[Pworp][0] * 64);
-
-			//前方スクロールライン
-			if (h->GetX() > 400)
+			else
 			{
-				scroll->SetScrooll(-(h->GetX() - (400)));
+				red = 1.0f;
 			}
+		}
 
-			else if (h->GetX() < 250)
+		//アニメーション前半開始時
+		if (Wanimation == true)
+		{
+			//主人公をアニメーションさせ、ワープしている扱いに変更
+			h->W_cat2 -= 6.4f;
+			h->Sworp = true;
+			//一定のアニメーションが終わったとき
+			if (h->W_cat2 <= -64.0f)
 			{
-				scroll->SetScrooll(-(h->GetX() - (250)));
-			}
+				//主人公の座標をワープ先に変更
+				h->SetX(D_tag[Pworp][1] * 64);
+				h->SetY(D_tag[Pworp][0] * 64);
 
-			if (h->GetY() < 80) {
-				scroll->SetYScrooll(-(h->GetY() - (80)));
-			}
-			else if (h->GetY() > 500) {
-				scroll->SetYScrooll(-(h->GetY() - (500)));
-			}
+				//主人公のリスタート位置変更
+				h->SetWX(D_tag[Pworp][1] * 64);
+				h->SetWY(D_tag[Pworp][0] * 64);
 
-			//アニメーション後半開始
-			h->W_cat2 = -64.0f;
-			Wanimation = false;
-			Wanimation2 = true;
+				//前方スクロールライン
+				if (h->GetX() > 400)
+				{
+					scroll->SetScrooll(-(h->GetX() - (400)));
+				}
+
+				else if (h->GetX() < 250)
+				{
+					scroll->SetScrooll(-(h->GetX() - (250)));
+				}
+
+				if (h->GetY() < 80) {
+					scroll->SetYScrooll(-(h->GetY() - (80)));
+				}
+				else if (h->GetY() > 500) {
+					scroll->SetYScrooll(-(h->GetY() - (500)));
+				}
+
+				//アニメーション後半開始
+				h->W_cat2 = -64.0f;
+				Wanimation = false;
+				Wanimation2 = true;
+			}
 		}
-	}
 
-	//アニメーション後半開始時
-	if (Wanimation2 == true)
+		//アニメーション後半開始時
+		if (Wanimation2 == true)
+		{
+			h->W_cat2 += 6.4f;
+			h->Sworp = true;
+			//アニメーションが終わったとき
+			if (h->W_cat2 >= 0.0f) {
+				h->W_cat2 = 0.0f;
+				h->W_cat = 1.0f;
+				Wanimation2 = false;
+			}
+		}
+
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+	}
+	//表示画面外の時
+	else
 	{
-		h->W_cat2 += 6.4f;
-		h->Sworp = true;
-		//アニメーションが終わったとき
-		if (h->W_cat2 >= 0.0f) {
-			h->W_cat2 = 0.0f;
-			h->W_cat = 1.0f;
-			Wanimation2 = false;
+		//ヒットボックス削除
+		if (HitBox_ON == true)
+		{
+			HitBox_ON = false;
+			Hits::DeleteHitBox(this);
 		}
 	}
-
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
 void CObjDonden::Draw()
 {
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	if (hide == false || hide == true && h->GetDoton() == true)
+	// 表示画面内の時
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-		float c[4] = { 1.0f,red,red,1.0f };
-		RECT_F src;
-		RECT_F dst;
 
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
+		if (hide == false || hide == true && h->GetDoton() == true)
+		{
+			float c[4] = { 1.0f,red,red,1.0f };
+			RECT_F src;
+			RECT_F dst;
 
-		dst.m_top = m_y + l_scroll;
-		dst.m_left = m_x + m_scroll;
-		dst.m_right = dst.m_left + 64.0f;
-		dst.m_bottom = dst.m_top + 64.0f;
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 64.0f;
+			src.m_bottom = 64.0f;
 
-		Draw::Draw(5, &src, &dst, c, 0.0f);
+			dst.m_top = m_y + l_scroll;
+			dst.m_left = m_x + m_scroll;
+			dst.m_right = dst.m_left + 64.0f;
+			dst.m_bottom = dst.m_top + 64.0f;
+
+			Draw::Draw(5, &src, &dst, c, 0.0f);
+		}
 	}
 }
 

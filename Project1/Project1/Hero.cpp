@@ -55,8 +55,8 @@ void CObjHero::Init()
 	doton=false;
 	nezumi = false;
 
-	w_x = 0.0f;
-	w_y = 0.0f;
+	w_x = m_x;
+	w_y = m_y;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//Ã~ƒtƒŒ[ƒ€‰Šú‰»
