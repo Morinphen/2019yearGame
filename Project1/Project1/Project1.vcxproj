@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Dondengaesi.cpp" />
+    <ClCompile Include="Dsyuriken.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="NawaBlock.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="Psyuriken.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="Otosiana.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -154,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Dondengaesi.h" />
+    <ClInclude Include="Dsyuriken.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="Otosiana.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="Psyuriken.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />

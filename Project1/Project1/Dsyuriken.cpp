@@ -4,30 +4,29 @@
 #include"GameL\SceneManager.h"
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
-#include"Makimono.h"
+#include"Dsyuriken.h"
 #include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjMakimono::CObjMakimono(int x,int y)
+CObjDsyuriken::CObjDsyuriken(int x, int y)
 {
 	m_x = x;
 	m_y = y;
 }
 
 //イニシャライズ
-void CObjMakimono::Init()
+void CObjDsyuriken::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
 
-	getflag = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_MAKIMONO, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_DSYURIKEN, 1);
 }
 //アクション
-void CObjMakimono::Action()
+void CObjDsyuriken::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -103,20 +102,18 @@ void CObjMakimono::Action()
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		//主人公と当たったらフラグをオンに
-		getflag = true;
-	}
-
-	if (getflag == true)
-	{
+		//敵の位置を取得
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		hero->SetPS(1);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
 
+
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
-void CObjMakimono::Draw()
+void CObjDsyuriken::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
@@ -128,11 +125,11 @@ void CObjMakimono::Draw()
 	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_top = m_y+32 + l_scroll;
+	dst.m_left = m_x+16 + m_scroll;
+	dst.m_right = dst.m_left + 32.0f;
+	dst.m_bottom = dst.m_top + 32.0f;
 
-	Draw::Draw(15, &src, &dst, c, 0.0f);
-	
+	Draw::Draw(17, &src, &dst, c, 0.0f);
+
 }

@@ -27,7 +27,8 @@ enum OBJ_NAME
 	OBJ_MAKIMONO,
 	OBJ_HAMUTARO,
 	OBJ_KARAKURI,
-
+	OBJ_DSYURIKEN,
+	OBJ_PSYURIKEN,
 	OBJ_TITLE,
 	OBJ_GAMEOVER,
 };
@@ -93,6 +94,8 @@ struct UserData
 #include"Makimono.h"
 #include"Hamutaro.h"
 #include"Karakuri.h"
+#include"Psyuriken.h"
+#include"Dsyuriken.h"
 
 #include"ObjTitle.h"
 #include"ObjGameOver.h"
