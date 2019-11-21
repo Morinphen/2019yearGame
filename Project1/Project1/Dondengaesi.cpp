@@ -160,19 +160,6 @@ void CObjDonden::Action()
 			}
 		}
 
-		//アニメーション後半開始時
-		if (Wanimation2 == true)
-		{
-			h->W_cat2 += 6.4f;
-			h->Sworp = true;
-			//アニメーションが終わったとき
-			if (h->W_cat2 >= 0.0f) {
-				h->W_cat2 = 0.0f;
-				h->W_cat = 1.0f;
-				Wanimation2 = false;
-			}
-		}
-
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 	}
 	//表示画面外の時
@@ -183,6 +170,19 @@ void CObjDonden::Action()
 		{
 			HitBox_ON = false;
 			Hits::DeleteHitBox(this);
+		}
+		//アニメーション後半開始時
+		if (Wanimation2 == true)
+		{
+			CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
+			h->W_cat2 += 6.4f;
+			h->Sworp = true;
+			//アニメーションが終わったとき
+			if (h->W_cat2 >= 0.0f) {
+				h->W_cat2 = 0.0f;
+				h->W_cat = 1.0f;
+				Wanimation2 = false;
+			}
 		}
 	}
 }

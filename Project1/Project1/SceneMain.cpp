@@ -139,7 +139,7 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
 			}
 
-			else if (map[i][j] >=30&&map[i][j]<=100)
+			else if (map[i][j] >=30&& map[i][j] <= 100)
 			{
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
@@ -186,82 +186,82 @@ void CSceneMain::InitScene()
 			}
 
 
-		//	/*if (block_data[i][j] == 1) {
-		//	CObjBlock*objb = new CObjBlock(j * 64, i * 64);
-		//	Objs::InsertObj(objb, OBJ_BLOCK, 2);
-		//	}*/
-		//	if (block_data[i][j] == 3)
-		//	{
-		//		CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
-		//		Objs::InsertObj(obje, OBJ_ENEMY, 6);
-		//	}
-		//	if (block_data[i][j] == 4)
-		//	{
-		//		CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
-		//		Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
-		//	}
+			/*if (block_data[i][j] == 1) {
+			CObjBlock*objb = new CObjBlock(j * 64, i * 64);
+			Objs::InsertObj(objb, OBJ_BLOCK, 2);
+			}*/
+			/*if (block_data[i][j] == 3)
+			{
+				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+			}
+			else if (map[i][j] == 4)
+			{
+				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
+				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
+			}
 
-		//	else if (block_data[i][j] >= 30 && block_data[i][j] <= 100)
-		//	{
-		//		CObjDonden*objd = new CObjDonden(j * 64, i * 64, block_data[i][j] ,false);
-		//		Objs::InsertObj(objd, OBJ_DONDEN, 3);
-		//	}
+			else if (map[i][j] >=30&&map[i][j]<=100)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
+			
 
-		//	else if (block_data[i][j] == 6)
-		//	{
-		//		CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-		//		Objs::InsertObj(objn, OBJ_NBLOCK, 3);
-		//	}
+			else if (map[i][j] == 6) 
+			{
+				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
+				Objs::InsertObj(objn, OBJ_DONDEN, 3);
+			}
 
-		//	else if (block_data[i][j] == 7)
-		//	{
-		//		CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-		//		Objs::InsertObj(obju, OBJ_UTIKAGI, 3);
-		//	}
+			else if (map[i][j] == 7)
+			{
+				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_DONDEN, 3);
 
-		//	else if (block_data[i][j] == 8)
-		//	{
-		//		CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
-		//		Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
-		//	}
+			}
+			else if (map[i][j] == 8)
+			{
+				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
+			}
 
-		//	else if (block_data[i][j] == 9)
-		//	{
-		//		CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
-		//		Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
-		//	}
-		//	else if (block_data[i][j] == 10)
-		//	{
-		//		CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
-		//		Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
-		//	}
-		//	else if (block_data[i][j] == 11)
-		//	{
-		//		CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
-		//		Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
-		//	}
-
-		//	else if (block_data[i][j] == 12)
-		//	{
-		//		CObjDonden*objd = new CObjDonden(j * 64, i * 64, 12 ,true);
-		//		Objs::InsertObj(objd, OBJ_DONDEN, 3);
-		//	}
-		//	else if (block_data[i][j] == 15)
-		//	{
-		//		CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
-		//		Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-		//	}
-		//	else if (block_data[i][j] == 16)
-		//	{
-		//		CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
-		//		Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-		//	}
-		//	else if (block_data[i][j] == 17)
-		//	{
-		//		CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
-		//		Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-		//	}
-		//
+			else if (map[i][j] == 9)
+			{
+				CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
+				Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
+			}
+			else if (map[i][j] == 10)
+			{
+				CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
+				Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
+			}
+			else if (map[i][j] == 11)
+			{
+				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
+				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
+			}
+			else if (map[i][j] == 13)
+			{
+				CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
+				Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
+			}
+			else if (block_data[i][j] == 15)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
+			else if (block_data[i][j] == 16)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
+			else if (block_data[i][j] == 17)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}*/
+		
 		}
 	}
 
