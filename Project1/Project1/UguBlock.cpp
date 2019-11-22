@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"HonoBlock.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -126,6 +127,7 @@ void CObjUguBlock::Action()
 
 		if (m_ani_frame == 12)
 		{
+			Audio::Stop(0);
 			Scene::SetScene(new CSceneMain);
 		}
 
