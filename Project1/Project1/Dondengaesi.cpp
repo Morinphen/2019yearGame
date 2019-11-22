@@ -171,13 +171,15 @@ void CObjDonden::Action()
 			HitBox_ON = false;
 			Hits::DeleteHitBox(this);
 		}
-		//アニメーション後半開始時
-		if (Wanimation2 == true)
-		{
-			h->W_cat2 += 6.4f;
-			h->Sworp = true;
-		}
 	}
+
+	//アニメーション後半開始時
+	if (Wanimation2 == true)
+	{
+		h->W_cat2 += 6.4f;
+		h->Sworp = true;
+	}
+
 	//アニメーションが終わったとき
 	if (h->W_cat2 >= 0.0f) {
 		h->W_cat2 = 0.0f;
