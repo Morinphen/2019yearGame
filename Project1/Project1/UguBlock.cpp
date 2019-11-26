@@ -128,7 +128,30 @@ void CObjUguBlock::Action()
 		if (m_ani_frame == 12)
 		{
 			Audio::Stop(0);
-			Scene::SetScene(new CSceneMain);
+			hero->SetRE(1);
+			hero->SetVX(0);
+			hero->SetVY(0);
+			hero->SetX(hero->GetWX());
+			hero->SetY(hero->GetWY());
+
+			if (hero->GetX() < 500) {
+				scroll->SetScrooll(-(hero->GetX() - (500)));
+			}
+			else if (hero->GetX() > 600) {
+				scroll->SetScrooll(-(hero->GetX() - (600)));
+			}
+
+			if (hero->GetY() < 80) {
+				scroll->SetYScrooll(-(hero->GetY() - (80)));
+			}
+			else if (hero->GetY() > 500) {
+				scroll->SetYScrooll(-(hero->GetY() - (500)));
+			}
+
+			hero->WDflag(false);
+			hero->Dflag(false);
+			uguisu = false;
+			m_ani_frame = 0;
 		}
 
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);

@@ -42,16 +42,24 @@ public:
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
 
+	//主人公の残機数を渡す
+	float GetRE() { return remain; }
+	//主人公の残機数を外部から変更する
+	void SetRE(float x) { remain = remain - x; }
+
 	//主人公の鉤縄使用状態を外部から変更する
 	void NawaIdo(bool b) { nawa_ido = b; }
 	void ReSetN(bool b) { nawa_stop = b; }
 	void SetNX(float x) { n_x = x; }
 	void SetNY(float y) { n_y = y; }
+
 	//主人公の鉤縄を使用している状態を渡す
 	bool GetNawa() { return nawa_stop; }
 	bool GetINawa() { return nawa_ido; }
-
 	void Uflag(bool b) { U_flag = b; }
+
+	//主人公の虫獣遁のフラグを設定
+	void HamuSetUP(bool b) { nezumi = b; }
 
 	//主人公の死亡フラグを外部から変更する
 	void Dflag(bool b) { dead = b; }
@@ -102,6 +110,7 @@ private:
 	float m_y;
 	float m_vy;
 	float m_posture;//姿勢
+	float remain;//残機
 
 	float g_x;//グローバルX位置
 	float g_y;//グローバルY位置

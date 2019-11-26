@@ -17,11 +17,14 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
+	//スクロール情報取得
+	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_x = 400;
 	m_y = 600;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
+	remain = 3;//残機
 
 	jamptime = 0;
 	jamppower = 0.0f;
@@ -60,8 +63,8 @@ void CObjHero::Init()
 	doton=false;
 	nezumi = false;
 
-	w_x = m_x;
-	w_y = m_y;
+	w_x = 400;
+	w_y = 600-scroll->GetYScroll();
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
@@ -80,14 +83,20 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	if (remain == 0)
+	{
+		Scene::SetScene(new CSceneRetry);
+	}
 	//敵の位置を取得
 	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	//ブロックとの当たり判定
+	CObjDonden* dd = (CObjDonden*)Objs::GetObj(OBJ_DONDEN);
 	//スクロール情報取得
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	pb->BlockHit(&m_x, &m_y, true,
+	pb->BlockHit(&m_x, &m_y, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
@@ -99,7 +108,7 @@ void CObjHero::Action()
 		d_ani_frame = 0;
 		d_ani_time = 0;
 
-		if (Input::GetVKey(VK_RIGHT) == true) {
+		if (Input::GetVKey(VK_RIGHT) == true && nezumi == false) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx += 0.5f;
@@ -108,7 +117,7 @@ void CObjHero::Action()
 			Rightwalk();
 		}
 
-		else if (Input::GetVKey(VK_LEFT) == true) {
+		else if (Input::GetVKey(VK_LEFT) == true && nezumi == false) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx -= 0.5f;
@@ -124,7 +133,7 @@ void CObjHero::Action()
 		}
 
 		//ジャンプ
-		if (Input::GetVKey('X') && m_hit_down == true)
+		if (Input::GetVKey('X') && m_hit_down == true && nezumi == false)
 		{
 			if (jamptime == 0)
 				jamptime++;
@@ -274,8 +283,6 @@ void CObjHero::Action()
 			&m_vx, &m_vy
 		);
 
-		/*scroll->SetUtikagiScroll(&m_x, &m_y);*/
-
 		m_vy = 0;
 
 		Ninzyutu = true;
@@ -377,13 +384,49 @@ void CObjHero::Action()
 	//敵と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		Scene::SetScene(new CSceneGameOver);
+		remain -= 1;
+		SetX(GetWX());
+		SetY(GetWY());
+		if (GetX() < 500) {
+			scroll->SetScrooll(-(GetX() - (500)));
+		}
+		else if (GetX() > 600) {
+			scroll->SetScrooll(-(GetX() - (600)));
+		}
+
+		if (GetY() < 80) {
+			scroll->SetYScrooll(-(GetY() - (80)));
+		}
+		else if (GetY() > 500) {
+			scroll->SetYScrooll(-(GetY() - (500)));
+		}
+
+		WDflag(false);
+		Dflag(false);
 	}
 
 	//天井と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr)
 	{
-		Scene::SetScene(new CSceneMain);
+		remain -= 1;
+		SetX(GetWX());
+		SetY(GetWY());
+		if (GetX() < 500) {
+			scroll->SetScrooll(-(GetX() - (500)));
+		}
+		else if (GetX() > 600) {
+			scroll->SetScrooll(-(GetX() - (600)));
+		}
+
+		if (GetY() < 80) {
+			scroll->SetYScrooll(-(GetY() - (80)));
+		}
+		else if (GetY() > 500) {
+			scroll->SetYScrooll(-(GetY() - (500)));
+		}
+
+		WDflag(false);
+		Dflag(false);
 	}
 
 }

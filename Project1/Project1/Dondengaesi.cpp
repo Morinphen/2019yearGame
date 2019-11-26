@@ -42,7 +42,7 @@ void CObjDonden::Init()
 				D_tag[a][2] = scroll->m_map[i][j];
 				a++;
 			}
-			if (scroll->m_map[i][j] == 12)
+			else if (scroll->m_map[i][j] == 12)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;

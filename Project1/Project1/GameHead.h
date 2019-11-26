@@ -31,7 +31,11 @@ enum OBJ_NAME
 	OBJ_PSYURIKEN,
 	OBJ_TITLE,
 	OBJ_GAMEOVER,
+	OBJ_RETRY,
+	OBJ_CLEAR,
 	OBJ_EXIT,
+	OBJ_NEZUANA,
+	OBJ_NEZUBLOCK,
 };
 //------------------------------------------------
 
@@ -100,13 +104,19 @@ struct UserData
 
 #include"ObjTitle.h"
 #include"ObjGameOver.h"
+#include"ObjRetry.h"
+#include"ObjClear.h"
 #include"Exit.h"
+#include"Nezuana.h"
+#include"NezuBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
 #include"SceneTitle.h"
 #include"SceneGameOver.h"
+#include"SceneRetry.h"
+#include"SceneClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

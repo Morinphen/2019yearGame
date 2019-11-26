@@ -5,16 +5,14 @@
 using namespace GameL;
 
 //オブジェクト：タイトル
-class CObjPsyuriken :public CObj
+class CObjClear :public CObj
 {
 public:
-	CObjPsyuriken() {};
-	~CObjPsyuriken() {};
+	CObjClear() {};
+	~CObjClear() {};
 	void Init();//イニシャライズ
 	void Action();//アクション
 	void Draw();//ドロー
 private:
-	int ps;
-	int re;
-	bool mode;
+	bool m_key_flag;//キーフラグ
 };

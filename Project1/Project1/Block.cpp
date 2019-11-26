@@ -82,7 +82,7 @@ void CObjBlock::Draw()
 //その結果は引数3～8に返す
 void CObjBlock::BlockHit
 (
-	float* x, float* y, bool s,
+	float* x, float* y, bool s,bool is,
 	bool*up, bool* down, bool* left, bool* right,bool smoke,
 	float *vx, float *vy
 )
@@ -98,7 +98,7 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j]==10)
+			if (m_map[i][j] == 1 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j]==10 || m_map[i][j] == 22 || m_map[i][j] == 23)
 			{
 				//要素番号を座標に変更
 				float bx = j*64.0f;
@@ -146,34 +146,42 @@ void CObjBlock::BlockHit
 							{
 								//右
 								*right = true;//主人公の左の部分が衝突しているか
-								*x = bx + 64.0f + (m_s);//ブロックに位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								if (is == true) {
+									*x = bx + 64.0f + (m_s);//ブロックに位置-主人公の幅
+									*vx = -(*vx)*0.1f;//-VX*反発係数
+								}
 							}
 
 							if (r > 45 && r < 135)
 							{
 								//上
 								*down = true;//主人公の下の部分が衝突しているか
-								*y = by - 64.0f + (l_s);//ブロックに位置-主人公の幅
-								*vy = 0.0f;
+								if (is == true) {
+									*y = by - 64.0f + (l_s);//ブロックに位置-主人公の幅
+									*vy = 0.0f;
+								}
 							}
 
 							if (r > 135 && r < 225)
 							{
 								//左
 								*left = true;//主人公の右の部分が衝突しているか
-								*x = bx - 64.0f + (m_s);//ブロックに位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								if (is == true) {
+									*x = bx - 64.0f + (m_s);//ブロックに位置-主人公の幅
+									*vx = -(*vx)*0.1f;//-VX*反発係数
+								}
 							}
 
 							if (r > 225 && r < 315)
 							{
 								//下
 								*up = true;//主人公の上の部分が衝突しているか
-								*y = by + 64.0f + (l_s);//ブロックの位置+主人公の幅
-								if (*vy < 0)
-								{
-									*vy = 0.0f;
+								if (is == true) {
+									*y = by + 64.0f + (l_s);//ブロックの位置+主人公の幅
+									if (*vy < 0)
+									{
+										*vy = 0.0f;
+									}
 								}
 							}
 						}

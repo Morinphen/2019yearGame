@@ -118,6 +118,7 @@ void CObjMBlock::Action()
 		Audio::Start(15);
 		Fdead = true;
 		hero->WDflag(true);
+		hero->SetRE(1);
 	}
 
 		//主人公が着水したとき
@@ -129,6 +130,7 @@ void CObjMBlock::Action()
 			//主人公を中間ポイントに戻す
 			if (deadtime == 80)
 			{
+				hero->SetRE(1);
 				hero->SetX(hero->GetWX());
 				hero->SetY(hero->GetWY());
 
