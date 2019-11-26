@@ -14,6 +14,8 @@ CObjTBlock::CObjTBlock(int x, int y)
 {
 	m_x = x;
 	m_y = y;
+	sm_x = x;
+	sm_y = y;
 }
 
 //イニシャライズ
@@ -23,6 +25,7 @@ void CObjTBlock::Init()
 	m_ani_time = 0;
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
+	n = 0;
 
 	modecheck = false;//モード切替
 	Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
@@ -92,9 +95,21 @@ void CObjTBlock::Action()
 
 	}
 
+	//ブロックを落とす
 	if (modecheck == true)
 	{
-		m_y += 5;
+		m_y += 4;
+		n++;
+		//落ちきったら元の位置に戻す
+		if (n / 38 == 3)
+		{
+			n = 0;
+			modecheck = false;
+			m_x = sm_x;
+			m_y = sm_y;
+			Hits::DeleteHitBox(this);
+			Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
+		}
 	}
 }
 //ドロー

@@ -274,8 +274,6 @@ void CObjHero::Action()
 			&m_vx, &m_vy
 		);
 
-		/*scroll->SetUtikagiScroll(&m_x, &m_y);*/
-
 		m_vy = 0;
 
 		Ninzyutu = true;
