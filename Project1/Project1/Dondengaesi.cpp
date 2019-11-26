@@ -68,6 +68,7 @@ void CObjDonden::Init()
 //アクション
 void CObjDonden::Action()
 {
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
@@ -81,7 +82,6 @@ void CObjDonden::Action()
 
 		CHitBox* hit = Hits::GetHitBox(this);
 
-		CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		m_scroll = scroll->GetScroll();
 		l_scroll = scroll->GetYScroll();
 
@@ -171,19 +171,20 @@ void CObjDonden::Action()
 			HitBox_ON = false;
 			Hits::DeleteHitBox(this);
 		}
-		//アニメーション後半開始時
-		if (Wanimation2 == true)
-		{
-			CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
-			h->W_cat2 += 6.4f;
-			h->Sworp = true;
-			//アニメーションが終わったとき
-			if (h->W_cat2 >= 0.0f) {
-				h->W_cat2 = 0.0f;
-				h->W_cat = 1.0f;
-				Wanimation2 = false;
-			}
-		}
+	}
+
+	//アニメーション後半開始時
+	if (Wanimation2 == true)
+	{
+		h->W_cat2 += 6.4f;
+		h->Sworp = true;
+	}
+
+	//アニメーションが終わったとき
+	if (h->W_cat2 >= 0.0f) {
+		h->W_cat2 = 0.0f;
+		h->W_cat = 1.0f;
+		Wanimation2 = false;
 	}
 }
 //ドロー

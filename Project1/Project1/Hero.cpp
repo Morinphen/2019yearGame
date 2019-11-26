@@ -387,7 +387,7 @@ void CObjHero::Action()
 	}
 
 	//“Vˆä‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F
-	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&smokeh == false)
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr)
 	{
 		//remain -= 1;
 		Scene::SetScene(new CSceneRetry);

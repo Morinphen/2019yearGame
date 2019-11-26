@@ -56,8 +56,6 @@ void CObjTBlock::Action()
 		float x = m_x;
 		float y = m_y;
 
-
-
 		m_ani_time++;
 		if (m_ani_time == 16)
 		{
@@ -80,12 +78,6 @@ void CObjTBlock::Action()
 			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_TURIBLOCK2, 1);
 		}
 
-		if (modecheck == true)
-		{
-			m_y += 5;
-		}
-
-
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 	}
 
@@ -98,6 +90,11 @@ void CObjTBlock::Action()
 			Hits::DeleteHitBox(this);
 		}
 
+	}
+
+	if (modecheck == true)
+	{
+		m_y += 5;
 	}
 }
 //ÉhÉçÅ[
