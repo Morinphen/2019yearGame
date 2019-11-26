@@ -42,6 +42,9 @@ public:
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
 
+	//主人公の残機数を外部から変更する
+	void SetRE(float x) { remain = remain - x; }
+
 	//主人公の鉤縄使用状態を外部から変更する
 	void NawaIdo(bool b) { nawa_ido = b; }
 	void ReSetN(bool b) { nawa_stop = b; }
@@ -102,6 +105,7 @@ private:
 	float m_y;
 	float m_vy;
 	float m_posture;//姿勢
+	float remain;//残機
 
 	float g_x;//グローバルX位置
 	float g_y;//グローバルY位置
