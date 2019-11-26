@@ -19,7 +19,7 @@ public:
 	//ハム太郎が歩けるかどうかを判定
 	bool mapsarch(int x,int y,int muki);
 	//ハム太郎の現在地を返す
-	int mapplace(int x, int y);
+	int mapplace(int x, int y, int muki);
 private:
 	float m_x;
 	float m_vx;
