@@ -48,8 +48,8 @@ void CObjGameOver::Draw()
 	 //Ø‚èæ‚èˆÊ’u‚Ìİ’è
 	src.m_top = 0.0f;
 	src.m_left = 00.0f;
-	src.m_right = 761.0f;
-	src.m_bottom = 711.0f;
+	src.m_right = 1024.0f;
+	src.m_bottom = 988.0f;
 
 	//•\¦ˆÊ’u‚Ìİ’è
 	dst.m_top = 0.0f;

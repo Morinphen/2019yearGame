@@ -22,6 +22,7 @@ void CObjHero::Init()
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
+	remain = 3;//残機
 
 	jamptime = 0;
 	jamppower = 0.0f;
@@ -80,6 +81,10 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	if (remain == 0)
+	{
+		Scene::SetScene(new CSceneGameOver);
+	}
 	//敵の位置を取得
 	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	//スクロール情報取得
@@ -375,13 +380,15 @@ void CObjHero::Action()
 	//敵と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		Scene::SetScene(new CSceneGameOver);
+		//remain -= 1;
+		Scene::SetScene(new CSceneRetry);
 	}
 
 	//天井と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr)
 	{
-		Scene::SetScene(new CSceneMain);
+		//remain -= 1;
+		Scene::SetScene(new CSceneRetry);
 	}
 
 }
