@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Kaginawa.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -103,6 +104,7 @@ void CObjKaginawa::Action()
 	//Aボタンをクリックしたとき、鍵縄を発射する
 	if (Input::GetVKey('A'))
 	{
+		Audio::Start(7);
 		float a = abs(m_x - h->GetX());
 		float b = abs(m_y - h->GetY());
 		CObjNagenawa* obj_s = new CObjNagenawa(h->GetX(), h->GetY(), m_muki, a, b);

@@ -35,4 +35,15 @@ private:
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
+
+	float Dot(float ax, float ay, float bx, float by);//内積
+	float Cross(float ax, float ay, float bx, float by);//外積
+														/*bool CObjBlock::LineCrossPoint(
+														float a1x, float a1y, float a2x, float a2y,
+														float b1x, float b1y, float b2x, float b2y,
+														float* out_px, float* out_py
+														);*/
 };

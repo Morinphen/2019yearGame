@@ -21,17 +21,12 @@ void CObjBlock::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
-	aaa = 0;
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_BLOCK, 1);
 }
 
 //アクション
 void CObjBlock::Action()
 {
-	
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
+
 }
 
 //ドロー
@@ -41,24 +36,32 @@ void CObjBlock::Draw()
 	RECT_F src;
 	RECT_F dst;
 
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+
 	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			//ブロック表示
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 64.0f;
-			src.m_bottom = 64.0f;
-
-			dst.m_top = i*64.0f + l_scroll;
-			dst.m_left = j*64.0f + m_scroll;
-			dst.m_right = dst.m_left + 64.0f;
-			dst.m_bottom = dst.m_top + 64.0f;
-
-			if (m_map[i][j] == 1)
+			if (scroll->Inscrooll_check(j*64,i*64) == true)
 			{
-				Draw::Draw(1, &src, &dst, c, 0.0f);
+				m_scroll = scroll->GetScroll();
+				l_scroll = scroll->GetYScroll();
+
+				//ブロック表示
+				src.m_top = 0.0f;
+				src.m_left = 0.0f;
+				src.m_right = 64.0f;
+				src.m_bottom = 64.0f;
+
+				dst.m_top = i*64.0f + l_scroll;
+				dst.m_left = j*64.0f + m_scroll;
+				dst.m_right = dst.m_left + 64.0f;
+				dst.m_bottom = dst.m_top + 64.0f;
+
+				if (m_map[i][j] == 1)
+				{
+					Draw::Draw(1, &src, &dst, c, 0.0f);
+				}
 			}
 		}
 	}

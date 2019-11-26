@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Nagenawa.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -72,6 +73,8 @@ void CObjNagenawa::Action()
 		m_hit_right == true ||
 		m_y > 700.0f)
 	{
+		Audio::Start(12);
+		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

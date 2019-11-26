@@ -26,7 +26,6 @@ public:
 	//	float x, float y, float vx, float vy,
 	//	float *out_px, float *out_py, float* out_len
 	//);
-
 private:
 	int m_x;
 	int m_y;
@@ -35,4 +34,7 @@ private:
 	float l_scroll;//上下スクロール用変数
 
 	bool getflag;
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

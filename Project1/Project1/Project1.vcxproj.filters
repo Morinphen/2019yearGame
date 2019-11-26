@@ -126,6 +126,42 @@
     <ClCompile Include="Makimono.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
+    <ClCompile Include="Karakuri.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameOver.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Psyuriken.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Dsyuriken.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRetry.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRetry.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjClear.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="Nezuana.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
@@ -235,6 +271,42 @@
     </ClInclude>
     <ClInclude Include="Hamutaro.h">
       <Filter>ソース ファイル\Ninzya</Filter>
+    </ClInclude>
+    <ClInclude Include="Karakuri.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameOver.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Psyuriken.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Dsyuriken.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRetry.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRetry.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjClear.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Utikagi.h">
       <Filter>ソース ファイル\Ninzya</Filter>

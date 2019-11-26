@@ -6,6 +6,7 @@
 #include "GameL\DrawTexture.h"
 #include"GameL\SceneObjManager.h"
 #include "GameL\UserData.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -28,6 +29,29 @@ CSceneMain::~CSceneMain()
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
+	//外部オーディオファイル読み込み
+	Audio::LoadAudio(0, L"main.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::LoadAudio(1, L"syuriken.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(2, L"jump.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(3, L"dash.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(4, L"donden.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(5, L"fire.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(6, L"gatyan.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(7, L"kaginawa nage.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(8, L"makimono.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(9, L"nezumi.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(10, L"smokeball.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(11, L"syuriken get.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(12, L"utikagi kaginawa.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(13, L"enemyfind.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(14, L"enemyhit.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(15, L"water.wav", SOUND_TYPE::EFFECT);
+	//ボリュームを1.5に増やす
+	float v = Audio::VolumeMaster(1.5);
+	//音楽スタート
+	Audio::Start(0);
+
 	//外部グラフィックファイル読み込み
 	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
 	Draw::LoadImage(L"block.png", 1, TEX_SIZE_512);
@@ -45,12 +69,25 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"enzyou.png", 13, TEX_SIZE_512);
 	Draw::LoadImage(L"mizu.jpg", 14, TEX_SIZE_512);
 	Draw::LoadImage(L"makimono.png", 15, TEX_SIZE_512);
+	Draw::LoadImage(L"karakuri.png", 16, TEX_SIZE_512);
+	Draw::LoadImage(L"syuriken1.png", 17, TEX_SIZE_512);
+	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
+	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
+	Draw::LoadImage(L"ninzya1.png", 25, TEX_SIZE_512);
 
 	//blockオブジェクト作成
-	int block_data[10][100] = {
+	/*int block_data[10][100] = {
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,1,1,0,0, 0,0,0,0,0,0,0,0,0,6, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,12,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,8,8,8,8,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,0, 7,7,7,7,7,7,7,7,7,7, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,4,4,4,4,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 1,0,0,0,0,0,0,0,0,1, 1,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,30,0,0,0,0,0,0,0, 3,0,0,6,6,6,6,0,12,5, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,1,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,1,0,0,0,0,0,0,0, 8,0,0,0,0,5,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 4,4,4,4,4,4,4,4,4,4, 1,1,1,1,1,1,1,1,1,1 },
+	};*/
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,1,1,0,0, 0,0,0,0,21,21,21,21,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,12,0, 0,0,0,0,0,0,0,0,0,20, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,8,8,8,8,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,20, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,0, 7,7,7,7,7,7,7,7,7,7, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
@@ -99,6 +136,7 @@ void CSceneMain::InitScene()
 		for (int j = 0; j < 100; j++)
 		{
 
+	/*		if (map[i][j] == 1) {
 			CObjNezublock*objne;
 
 		/*	if (map[i][j] == 1) {
@@ -106,62 +144,81 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			}*/
 
-			//if (map[i][j] == 3)
-			//{
-			//	CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
-			//	Objs::InsertObj(obje, OBJ_ENEMY, 6);
-			//}
-			///*else if (map[i][j] == 4)
-			//{
-			//	CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
-			//}*/
+			if (map[i][j] == 3)
+			{
+				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+			}
+			else if (map[i][j] == 4)
+			{
+				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
+				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
+			}
 
-			//else if (map[i][j] == 5)
-			//{
-			//	CObjDonden*objd = new CObjDonden(j * 64, i * 64);
-			//	Objs::InsertObj(objd, OBJ_DONDEN, 3);
-			//}
-			//
+			else if (map[i][j] >=30&& map[i][j] <= 100)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
 
-			//else if (map[i][j] == 6) 
-			//{
-			//	CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objn, OBJ_DONDEN, 3);
-			//}
+			else if (map[i][j] == 6) 
+			{
+				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
+				Objs::InsertObj(objn, OBJ_DONDEN, 3);
+			}
 
-			//else if (map[i][j] == 7)
-			//{
-			//	CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-			//	Objs::InsertObj(obju, OBJ_DONDEN, 3);
+			else if (map[i][j] == 7)
+			{
+				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_DONDEN, 3);
 
-			//}
-			//else if (map[i][j] == 8)
-			//{
-			//	CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
-			//	Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
-			//}
+			}
+			else if (map[i][j] == 8)
+			{
+				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
+				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
+			}
 
-			///*else if (map[i][j] == 9)
-			//{
-			//	CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
-			//}*/
-			//else if (map[i][j] == 10)
-			//{
-			//	CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
-			//}
-			//else if (map[i][j] == 11)
-			//{
-			//	CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
-			//	Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
-			//}
-			//else if (map[i][j] == 13)
-			//{
-			//	CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
-			//	Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
-			//}
+			else if (map[i][j] == 9)
+			{
+				CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
+				Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
+			}
+			else if (map[i][j] == 10)
+			{
+				CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
+				Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
+			}
+			else if (map[i][j] == 11)
+			{
+				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
+				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
+			}
+			else if (map[i][j] == 13)
+			{
+				CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
+				Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
+			}
+			else if (map[i][j] == 14)
+			{
+				CObjExit*objex = new CObjExit(j * 64, i * 64);
+				Objs::InsertObj(objex, OBJ_EXIT, 3);
+			}
+			else if (map[i][j] == 15)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
+			else if (map[i][j] == 16)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
+			else if (map[i][j] == 17)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
 
 
 			/*if (block_data[i][j] == 1) {
@@ -172,6 +229,8 @@ void CSceneMain::InitScene()
 			{
 				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
 				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+			}
+			else if (map[i][j] == 4)
 			}*/
 			if (block_data[i][j] == 4)
 			{
@@ -179,48 +238,67 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
 			}
 
-			else if (block_data[i][j] >= 30 && block_data[i][j] <= 100)
+			else if (map[i][j] >=30&&map[i][j]<=100)
 			{
-				CObjDonden*objd = new CObjDonden(j * 64, i * 64, block_data[i][j] ,false);
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
+			
 
-			else if (block_data[i][j] == 6)
+			else if (map[i][j] == 6) 
 			{
 				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-				Objs::InsertObj(objn, OBJ_NBLOCK, 3);
+				Objs::InsertObj(objn, OBJ_DONDEN, 3);
 			}
 
-			else if (block_data[i][j] == 7)
+			else if (map[i][j] == 7)
 			{
 				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_UTIKAGI, 3);
-			}
+				Objs::InsertObj(obju, OBJ_DONDEN, 3);
 
-			else if (block_data[i][j] == 8)
+			}
+			else if (map[i][j] == 8)
 			{
 				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
 				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
 			}
 
-			else if (block_data[i][j] == 9)
+			else if (map[i][j] == 9)
 			{
 				CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
 				Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
 			}
-			else if (block_data[i][j] == 10)
+			else if (map[i][j] == 10)
 			{
 				CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
 				Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
 			}
-			else if (block_data[i][j] == 11)
+			else if (map[i][j] == 11)
 			{
 				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
 				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
 			}
-
-			else if (block_data[i][j] == 12)
+			else if (map[i][j] == 13)
 			{
+				CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
+				Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
+			}
+			else if (block_data[i][j] == 15)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
+			else if (block_data[i][j] == 16)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}
+			else if (block_data[i][j] == 17)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
+				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			}*/
+		
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64, 12 ,true);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
@@ -244,8 +322,12 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(obj, OBJ_HERO, 4);
 
 	//Blockオブジェクト作成
-	CObjBlock* objb = new CObjBlock(block_data);
+	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
+
+	//手裏剣所持数オブジェクト作成
+	CObjPsyuriken*objp= new CObjPsyuriken();//主人公オブジェクト作成
+	Objs::InsertObj(objp, OBJ_PSYURIKEN, 10);
 }
 
 //ゲームメイン実行中メソッド

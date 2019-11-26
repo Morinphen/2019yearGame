@@ -2,6 +2,8 @@
 #include"GameL\DrawTexture.h"
 #include"GameL\WinInputs.h"
 #include"GameL\SceneManager.h"
+#include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 #include"GameHead.h"
 #include"ObjEnemy.h"
@@ -18,7 +20,6 @@ CObjEnemy::CObjEnemy(int x, int y)
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;//右向き0.0f　左向き1.0f
@@ -134,12 +135,13 @@ void CObjEnemy::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
-		//CObjDonden*objn = new CObjDonden(m_px, m_py,false);
-		//Objs::InsertObj(objn, OBJ_DONDEN, 3);
+		Audio::Start(14);
+		CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
+		Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	if (m_move == true)
+	else if (m_move == true)
 	{
 		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
 	}

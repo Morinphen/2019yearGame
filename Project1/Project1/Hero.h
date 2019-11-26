@@ -33,9 +33,19 @@ public:
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
 
+	//主人公の手裏剣の所持数を渡す
+	float GetPS() { return psyuriken; }
+	//主人公の手裏剣の所持数を外部から変更する
+	void SetPS(float x) { psyuriken = psyuriken+x; }
+
 	//主人公のリスタート位置を外部から変更する
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
+
+	//主人公の残機数を渡す
+	float GetRE() { return remain; }
+	//主人公の残機数を外部から変更する
+	void SetRE(float x) { remain = remain - x; }
 
 	//主人公の鉤縄使用状態を外部から変更する
 	void NawaIdo(bool b) { nawa_ido = b; }
@@ -73,10 +83,19 @@ public:
 	//主人公の戦闘スタイルを外部に渡す
 	bool GetMode() { return change; }
 
+	//右に歩く
+	void Rightwalk();
+	void Leftwalk();
+
 	bool Sworp;//ワープ制御用変数
+
+
 
 	//忍術フラグ
 	bool Ninzyutu;
+
+	//クリア用フラグ
+	bool Cflag;
 
 	//ワープする際の画像切り取り位置
 	float W_cat;
@@ -91,6 +110,7 @@ private:
 	float m_y;
 	float m_vy;
 	float m_posture;//姿勢
+	float remain;//残機
 
 	float g_x;//グローバルX位置
 	float g_y;//グローバルY位置
@@ -102,7 +122,10 @@ private:
 	int jamptime;
 	float jamppower;
 
-	//攻撃の制限用変数
+	//手裏剣の所持数
+	int psyuriken;
+
+	//攻撃等の制限用変数
 	bool s_atack;
 	bool nawa_stop;
 

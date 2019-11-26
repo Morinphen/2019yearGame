@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"smokeball.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -71,6 +72,7 @@ void CObjSmokeball::Action()
 	{
 		if (smoke_time == 0)
 		{
+			Audio::Start(10);
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*9, 64*2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
 		}
@@ -95,7 +97,7 @@ void CObjSmokeball::Action()
 	}
 
 	//削除範囲
-	if (m_y > 800)
+	if (m_y > 3000)
 		smokeball_delete = true;
 
 	
