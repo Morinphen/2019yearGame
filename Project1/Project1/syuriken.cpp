@@ -40,7 +40,7 @@ void CObjSyuriken::Init()
 
 	Animation = false;
 
-	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 16, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
+	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
 }
 
 //アクション
@@ -55,12 +55,13 @@ void CObjSyuriken::Action()
 
 	if (Animation == false) {
 		//m_vx += 1.0f;
+		spen -= 30.0f;
 		hit = Hits::GetHitBox(this);
 	}
 
 	else {
 		m_vy += 9.8f / 16.0f;
-		spen += 30.0f;
+		spen -= 60.0f;
 	}
 
 	//ブロックとの当たり判定
@@ -105,8 +106,8 @@ void CObjSyuriken::Draw()
 
 	src.m_top = 0.0f;
 	src.m_left = 0.0f*(m_muki);
-	src.m_right = 64.0f*(m_muki);
-	src.m_bottom = 64.0f;
+	src.m_right = 32.0f*(m_muki);
+	src.m_bottom = 32.0f;
 
 	dst.m_top = m_y + l_scroll;
 	dst.m_left = m_x + m_scroll;

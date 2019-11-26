@@ -54,14 +54,14 @@ void CSceneMain::InitScene()
 
 	//外部グラフィックファイル読み込み
 	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
-	Draw::LoadImage(L"block.png", 1, TEX_SIZE_512);
-	Draw::LoadImage(L"field.jpg", 2, TEX_SIZE_512);
-	Draw::LoadImage(L"syuriken.png", 3, TEX_SIZE_512);
+	Draw::LoadImage(L"Zimen.jpg", 1, TEX_SIZE_512);
+	Draw::LoadImage(L"Kabe2.jpg", 2, TEX_SIZE_512);
+	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
 	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
-	Draw::LoadImage(L"mon.png", 5, TEX_SIZE_512);
+	Draw::LoadImage(L"Donden.png", 5, TEX_SIZE_512);
 	Draw::LoadImage(L"kemuridama.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
-	Draw::LoadImage(L"tokei.jpg", 8, TEX_SIZE_512);
+	Draw::LoadImage(L"Kaginawablock.jpg", 8, TEX_SIZE_512);
 	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
 	Draw::LoadImage(L"kagidume.jpg",10, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya.png", 11, TEX_SIZE_512);
@@ -73,6 +73,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"syuriken1.png", 17, TEX_SIZE_512);
 	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
 	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
+	Draw::LoadImage(L"kaginawa.png", 20, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	/*int block_data[10][100] = {
