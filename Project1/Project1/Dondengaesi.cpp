@@ -221,8 +221,8 @@ void CObjDonden::Draw()
 //‚Ç‚ñ‚Å‚ñ•Ô‚µ‚Ìƒ^ƒbƒO‚ğŒˆ‚ß‚éŠÖ”
 int CObjDonden::Worp(int a)
 {
-	int data[10];
-	int data2[10];
+	int data[50];
+	int data2[50];
 
 	int base;
 	int aa = 0;
