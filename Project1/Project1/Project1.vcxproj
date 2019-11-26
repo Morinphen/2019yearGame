@@ -135,6 +135,7 @@
     <ClCompile Include="Makimono.cpp" />
     <ClCompile Include="Karakuri.cpp" />
     <ClCompile Include="MizuBlock.cpp" />
+    <ClCompile Include="ObjClear.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="Kaginawa.cpp" />
     <ClCompile Include="Nagenawa.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="ObjRetry.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="Psyuriken.cpp" />
+    <ClCompile Include="SceneClear.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="Otosiana.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -182,6 +184,7 @@
     <ClInclude Include="Makimono.h" />
     <ClInclude Include="Karakuri.h" />
     <ClInclude Include="MizuBlock.h" />
+    <ClInclude Include="ObjClear.h" />
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="Kaginawa.h" />
     <ClInclude Include="Nagenawa.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Psyuriken.h" />
+    <ClInclude Include="SceneClear.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />

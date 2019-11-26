@@ -73,6 +73,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"syuriken1.png", 17, TEX_SIZE_512);
 	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
 	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
+	Draw::LoadImage(L"ninzya1.png", 25, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	/*int block_data[10][100] = {

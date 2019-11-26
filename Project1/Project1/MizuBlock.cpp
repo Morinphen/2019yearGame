@@ -130,6 +130,7 @@ void CObjMBlock::Action()
 			//主人公を中間ポイントに戻す
 			if (deadtime == 80)
 			{
+				hero->SetRE(1);
 				hero->SetX(hero->GetWX());
 				hero->SetY(hero->GetWY());
 

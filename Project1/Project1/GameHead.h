@@ -32,6 +32,7 @@ enum OBJ_NAME
 	OBJ_TITLE,
 	OBJ_GAMEOVER,
 	OBJ_RETRY,
+	OBJ_CLEAR,
 	OBJ_EXIT,
 };
 //------------------------------------------------
@@ -102,6 +103,7 @@ struct UserData
 #include"ObjTitle.h"
 #include"ObjGameOver.h"
 #include"ObjRetry.h"
+#include"ObjClear.h"
 #include"Exit.h"
 //------------------------------------------------
 
@@ -110,10 +112,11 @@ struct UserData
 #include"SceneTitle.h"
 #include"SceneGameOver.h"
 #include"SceneRetry.h"
+#include"SceneClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneTitle
 //#define SET_GAME_START  
 //-----------------------------------------------

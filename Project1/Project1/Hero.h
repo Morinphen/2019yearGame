@@ -42,6 +42,8 @@ public:
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
 
+	//主人公の残機数を渡す
+	float GetRE() { return remain; }
 	//主人公の残機数を外部から変更する
 	void SetRE(float x) { remain = remain - x; }
 
