@@ -31,6 +31,11 @@ private:
 	int m_x;
 	int m_y;
 
+	int sm_x;//初期位置保存
+	int sm_y;//初期位置保存
+
+	int n;
+
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
 
