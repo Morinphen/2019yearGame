@@ -31,4 +31,7 @@ private:
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
+	float w_m_scroll;//ワープ先保存左右スクロール用変数
+	float w_l_scroll;//ワープ先保存上下スクロール用変数
+
 };
