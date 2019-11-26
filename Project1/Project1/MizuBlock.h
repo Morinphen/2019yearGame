@@ -30,7 +30,6 @@ public:
 private:
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム

@@ -25,7 +25,7 @@ public:
 
 	void CObjBlock::BlockHit
 	(
-		float* x, float* y,bool s,
+		float* x, float* y,bool s,bool is,
 		bool*up, bool* down, bool* left, bool* right,bool smoke,
 		float *vx, float *vy
 	);
@@ -36,8 +36,6 @@ public:
 		bool*up, bool* down, bool* left, bool* right,
 		float *vx, float *vy
 	);
-
-	void Worp(int x,int y);
 
 	void Deletemap(int x, int y);
 

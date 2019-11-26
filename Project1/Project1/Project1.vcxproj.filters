@@ -126,6 +126,12 @@
     <ClCompile Include="Makimono.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
+    <ClCompile Include="Nezuana.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="NezuBlock.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -206,9 +212,6 @@
     <ClInclude Include="NawaBlock.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
-    <ClInclude Include="Utikagi.h">
-      <Filter>ソース ファイル\Mapgimic</Filter>
-    </ClInclude>
     <ClInclude Include="Hinotama.h">
       <Filter>ソース ファイル\Ninzya</Filter>
     </ClInclude>
@@ -232,6 +235,15 @@
     </ClInclude>
     <ClInclude Include="Hamutaro.h">
       <Filter>ソース ファイル\Ninzya</Filter>
+    </ClInclude>
+    <ClInclude Include="Utikagi.h">
+      <Filter>ソース ファイル\Ninzya</Filter>
+    </ClInclude>
+    <ClInclude Include="Nezuana.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="NezuBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -92,5 +92,5 @@ void CObjHonoBlock::Draw()
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 	if (enzyou == true)
-	Draw::Draw(13, &src, &dst, c, 0.0f);
+		Draw::Draw(13, &src, &dst, c, 0.0f);
 }

@@ -4,27 +4,33 @@
 #include"GameL\SceneManager.h"
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
-#include"NawaBlock.h"
+#include"Nezuana.h"
 #include"GameL\HitBoxManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjNBlock::CObjNBlock(int x, int y)
+CObjNezuana::CObjNezuana(int x, int y, int n)
 {
 	m_x = x;
 	m_y = y;
+	Namber = n;
 }
 
 //イニシャライズ
-void CObjNBlock::Init()
+void CObjNezuana::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_NBLOCK, 1);
+	Hits::SetHitBox(this, m_x + 16, m_y + 32, 32, 32, ELEMENT_BLACK, OBJ_NEZUANA, 1);
+
+	testc = 1.0f;
+	flag = false;
+	Dnamber = false;
+	stop = false;
 }
 //アクション
-void CObjNBlock::Action()
+void CObjNezuana::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -39,13 +45,25 @@ void CObjNBlock::Action()
 	float x = m_x;
 	float y = m_y;
 
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+	if (flag == true)
+	{
+		testc = 0.0f;
+		Dnamber = true;
+		if (stop == false) {
+			Hits::DeleteHitBox(this);
+			stop = true;
+		}
+	}
+
+	else {
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_x + m_scroll + 18, m_y + l_scroll + 32);
+	}
 }
 //ドロー
-void CObjNBlock::Draw()
+void CObjNezuana::Draw()
 {
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { testc,testc,testc,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
@@ -59,5 +77,5 @@ void CObjNBlock::Draw()
 	dst.m_left = m_x + m_scroll;
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
-	Draw::Draw(8, &src, &dst, c, 0.0f);
+	Draw::Draw(6, &src, &dst, c, 0.0f);
 }

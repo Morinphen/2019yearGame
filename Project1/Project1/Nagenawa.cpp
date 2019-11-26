@@ -49,13 +49,13 @@ void CObjNagenawa::Action()
 
 	float aa, bb;
 	//ブロックの当たり判定を行う当たれば消滅させる
-	pb->BlockHit(&aa, &bb,true,
+	pb->BlockHit(&m_x, &m_y, true, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
 
 	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
-	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr || m_y > 700.0f)
+	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
 	{
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
@@ -66,12 +66,11 @@ void CObjNagenawa::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	else if (m_hit_up    == true ||
-		m_hit_down  == true || 
-		m_hit_left  == true || 
+	else if (m_hit_up == true ||
+		m_hit_down == true ||
+		m_hit_left == true ||
 		m_hit_right == true ||
-		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
-		hit->CheckElementHit(ELEMENT_BLACK) == true)
+		m_y > 700.0f)
 	{
 		h->ReSetN(false);
 		this->SetStatus(false);

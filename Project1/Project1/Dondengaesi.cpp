@@ -41,7 +41,7 @@ void CObjDonden::Init()
 				D_tag[a][2] = scroll->m_map[i][j];
 				a++;
 			}
-			if (scroll->m_map[i][j] == 12)
+			else if (scroll->m_map[i][j] == 12)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
@@ -238,9 +238,9 @@ int CObjDonden::Worp(int a)
 
 int CObjDonden::TagWorp(int a)
 {
-	int data[10];
-	int data2[10];
-	int data3[10];
+	int data[50];
+	int data2[50];
+	int data3[50];
 
 	int base;
 	int aa = 0;
@@ -258,7 +258,7 @@ int CObjDonden::TagWorp(int a)
 			base = D_tag[i][0] + D_tag[i][1];
 	}
 
-	for (int i = 0; i < aa - 1; i++)
+	for (int i = 0; i < aa; i++)
 	{
 		if (data3[i] == Wnamber)
 		{

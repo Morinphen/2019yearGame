@@ -81,7 +81,7 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	pb->BlockHit(&m_x, &m_y, true,
+	pb->BlockHit(&m_x, &m_y, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
@@ -93,7 +93,7 @@ void CObjHero::Action()
 		d_ani_frame = 0;
 		d_ani_time = 0;
 
-		if (Input::GetVKey(VK_RIGHT) == true) {
+		if (Input::GetVKey(VK_RIGHT) == true && nezumi == false) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx += 0.5f;
@@ -105,7 +105,7 @@ void CObjHero::Action()
 			m_posture = 0.0f;
 		}
 
-		else if (Input::GetVKey(VK_LEFT) == true) {
+		else if (Input::GetVKey(VK_LEFT) == true && nezumi == false) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx -= 0.5f;
@@ -123,7 +123,7 @@ void CObjHero::Action()
 		}
 
 		//ジャンプ
-		if (Input::GetVKey('X') && m_hit_down == true)
+		if (Input::GetVKey('X') && m_hit_down == true && nezumi == false)
 		{
 			if (jamptime == 0)
 				jamptime++;

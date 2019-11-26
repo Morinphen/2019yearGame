@@ -30,18 +30,9 @@ public:
 private:
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_map[10][100];
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
-
-	float Dot(float ax, float ay, float bx, float by);//内積
-	float Cross(float ax, float ay, float bx, float by);//外積
-														/*bool CObjBlock::LineCrossPoint(
-														float a1x, float a1y, float a2x, float a2y,
-														float b1x, float b1y, float b2x, float b2y,
-														float* out_px, float* out_py
-														);*/
 };

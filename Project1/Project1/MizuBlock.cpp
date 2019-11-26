@@ -150,7 +150,6 @@ void CObjMBlock::Action()
 		}
 	}
 
-	aaa++;
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 48);
 }
 //ƒhƒ[

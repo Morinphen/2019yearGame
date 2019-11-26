@@ -26,6 +26,8 @@ enum OBJ_NAME
 	OBJ_OTOSIANA,
 	OBJ_MAKIMONO,
 	OBJ_HAMUTARO,
+	OBJ_NEZUANA,
+	OBJ_NEZUBLOCK,
 };
 //------------------------------------------------
 
@@ -88,6 +90,8 @@ struct UserData
 #include"Otosiana.h"
 #include"Makimono.h"
 #include"Hamutaro.h"
+#include"Nezuana.h"
+#include"NezuBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

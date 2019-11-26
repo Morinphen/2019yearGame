@@ -42,12 +42,14 @@ public:
 	void ReSetN(bool b) { nawa_stop = b; }
 	void SetNX(float x) { n_x = x; }
 	void SetNY(float y) { n_y = y; }
+
 	//主人公の鉤縄を使用している状態を渡す
 	bool GetNawa() { return nawa_stop; }
 	bool GetINawa() { return nawa_ido; }
-
-
 	void Uflag(bool b) { U_flag = b; }
+
+	//主人公の虫獣遁のフラグを設定
+	void HamuSetUP(bool b) { nezumi = b; }
 
 	//主人公の死亡フラグを外部から変更する
 	void Dflag(bool b) { dead = b; }
@@ -100,7 +102,7 @@ private:
 	int jamptime;
 	float jamppower;
 
-	//攻撃等の制限用変数
+	//攻撃の制限用変数
 	bool s_atack;
 	bool nawa_stop;
 
