@@ -14,7 +14,7 @@ CObjNezublock::CObjNezublock(int x, int y, int n)
 {
 	m_x = x;
 	m_y = y;
-	Namber = n - 6;
+	Namber = n + 6;
 
 	dflag = false;
 }

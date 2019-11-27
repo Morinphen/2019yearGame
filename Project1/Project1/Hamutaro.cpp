@@ -114,7 +114,7 @@ void CObjNezumi::Action()
 	{
 		Dimax--;
 		if (Dimax == 0) {
-			hamnam = mapplace(m_x, m_y);
+			hamnam = mapplace(m_x, m_y,m_posture);
 			CObjNezuana* ne = (CObjNezuana*)Objs::GetObj(hamnam);
 			ne->SetFlag(true);
 			h->HamuSetUP(false);
@@ -178,12 +178,12 @@ bool CObjNezumi::mapsarch(int x, int y, int muki)
 	return flag;
 }
 
-int CObjNezumi::mapplace(int x, int y)
+int CObjNezumi::mapplace(int x, int y, int muki)
 {
 	bool flag;
 	int mp_x, mp_y;
 
-	mp_x = 1;
+	mp_x = 1 + (muki * 1);
 	mp_y = 1;
 
 	for (; x > 64.0;)

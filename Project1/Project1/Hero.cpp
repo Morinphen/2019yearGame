@@ -102,13 +102,13 @@ void CObjHero::Action()
 	);
 
 	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
-	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
+	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false && nezumi == false) {
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
 		d_ani_time = 0;
 
-		if (Input::GetVKey(VK_RIGHT) == true && nezumi == false) {
+		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx += 0.5f;
@@ -117,7 +117,7 @@ void CObjHero::Action()
 			Rightwalk();
 		}
 
-		else if (Input::GetVKey(VK_LEFT) == true && nezumi == false) {
+		else if (Input::GetVKey(VK_LEFT) == true) {
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx -= 0.5f;
@@ -133,7 +133,7 @@ void CObjHero::Action()
 		}
 
 		//ジャンプ
-		if (Input::GetVKey('X') && m_hit_down == true && nezumi == false)
+		if (Input::GetVKey('X') && m_hit_down == true)
 		{
 			if (jamptime == 0)
 				jamptime++;
@@ -170,7 +170,7 @@ void CObjHero::Action()
 		if (m_vy < 10)
 			m_vy += 9.8f / 16.0f;
 
-		if (nawa_stop == false) {
+		if (nawa_stop == false || nezumi == false) {
 
 			//シノビチェンジ
 			if (Input::GetVKey('Q'))
