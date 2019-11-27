@@ -189,8 +189,6 @@ void CObjUguBlock::Draw()
 		dst.m_right = dst.m_left + 64.0f;
 		dst.m_bottom = dst.m_top + 64.0f;
 
-		Draw::Draw(0, &src, &dst, c, 0.0f);
-		if (uguisu == true)
-			Draw::Draw(13, &src, &dst, c, 0.0f);
+		Draw::Draw(28, &src, &dst, c, 0.0f);
 	}
 }

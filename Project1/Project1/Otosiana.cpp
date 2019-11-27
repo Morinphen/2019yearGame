@@ -23,7 +23,7 @@ void CObjOtosiana::Init()
 	l_scroll = 0.0f;
 	ana = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_OTOSIANA, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_WHITE, OBJ_OTOSIANA, 1);
 	HitBox_ON = true;
 }
 //アクション
@@ -38,7 +38,7 @@ void CObjOtosiana::Action()
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_OTOSIANA, 1);
+			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_WHITE, OBJ_OTOSIANA, 1);
 		}
 
 		//主人公の位置を取得
@@ -135,7 +135,7 @@ void CObjOtosiana::Action()
 //ドロー
 void CObjOtosiana::Draw()
 {
-	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 0.9f,0.9f,0.9f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
@@ -155,6 +155,6 @@ void CObjOtosiana::Draw()
 		dst.m_right = dst.m_left + 64.0f;
 		dst.m_bottom = dst.m_top + 64.0f;
 
-		Draw::Draw(1, &src, &dst, c, 0.0f);
+		Draw::Draw(26, &src, &dst, c, 0.0f);
 	}
 }
