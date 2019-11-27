@@ -26,7 +26,7 @@ CObjSyuriken::CObjSyuriken(int x,int y,int m)
 //イニシャライズ
 void CObjSyuriken::Init()
 {
-	m_vx = 8 * m_muki;
+	m_vx = 10 * m_muki;
 	m_vy = 0;
 	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
 
