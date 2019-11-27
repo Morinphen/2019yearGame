@@ -83,7 +83,7 @@ void CObjHero::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjHero::Action()
 {
-	if (remain == 0)
+	if (remain <= 0)
 	{
 		Scene::SetScene(new CSceneRetry);
 	}

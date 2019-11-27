@@ -54,7 +54,7 @@ void CSceneMain::InitScene()
 
 	//外部グラフィックファイル読み込み
 	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
-	Draw::LoadImage(L"Zimen.jpg", 1, TEX_SIZE_512);
+	Draw::LoadImage(L"Zimen_t.jpg", 1, TEX_SIZE_512);
 	Draw::LoadImage(L"Kabe2.jpg", 2, TEX_SIZE_512);
 	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
 	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
@@ -75,6 +75,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
 	Draw::LoadImage(L"kaginawa.png", 20, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya1.png", 25, TEX_SIZE_512);
+	Draw::LoadImage(L"Zimen_y.jpg", 26, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	/*int block_data[10][100] = {
