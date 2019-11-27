@@ -61,7 +61,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"Donden.png", 5, TEX_SIZE_512);
 	Draw::LoadImage(L"kemuridama.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
-	Draw::LoadImage(L"Kaginawablock.jpg", 8, TEX_SIZE_512);
+	Draw::LoadImage(L"Kaginawablock.png", 8, TEX_SIZE_512);
 	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
 	Draw::LoadImage(L"kagidume.jpg",10, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya.png", 11, TEX_SIZE_512);
