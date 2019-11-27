@@ -125,7 +125,7 @@ void CObjUguBlock::Action()
 
 		}
 
-		if (m_ani_frame == 12)
+		if (m_ani_frame == 1)
 		{
 			Audio::Stop(0);
 			hero->SetRE(1);
