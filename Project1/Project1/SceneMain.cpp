@@ -107,9 +107,7 @@ void CSceneMain::InitScene()
 	int map[46][100];
 	int count = 1;
 
-	//Scrollオブジェクト追加
-	CObjScroll* obj_s = new CObjScroll(map);
-	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
+	
 
 	for (int i = 0; i < 46; i++)
 	{
@@ -129,6 +127,10 @@ void CSceneMain::InitScene()
 			}
 		}
 	}
+
+	//Scrollオブジェクト追加
+	CObjScroll* obj_s = new CObjScroll(map);
+	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
 
 	int Na = 0;
 

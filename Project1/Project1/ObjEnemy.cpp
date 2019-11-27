@@ -56,18 +56,13 @@ void CObjEnemy::Action()
 		Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 		crhitbox = false;
 	}
+
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py,false,false,
+	pb->BlockHit(&m_px, &m_py,false,true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
-
-	//落下
-	if (m_py > 1000.0f)
-	{
-		;
-	}
 
 	//ブロック衝突で向きを変更
 	if (m_hit_left == true&& m_hit_right == false||m_posture_time>150&& m_move == false)

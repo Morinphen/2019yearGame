@@ -308,13 +308,13 @@
     <ClInclude Include="ObjClear.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Utikagi.h">
-      <Filter>ソース ファイル\Ninzya</Filter>
-    </ClInclude>
     <ClInclude Include="Nezuana.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
     <ClInclude Include="NezuBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Utikagi.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>

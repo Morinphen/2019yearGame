@@ -315,11 +315,6 @@ void CObjHero::Action()
 		}
 	}
 
-	/*if (m_y > 700.0f)
-	{
-		Scene::SetScene(new CSceneMain);
-	}*/
-
 	//ã“ü—Í§Œä
 	if (Input::GetVKey(VK_UP) == true || W_cat != 1.0f)
 	{
