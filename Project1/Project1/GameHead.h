@@ -34,6 +34,8 @@ enum OBJ_NAME
 	OBJ_RETRY,
 	OBJ_CLEAR,
 	OBJ_EXIT,
+	OBJ_NEZUANA,
+	OBJ_NEZUBLOCK,
 };
 //------------------------------------------------
 
@@ -105,6 +107,8 @@ struct UserData
 #include"ObjRetry.h"
 #include"ObjClear.h"
 #include"Exit.h"
+#include"Nezuana.h"
+#include"NezuBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

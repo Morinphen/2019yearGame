@@ -96,13 +96,13 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	pb->BlockHit(&m_x, &m_y, true,
+	pb->BlockHit(&m_x, &m_y, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
 
 	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
-	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
+	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false && nezumi == false) {
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
@@ -170,7 +170,7 @@ void CObjHero::Action()
 		if (m_vy < 10)
 			m_vy += 9.8f / 16.0f;
 
-		if (nawa_stop == false) {
+		if (nawa_stop == false || nezumi == false) {
 
 			//シノビチェンジ
 			if (Input::GetVKey('Q'))

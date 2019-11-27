@@ -136,6 +136,8 @@
     <ClCompile Include="Karakuri.cpp" />
     <ClCompile Include="MizuBlock.cpp" />
     <ClCompile Include="ObjClear.cpp" />
+    <ClCompile Include="Nezuana.cpp" />
+    <ClCompile Include="NezuBlock.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="Kaginawa.cpp" />
     <ClCompile Include="Nagenawa.cpp" />
@@ -185,6 +187,8 @@
     <ClInclude Include="Karakuri.h" />
     <ClInclude Include="MizuBlock.h" />
     <ClInclude Include="ObjClear.h" />
+    <ClInclude Include="Nezuana.h" />
+    <ClInclude Include="NezuBlock.h" />
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="Kaginawa.h" />
     <ClInclude Include="Nagenawa.h" />

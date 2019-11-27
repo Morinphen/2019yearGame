@@ -42,7 +42,7 @@ void CObjDonden::Init()
 				D_tag[a][2] = scroll->m_map[i][j];
 				a++;
 			}
-			if (scroll->m_map[i][j] == 12)
+			else if (scroll->m_map[i][j] == 12)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
@@ -221,8 +221,8 @@ void CObjDonden::Draw()
 //‚Ç‚ñ‚Å‚ñ•Ô‚µ‚Ìƒ^ƒbƒO‚ğŒˆ‚ß‚éŠÖ”
 int CObjDonden::Worp(int a)
 {
-	int data[10];
-	int data2[10];
+	int data[50];
+	int data2[50];
 
 	int base;
 	int aa = 0;

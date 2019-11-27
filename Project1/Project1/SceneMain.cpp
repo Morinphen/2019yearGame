@@ -54,14 +54,14 @@ void CSceneMain::InitScene()
 
 	//外部グラフィックファイル読み込み
 	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
-	Draw::LoadImage(L"block.png", 1, TEX_SIZE_512);
-	Draw::LoadImage(L"field.jpg", 2, TEX_SIZE_512);
-	Draw::LoadImage(L"syuriken.png", 3, TEX_SIZE_512);
+	Draw::LoadImage(L"Zimen.jpg", 1, TEX_SIZE_512);
+	Draw::LoadImage(L"Kabe2.jpg", 2, TEX_SIZE_512);
+	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
 	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
-	Draw::LoadImage(L"mon.png", 5, TEX_SIZE_512);
+	Draw::LoadImage(L"Donden.png", 5, TEX_SIZE_512);
 	Draw::LoadImage(L"kemuridama.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
-	Draw::LoadImage(L"tokei.jpg", 8, TEX_SIZE_512);
+	Draw::LoadImage(L"Kaginawablock.jpg", 8, TEX_SIZE_512);
 	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
 	Draw::LoadImage(L"kagidume.jpg",10, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya.png", 11, TEX_SIZE_512);
@@ -73,12 +73,13 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"syuriken1.png", 17, TEX_SIZE_512);
 	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
 	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
+	Draw::LoadImage(L"kaginawa.png", 20, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya1.png", 25, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	/*int block_data[10][100] = {
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
-		{ 1,0,31,0,0,0,0,30,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,1,1,0,0, 0,0,0,0,0,0,0,0,0,6, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,12,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
@@ -87,6 +88,15 @@ void CSceneMain::InitScene()
 		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,0,30,0,0,0,0,0,0,0, 3,0,0,6,6,6,6,0,12,5, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,1,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,1,0,0,0,0,0,0,0, 8,0,0,0,0,5,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
 		{ 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 4,4,4,4,4,4,4,4,4,4, 1,1,1,1,1,1,1,1,1,1 },
+	};
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,1,1,0,0, 0,0,0,0,21,21,21,21,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,12,0, 0,0,0,0,0,0,0,0,0,20, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,0, 0,8,8,8,8,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,20, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,0, 7,7,7,7,7,7,7,7,7,7, 0,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,20, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,1, 1,0,0,0,0,0,0,0,0,1, 1,0,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,20, 0,0,0,0,0,0,0,0,0,1, 0,0,0,0,0,0,0,0,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,0,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,0,0, 4,4,4,4,4,4,4,4,4,4, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,0,0,0,0,0,31,0,0,1, 0,0,0,6,6,6,6,0,12,5, 0,0,0,0,0,0,0,14,0,20, 0,0,0,0,0,0,15,0,0,1, 0,0,0,0,0,0,0,1,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,1,0,0,0,0,0,0,0, 8,0,0,0,0,5,0,31,0,0, 4,4,4,4,4,4,4,4,4,4, 0,0,0,0,0,0,0,0,0,0 },
+		{ 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,0,0,0, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,0,0,0,0,0,0,0,0,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 4,4,4,4,4,4,4,4,4,4, 1,1,1,1,1,1,1,1,1,1 },
+
 	};*/
 
 	//外部データの読み込み（ステージ情報）
@@ -96,6 +106,7 @@ void CSceneMain::InitScene()
 
 	int map[46][100];
 	int count = 1;
+
 	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
@@ -119,12 +130,17 @@ void CSceneMain::InitScene()
 	CObjScroll* obj_s = new CObjScroll(map);
 	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
 
+	int Na = 0;
+
 	for (int i = 0; i < 46; i++)
 	{
 		for (int j = 0; j < 100; j++)
 		{
 
 	/*		if (map[i][j] == 1) {
+			CObjNezublock*objne;
+
+		/*	if (map[i][j] == 1) {
 				CObjBlock*objb = new CObjBlock(j * 64, i * 64);
 				Objs::InsertObj(objb, OBJ_BLOCK, 2);
 			}*/
@@ -216,9 +232,23 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(obje, OBJ_ENEMY, 6);
 			}
 			else if (map[i][j] == 4)
+			}*/
+			//if (block_data[i][j] == 4)
+			//{
+			//	CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
+			//	Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
+			//}
+
+			else if (map[i][j] == 20 || map[i][j] == 21)
 			{
-				CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
-				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
+				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objne, map[i][j], 3);
+			}
+
+			else if (map[i][j] == 26 || map[i][j] == 27)
+			{
+				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objn, map[i][j], 3);
 			}
 
 			else if (map[i][j] >=30&&map[i][j]<=100)
@@ -228,60 +258,59 @@ void CSceneMain::InitScene()
 			}
 			
 
-			else if (map[i][j] == 6) 
-			{
-				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-				Objs::InsertObj(objn, OBJ_DONDEN, 3);
-			}
+			//else if (map[i][j] == 6) 
+			//{
+			//	CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
+			//	Objs::InsertObj(objn, OBJ_DONDEN, 3);
+			//}
 
-			else if (map[i][j] == 7)
-			{
-				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_DONDEN, 3);
+			//else if (map[i][j] == 7)
+			//{
+			//	CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
+			//	Objs::InsertObj(obju, OBJ_DONDEN, 3);
 
-			}
-			else if (map[i][j] == 8)
-			{
-				CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
-			}
+			//}
+			//else if (map[i][j] == 8)
+			//{
+			//	CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
+			//	Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
+			//}
 
-			else if (map[i][j] == 9)
-			{
-				CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
-				Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
-			}
-			else if (map[i][j] == 10)
-			{
-				CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
-				Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
-			}
-			else if (map[i][j] == 11)
-			{
-				CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
-				Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
-			}
-			else if (map[i][j] == 13)
-			{
-				CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
-				Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
-			}
-			else if (block_data[i][j] == 15)
-			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-			}
-			else if (block_data[i][j] == 16)
-			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-			}
-			else if (block_data[i][j] == 17)
-			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-			}*/
-		
+			//else if (map[i][j] == 9)
+			//{
+			//	CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
+			//	Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
+			//}
+			//else if (map[i][j] == 10)
+			//{
+			//	CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
+			//	Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
+			//}
+			//else if (map[i][j] == 11)
+			//{
+			//	CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
+			//	Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
+			//}
+			//else if (map[i][j] == 13)
+			//{
+			//	CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
+			//	Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
+			//}
+			//else if (block_data[i][j] == 15)
+			//{
+			//	CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
+			//	Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			//}
+			//else if (block_data[i][j] == 16)
+			//{
+			//	CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
+			//	Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			//}
+			//else if (block_data[i][j] == 17)
+			//{
+			//	CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
+			//	Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+			//}
 		}
 	}
 

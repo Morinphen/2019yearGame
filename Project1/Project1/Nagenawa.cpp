@@ -50,13 +50,13 @@ void CObjNagenawa::Action()
 
 	float aa, bb;
 	//ブロックの当たり判定を行う当たれば消滅させる
-	pb->BlockHit(&aa, &bb,true,
+	pb->BlockHit(&m_x, &m_y, true, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
 
 	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
-	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr || m_y > 700.0f)
+	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
 	{
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
@@ -67,12 +67,11 @@ void CObjNagenawa::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	else if (m_hit_up    == true ||
-		m_hit_down  == true || 
-		m_hit_left  == true || 
+	else if (m_hit_up == true ||
+		m_hit_down == true ||
+		m_hit_left == true ||
 		m_hit_right == true ||
-		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
-		hit->CheckElementHit(ELEMENT_BLACK) == true)
+		m_y > 700.0f)
 	{
 		Audio::Start(12);
 		float a = abs(m_y - h->GetY());
@@ -110,15 +109,15 @@ void CObjNagenawa::Draw()
 
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 36.0f;
+	src.m_bottom = 31.0f;
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
 	dst.m_right = 64.0f + m_x;
 	dst.m_bottom = 64.0f + m_y;
 
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(20, &src, &dst, c, 0.0f);
 
 	float d[4] = { 0.0f,0.0f,0.0f,1.0f };
 
