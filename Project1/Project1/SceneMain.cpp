@@ -78,6 +78,8 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"Zimen_y.jpg", 26, TEX_SIZE_512);
 	Draw::LoadImage(L"Moemasu.jpg", 27, TEX_SIZE_512);
 	Draw::LoadImage(L"uguisu.png", 28, TEX_SIZE_512);
+	Draw::LoadImage(L"nezuana.png", 29, TEX_SIZE_512);
+	Draw::LoadImage(L"turi.png", 30, TEX_SIZE_512);
 
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
