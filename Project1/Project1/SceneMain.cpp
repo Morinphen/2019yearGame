@@ -81,6 +81,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"nezuana.png", 29, TEX_SIZE_512);
 	Draw::LoadImage(L"turi.png", 30, TEX_SIZE_512);
 	Draw::LoadImage(L"goal.png", 31, TEX_SIZE_512);
+	Draw::LoadImage(L"sikaku.png", 32, TEX_SIZE_512);
 
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター

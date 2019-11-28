@@ -177,7 +177,34 @@ void CObjEnemy::Draw()
 
 	//描画
 	Draw::Draw(4, &src, &dst, c, 0.0f);
-	if(find==true)
+
+	RECT_F srcs; //描画元切り取り位置
+	RECT_F dsts; //描画先表示位置
+
+	srcs.m_top = 0.0f;
+	srcs.m_left = 300.0f;
+	srcs.m_right = 0.0f;
+	srcs.m_bottom = 300.0f;
+
+	if (m_move == true)
+	{
+		//表示位置の設定
+		dsts.m_top = dst.m_top;
+		dsts.m_left = dst.m_left+64.0f;
+		dsts.m_right = dst.m_right+192.0f;
+		dsts.m_bottom = dst.m_bottom;
+	}
+	else
+	{
+		//表示位置の設定
+		dsts.m_top = dst.m_top;
+		dsts.m_left = dst.m_left -192.0f;
+		dsts.m_right = dst.m_right - 64.0f;
+		dsts.m_bottom = dst.m_bottom;
+	}
+	//描画
+	Draw::Draw(32, &srcs, &dsts, c, 0.0f);
+	/*if(find==true)
 	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
@@ -193,5 +220,5 @@ void CObjEnemy::Draw()
 
 		//描画
 		Draw::Draw(9, &src, &dst, c, 0.0f);
-	}
+	}*/
 }
