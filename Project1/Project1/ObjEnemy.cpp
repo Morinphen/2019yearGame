@@ -64,6 +64,7 @@ void CObjEnemy::Action()
 		&m_vx, &m_vy
 	);
 
+
 	//ブロック衝突で向きを変更
 	if (m_hit_left == true&& m_hit_right == false||m_posture_time>150&& m_move == false)
 	{
@@ -130,11 +131,53 @@ void CObjEnemy::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
-		Audio::Start(14);
-		CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-		Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+		sm_x = sy->GetX();
+		p = sy->GetP();
+		if (m_move==true)//敵左向き
+		{
+			if (p == true)//手裏剣左向き
+			{
+					Audio::Start(14);
+					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
+			}
+			else//手裏剣右向き
+			{
+				if (sm_x +2.0>=m_px)
+				{
+					Audio::Start(14);
+					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
+				}
+			}
+		}
+		else//敵右向き
+		{
+			if (p == true)//手裏剣左向き
+			{
+				if (sm_x - 2.0 <= m_px)
+				{
+					Audio::Start(14);
+					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
+				}
+			}
+			else//手裏剣右向き
+			{
+					Audio::Start(14);
+					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
+			}
+		}
 	}
 	else if (m_move == true)
 	{

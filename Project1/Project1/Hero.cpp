@@ -196,6 +196,16 @@ void CObjHero::Action()
 							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
 							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
 							s_atack = true;
+							if (m_posture == 1.0f)
+							{
+								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+								sy->SetP(true);
+							}
+							else
+							{
+								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+								sy->SetP(false);
+							}
 							psyuriken -= 1;
 						}
 					}
@@ -482,7 +492,6 @@ void CObjHero::Draw()
 void CObjHero::Rightwalk()
 {
 	m_vx += 0.5f;
-
 	m_ani_time++;
 	m_posture = 0.0f;
 }
@@ -491,7 +500,6 @@ void CObjHero::Rightwalk()
 void CObjHero::Leftwalk()
 {
 	m_vx -= 0.5f;
-
 	m_ani_time++;
 	m_posture = 1.0f;
 }
