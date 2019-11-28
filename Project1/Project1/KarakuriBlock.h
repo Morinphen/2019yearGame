@@ -5,6 +5,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+//オブジェクト主人公
 class  CObjKarakuriblock :public CObj
 {
 public:
@@ -15,6 +16,8 @@ public:
 	void Action();//あくしょん
 	void Draw();//どろー
 
+	void SetDelete(bool b) { Delete = b; }
+
 private:
 	int m_x;
 	int m_y;
@@ -23,4 +26,7 @@ private:
 	float l_scroll;//上下スクロール用変数
 
 	int num;//識別番号
+	bool Delete;//削除命令
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

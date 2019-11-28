@@ -180,14 +180,14 @@ void CSceneMain::InitScene()
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
 				Objs::InsertObj(objex, OBJ_EXIT, 3);
 			}
-			/*else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62)
-			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);
-			}
-			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
+			/*else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
 			{
 				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
+			}
+			else if (map[i][j] == 60 || map[i][j] == 61 || map[i][j] == 62)
+			{
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}*/
 			else if (map[i][j] == 51 || map[i][j] == 52)
@@ -195,7 +195,6 @@ void CSceneMain::InitScene()
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
-
 			else if (map[i][j] == 57 || map[i][j] == 58)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);

@@ -32,22 +32,24 @@ void CObjKarakuri::Init()
 //アクション
 void CObjKarakuri::Action()
 {
-	//表示画面内の時
+	////表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-		//
-		CHitBox* hit = Hits::GetHitBox(this);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true)
-		{
-			on_off == true;
-		}
-
 		//ヒットボックス生成
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK,OBJ_KARAKURI, 1);
+			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
+		}
+
+		//レバー作動
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false)
+		{
+			on_off = true;
+			CObjKarakuriblock* kb = (CObjKarakuriblock*)Objs::GetObj(num);
+			kb->SetDelete(true);
 		}
 
 		m_scroll = scroll->GetScroll();
@@ -55,11 +57,6 @@ void CObjKarakuri::Action()
 
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 
-		//レバーが作動した後かどうか
-		if (on_off == false)
-		{
-			Hits::DeleteHitBox(this);
-		}
 	}
 	//表示画面外の時
 	else
