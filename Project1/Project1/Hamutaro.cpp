@@ -191,7 +191,6 @@ void CObjNezumi::Draw()
 	dst.m_left = m_x + m_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_right = dst.m_left + Dimax;
 	dst.m_bottom = dst.m_top + Dimax;
-
 	Draw::Draw(34, &src, &dst, c, 0.0f);
 }
 
@@ -218,6 +217,14 @@ bool CObjNezumi::mapsarch(int x, int y, int muki)
 	if (map_data[mp_y][mp_x] == 0)
 	{
 		flag = true;
+		if (a_pos == true)
+		{
+			a_pos = false;
+		}
+		else
+		{
+			a_pos = true;
+		}
 		speed = -speed;
 	}
 	else

@@ -64,7 +64,7 @@ void CObjNezuana::Draw()
 	RECT_F dst;
 
 	//ブロック表示
-	src.m_top = 0.0f;
+	src.m_top = 1.0f;
 	src.m_left = 0.0f;
 	src.m_right = 128.0f;
 	src.m_bottom = 128.0f;
