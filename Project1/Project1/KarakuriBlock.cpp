@@ -18,7 +18,7 @@ CObjKarakuriblock::CObjKarakuriblock(int x, int y, int n)
 }
 
 //イニシャライズ
-void CObjNezublock::Init()
+void CObjKarakuriblock::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
