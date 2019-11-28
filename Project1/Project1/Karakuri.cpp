@@ -25,7 +25,7 @@ void CObjKarakuri::Init()
 
 	on_off = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK,num, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK,OBJ_KARAKURI, 1);
 	HitBox_ON = true;
 }
 
@@ -47,16 +47,18 @@ void CObjKarakuri::Action()
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_MIZUBLOCK, 1);
+			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK,OBJ_KARAKURI, 1);
 		}
 
 		m_scroll = scroll->GetScroll();
 		l_scroll = scroll->GetYScroll();
 
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+
 		//レバーが作動した後かどうか
 		if (on_off == false)
 		{
-			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+			Hits::DeleteHitBox(this);
 		}
 	}
 	//表示画面外の時
