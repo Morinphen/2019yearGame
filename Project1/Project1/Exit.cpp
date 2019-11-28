@@ -120,7 +120,7 @@ void CObjExit::Draw()
 	RECT_F dst;
 
 	//ブロック表示
-	src.m_top = 0.0f;
+	src.m_top = 2.0f;
 	src.m_left = 0.0f;
 	src.m_right = 400.0f;
 	src.m_bottom = 505.0f;
