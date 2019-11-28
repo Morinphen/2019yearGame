@@ -74,12 +74,40 @@ void CObjNezumi::Action()
 		if (m_posture == 0)
 		{
 			m_x += speed;
+			m_ani_time += 1;
+			if (m_return == false)
+			{
+				a_pos = true;
+			}
+
 		}
 
-		else
+		else if(m_posture==-1)
 		{
 			m_x += -speed;
+			m_ani_time += 1;
+			if (m_return == false)
+			{
+				a_pos = false;
+			}
 		}
+		else
+		{
+			m_ani_frame = 1;
+			m_ani_time = 0;
+		}
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+
+		if (m_ani_frame == 4)
+		{
+			m_ani_frame = 0;
+		}
+
 	}
 
 	//マップ情報を確認する
@@ -93,6 +121,14 @@ void CObjNezumi::Action()
 		if (m_return == false) {
 			m_return = true;
 			speed = -speed;
+			if (a_pos == true)
+			{
+				a_pos = false;
+			}
+			else
+			{
+				a_pos = true;
+			}
 		}
 
 	}
@@ -129,21 +165,34 @@ void CObjNezumi::Action()
 //ドロー
 void CObjNezumi::Draw()
 {
+	int AniData[4] =
+	{
+		0,1,0,1
+	};
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	if (a_pos==true)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 24.0f*AniData[m_ani_frame] - 24;
+		src.m_right = 24.0f*AniData[m_ani_frame];
+		src.m_bottom = 21.0f;
+	}
+	else
+	{
+		src.m_top = 0.0f;
+		src.m_left = 24.0f*AniData[m_ani_frame];
+		src.m_right = 24.0f*AniData[m_ani_frame]-24;
+		src.m_bottom = 21.0f;
+	}
 
 	dst.m_top = m_y + l_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_left = m_x + m_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_right = dst.m_left + Dimax;
 	dst.m_bottom = dst.m_top + Dimax;
 
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(34, &src, &dst, c, 0.0f);
 }
 
 bool CObjNezumi::mapsarch(int x, int y, int muki)
