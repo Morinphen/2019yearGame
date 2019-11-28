@@ -66,12 +66,12 @@ void CObjNezuana::Draw()
 	//ブロック表示
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 75.0f;
 
 	dst.m_top = m_y + l_scroll;
 	dst.m_left = m_x + m_scroll;
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
-	Draw::Draw(6, &src, &dst, c, 0.0f);
+	Draw::Draw(29, &src, &dst, c, 0.0f);
 }

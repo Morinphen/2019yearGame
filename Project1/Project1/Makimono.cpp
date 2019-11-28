@@ -152,8 +152,8 @@ void CObjMakimono::Draw()
 		//ブロック表示
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
+		src.m_right = 700.0f;
+		src.m_bottom = 200.0f;
 
 		dst.m_top = m_y + l_scroll;
 		dst.m_left = m_x + m_scroll;

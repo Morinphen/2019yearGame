@@ -11,8 +11,8 @@ class CSceneRetry :public CScene
 public:
 	CSceneRetry();
 	~CSceneRetry();
-	void InitScene();//ゲームタイトルの初期化メソッド
-	void Scene();    //ゲームタイトルの実行中メソッド
+	void InitScene();//ゲームリトライの初期化メソッド
+	void Scene();    //ゲームリトライの実行中メソッド
 private:
 
 };
