@@ -41,10 +41,6 @@ void CObjNezuana::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
-	//—v‘f”Ô†‚ğˆÀ•U‚É•ÏX
-	float x = m_x;
-	float y = m_y;
-
 	if (flag == true)
 	{
 		testc = 0.0f;

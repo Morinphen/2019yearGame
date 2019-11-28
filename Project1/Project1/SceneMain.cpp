@@ -107,9 +107,6 @@ void CSceneMain::InitScene()
 	int map[46][100];
 	int count = 1;
 
-	//Scrollオブジェクト追加
-	CObjScroll* obj_s = new CObjScroll(map);
-	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
 
 	for (int i = 0; i < 46; i++)
 	{
@@ -209,47 +206,23 @@ void CSceneMain::InitScene()
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
 				Objs::InsertObj(objex, OBJ_EXIT, 3);
 			}
-			else if (map[i][j] == 15)
+			else if (map[i][j] == 15|| map[i][j] == 16|| map[i][j] == 17)
 			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 16)
+			else if (map[i][j] == 18 || map[i][j] == 19 || map[i][j] == 20)
 			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 17)
-			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-			}
-
-
-			/*if (block_data[i][j] == 1) {
-			CObjBlock*objb = new CObjBlock(j * 64, i * 64);
-			Objs::InsertObj(objb, OBJ_BLOCK, 2);
-			}*/
-			/*if (block_data[i][j] == 3)
-			{
-				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_ENEMY, 6);
-			}
-			else if (map[i][j] == 4)
-			}*/
-			//if (block_data[i][j] == 4)
-			//{
-			//	CObjMBlock* objm = new CObjMBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
-			//}
-
-			else if (map[i][j] == 20 || map[i][j] == 21)
+			else if (map[i][j] == 21 || map[i][j] == 22)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
 
-			else if (map[i][j] == 26 || map[i][j] == 27)
+			else if (map[i][j] == 27 || map[i][j] == 28)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
@@ -261,45 +234,6 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 			
-
-			//else if (map[i][j] == 6) 
-			//{
-			//	CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objn, OBJ_DONDEN, 3);
-			//}
-
-			//else if (map[i][j] == 7)
-			//{
-			//	CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-			//	Objs::InsertObj(obju, OBJ_DONDEN, 3);
-
-			//}
-			//else if (map[i][j] == 8)
-			//{
-			//	CObjHonoBlock*obju = new CObjHonoBlock(j * 64, i * 64);
-			//	Objs::InsertObj(obju, OBJ_HONOBLOCK, 3);
-			//}
-
-			//else if (map[i][j] == 9)
-			//{
-			//	CObjTBlock*objt = new CObjTBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objt, OBJ_TURIBLOCK, 3);
-			//}
-			//else if (map[i][j] == 10)
-			//{
-			//	CObjUguBlock*objugu = new CObjUguBlock(j * 64, i * 64);
-			//	Objs::InsertObj(objugu, OBJ_UGUBLOCK, 3);
-			//}
-			//else if (map[i][j] == 11)
-			//{
-			//	CObjOtosiana*objo = new CObjOtosiana(j * 64, i * 64);
-			//	Objs::InsertObj(objo, OBJ_OTOSIANA, 3);
-			//}
-			//else if (map[i][j] == 13)
-			//{
-			//	CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
-			//	Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
-			//}
 			//else if (block_data[i][j] == 15)
 			//{
 			//	CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);

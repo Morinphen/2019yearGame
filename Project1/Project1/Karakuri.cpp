@@ -48,28 +48,9 @@ void CObjKarakuri::Action()
 
 		CHitBox* hit = Hits::GetHitBox(this);
 
+		//レバーが作動した後かどうか
 		if (on_off == false)
 		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP))
-			{
-				Hits::DeleteHitBox(this);
-
-				if (num == 1)
-				{
-					//こ↑こ↓にマップに変更処理
-					on_off = true;
-				}
-				else if (num == 2)
-				{
-					//こ↑こ↓にマップに変更処理
-					on_off = true;
-				}
-				else if (num == 3)
-				{
-					//こ↑こ↓にマップに変更処理
-					on_off = true;
-				}
-			}
 			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 		}
 	}
