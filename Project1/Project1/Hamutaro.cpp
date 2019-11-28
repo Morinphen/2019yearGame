@@ -49,8 +49,6 @@ void CObjNezumi::Init()
 
 	speed = 2;
 
-	a_pos = true;
-
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
@@ -77,7 +75,21 @@ void CObjNezumi::Action()
 		{
 			m_x += speed;
 			m_ani_time += 1;
+			if (m_return == false)
+			{
+				a_pos = true;
+			}
 
+		}
+
+		else if(m_posture==-1)
+		{
+			m_x += -speed;
+			m_ani_time += 1;
+			if (m_return == false)
+			{
+				a_pos = false;
+			}
 		}
 		else
 		{
@@ -109,7 +121,14 @@ void CObjNezumi::Action()
 		if (m_return == false) {
 			m_return = true;
 			speed = -speed;
-			a_pos = false;
+			if (a_pos == true)
+			{
+				a_pos = false;
+			}
+			else
+			{
+				a_pos = true;
+			}
 		}
 
 	}
@@ -153,7 +172,7 @@ void CObjNezumi::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (a_pos == true)
+	if (a_pos==true)
 	{
 		src.m_top = 0.0f;
 		src.m_left = 24.0f*AniData[m_ani_frame] - 24;
