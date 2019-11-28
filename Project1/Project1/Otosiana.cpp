@@ -23,7 +23,7 @@ void CObjOtosiana::Init()
 	l_scroll = 0.0f;
 	ana = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_WHITE, OBJ_OTOSIANA, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLUE, OBJ_OTOSIANA, 1);
 	HitBox_ON = true;
 }
 //アクション
@@ -38,7 +38,7 @@ void CObjOtosiana::Action()
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_WHITE, OBJ_OTOSIANA, 1);
+			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLUE, OBJ_OTOSIANA, 1);
 		}
 
 		//主人公の位置を取得
