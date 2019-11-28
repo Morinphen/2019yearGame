@@ -42,7 +42,7 @@ void CSceneRetry::InitScene()
 
 	Audio::Start(0);
 
-	//タイトルオブジェクト作成
+	//リトライオブジェクト作成
 	CObjRetry* obj = new CObjRetry();//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_RETRY, 10);//主人公オブジェクト登録
 }

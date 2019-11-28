@@ -20,12 +20,12 @@ void CObjClear::Init()
 //アクション
 void CObjClear::Action()
 {
-	//エンターキーを押してシーン:ゲームメインに移行する
+	//エンターキーを押してシーン:タイトルに移行する
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
 		if (m_key_flag == true)
 		{
-			Audio::Start(1);
+			Audio::Start(0);
 			Scene::SetScene(new CSceneTitle());
 			m_key_flag = false;
 		}

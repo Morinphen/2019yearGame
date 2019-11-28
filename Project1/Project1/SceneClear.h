@@ -11,8 +11,8 @@ class CSceneClear :public CScene
 public:
 	CSceneClear();
 	~CSceneClear();
-	void InitScene();//ゲームタイトルの初期化メソッド
-	void Scene();    //ゲームタイトルの実行中メソッド
+	void InitScene();//ゲームクリアの初期化メソッド
+	void Scene();    //ゲームクリアの実行中メソッド
 private:
 
 }; 

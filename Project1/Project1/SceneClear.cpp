@@ -42,7 +42,7 @@ void CSceneClear::InitScene()
 	float Volume = Audio::VolumeMaster(-0.8f);
 	Audio::Start(0);
 
-	//タイトルオブジェクト作成
+	//クリアオブジェクト作成
 	CObjClear* obj = new CObjClear();//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_CLEAR, 10);//主人公オブジェクト登録
 }

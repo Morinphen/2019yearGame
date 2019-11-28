@@ -41,7 +41,7 @@ void CSceneGameOver::InitScene()
 
 	Audio::Start(0);
 
-	//タイトルオブジェクト作成
+	//ゲームオーバーオブジェクト作成
 	CObjGameOver* obj = new CObjGameOver();//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_GAMEOVER, 10);//主人公オブジェクト登録
 }
