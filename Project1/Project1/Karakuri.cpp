@@ -25,7 +25,7 @@ void CObjKarakuri::Init()
 
 	on_off = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK,num, 1);
 	HitBox_ON = true;
 }
 
@@ -36,6 +36,13 @@ void CObjKarakuri::Action()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
+		//
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true)
+		{
+			on_off == true;
+		}
+
 		//ヒットボックス生成
 		if (HitBox_ON == false)
 		{
@@ -45,8 +52,6 @@ void CObjKarakuri::Action()
 
 		m_scroll = scroll->GetScroll();
 		l_scroll = scroll->GetYScroll();
-
-		CHitBox* hit = Hits::GetHitBox(this);
 
 		//レバーが作動した後かどうか
 		if (on_off == false)
