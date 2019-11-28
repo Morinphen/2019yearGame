@@ -83,6 +83,8 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"goal.png", 31, TEX_SIZE_512);
 	Draw::LoadImage(L"sikaku.png", 32, TEX_SIZE_512);
 	Draw::LoadImage(L"kemuri.png", 33, TEX_SIZE_1024);
+	Draw::LoadImage(L"nezumi.png", 34, TEX_SIZE_512);
+	Draw::LoadImage(L"makimo_a.png", 35, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
@@ -180,16 +182,18 @@ void CSceneMain::InitScene()
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
 				Objs::InsertObj(objex, OBJ_EXIT, 3);
 			}
-			/*else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
+			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62)
 			{
-				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);
+				/*CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);*/
+				map[i][j] = 0;
 			}
-			else if (map[i][j] == 60 || map[i][j] == 61 || map[i][j] == 62)
+			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
 			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);
-			}*/
+				/*CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);*/
+				map[i][j] = 0;
+			}
 			else if (map[i][j] == 51 || map[i][j] == 52)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);

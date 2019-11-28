@@ -160,4 +160,22 @@ void CObjPsyuriken::Draw()
 	dstz.m_bottom = 84.0f;
 	//描画
 	Draw::Draw(25, &srcz, &dstz, c, 0.0f);
+	if (hero->GetCF() == true)
+	{
+		RECT_F srcg; //描画元切り取り位置
+		RECT_F dstg; //描画先表示位置
+		srcg.m_top = 0.0f;
+		srcg.m_left = 0.0f;
+		srcg.m_right = 512.0f;
+		srcg.m_bottom = 512.0f;
+
+		//表示位置の設定
+		dstg.m_top = 20.0f;
+		dstg.m_left = 600.0f;
+		dstg.m_right = 664.0f;
+		dstg.m_bottom = 84.0f;
+
+		//描画
+		Draw::Draw(35, &srcg, &dstg, c, 0.0f);
+	}
 }
