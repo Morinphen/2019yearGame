@@ -80,6 +80,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"uguisu.png", 28, TEX_SIZE_512);
 	Draw::LoadImage(L"nezuana.png", 29, TEX_SIZE_512);
 	Draw::LoadImage(L"turi.png", 30, TEX_SIZE_512);
+	Draw::LoadImage(L"goal.png", 31, TEX_SIZE_512);
 
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
@@ -178,29 +179,23 @@ void CSceneMain::InitScene()
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
 				Objs::InsertObj(objex, OBJ_EXIT, 3);
 			}
-			else if (map[i][j] == 15)
+			else if (map[i][j] == 15|| map[i][j] == 16|| map[i][j] == 17)
 			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 1);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 16)
+			else if (map[i][j] == 18 || map[i][j] == 19 || map[i][j] == 20)
 			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 2);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
+				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 17)
-			{
-				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, 3);
-				Objs::InsertObj(objk, OBJ_KARAKURI, 3);
-			}
-
-			else if (map[i][j] == 20 || map[i][j] == 21)
+			else if (map[i][j] == 21 || map[i][j] == 22)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
 
-			else if (map[i][j] == 26 || map[i][j] == 27)
+			else if (map[i][j] == 27 || map[i][j] == 28)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);

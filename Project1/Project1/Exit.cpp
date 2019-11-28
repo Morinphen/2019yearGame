@@ -115,21 +115,21 @@ void CObjExit::Action()
 //ドロー
 void CObjExit::Draw()
 {
-	float c[4] = { 1.0f,0.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
 	//ブロック表示
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 400.0f;
+	src.m_bottom = 505.0f;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_top = m_y+ l_scroll-128;
+	dst.m_left = m_x + m_scroll-64;
+	dst.m_right = dst.m_left + 128.0f;
+	dst.m_bottom = dst.m_top + 192.0f;
 
-	Draw::Draw(1, &src, &dst, c, 0.0f);
+	Draw::Draw(31, &src, &dst, c, 0.0f);
 
 }

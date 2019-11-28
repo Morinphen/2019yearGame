@@ -36,6 +36,7 @@ enum OBJ_NAME
 	OBJ_EXIT,
 	OBJ_NEZUANA,
 	OBJ_NEZUBLOCK,
+	OBJ_KARAKURIBLOCK,
 };
 //------------------------------------------------
 
@@ -109,6 +110,7 @@ struct UserData
 #include"Exit.h"
 #include"Nezuana.h"
 #include"NezuBlock.h"
+#include"KarakuriBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
