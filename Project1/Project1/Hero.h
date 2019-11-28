@@ -42,6 +42,7 @@ public:
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
 
+	bool GetCF() { return Cflag; }
 	//主人公の残機数を渡す
 	float GetRE() { return remain; }
 	//主人公の残機数を外部から変更する
