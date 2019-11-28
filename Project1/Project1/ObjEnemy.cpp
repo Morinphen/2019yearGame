@@ -129,6 +129,16 @@ void CObjEnemy::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	if (m_move == true)
+	{
+		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
+	}
+	else if (m_move == false)
+	{
+		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
+	}
+
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
 		CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
@@ -143,6 +153,7 @@ void CObjEnemy::Action()
 					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
+					sy->SetT(true);
 			}
 			else//手裏剣右向き
 			{
@@ -153,6 +164,7 @@ void CObjEnemy::Action()
 					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
+					sy->SetT(true);
 				}
 			}
 		}
@@ -167,6 +179,7 @@ void CObjEnemy::Action()
 					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
+					sy->SetT(true);
 				}
 			}
 			else//手裏剣右向き
@@ -176,16 +189,9 @@ void CObjEnemy::Action()
 					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
+					sy->SetT(true);
 			}
 		}
-	}
-	else if (m_move == true)
-	{
-		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
-	}
-	else if (m_move == false)
-	{
-		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 	}
 }
 
