@@ -5,17 +5,15 @@
 //使用するネームスペース
 using namespace GameL;
 
-class  CObjKarakuri :public CObj
+class  CObjKarakuriblock :public CObj
 {
 public:
-	CObjKarakuri(int x, int y,int n);
-	~CObjKarakuri() {};
+	CObjKarakuriblock(int x, int y, int n);
+	~CObjKarakuriblock() {};
 
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
-
-	bool GetON_OFF() { return on_off; }
 
 private:
 	int m_x;
@@ -24,10 +22,5 @@ private:
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 
-	int num;
-
-	bool on_off;
-
-	//画面内の時のみヒットボックスをつける
-	bool HitBox_ON;
+	int num;//識別番号
 };
