@@ -82,7 +82,7 @@ void CObjEnemy::Action()
 
 	//’Êí‘¬“x
 	m_speed_power = 0.5f;
-	m_ani_max_time = 2;
+	m_ani_max_time = 4;
 
 	//•ûŒü
 	if (m_move==false)
