@@ -71,7 +71,7 @@ void CObjNezuana::Draw()
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 128.0f;
-	src.m_bottom = 75.0f;
+	src.m_bottom = 128.0f;
 
 	dst.m_top = m_y + l_scroll;
 	dst.m_left = m_x + m_scroll;
