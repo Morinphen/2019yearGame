@@ -166,10 +166,6 @@ void CObjHero::Action()
 			}
 		}
 
-		//重力
-		if (m_vy < 10)
-			m_vy += 9.8f / 16.0f;
-
 		if (nawa_stop == false || nezumi == false) {
 
 			//シノビチェンジ
@@ -254,7 +250,7 @@ void CObjHero::Action()
 					}
 				}
 
-				else if (Input::GetVKey('D'))
+				else if (Input::GetVKey('D') && m_hit_down == true)
 				{
 					if (s_atack == false && nezumi == false)
 					{
@@ -360,6 +356,10 @@ void CObjHero::Action()
 			idocount = 0;
 		}
 	}
+
+	//重力
+	if (m_vy < 10)
+		m_vy += 9.8f / 16.0f;
 
 	m_x += m_vx;
 
