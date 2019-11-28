@@ -78,7 +78,7 @@ void CObjSmokeball::Action()
 		}
 		//ヒットボックス更新
 		hit = Hits::GetHitBox(this);
-		hit->SetPos(m_x - 64 * 4 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
+		hit->SetPos(m_x - 64 * 3 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
 		smoke_time++;
 		if (smoke_time / 60 == 5)
 		{
@@ -107,6 +107,7 @@ void CObjSmokeball::Action()
 void CObjSmokeball::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float cn[4] = { 1.0f,1.0f,1.0f,0.8f };
 	RECT_F src;
 	RECT_F dst;
 
@@ -131,21 +132,21 @@ void CObjSmokeball::Draw()
 	//煙の状態
 	else
 	{
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
-			for (int j = -4; j < 5; j++)
+			for (int j = -4; j < 7; j++)
 			{
-				src.m_top = 0.0f;
-				src.m_left = 0.0f;
-				src.m_right = 200.0f;
-				src.m_bottom = 200.0f;
+					src.m_top = 0.0f+64.0*(2-i);
+					src.m_left = 0.0f+64.0*(j+4);
+					src.m_right = 64.0+64.0*(j + 4);
+					src.m_bottom = 64.0f+ 64.0*(2 - i);
 
-				dst.m_top = (0.0f + m_y + scroll->GetYScroll())-(64.0f*i);
-				dst.m_left = (0.0f*m_posture + m_x + scroll->GetScroll())+(64.0f*j);
-				dst.m_right = (64.0f*m_posture + m_x + scroll->GetScroll())+(64.0f*j);
-				dst.m_bottom = (64.0f + m_y + scroll->GetYScroll())-(64.0f*i);
+					dst.m_top = (0.0f + m_y + scroll->GetYScroll()) - (64.0f*i);
+					dst.m_left = (0.0f*m_posture + m_x + scroll->GetScroll()) + (64.0f*j);
+					dst.m_right = (64.0f*m_posture + m_x + scroll->GetScroll()) + (64.0f*j);
+					dst.m_bottom = (64.0f + m_y + scroll->GetYScroll()) - (64.0f*i);
 
-				Draw::Draw(1, &src, &dst, c, 0);
+					Draw::Draw(33, &src, &dst, cn, 0);
 			}
 		}
 	}
