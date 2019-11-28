@@ -30,7 +30,7 @@ void CObjEnemy::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション間隔幅
 
-	m_move = true;    //true=右　false=左
+	m_move = true;    //true=左　false=右
 
 	//blockとの衝突状態確認用
 	m_hit_up = false;
@@ -180,26 +180,28 @@ void CObjEnemy::Draw()
 
 	RECT_F srcs; //描画元切り取り位置
 	RECT_F dsts; //描画先表示位置
-
-	srcs.m_top = 0.0f;
-	srcs.m_left = 300.0f;
-	srcs.m_right = 0.0f;
-	srcs.m_bottom = 300.0f;
-
 	if (m_move == true)
 	{
+		srcs.m_top = 0.0f;
+		srcs.m_left = 0.0f;
+		srcs.m_right = 300.0f;
+		srcs.m_bottom = 300.0f;
 		//表示位置の設定
 		dsts.m_top = dst.m_top;
-		dsts.m_left = dst.m_left+64.0f;
-		dsts.m_right = dst.m_right+192.0f;
+		dsts.m_left = dst.m_left-230.0f;
+		dsts.m_right = dst.m_right+64;
 		dsts.m_bottom = dst.m_bottom;
 	}
 	else
 	{
+		srcs.m_top = 0.0f;
+		srcs.m_left = 300.0f;
+		srcs.m_right = 0.0f;
+		srcs.m_bottom = 300.0f;
 		//表示位置の設定
 		dsts.m_top = dst.m_top;
-		dsts.m_left = dst.m_left -192.0f;
-		dsts.m_right = dst.m_right - 64.0f;
+		dsts.m_left = dst.m_left ;
+		dsts.m_right = dst.m_right + 166.0f;
 		dsts.m_bottom = dst.m_bottom;
 	}
 	//描画
