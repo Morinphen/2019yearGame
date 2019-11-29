@@ -41,7 +41,7 @@ void CObjSyuriken::Init()
 
 	Animation = false;
 
-	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 32, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
+	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 16, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
 }
 
 //ƒAƒNƒVƒ‡ƒ“
