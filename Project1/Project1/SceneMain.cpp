@@ -184,15 +184,13 @@ void CSceneMain::InitScene()
 			}
 			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62)
 			{
-				/*CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);*/
-				map[i][j] = 0;
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
 			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
 			{
-				/*CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);*/
-				map[i][j] = 0;
+				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
 			else if (map[i][j] == 51 || map[i][j] == 52)
 			{
@@ -204,12 +202,6 @@ void CSceneMain::InitScene()
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
 			}
-
-			/*else if (map[i][j] >=30&&map[i][j]<=100)
-			{
-				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
-				Objs::InsertObj(objd, OBJ_DONDEN, 3);
-			}*/
 		}
 	}
 
