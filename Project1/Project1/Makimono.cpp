@@ -6,7 +6,7 @@
 #include"GameHead.h"
 #include"Makimono.h"
 #include"GameL\HitBoxManager.h"
-
+#include"GameL\Audio.h"
 //使用するネームスペース
 using namespace GameL;
 
@@ -120,6 +120,7 @@ void CObjMakimono::Action()
 
 			if (getflag == true)
 			{
+				Audio::Start(11);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
 			}

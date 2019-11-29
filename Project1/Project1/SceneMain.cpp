@@ -47,6 +47,9 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(13, L"enemyfind.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(14, L"enemyhit.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(15, L"water.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(16, L"matti.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(17, L"key-drop1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(18, L"sword-slash4.wav", SOUND_TYPE::EFFECT);
 	//ボリュームを1.5に増やす
 	float v = Audio::VolumeMaster(1.5);
 	//音楽スタート

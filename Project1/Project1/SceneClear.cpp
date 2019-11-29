@@ -35,6 +35,7 @@ void CSceneClear::InitScene()
 	Draw::LoadImage(L"clear.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
+
 	Audio::LoadAudio(0, L"gameclear.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::LoadAudio(1, L"titleselect.wav", SOUND_TYPE::EFFECT);
