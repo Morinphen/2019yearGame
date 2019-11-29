@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Hamutaro.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -45,6 +46,7 @@ void CObjNezumi::Init()
 	Dimax = 32;
 
 	hamstop = false;
+	naki = false;
 	hamnam=0;
 
 	speed = 2;
@@ -106,6 +108,15 @@ void CObjNezumi::Action()
 		if (m_ani_frame == 4)
 		{
 			m_ani_frame = 0;
+			if (naki == true)
+			{
+				naki = false;
+				Audio::Start(9);
+			}
+			else
+			{
+				naki = true;
+			}
 		}
 
 	}

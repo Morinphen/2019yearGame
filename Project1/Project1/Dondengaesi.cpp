@@ -102,7 +102,7 @@ void CObjDonden::Action()
 				if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false)
 				{
 					if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
-
+						Audio::Start(4);
 						h->W_cat = 0.0f;
 						h->W_cat2 -= 6.4f;
 						h->Sworp = true;

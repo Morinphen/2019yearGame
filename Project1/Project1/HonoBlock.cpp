@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"HonoBlock.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -61,6 +62,7 @@ void CObjHonoBlock::Action()
 		{
 			m_ani_time++;
 			if (m_ani_time == 6) {
+				Audio::Start(5);
 				m_ani_time = 0;
 				m_ani_frame++;
 			}

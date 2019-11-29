@@ -37,7 +37,7 @@ void CSceneRetry::InitScene()
 	Audio::LoadAudio(0, L"gameover.wav", SOUND_TYPE::BACK_MUSIC);
 
 	//バックミュージックスタート
-	float v = Audio::VolumeMaster(0);
+	float v = Audio::VolumeMaster(0.5);
 	v = Audio::VolumeMaster((1.0 - v));
 
 	Audio::Start(0);
