@@ -5,7 +5,7 @@
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
 #include"GameL\HitBoxManager.h"
-
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -47,6 +47,7 @@ void CObjKarakuri::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false)
 		{
+			Audio::Start(6);
 			on_off = true;
 		}
 
