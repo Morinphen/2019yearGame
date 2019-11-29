@@ -127,7 +127,7 @@ void CObjUguBlock::Action()
 
 		if (m_ani_frame == 1)
 		{
-			Audio::Stop(0);
+			Audio::Start(18);
 			hero->SetRE(1);
 			hero->SetVX(0);
 			hero->SetVY(0);

@@ -57,7 +57,8 @@ void CObjKarakuriblock::Action()
 		}
 	}
 	//ƒŒƒo[‚ª‹N“®‚µ‚½‚çŽ©•ª‚ðÁ‚·
-	if (Delete == true)
+	CObjKarakuri* karakuri = (CObjKarakuri*)Objs::GetObj(num);
+	if (karakuri->GetON_OFF()==true)
 	{
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 		pb->Deletemap(m_x, m_y);

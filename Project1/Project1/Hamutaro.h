@@ -47,6 +47,8 @@ private:
 	//ハム太郎のスピード
 	int speed;
 
+	bool naki;
+
 	//方向の反転
 	bool m_return;
 

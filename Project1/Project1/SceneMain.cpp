@@ -47,6 +47,9 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(13, L"enemyfind.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(14, L"enemyhit.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(15, L"water.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(16, L"matti.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(17, L"key-drop1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(18, L"sword-slash4.wav", SOUND_TYPE::EFFECT);
 	//ボリュームを1.5に増やす
 	float v = Audio::VolumeMaster(1.5);
 	//音楽スタート
@@ -184,15 +187,13 @@ void CSceneMain::InitScene()
 			}
 			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62)
 			{
-				/*CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);*/
-				map[i][j] = 0;
+				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
 			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
 			{
-				/*CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);*/
-				map[i][j] = 0;
+				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
+				Objs::InsertObj(objk, map[i][j], 3);
 			}
 			else if (map[i][j] == 51 || map[i][j] == 52)
 			{
@@ -204,12 +205,6 @@ void CSceneMain::InitScene()
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
 			}
-
-			/*else if (map[i][j] >=30&&map[i][j]<=100)
-			{
-				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
-				Objs::InsertObj(objd, OBJ_DONDEN, 3);
-			}*/
 		}
 	}
 

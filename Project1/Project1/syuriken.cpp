@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"syuriken.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -83,6 +84,8 @@ void CObjSyuriken::Action()
 		m_hit_right = false;
 		m_hit_up = false;
 		Animation = true;
+
+		Audio::Start(17);
 
 		m_vx = -4.0f*m_muki;
 		m_vy = -10.0f;

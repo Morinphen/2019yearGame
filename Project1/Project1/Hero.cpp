@@ -245,6 +245,7 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
+						Audio::Start(16);
 						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
 						s_atack = true;
@@ -408,6 +409,7 @@ void CObjHero::Action()
 
 		WDflag(false);
 		Dflag(false);
+
 	}
 
 	//“Vˆä‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F

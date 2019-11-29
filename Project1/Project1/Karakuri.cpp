@@ -5,7 +5,7 @@
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
 #include"GameL\HitBoxManager.h"
-
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -47,9 +47,8 @@ void CObjKarakuri::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false)
 		{
+			Audio::Start(6);
 			on_off = true;
-			CObjKarakuriblock* kb = (CObjKarakuriblock*)Objs::GetObj(num);
-			kb->SetDelete(true);
 		}
 
 		m_scroll = scroll->GetScroll();
@@ -82,23 +81,46 @@ void CObjKarakuri::Draw()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-
-		if (on_off == false)
+		//レバーの向きを決める
+		if (num == 61)
 		{
-			//ブロック表示
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 64.0f;
-			src.m_bottom = 64.0f;
+			if (on_off == false)
+			{
+				//ブロック表示
+				src.m_top = 0.0f;
+				src.m_left = 0.0f;
+				src.m_right = 64.0f;
+				src.m_bottom = 64.0f;
 
+			}
+			else
+			{
+				//ブロック表示
+				src.m_top = 64.0f;
+				src.m_left = 0.0f;
+				src.m_right = 64.0f;
+				src.m_bottom = 0.0f;
+			}
 		}
 		else
 		{
-			//ブロック表示
-			src.m_top = 64.0f;
-			src.m_left = 0.0f;
-			src.m_right = 64.0f;
-			src.m_bottom = 0.0f;
+			if (on_off == false)
+			{
+				//ブロック表示
+				src.m_top = 0.0f;
+				src.m_left = 64.0f;
+				src.m_right = 0.0f;
+				src.m_bottom = 64.0f;
+
+			}
+			else
+			{
+				//ブロック表示
+				src.m_top = 64.0f;
+				src.m_left = 64.0f;
+				src.m_right = 0.0f;
+				src.m_bottom = 0.0f;
+			}
 		}
 
 		dst.m_top = m_y + l_scroll;
