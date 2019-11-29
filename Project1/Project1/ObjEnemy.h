@@ -18,6 +18,7 @@ public:
 	float GetY() { return m_py; }
 	float GetVX() { return m_vx; }
 	float GetVY() { return m_vy; }
+	float GetMV() { return m_move; }
 
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
@@ -30,6 +31,7 @@ public:
 	void SetRight(bool b) { m_hit_right = b; }
 	void SetF(bool b) { find = b; }
 	void SetD(bool b) { de = b; }
+
 private:
 	float m_px; //位置
 	float m_py;
@@ -44,6 +46,8 @@ private:
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム
 	int m_posture_time;//姿勢変えるまでの時間
+	int sm_x;//手裏剣のx座標
+	bool p;//手裏剣の向き
 
 	bool crhitbox;
 	float m_speed_power; //スピードパワー

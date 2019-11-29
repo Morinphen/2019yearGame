@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjDonden :public CObj
 {
 public:
-	CObjDonden(int x, int y);
+	CObjDonden(int x, int y, int namber, bool b);
 	~CObjDonden() {};
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
@@ -20,6 +20,9 @@ public:
 private:
 
 	int Worp(int a);
+	int TagWorp(int a);
+
+	int Wnamber;//ワープ先の番号を保存する
 
 	float m_x;
 	float m_y;
@@ -35,14 +38,23 @@ private:
 	//鉤縄移動制御用変数
 	bool N_stop;
 
+	//土遁用
+	bool doton_flag;
+
 	//主人公の位置の確認
 	bool s_down;
 
-	int D_tag[10][2];//ペアのどんでん返しを探す
+	//どんでん返しで隠す
+	bool hide;
+
+	int D_tag[50][3];//ペアのどんでん返しを探す
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
 
 	float m_speed_power;//スピードパワー
 	float m_ani_max_time;//アニメーション動作
+
+	//画面内の時のみヒットボックスをつける
+	bool HitBox_ON;
 };

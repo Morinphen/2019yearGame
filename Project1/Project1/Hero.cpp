@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Hero.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -16,11 +17,14 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	//m_x = 100;
-	//m_y = 300;
+	//スクロール情報取得
+	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	m_x = 400;
+	m_y = 600;
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
+	remain = 3;//残機
 
 	jamptime = 0;
 	jamppower = 0.0f;
@@ -37,22 +41,30 @@ void CObjHero::Init()
 	nawa_ido = false;
 	idocount = 0;
 
+	doton = false;
 	ball = false;
 	smokeh = false;
 	U_flag = false;
 
 	Ninzyutu = false;
 
+	Cflag = false;
+
 	U_scroll = false;
 
 	dead = false;
 	Wdead = false;
 
+	psyuriken = 5;
+
 	d_ani_time = 0;
 	d_ani_frame = 0;
 
-	w_x = 0.0f;
-	w_y = 0.0f;
+	doton=false;
+	nezumi = false;
+
+	w_x = 400;
+	w_y = 600-scroll->GetYScroll();
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
@@ -67,23 +79,30 @@ void CObjHero::Init()
 	m_hit_right = false;
 	Hits::SetHitBox(this, m_x, m_y,64,64, ELEMENT_PLAYER, OBJ_HERO,1);
 }
+
 //アクション
 void CObjHero::Action()
 {
+	if (remain <= 0)
+	{
+		Scene::SetScene(new CSceneRetry);
+	}
 	//敵の位置を取得
 	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	//ブロックとの当たり判定
+	CObjDonden* dd = (CObjDonden*)Objs::GetObj(OBJ_DONDEN);
 	//スクロール情報取得
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	pb->BlockHit(&m_x, &m_y, true,
+	pb->BlockHit(&m_x, &m_y, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
 
 	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
-	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false) {
+	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false && nezumi == false) {
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
@@ -95,10 +114,7 @@ void CObjHero::Action()
 				m_vx += 0.5f;
 				m_ani_time++;
 			}
-			m_vx += 0.5f;
-
-			m_ani_time++;
-			m_posture = 0.0f;
+			Rightwalk();
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
@@ -107,9 +123,7 @@ void CObjHero::Action()
 				m_vx -= 0.5f;
 				m_ani_time++;
 			}
-			m_vx -= 0.5f;
-			m_ani_time++;
-			m_posture = 1.0f;
+			Leftwalk();
 		}
 
 		else
@@ -124,6 +138,7 @@ void CObjHero::Action()
 			if (jamptime == 0)
 				jamptime++;
 
+			Audio::Start(2);
 			jamppower += 8.0f;
 		}
 
@@ -151,11 +166,7 @@ void CObjHero::Action()
 			}
 		}
 
-		//重力
-		if (m_vy < 10)
-			m_vy += 9.8f / 16.0f;
-
-		if (nawa_stop == false) {
+		if (nawa_stop == false || nezumi == false) {
 
 			//シノビチェンジ
 			if (Input::GetVKey('Q'))
@@ -180,9 +191,23 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
-						CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
-						Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
-						s_atack = true;
+						if (psyuriken > 0) {
+							Audio::Start(1);
+							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
+							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
+							s_atack = true;
+							if (m_posture == 1.0f)
+							{
+								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+								sy->SetP(true);
+							}
+							else
+							{
+								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+								sy->SetP(false);
+							}
+							psyuriken -= 1;
+						}
 					}
 				}
 
@@ -214,22 +239,44 @@ void CObjHero::Action()
 				}
 			}
 
+			//妖術モード
+			else {
+				//火遁
+				if (Input::GetVKey('Z'))
+				{
+					if (s_atack == false) {
+						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
+						s_atack = true;
+					}
+				}
 
-		else {
-			//火遁
-			if (Input::GetVKey('Z'))
-			{
-				if (s_atack == false) {
-					CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
-					Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
-					s_atack = true;
+				else if (Input::GetVKey('S'))
+				{
+					if (s_atack == false)
+					{
+						doton = doton ? false : true;
+						s_atack = true;
+					}
+				}
+
+				else if (Input::GetVKey('D') && m_hit_down == true)
+				{
+					if (s_atack == false && nezumi == false)
+					{
+						CObjNezumi* obj_n = new CObjNezumi(m_x, m_y, m_posture);
+						Objs::InsertObj(obj_n, OBJ_HAMUTARO, 10);
+						s_atack = true;
+						nezumi = true;
+					}
+				}
+
+				else
+				{
+					s_atack = false;
+					doton = false;
 				}
 			}
-			else
-			{
-				s_atack = false;
-			}
-		}
 
 		}
 	}
@@ -246,19 +293,12 @@ void CObjHero::Action()
 
 		Ninzyutu = true;
 
-		scroll->SetUtikagiScroll(&m_x, &m_y);
-
 		if (Input::GetVKey(VK_RIGHT) == true) {
-			m_vx += 0.5f;
-
-			m_ani_time++;
-			m_posture = 0.0f;
+			Rightwalk();
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
-			m_vx -= 0.5f;
-			m_ani_time++;
-			m_posture = 1.0f;
+			Leftwalk();
 		}
 	}
 
@@ -279,11 +319,6 @@ void CObjHero::Action()
 			d_ani_time = 0;
 			d_ani_frame++;
 		}
-	}
-
-	if (m_y > 700.0f)
-	{
-		Scene::SetScene(new CSceneMain);
 	}
 
 	//上入力制御
@@ -332,6 +367,10 @@ void CObjHero::Action()
 		}
 	}
 
+	//重力
+	if (m_vy < 10)
+		m_vy += 9.8f / 16.0f;
+
 	m_x += m_vx;
 
 	m_y += m_vy;
@@ -350,14 +389,51 @@ void CObjHero::Action()
 	//敵と当たっているかどうか確認
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
 	{
-		Scene::SetScene(new CSceneMain);
+		remain -= 1;
+		SetX(GetWX());
+		SetY(GetWY());
+		if (GetX() < 500) {
+			scroll->SetScrooll(-(GetX() - (500)));
+		}
+		else if (GetX() > 600) {
+			scroll->SetScrooll(-(GetX() - (600)));
+		}
+
+		if (GetY() < 80) {
+			scroll->SetYScrooll(-(GetY() - (80)));
+		}
+		else if (GetY() > 500) {
+			scroll->SetYScrooll(-(GetY() - (500)));
+		}
+
+		WDflag(false);
+		Dflag(false);
 	}
 
 	//天井と当たっているかどうか確認
-	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&smokeh == false)
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr)
 	{
-		Scene::SetScene(new CSceneMain);
+		remain -= 1;
+		SetX(GetWX());
+		SetY(GetWY());
+		if (GetX() < 500) {
+			scroll->SetScrooll(-(GetX() - (500)));
+		}
+		else if (GetX() > 600) {
+			scroll->SetScrooll(-(GetX() - (600)));
+		}
+
+		if (GetY() < 80) {
+			scroll->SetYScrooll(-(GetY() - (80)));
+		}
+		else if (GetY() > 500) {
+			scroll->SetYScrooll(-(GetY() - (500)));
+		}
+
+		WDflag(false);
+		Dflag(false);
 	}
+
 }
 
 //ドロー
@@ -384,8 +460,8 @@ void CObjHero::Draw()
 
 	else {
 		src.m_top = 0.0f;
-		src.m_left = 64.0f*(m_ani_frame*W_cat);
-		src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
+		src.m_left = 64.0f*(m_ani_frame*W_cat+1);
+		src.m_right = 64.0f*((m_ani_frame*W_cat));
 		src.m_bottom = 64.0f;
 	}
 
@@ -410,4 +486,20 @@ void CObjHero::Draw()
 	}
 
 	Draw::Draw(11, &src, &dst, c, 0.0f);
+}
+
+//右に歩かせる
+void CObjHero::Rightwalk()
+{
+	m_vx += 0.5f;
+	m_ani_time++;
+	m_posture = 0.0f;
+}
+
+//左に歩かせる
+void CObjHero::Leftwalk()
+{
+	m_vx -= 0.5f;
+	m_ani_time++;
+	m_posture = 1.0f;
 }

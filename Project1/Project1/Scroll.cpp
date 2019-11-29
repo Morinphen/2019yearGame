@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"Scroll.h"
 #include"GameL\HitBoxManager.h"
+#include"main.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -18,8 +19,8 @@ CObjScroll::CObjScroll(int map[46][100])
 //イニシャライズ
 void CObjScroll::Init()
 {
-	m_scroll = 0.0f;
-	l_scroll = 0.0f;
+	m_scroll = 64.0f*0.0f;
+	l_scroll = 64.0f*-35.0f;
 }
 //アクション
 void CObjScroll::Action()
@@ -31,16 +32,16 @@ void CObjScroll::Action()
 
 
 	//後方スクロールライン
-	if (hx < 250)
+	if (hx < 500)
 	{
-		hero->SetX(250);//主人公はラインを超えないように
+		hero->SetX(500);//主人公はラインを超えないように
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
 	//前方スクロールライン
-	if (hx > 400)
+	if (hx > 600)
 	{
-		hero->SetX(400);//主人公はラインを超えないように
+		hero->SetX(600);//主人公はラインを超えないように
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
@@ -73,50 +74,19 @@ void CObjScroll::Draw()
 	src.m_bottom = 1000.0f - (l_scroll / 4);
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
-	dst.m_right = 800.0f;
+	dst.m_right = 1200.0f;
 	dst.m_bottom = 800.0f;
 	Draw::Draw(2, &src, &dst, c, 0.0f);
 }
 
-void CObjScroll::SetUtikagiScroll(float *hx, float *hy)
+//表示画面の中にいるか調べる
+bool CObjScroll::Inscrooll_check(int x, int y)
 {
-	//後方スクロールライン
-	if (*hx < 250)
-	{
-		while (*hx < 250)
-		{
-			m_scroll += 64;//1ブロックづつ調整する（スクロール）
-			*hx += 64;//1ブロックづつ調整（主人公）
-		}
-	}
-
-	//前方スクロールライン
-	if (*hx > 400)
-	{
-		while (*hx > 400)
-		{
-			m_scroll -= 64;//1ブロックづつ調整する（スクロール）
-			*hx -= 64;//1ブロックづつ調整（主人公）
-		}
-	}
-
-	//上方スクロールライン
-	if (*hy < 80)
-	{
-		while (*hy < 80)
-		{
-			l_scroll -= 64;//1ブロックづつ調整する（スクロール）
-			*hy -= 64;//1ブロックづつ調整（主人公）
-		}
-	}
-
-	//下方スクロールライン
-	if (*hy > 500 && l_scroll>-100)
-	{
-		while (*hy > 500)
-		{
-			l_scroll += 64;//1ブロックづつ調整する（スクロール）
-			*hy += 64;//1ブロックづつ調整（主人公）
-		}
-	}
+	if (x+64 >= -m_scroll&&
+		x    <= WINDOW_SIZE_W-m_scroll&&
+		y+64 >= -l_scroll&&
+		y    <= WINDOW_SIZE_H-l_scroll)
+		return true;
+	else
+		false;
 }

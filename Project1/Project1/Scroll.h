@@ -21,7 +21,7 @@ public:
 	void SetYScrooll(float s) { l_scroll = s; }
 	float GetYScroll() { return l_scroll; }
 
-	void SetUtikagiScroll(float *hx, float *hy);
+	bool Inscrooll_check(int x, int y);
 
 	int m_map[46][100];
 private:
@@ -30,5 +30,8 @@ private:
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
+
+	float w_m_scroll;//ワープ先保存左右スクロール用変数
+	float w_l_scroll;//ワープ先保存上下スクロール用変数
 
 };

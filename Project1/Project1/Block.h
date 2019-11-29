@@ -25,7 +25,7 @@ public:
 
 	void CObjBlock::BlockHit
 	(
-		float* x, float* y,bool s,
+		float* x, float* y,bool s,bool is,
 		bool*up, bool* down, bool* left, bool* right,bool smoke,
 		float *vx, float *vy
 	);
@@ -37,7 +37,7 @@ public:
 		float *vx, float *vy
 	);
 
-	void Worp(int x,int y);
+	void Deletemap(int x, int y);
 
 	////ålŒö‚Æ•Ç‚ÌŒğ·”»’è
 	//bool HeroBlockCrossPoint(
@@ -48,7 +48,6 @@ public:
 private:
 	int m_x;
 	int m_y;
-	int aaa;
 
 	int m_map[46][100];
 
