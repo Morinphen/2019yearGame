@@ -101,6 +101,9 @@ void CObjKaginawa::Action()
 	}
 	////////////////////////////////////////////////////////
 
+	bool Mode;
+	Mode = h->GetChange();
+
 	//Aボタンをクリックしたとき、鍵縄を発射する
 	if (Input::GetVKey('A'))
 	{
@@ -114,7 +117,7 @@ void CObjKaginawa::Action()
 	}
 
 	//カーソル出現時に、一定の行動を行うと、カーソルを消滅させる
-	else if (h->Ninzyutu == true)
+	else if (h->Ninzyutu == true || Mode==true)
 	{
 		h->ReSetN(false);
 		this->SetStatus(false);

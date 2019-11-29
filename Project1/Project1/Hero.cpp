@@ -304,7 +304,7 @@ void CObjHero::Action()
 
 	else
 	{
-		Ninzyutu = true;
+		Ninzyutu = false;
 	}
 
 	//Ž€–S‚µ‚½‚Æ‚«

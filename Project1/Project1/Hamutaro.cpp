@@ -146,6 +146,13 @@ void CObjNezumi::Action()
 		Hits::DeleteHitBox(this);
 	}
 
+	else if (h->Ninzyutu == true)
+	{
+		h->HamuSetUP(false);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	if (hamstop == true)
 	{
 		Dimax--;
@@ -239,6 +246,9 @@ int CObjNezumi::mapplace(int x, int y, int muki)
 	bool flag;
 	int mp_x, mp_y;
 
+	int rflag;//‘—‚é’l
+	bool stop = false;
+
 	mp_x = 1 + (muki * 1);
 	mp_y = 1;
 
@@ -254,5 +264,20 @@ int CObjNezumi::mapplace(int x, int y, int muki)
 		y -= 64;
 	}
 
-	return map_data[mp_y][mp_x];
+	for (int i = mp_x - 3; i < mp_x+3; i++)
+	{
+		if (stop == true)
+			break;
+		for (int j = mp_y - 3; j < mp_y+3; j++)
+		{
+			if (map_data[j][i] == 57 || map_data[j][i] == 58)
+			{
+				rflag = map_data[j][i];
+				stop = true;
+				break;
+			}
+		}
+	}
+
+	return rflag;
 }
