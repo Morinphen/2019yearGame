@@ -369,8 +369,6 @@ void CObjHero::Action()
 	m_x += m_vx;
 
 	m_y += m_vy;
-
-	hit->SetPos(m_x, m_y);
 	//‰Œ‹Ê‚Ì‰Œ‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F
 	if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr)
 	{
@@ -428,6 +426,8 @@ void CObjHero::Action()
 		WDflag(false);
 		Dflag(false);
 	}
+
+	hit->SetPos(m_x, m_y);
 
 }
 
