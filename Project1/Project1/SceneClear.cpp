@@ -39,8 +39,9 @@ void CSceneClear::InitScene()
 	Audio::LoadAudio(0, L"gameclear.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::LoadAudio(1, L"titleselect.wav", SOUND_TYPE::EFFECT);
-	//バックミュージックスタート
-	float Volume = Audio::VolumeMaster(-0.8f);
+	float v = Audio::VolumeMaster(-0.5);
+	v = Audio::VolumeMaster((1.0 - v));
+	v = Audio::VolumeMaster(-0.5);
 	Audio::Start(0);
 
 	//クリアオブジェクト作成

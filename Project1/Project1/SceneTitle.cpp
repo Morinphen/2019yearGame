@@ -39,7 +39,9 @@ void CSceneTitle::InitScene()
 
 	Audio::LoadAudio(1, L"titleselect.wav", SOUND_TYPE::EFFECT);
 	//バックミュージックスタート
-	float Volume = Audio::VolumeMaster(-0.8f);
+	float v = Audio::VolumeMaster(-0.4);
+	v = Audio::VolumeMaster((1.0 - v));
+	v = Audio::VolumeMaster(-0.4);
 	Audio::Start(0);
 
 	//タイトルオブジェクト作成

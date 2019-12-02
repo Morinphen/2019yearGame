@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include"Nezuana.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -46,6 +47,7 @@ void CObjNezuana::Action()
 		testc = 0.0f;
 		Dnamber = true;
 		if (stop == false) {
+			Audio::Start(19);
 			Hits::DeleteHitBox(this);
 			stop = true;
 		}
