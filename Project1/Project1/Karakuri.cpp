@@ -5,7 +5,7 @@
 #include"GameL\SceneObjManager.h"
 #include"GameHead.h"
 #include"GameL\HitBoxManager.h"
-
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -25,14 +25,14 @@ void CObjKarakuri::Init()
 
 	on_off = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
+	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK,OBJ_KARAKURI, 1);
 	HitBox_ON = true;
 }
 
 //アクション
 void CObjKarakuri::Action()
 {
-	//表示画面内の時
+	////表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
@@ -40,38 +40,22 @@ void CObjKarakuri::Action()
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_MIZUBLOCK, 1);
+			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
+		}
+
+		//レバー作動
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false)
+		{
+			Audio::Start(6);
+			on_off = true;
 		}
 
 		m_scroll = scroll->GetScroll();
 		l_scroll = scroll->GetYScroll();
 
-		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 
-		if (on_off == false)
-		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP))
-			{
-				Hits::DeleteHitBox(this);
-
-				if (num == 1)
-				{
-					//こ↑こ↓にマップに変更処理
-					on_off = true;
-				}
-				else if (num == 2)
-				{
-					//こ↑こ↓にマップに変更処理
-					on_off = true;
-				}
-				else if (num == 3)
-				{
-					//こ↑こ↓にマップに変更処理
-					on_off = true;
-				}
-			}
-			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-		}
 	}
 	//表示画面外の時
 	else
@@ -97,23 +81,46 @@ void CObjKarakuri::Draw()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-
-		if (on_off == false)
+		//レバーの向きを決める
+		if (num == 61)
 		{
-			//ブロック表示
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 64.0f;
-			src.m_bottom = 64.0f;
+			if (on_off == false)
+			{
+				//ブロック表示
+				src.m_top = 0.0f;
+				src.m_left = 0.0f;
+				src.m_right = 64.0f;
+				src.m_bottom = 64.0f;
 
+			}
+			else
+			{
+				//ブロック表示
+				src.m_top = 64.0f;
+				src.m_left = 0.0f;
+				src.m_right = 64.0f;
+				src.m_bottom = 0.0f;
+			}
 		}
 		else
 		{
-			//ブロック表示
-			src.m_top = 64.0f;
-			src.m_left = 0.0f;
-			src.m_right = 64.0f;
-			src.m_bottom = 0.0f;
+			if (on_off == false)
+			{
+				//ブロック表示
+				src.m_top = 0.0f;
+				src.m_left = 64.0f;
+				src.m_right = 0.0f;
+				src.m_bottom = 64.0f;
+
+			}
+			else
+			{
+				//ブロック表示
+				src.m_top = 64.0f;
+				src.m_left = 64.0f;
+				src.m_right = 0.0f;
+				src.m_bottom = 0.0f;
+			}
 		}
 
 		dst.m_top = m_y + l_scroll;

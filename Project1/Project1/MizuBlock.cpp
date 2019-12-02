@@ -118,7 +118,6 @@ void CObjMBlock::Action()
 		Audio::Start(15);
 		Fdead = true;
 		hero->WDflag(true);
-		//hero->SetRE(1);
 	}
 
 		//ŽålŒö‚ª’……‚µ‚½‚Æ‚«

@@ -35,6 +35,7 @@ void CSceneClear::InitScene()
 	Draw::LoadImage(L"clear.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
+
 	Audio::LoadAudio(0, L"gameclear.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::LoadAudio(1, L"titleselect.wav", SOUND_TYPE::EFFECT);
@@ -42,7 +43,7 @@ void CSceneClear::InitScene()
 	float Volume = Audio::VolumeMaster(-0.8f);
 	Audio::Start(0);
 
-	//タイトルオブジェクト作成
+	//クリアオブジェクト作成
 	CObjClear* obj = new CObjClear();//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_CLEAR, 10);//主人公オブジェクト登録
 }

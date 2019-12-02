@@ -6,7 +6,7 @@
 #include"GameHead.h"
 #include"Makimono.h"
 #include"GameL\HitBoxManager.h"
-
+#include"GameL\Audio.h"
 //使用するネームスペース
 using namespace GameL;
 
@@ -120,6 +120,7 @@ void CObjMakimono::Action()
 
 			if (getflag == true)
 			{
+				Audio::Start(11);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
 			}
@@ -152,8 +153,8 @@ void CObjMakimono::Draw()
 		//ブロック表示
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
+		src.m_right = 512.0f;
+		src.m_bottom = 512.0f;
 
 		dst.m_top = m_y + l_scroll;
 		dst.m_left = m_x + m_scroll;

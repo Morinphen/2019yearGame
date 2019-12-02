@@ -37,12 +37,12 @@ void CSceneRetry::InitScene()
 	Audio::LoadAudio(0, L"gameover.wav", SOUND_TYPE::BACK_MUSIC);
 
 	//バックミュージックスタート
-	float v = Audio::VolumeMaster(0);
+	float v = Audio::VolumeMaster(0.5);
 	v = Audio::VolumeMaster((1.0 - v));
 
 	Audio::Start(0);
 
-	//タイトルオブジェクト作成
+	//リトライオブジェクト作成
 	CObjRetry* obj = new CObjRetry();//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_RETRY, 10);//主人公オブジェクト登録
 }

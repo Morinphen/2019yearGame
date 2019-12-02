@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"Hamutaro.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -45,6 +46,7 @@ void CObjNezumi::Init()
 	Dimax = 32;
 
 	hamstop = false;
+	naki = false;
 	hamnam=0;
 
 	speed = 2;
@@ -74,12 +76,49 @@ void CObjNezumi::Action()
 		if (m_posture == 0)
 		{
 			m_x += speed;
+			m_ani_time += 1;
+			if (m_return == false)
+			{
+				a_pos = true;
+			}
+
 		}
 
-		else
+		else if(m_posture==-1)
 		{
 			m_x += -speed;
+			m_ani_time += 1;
+			if (m_return == false)
+			{
+				a_pos = false;
+			}
 		}
+		else
+		{
+			m_ani_frame = 1;
+			m_ani_time = 0;
+		}
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+
+		if (m_ani_frame == 4)
+		{
+			m_ani_frame = 0;
+			if (naki == true)
+			{
+				naki = false;
+				Audio::Start(9);
+			}
+			else
+			{
+				naki = true;
+			}
+		}
+
 	}
 
 	//マップ情報を確認する
@@ -93,6 +132,14 @@ void CObjNezumi::Action()
 		if (m_return == false) {
 			m_return = true;
 			speed = -speed;
+			if (a_pos == true)
+			{
+				a_pos = false;
+			}
+			else
+			{
+				a_pos = true;
+			}
 		}
 
 	}
@@ -104,6 +151,13 @@ void CObjNezumi::Action()
 
 	else if (b_x + 10 >= m_x && m_return == true &&
 		b_x - 10 <= m_x && m_return == true)
+	{
+		h->HamuSetUP(false);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	else if (h->Ninzyutu == true)
 	{
 		h->HamuSetUP(false);
 		this->SetStatus(false);
@@ -129,21 +183,33 @@ void CObjNezumi::Action()
 //ドロー
 void CObjNezumi::Draw()
 {
+	int AniData[4] =
+	{
+		0,1,0,1
+	};
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	if (a_pos==true)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 24.0f*AniData[m_ani_frame] - 24;
+		src.m_right = 24.0f*AniData[m_ani_frame];
+		src.m_bottom = 21.0f;
+	}
+	else
+	{
+		src.m_top = 0.0f;
+		src.m_left = 24.0f*AniData[m_ani_frame];
+		src.m_right = 24.0f*AniData[m_ani_frame]-24;
+		src.m_bottom = 21.0f;
+	}
 
 	dst.m_top = m_y + l_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_left = m_x + m_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_right = dst.m_left + Dimax;
 	dst.m_bottom = dst.m_top + Dimax;
-
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(34, &src, &dst, c, 0.0f);
 }
 
 bool CObjNezumi::mapsarch(int x, int y, int muki)
@@ -169,6 +235,14 @@ bool CObjNezumi::mapsarch(int x, int y, int muki)
 	if (map_data[mp_y][mp_x] == 0)
 	{
 		flag = true;
+		if (a_pos == true)
+		{
+			a_pos = false;
+		}
+		else
+		{
+			a_pos = true;
+		}
 		speed = -speed;
 	}
 	else
@@ -182,6 +256,9 @@ int CObjNezumi::mapplace(int x, int y, int muki)
 {
 	bool flag;
 	int mp_x, mp_y;
+
+	int rflag;//送る値
+	bool stop = false;
 
 	mp_x = 1 + (muki * 1);
 	mp_y = 1;
@@ -198,5 +275,20 @@ int CObjNezumi::mapplace(int x, int y, int muki)
 		y -= 64;
 	}
 
-	return map_data[mp_y][mp_x];
+	for (int i = mp_x - 3; i < mp_x+3; i++)
+	{
+		if (stop == true)
+			break;
+		for (int j = mp_y - 3; j < mp_y+3; j++)
+		{
+			if (map_data[j][i] == 57 || map_data[j][i] == 58)
+			{
+				rflag = map_data[j][i];
+				stop = true;
+				break;
+			}
+		}
+	}
+
+	return rflag;
 }

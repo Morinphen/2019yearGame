@@ -4,6 +4,7 @@
 #include"GameHead.h"
 #include"syuriken.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -26,11 +27,12 @@ CObjSyuriken::CObjSyuriken(int x,int y,int m)
 //イニシャライズ
 void CObjSyuriken::Init()
 {
-	m_vx = 8 * m_muki;
+	m_vx = 10 * m_muki;
 	m_vy = 0;
 	m_posture = 1.0f;//右向き0.0ｆ、左向き1.0f
 
 	spen = 0;
+	t_h = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;//静止フレーム初期化
@@ -40,13 +42,14 @@ void CObjSyuriken::Init()
 
 	Animation = false;
 
-	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll, 64, 64, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
+	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 16, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
 }
 
 //アクション
 void CObjSyuriken::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	CObjEnemy* en = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
@@ -82,18 +85,26 @@ void CObjSyuriken::Action()
 		m_hit_up = false;
 		Animation = true;
 
+		Audio::Start(17);
+
 		m_vx = -4.0f*m_muki;
 		m_vy = -10.0f;
 		m_y += m_vy;
 	}
 
-	if (m_x > 20000 || m_x<-200 || m_y > 7000|| hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	if (m_x > 20000 || m_x<-200 || m_y > 7000)
 	{
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
+	
+	if (t_h == true)
+	{
+		Hits::DeleteHitBox(this);
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
 }
 

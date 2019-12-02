@@ -125,9 +125,9 @@ void CObjUguBlock::Action()
 
 		}
 
-		if (m_ani_frame == 12)
+		if (m_ani_frame == 1)
 		{
-			Audio::Stop(0);
+			Audio::Start(18);
 			hero->SetRE(1);
 			hero->SetVX(0);
 			hero->SetVY(0);
@@ -189,8 +189,6 @@ void CObjUguBlock::Draw()
 		dst.m_right = dst.m_left + 64.0f;
 		dst.m_bottom = dst.m_top + 64.0f;
 
-		Draw::Draw(0, &src, &dst, c, 0.0f);
-		if (uguisu == true)
-			Draw::Draw(13, &src, &dst, c, 0.0f);
+		Draw::Draw(28, &src, &dst, c, 0.0f);
 	}
 }

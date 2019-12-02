@@ -55,6 +55,9 @@ void CObjNagenawa::Action()
 		&m_vx, &m_vy
 	);
 
+	bool Mode;
+	Mode = h->GetChange();
+
 	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
 	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
 	{
@@ -82,7 +85,7 @@ void CObjNagenawa::Action()
 	///////////////////////////////////////////////////////
 
 	//縄が出現しているときに一定の行動を行った場合、消滅させる
-	else if (h->Ninzyutu == true)
+	else if (h->Ninzyutu == true || Mode == true)
 	{
 		h->ReSetN(false);
 		this->SetStatus(false);
@@ -109,8 +112,8 @@ void CObjNagenawa::Draw()
 
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 36.0f;
-	src.m_bottom = 31.0f;
+	src.m_right = 31.0f;
+	src.m_bottom = 36.0f;
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;

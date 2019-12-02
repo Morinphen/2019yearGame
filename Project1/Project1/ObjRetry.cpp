@@ -28,7 +28,7 @@ void CObjRetry::Action()
 	{
 		m_posture = false;
 	}
-	//エンターキーを押してシーン:ゲームメインに移行する
+	//エンターキーを押してシーン:ゲームオーバーかメインに移行する
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
 		if (m_key_flag == true)

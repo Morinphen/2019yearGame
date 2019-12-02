@@ -42,10 +42,6 @@ void CObjNezublock::Action()
 	CObjNezuana* Nezu = (CObjNezuana*)Objs::GetObj(Namber);
 	dflag = Nezu->GetDnamber();
 
-	//—v‘f”Ô†‚ðˆÀ•U‚É•ÏX
-	float x = m_x;
-	float y = m_y;
-
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 

@@ -83,7 +83,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	if (remain == 0)
+	if (remain <= 0)
 	{
 		Scene::SetScene(new CSceneRetry);
 	}
@@ -166,10 +166,6 @@ void CObjHero::Action()
 			}
 		}
 
-		//重力
-		if (m_vy < 10)
-			m_vy += 9.8f / 16.0f;
-
 		if (nawa_stop == false || nezumi == false) {
 
 			//シノビチェンジ
@@ -200,6 +196,16 @@ void CObjHero::Action()
 							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
 							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
 							s_atack = true;
+							if (m_posture == 1.0f)
+							{
+								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+								sy->SetP(true);
+							}
+							else
+							{
+								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
+								sy->SetP(false);
+							}
 							psyuriken -= 1;
 						}
 					}
@@ -239,6 +245,7 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
+						Audio::Start(16);
 						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
 						s_atack = true;
@@ -254,7 +261,7 @@ void CObjHero::Action()
 					}
 				}
 
-				else if (Input::GetVKey('D'))
+				else if (Input::GetVKey('D') && m_hit_down == true)
 				{
 					if (s_atack == false && nezumi == false)
 					{
@@ -298,7 +305,7 @@ void CObjHero::Action()
 
 	else
 	{
-		Ninzyutu = true;
+		Ninzyutu = false;
 	}
 
 	//死亡したとき
@@ -314,11 +321,6 @@ void CObjHero::Action()
 			d_ani_frame++;
 		}
 	}
-
-	/*if (m_y > 700.0f)
-	{
-		Scene::SetScene(new CSceneMain);
-	}*/
 
 	//上入力制御
 	if (Input::GetVKey(VK_UP) == true || W_cat != 1.0f)
@@ -366,6 +368,10 @@ void CObjHero::Action()
 		}
 	}
 
+	//重力
+	if (m_vy < 10)
+		m_vy += 9.8f / 16.0f;
+
 	m_x += m_vx;
 
 	m_y += m_vy;
@@ -401,6 +407,7 @@ void CObjHero::Action()
 
 		WDflag(false);
 		Dflag(false);
+
 	}
 
 	//天井と当たっているかどうか確認
@@ -487,7 +494,6 @@ void CObjHero::Draw()
 void CObjHero::Rightwalk()
 {
 	m_vx += 0.5f;
-
 	m_ani_time++;
 	m_posture = 0.0f;
 }
@@ -496,7 +502,6 @@ void CObjHero::Rightwalk()
 void CObjHero::Leftwalk()
 {
 	m_vx -= 0.5f;
-
 	m_ani_time++;
 	m_posture = 1.0f;
 }

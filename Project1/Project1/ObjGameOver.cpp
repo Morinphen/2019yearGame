@@ -19,7 +19,7 @@ void CObjGameOver::Init()
 //アクション
 void CObjGameOver::Action()
 {
-	//エンターキーを押してシーン:ゲームメインに移行する
+	//エンターキーを押してシーン:タイトルに移行する
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
 		if (m_key_flag == true)

@@ -41,10 +41,6 @@ void CObjNezuana::Action()
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
-	//要素番号を安俵に変更
-	float x = m_x;
-	float y = m_y;
-
 	if (flag == true)
 	{
 		testc = 0.0f;
@@ -68,14 +64,14 @@ void CObjNezuana::Draw()
 	RECT_F dst;
 
 	//ブロック表示
-	src.m_top = 0.0f;
+	src.m_top = 1.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 128.0f;
 
 	dst.m_top = m_y + l_scroll;
 	dst.m_left = m_x + m_scroll;
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
-	Draw::Draw(6, &src, &dst, c, 0.0f);
+	Draw::Draw(29, &src, &dst, c, 0.0f);
 }

@@ -168,6 +168,9 @@
     <ClCompile Include="NezuBlock.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
+    <ClCompile Include="KarakuriBlock.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -308,13 +311,16 @@
     <ClInclude Include="ObjClear.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Utikagi.h">
-      <Filter>ソース ファイル\Ninzya</Filter>
-    </ClInclude>
     <ClInclude Include="Nezuana.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
     <ClInclude Include="NezuBlock.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Utikagi.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="KarakuriBlock.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>

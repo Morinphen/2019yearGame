@@ -33,7 +33,7 @@ void CSceneGameOver::InitScene()
 	Draw::LoadImage(L"GameOver.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
-	Audio::LoadAudio(0, L"gameover.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"gameover2.wav", SOUND_TYPE::BACK_MUSIC);
 
 	//バックミュージックスタート
 	float v = Audio::VolumeMaster(0);
@@ -41,7 +41,7 @@ void CSceneGameOver::InitScene()
 
 	Audio::Start(0);
 
-	//タイトルオブジェクト作成
+	//ゲームオーバーオブジェクト作成
 	CObjGameOver* obj = new CObjGameOver();//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_GAMEOVER, 10);//主人公オブジェクト登録
 }

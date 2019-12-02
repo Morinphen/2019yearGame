@@ -35,6 +35,9 @@ private:
 	//ハム太郎移動制限用変数
 	bool hamstop;
 
+	//アニメーション用ハム太郎の向き
+	bool a_pos;
+
 	int map_data[46][100];
 
 	//召喚された位置情報情報を保存
@@ -43,6 +46,8 @@ private:
 
 	//ハム太郎のスピード
 	int speed;
+
+	bool naki;
 
 	//方向の反転
 	bool m_return;
