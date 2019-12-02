@@ -435,7 +435,6 @@ void CObjHero::Action()
 	}
 
 	hit->SetPos(m_x, m_y);
-
 }
 
 //ƒhƒ[
