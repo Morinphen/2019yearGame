@@ -232,7 +232,7 @@ bool CObjNezumi::mapsarch(int x, int y, int muki)
 		y -= 64;
 	}
 
-	if (map_data[mp_y][mp_x] == 0)
+	if (map_data[mp_y][mp_x] == 0 || map_data[mp_y][mp_x] == 4 || map_data[mp_y][mp_x] == 11)
 	{
 		flag = true;
 		if (a_pos == true)
