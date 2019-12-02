@@ -178,6 +178,7 @@ void CObjHero::Action()
 						green = 1.0f;
 					change = change ? false : true;
 					c_stop = true;
+					Audio::Start(20);
 				}
 			}
 			else
@@ -435,7 +436,6 @@ void CObjHero::Action()
 	}
 
 	hit->SetPos(m_x, m_y);
-
 }
 
 //ƒhƒ[

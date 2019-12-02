@@ -61,6 +61,7 @@ void CObjNagenawa::Action()
 	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
 	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
 	{
+		Audio::Start(12);
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
 		h->NawaIdo(true);

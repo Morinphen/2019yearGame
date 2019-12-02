@@ -50,8 +50,12 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(16, L"matti.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(17, L"key-drop1.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(18, L"sword-slash4.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(19, L"sadou.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(20, L"change.wav", SOUND_TYPE::EFFECT);
 	//ボリュームを1.5に増やす
-	float v = Audio::VolumeMaster(1.5);
+	float v = Audio::VolumeMaster(-0.5);
+	v = Audio::VolumeMaster((1.0 - v));
+	v = Audio::VolumeMaster(-0.5);
 	//音楽スタート
 	Audio::Start(0);
 
