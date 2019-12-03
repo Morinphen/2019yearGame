@@ -11,8 +11,8 @@ class CScenesetumei :public CScene
 public:
 	CScenesetumei();
 	~CScenesetumei();
-	void InitScene();//ゲームクリアの初期化メソッド
-	void Scene();    //ゲームクリアの実行中メソッド
+	void InitScene();//ゲーム説明の初期化メソッド
+	void Scene();    //ゲーム説明の実行中メソッド
 private:
 
 };

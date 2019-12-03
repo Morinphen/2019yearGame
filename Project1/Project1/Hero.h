@@ -87,6 +87,8 @@ public:
 	//主人公の戦闘スタイルを外部に渡す
 	bool GetMode() { return change; }
 
+	//どの道具か術を使ったかを外部に渡す
+	float GetN_M() { return n_m; }
 	//右に歩く
 	void Rightwalk();
 	void Leftwalk();
@@ -115,7 +117,7 @@ private:
 	float m_vy;
 	float m_posture;//姿勢
 	float remain;//残機
-
+	float n_m;//寸前に何を使ったか
 	float g_x;//グローバルX位置
 	float g_y;//グローバルY位置
 

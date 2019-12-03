@@ -45,8 +45,8 @@ void CSceneClear::InitScene()
 	Audio::Start(0);
 
 	//クリアオブジェクト作成
-	CObjClear* obj = new CObjClear();//タイトルオブジェクト作成
-	Objs::InsertObj(obj, OBJ_CLEAR, 10);//主人公オブジェクト登録
+	CObjClear* obj = new CObjClear();//クリアオブジェクト作成
+	Objs::InsertObj(obj, OBJ_CLEAR, 10);//クリアオブジェクト登録
 }
 
 void CSceneClear::Scene()
