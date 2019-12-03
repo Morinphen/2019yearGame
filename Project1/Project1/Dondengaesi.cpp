@@ -35,7 +35,7 @@ void CObjDonden::Init()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (scroll->m_map[i][j] >= 30)
+			if (scroll->m_map[i][j] >= 30  && scroll->m_map[i][j] <= 50)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
@@ -134,6 +134,9 @@ void CObjDonden::Action()
 				//主人公のリスタート位置変更
 				h->SetWX(D_tag[Pworp][1] * 64);
 				h->SetWY(D_tag[Pworp][0] * 64);
+
+				scroll->SetScrooll(-(h->GetX() - (D_tag[Pworp][1] * 64)));
+				scroll->SetYScrooll(-(h->GetY() - (D_tag[Pworp][0] * 64)));
 
 				//前方スクロールライン
 				if (h->GetX() > 600)
