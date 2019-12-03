@@ -35,7 +35,7 @@ void CObjDonden::Init()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (scroll->m_map[i][j] >= 30)
+			if (scroll->m_map[i][j] >= 30  && scroll->m_map[i][j] <= 50)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
