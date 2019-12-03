@@ -135,6 +135,9 @@ void CObjDonden::Action()
 				h->SetWX(D_tag[Pworp][1] * 64);
 				h->SetWY(D_tag[Pworp][0] * 64);
 
+				scroll->SetScrooll(-(h->GetX() - (D_tag[Pworp][1] * 64)));
+				scroll->SetYScrooll(-(h->GetY() - (D_tag[Pworp][0] * 64)));
+
 				//前方スクロールライン
 				if (h->GetX() > 600)
 				{
