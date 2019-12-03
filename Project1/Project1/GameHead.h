@@ -37,6 +37,7 @@ enum OBJ_NAME
 	OBJ_NEZUANA,
 	OBJ_NEZUBLOCK,
 	OBJ_KARAKURIBLOCK,
+	OBJ_SETUMEI
 };
 //------------------------------------------------
 
@@ -107,6 +108,7 @@ struct UserData
 #include"ObjGameOver.h"
 #include"ObjRetry.h"
 #include"ObjClear.h"
+#include"Objsetumei.h"
 #include"Exit.h"
 #include"Nezuana.h"
 #include"NezuBlock.h"
@@ -119,6 +121,7 @@ struct UserData
 #include"SceneGameOver.h"
 #include"SceneRetry.h"
 #include"SceneClear.h"
+#include"Scenesetumei.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

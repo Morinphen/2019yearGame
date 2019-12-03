@@ -63,7 +63,6 @@ void CObjUtikagi::Action()
 			Bflag = true;
 		}
 	}
-
 		else
 		{
 			Bflag = false;

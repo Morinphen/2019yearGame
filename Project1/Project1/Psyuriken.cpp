@@ -27,9 +27,11 @@ void CObjPsyuriken::Action()
 //ドロー
 void CObjPsyuriken::Draw()
 {
-	//
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	//描画カラー情報
+	float c2[4] = { 1.0f,1.0f,1.0f,0.8f };
 
 	RECT_F srcf; //描画元切り取り位置
 	RECT_F dstf; //描画先表示位置
@@ -91,30 +93,60 @@ void CObjPsyuriken::Draw()
 	dsts.m_bottom = 84.0f;
 	//描画
 	Draw::Draw(17, &srcs, &dsts, c, 0.0f);
+	
+	RECT_F srcb; //描画元切り取り位置
+	RECT_F dstb; //描画先表示位置
+	srcb.m_top = 0.0f;
+	srcb.m_left = 0.0f;
+	srcb.m_right = 512.0f;
+	srcb.m_bottom = 512.0f;
 
+	//表示位置の設定
+	dstb.m_top = 0.0f;
+	dstb.m_left = 0.0f;
+	dstb.m_right = 100.0f;
+	dstb.m_bottom = 120.0f;
+	//描画
+	Draw::Draw(36, &srcb, &dstb, c, 0.0f);
+
+	RECT_F srcm_u; //描画元切り取り位置
+	RECT_F dstm_u; //描画先表示位置
+	srcm_u.m_top = 0.0f;
+	srcm_u.m_left = 0.0f;
+	srcm_u.m_right = 211.0f;
+	srcm_u.m_bottom = 256.0f;
+
+	//表示位置の設定
+	dstm_u.m_top = 10.0f;
+	dstm_u.m_left = 20.0f;
+	dstm_u.m_right = 80.0f;
+	dstm_u.m_bottom = 60.0f;
+	//描画
+	Draw::Draw(18, &srcm_u, &dstm_u, c, 0.0f);
+	mode = hero->GetChange();
 	RECT_F srcm; //描画元切り取り位置
 	RECT_F dstm; //描画先表示位置
-	mode = hero->GetMode();
+
 	if (mode == false)
 	{
-		srcm.m_top = 0.0f;
+		srcm.m_top = 256.0f;
 		srcm.m_left = 0.0f;
-		srcm.m_right = 256.0f;
-		srcm.m_bottom = 256.0f;
+		srcm.m_right = 211.0f;
+		srcm.m_bottom = 512.0f;
 	}
 	else
 	{
-		srcm.m_top = 0.0f;
-		srcm.m_left = 256.0f;
-		srcm.m_right = 512.0f;
-		srcm.m_bottom = 256.0f;
+		srcm.m_top = 256.0f;
+		srcm.m_left = 211.0f;
+		srcm.m_right = 422.0f;
+		srcm.m_bottom = 512.0f;
 	}
 
 	//表示位置の設定
-	dstm.m_top = 0.0f;
-	dstm.m_left = 0.0f;
-	dstm.m_right = 100.0f;
-	dstm.m_bottom = 120.0f;
+	dstm.m_top = 60.0f;
+	dstm.m_left = 20.0f;
+	dstm.m_right = 80.0f;
+	dstm.m_bottom = 110.0f;
 	//描画
 	Draw::Draw(18, &srcm, &dstm, c, 0.0f);
 
@@ -160,6 +192,15 @@ void CObjPsyuriken::Draw()
 	dstz.m_bottom = 84.0f;
 	//描画
 	Draw::Draw(25, &srcz, &dstz, c, 0.0f);
+	RECT_F dstt; //描画先表示位置
+
+	//表示位置の設定
+	dstt.m_top = 0.0f;
+	dstt.m_left = 1100.0f;
+	dstt.m_right = 1200.0f;
+	dstt.m_bottom = 120.0f;
+	//描画
+	Draw::Draw(36, &srcb, &dstt, c2, 0.0f);
 	if (hero->GetCF() == true)
 	{
 		RECT_F srcg; //描画元切り取り位置
@@ -171,9 +212,9 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstg.m_top = 20.0f;
-		dstg.m_left = 600.0f;
-		dstg.m_right = 664.0f;
-		dstg.m_bottom = 84.0f;
+		dstg.m_left = 1110.0f;
+		dstg.m_right = 1190.0f;
+		dstg.m_bottom = 100.0f;
 
 		//描画
 		Draw::Draw(35, &srcg, &dstg, c, 0.0f);
