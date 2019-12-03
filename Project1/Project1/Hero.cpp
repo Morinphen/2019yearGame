@@ -63,6 +63,8 @@ void CObjHero::Init()
 	doton=false;
 	nezumi = false;
 
+	hero_stop = false;
+
 	w_x = 400;
 	w_y = 600-scroll->GetYScroll();
 
@@ -102,7 +104,7 @@ void CObjHero::Action()
 	);
 
 	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
-	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false && nezumi == false) {
+	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false && nezumi == false&& hero_stop==false) {
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
@@ -363,6 +365,7 @@ void CObjHero::Action()
 		{
 			nawa_ido = false;
 			nawa_stop = false;
+			hero_stop = false;
 			n_x = 0;
 			n_y = 0;
 			idocount = 0;

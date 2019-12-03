@@ -112,6 +112,7 @@ void CObjKaginawa::Action()
 		float b = abs(m_y - h->GetY());
 		CObjNagenawa* obj_s = new CObjNagenawa(h->GetX(), h->GetY(), m_muki, a, b);
 		Objs::InsertObj(obj_s, OBJ_NAGENAWA, 10);
+		h->Setstop(true);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

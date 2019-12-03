@@ -93,7 +93,8 @@ public:
 
 	bool Sworp;//ワープ制御用変数
 
-
+	//主人公の動きを止める
+	void Setstop(bool b) { hero_stop = b; }
 
 	//忍術フラグ
 	bool Ninzyutu;
@@ -160,6 +161,9 @@ private:
 
 	//土遁の術
 	bool doton;
+
+	//主人公の動きを止める
+	bool hero_stop;
 
 	bool ball;//煙玉フラグ
 	bool smokeh;//煙との衝突確認用
