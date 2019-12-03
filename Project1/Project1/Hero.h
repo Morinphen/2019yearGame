@@ -67,6 +67,7 @@ public:
 	//主人公の死亡フラグを外部から変更する
 	void Dflag(bool b) { dead = b; }
 	void WDflag(bool b) { Wdead = b; }
+	bool GetWDflag() { return Wdead; }
 
 	//主人公の当たり判定の状態を外部から変更する
 	void SetUP(bool b) { m_hit_up = b; }

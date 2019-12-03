@@ -113,12 +113,15 @@ void CObjMBlock::Action()
 		//ヒットボックス更新
 		CHitBox* hit = Hits::GetHitBox(this);
 
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Fdead == false)
-	{
-		Audio::Start(15);
-		Fdead = true;
-		hero->WDflag(true);
-	}
+		bool flag;
+		flag = hero->GetWDflag();
+
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && Fdead == false && flag == false)
+		{
+			Audio::Start(15);
+			Fdead = true;
+			hero->WDflag(true);
+		}
 
 		//主人公が着水したとき
 		if (Fdead == true)
@@ -133,20 +136,32 @@ void CObjMBlock::Action()
 				hero->SetX(hero->GetWX());
 				hero->SetY(hero->GetWY());
 
-				if (hero->GetX() < 500) {
-					scroll->SetScrooll(-(hero->GetX() - (500)));
-				}
-				else if (hero->GetX() > 600) {
+				if (hero->GetX() > 600)
+				{
 					scroll->SetScrooll(-(hero->GetX() - (600)));
+					hero->SetX(600);
+				}
+
+				else if (hero->GetX() < 500)
+				{
+					scroll->SetScrooll(-(hero->GetX() - (500)));
+					hero->SetX(500);
 				}
 
 				if (hero->GetY() < 80) {
 					scroll->SetYScrooll(-(hero->GetY() - (80)));
+					hero->SetY(80);
 				}
 				else if (hero->GetY() > 500) {
 					scroll->SetYScrooll(-(hero->GetY() - (500)));
+					hero->SetY(500);
 				}
+			}
 
+			else if(deadtime > 80)
+			{
+				deadtime = 0;
+				Fdead = false;
 				hero->WDflag(false);
 				hero->Dflag(false);
 			}

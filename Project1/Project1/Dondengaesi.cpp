@@ -35,7 +35,7 @@ void CObjDonden::Init()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (scroll->m_map[i][j] >= 30)
+			if (scroll->m_map[i][j] >= 30  && scroll->m_map[i][j] <= 50)
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
@@ -135,22 +135,26 @@ void CObjDonden::Action()
 				h->SetWX(D_tag[Pworp][1] * 64);
 				h->SetWY(D_tag[Pworp][0] * 64);
 
-			//前方スクロールライン
-			if (h->GetX() > 600)
-			{
-				scroll->SetScrooll(-(h->GetX() - (600)));
-			}
+				//前方スクロールライン
+				if (h->GetX() > 600)
+				{
+					scroll->SetScrooll(-(h->GetX() - (600)));
+					h->SetX(600);
+				}
 
-			else if (h->GetX() < 500)
-			{
-				scroll->SetScrooll(-(h->GetX() - (500)));
-			}
+				else if (h->GetX() < 500)
+				{
+					scroll->SetScrooll(-(h->GetX() - (500)));
+					h->SetX(500);
+				}
 
 				if (h->GetY() < 80) {
 					scroll->SetYScrooll(-(h->GetY() - (80)));
+					h->SetY(80);
 				}
 				else if (h->GetY() > 500) {
 					scroll->SetYScrooll(-(h->GetY() - (500)));
+					h->SetY(500);
 				}
 
 				//アニメーション後半開始
