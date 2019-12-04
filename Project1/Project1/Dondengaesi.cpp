@@ -50,14 +50,8 @@ void CObjDonden::Init()
 			}
 		}
 	}
-	if (hide == true)
-	{
-		Pworp = Worp((a));
-	}
-	else
-	{
-		Pworp = TagWorp((a));
-	}
+
+	Pworp = TagWorp((a));
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
@@ -134,6 +128,9 @@ void CObjDonden::Action()
 				//主人公のリスタート位置変更
 				h->SetWX(D_tag[Pworp][1] * 64);
 				h->SetWY(D_tag[Pworp][0] * 64);
+
+				scroll->SetScrooll(-(h->GetX() - (D_tag[Pworp][1] * 64)));
+				scroll->SetScrooll(-(h->GetX() - (D_tag[Pworp][0] * 64)));
 
 				//前方スクロールライン
 				if (h->GetX() > 600)

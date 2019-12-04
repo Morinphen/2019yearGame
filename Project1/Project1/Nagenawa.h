@@ -21,6 +21,9 @@ private:
 	float m_x;
 	float m_y;
 
+	float b_x;
+	float b_y;
+
 	float m_vx;
 	float m_vy;
 

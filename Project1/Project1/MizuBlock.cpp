@@ -136,6 +136,9 @@ void CObjMBlock::Action()
 				hero->SetX(hero->GetWX());
 				hero->SetY(hero->GetWY());
 
+				hero->WDflag(false);
+				hero->Dflag(false);
+
 				if (hero->GetX() > 600)
 				{
 					scroll->SetScrooll(-(hero->GetX() - (600)));
@@ -162,8 +165,6 @@ void CObjMBlock::Action()
 			{
 				deadtime = 0;
 				Fdead = false;
-				hero->WDflag(false);
-				hero->Dflag(false);
 			}
 
 		}
