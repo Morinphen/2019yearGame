@@ -162,8 +162,8 @@ void CObjMBlock::Action()
 
 			else if(deadtime > 80)
 			{
-				deadtime = 0;
 				Fdead = false;
+				deadtime = 0;
 			}
 
 		}
@@ -192,7 +192,6 @@ void CObjMBlock::Action()
 			Fdead = false;
 			deadtime = 0;
 		}
-
 	}
 }
 //ƒhƒ[

@@ -325,7 +325,7 @@ void CObjHero::Action()
 		Ninzyutu = false;
 	}
 
-	//€–S‚µ‚½‚Æ‚«
+	//…‚Å€–S‚µ‚½‚Æ‚«
 	if (Wdead == true) {
 		dead = true;
 		if (d_ani_frame < 4) {
