@@ -50,14 +50,8 @@ void CObjDonden::Init()
 			}
 		}
 	}
-	if (hide == true)
-	{
-		Pworp = Worp((a));
-	}
-	else
-	{
-		Pworp = TagWorp((a));
-	}
+
+	Pworp = TagWorp((a));
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅

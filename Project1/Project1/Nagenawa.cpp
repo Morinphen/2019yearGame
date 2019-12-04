@@ -14,6 +14,9 @@ CObjNagenawa::CObjNagenawa(int x, int y, int a, float vx, float vy)
 	m_x = x;
 	m_y = y - 10;
 
+	b_x = x;
+	b_y = y - 10;;
+
 	m_vx = vx / 50;
 
 	m_vy = vy / 40;
@@ -98,6 +101,7 @@ void CObjNagenawa::Action()
 
 	//d—Ν
 	m_vy += (-grabty / 3) / 16.0f;
+
 	m_y += m_vy;
 
 	m_scroll = scroll->GetScroll();
@@ -108,33 +112,10 @@ void CObjNagenawa::Action()
 //ƒhƒ[
 void CObjNagenawa::Draw()
 {
-	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
+	//“κ•”•ª‚Μ•`‰ζ
+	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (h->GetMP()==0.0)
-	{
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 31.0f;
-		src.m_bottom = 36.0f;
-	}
-	else
-	{
-		src.m_top = 0.0f;
-		src.m_left = 31.0f;
-		src.m_right = 0.0f;
-		src.m_bottom = 36.0f;
-	}
-
-	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
-	dst.m_right = 64.0f + m_x;
-	dst.m_bottom = 64.0f + m_y;
-
-	Draw::Draw(20, &src, &dst, c, 0.0f);
-
-	/*float d[4] = { 0.0f,0.0f,0.0f,1.0f };
 
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
@@ -146,7 +127,12 @@ void CObjNagenawa::Draw()
 	float r = atan2(vy, vx);
 	r = r * 180 / 3.14;
 
-	r = 360.0f - abs(r);
+	if (r < 0)
+		r = 360.0f - abs(r);
+
+	float ar = atan2(m_vy, m_vx)*3.14 / 180;
+
+	float br = 3.14 / 180;
 
 	float a = abs(m_vy);
 	float b = abs(m_vx);
@@ -158,10 +144,44 @@ void CObjNagenawa::Draw()
 	src.m_right = Nawa;
 	src.m_bottom = 64.0f;
 
-	dst.m_top = 0.0f + h->GetY() - (Nawa - b) / 7;
-	dst.m_left = 0.0f + h->GetX();
-	dst.m_right = Nawa + h->GetX();
-	dst.m_bottom = 64.0f + h->GetY() - (Nawa - b) /7;
+	float aka = 0;
 
-	Draw::Draw(7, &src, &dst, d, -r);*/
+	for (float i = -r * 6; i < -180; i += 180)
+	{
+		aka = i + 180;
+	}
+
+	float iy = vy + 64;
+
+	if (iy > 0)
+	{
+		iy = 0.0f;
+	}
+
+	if (iy < -32.0f)
+	{
+		//iy = -32.0f;
+	}
+
+	dst.m_top = iy + h->GetY();
+	dst.m_left = 20.0f + h->GetX();
+	dst.m_right = Nawa + h->GetX();
+	dst.m_bottom = dst.m_top + 64.0f;
+
+	Draw::Draw(7, &src, &dst, d, -r*6);
+
+	//ηκ•”•ª‚Μ•`‰ζ
+	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
+
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 31.0f;
+	src.m_bottom = 36.0f;
+
+	dst.m_top = 0.0f + m_y;
+	dst.m_left = 0.0f + m_x;
+	dst.m_right = 64.0f + m_x;
+	dst.m_bottom = 64.0f + m_y;
+
+	Draw::Draw(20, &src, &dst, c, 0.0f);
 }
