@@ -95,6 +95,8 @@ public:
 
 	bool Sworp;//ワープ制御用変数
 
+	float GetMP() { return m_posture; }
+
 	//主人公の動きを止める
 	void Setstop(bool b) { hero_stop = b; }
 
