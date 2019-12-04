@@ -119,7 +119,7 @@ void CObjNagenawa::Draw()
 
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//vector‚Ìì¬
+	/*//vector‚Ìì¬
 	float vx = (m_x + (-m_scroll)) - h->GetX();
 	float vy = (m_y + (-l_scroll)) - h->GetY();
 
@@ -168,16 +168,25 @@ void CObjNagenawa::Draw()
 	dst.m_right = Nawa + h->GetX();
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(7, &src, &dst, d, -r*6);
+	Draw::Draw(7, &src, &dst, d, -r*6);*/
 
 	//çê•”•ª‚Ì•`‰æ
 	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
 
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 31.0f;
-	src.m_bottom = 36.0f;
-
+	if (h->GetMP() == 0)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 31.0f;
+		src.m_bottom = 36.0f;
+	}
+	else
+	{
+		src.m_top = 0.0f;
+		src.m_left = 31.0f;
+		src.m_right = 0.0f;
+		src.m_bottom = 36.0f;
+	}
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
 	dst.m_right = 64.0f + m_x;
