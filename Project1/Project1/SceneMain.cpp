@@ -142,9 +142,15 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(objm, OBJ_MIZUBLOCK, 6);
 			}
 
-			else if (map[i][j] == 12 || map[i][j] >=30&& map[i][j] <= 50)
+			else if (map[i][j] >=30&& map[i][j] <= 50)
 			{
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
+
+			else if (map[i][j] == 12)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64, map[i][j], true);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 
