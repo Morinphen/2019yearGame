@@ -145,6 +145,7 @@
     <ClCompile Include="NawaBlock.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjRetry.cpp" />
+    <ClCompile Include="Objsetumei.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="Psyuriken.cpp" />
     <ClCompile Include="SceneClear.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Otosiana.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneRetry.cpp" />
+    <ClCompile Include="Scenesetumei.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="Scroll.cpp" />
     <ClCompile Include="smokeball.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="Nagenawa.h" />
     <ClInclude Include="NawaBlock.h" />
     <ClInclude Include="ObjRetry.h" />
+    <ClInclude Include="Objsetumei.h" />
     <ClInclude Include="Otosiana.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjTitle.h" />
@@ -205,6 +208,7 @@
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="SceneRetry.h" />
+    <ClInclude Include="Scenesetumei.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="Scroll.h" />
     <ClInclude Include="smokeball.h" />

@@ -83,6 +83,7 @@ void CObjNagenawa::Action()
 		Audio::Start(12);
 		float a = abs(m_y - h->GetY());
 		h->ReSetN(false);
+		h->Setstop(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

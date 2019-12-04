@@ -46,7 +46,7 @@ void CSceneTitle::InitScene()
 
 	//タイトルオブジェクト作成
 	CObjTitle* obj = new CObjTitle();//タイトルオブジェクト作成
-	Objs::InsertObj(obj, OBJ_TITLE, 10);//主人公オブジェクト登録
+	Objs::InsertObj(obj, OBJ_TITLE, 10);//タイトルオブジェクト登録
 }
 
 void CSceneTitle::Scene()

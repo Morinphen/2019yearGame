@@ -31,6 +31,8 @@ void CObjSyuriken::Init()
 	m_vy = 0;
 	m_posture = 1.0f;//‰EŒü‚«0.0‚†A¶Œü‚«1.0f
 
+	syuriken_time = 0.0f;
+
 	spen = 0;
 	t_h = false;
 
@@ -90,13 +92,17 @@ void CObjSyuriken::Action()
 		m_vx = -4.0f*m_muki;
 		m_vy = -10.0f;
 		m_y += m_vy;
+		syuriken_time = 0;
 	}
 
-	if (m_x > 20000 || m_x<-200 || m_y > 7000)
+	syuriken_time++;
+
+	if (syuriken_time==120.0f)
 	{
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
+		syuriken_time = 0;
 	}
 	
 	if (t_h == true)

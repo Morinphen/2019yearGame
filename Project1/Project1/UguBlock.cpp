@@ -164,6 +164,9 @@ void CObjUguBlock::Action()
 		{
 			HitBox_ON = false;
 			Hits::DeleteHitBox(this);
+			uguisu = false;
+			m_ani_time = 0;
+			m_ani_frame = 0;
 		}
 	}
 }

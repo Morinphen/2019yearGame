@@ -26,7 +26,7 @@ void CObjTitle::Action()
 		if (m_key_flag == true)
 		{
 			Audio::Start(1);
-			Scene::SetScene(new CSceneMain());
+			Scene::SetScene(new CScenesetumei());
 			m_key_flag = false;
 		}
 	}

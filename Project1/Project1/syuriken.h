@@ -43,6 +43,9 @@ private:
 	bool Animation;
 	float spen;
 
+	//手裏剣消滅カウント
+	float syuriken_time;
+
 	//blockとの衝突確認用
 	bool m_hit_up;
 	bool m_hit_down;

@@ -144,7 +144,6 @@ void CObjMBlock::Action()
 					scroll->SetScrooll(-(hero->GetX() - (600)));
 					hero->SetX(600);
 				}
-
 				else if (hero->GetX() < 500)
 				{
 					scroll->SetScrooll(-(hero->GetX() - (500)));
