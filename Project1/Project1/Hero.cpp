@@ -113,6 +113,10 @@ void CObjHero::Action()
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
+			if (change == true)
+			{
+				n_m = 5;
+			}
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx += 0.5f;
 				m_ani_time++;
@@ -121,6 +125,10 @@ void CObjHero::Action()
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
+			if (change == true)
+			{
+				n_m = 5;
+			}
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx -= 0.5f;
