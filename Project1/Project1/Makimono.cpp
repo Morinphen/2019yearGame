@@ -111,7 +111,7 @@ void CObjMakimono::Action()
 			CHitBox* hit = Hits::GetHitBox(this);
 
 
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr||hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr)
 	{
 		//主人公と当たったらフラグをオンに
 		getflag = true;
