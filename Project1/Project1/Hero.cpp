@@ -273,6 +273,16 @@ void CObjHero::Action()
 						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
 						s_atack = true;
+						if (m_posture == 1.0f)
+						{
+							CObjHinotama* sy = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+							sy->SetP(true);
+						}
+						else
+						{
+							CObjHinotama* sy = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+							sy->SetP(false);
+						}
 					}
 				}
 
@@ -413,7 +423,8 @@ void CObjHero::Action()
 	}
 
 	//“G‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false)
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false||
+		hit->CheckObjNameHit(OBJ_HAMENEMY) != nullptr&&smokeh == false)
 	{
 		remain -= 1;
 		SetX(GetWX());

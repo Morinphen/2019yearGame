@@ -99,7 +99,11 @@ void CObjHinotama::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
+	if (t_h == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ƒhƒ[

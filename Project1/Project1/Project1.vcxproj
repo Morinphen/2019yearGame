@@ -114,6 +114,7 @@
     <ClCompile Include="Dondengaesi.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Dsyuriken.cpp" />
+    <ClCompile Include="Fireenemy.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
@@ -128,6 +129,7 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="HamEnemy.cpp" />
     <ClCompile Include="Hamutaro.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Hinotama.cpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Dondengaesi.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Dsyuriken.h" />
+    <ClInclude Include="Fireenemy.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="GameL\UserData.h" />
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
+    <ClInclude Include="HamEnemy.h" />
     <ClInclude Include="Hamutaro.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Hinotama.h" />

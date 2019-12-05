@@ -19,6 +19,27 @@
     <Filter Include="ソース ファイル\Mapgimic">
       <UniqueIdentifier>{fa61bd2b-8502-4a9f-82e2-1088fe9ee9fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\enemy">
+      <UniqueIdentifier>{7f397db9-f718-41e6-98de-63cd4b196634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main">
+      <UniqueIdentifier>{b4b6d891-5ef6-4c88-a5c4-c6b1747d8032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Clear">
+      <UniqueIdentifier>{5fc30afd-f7a5-45e9-8b86-265285a3c958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameOver">
+      <UniqueIdentifier>{34904bf9-aa2a-4af4-b586-7fafc7c79926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Retry">
+      <UniqueIdentifier>{3ea85f58-f5ef-4620-84a9-c3c9641e0e6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Title">
+      <UniqueIdentifier>{6565104c-feac-4693-8c04-4d564371fb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\setumei">
+      <UniqueIdentifier>{a14537a0-28dc-4127-a90f-2c1cca09b94b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -66,13 +87,7 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Scroll.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
@@ -129,38 +144,11 @@
     <ClCompile Include="Karakuri.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTitle.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGameOver.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGameOver.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Psyuriken.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Dsyuriken.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
     <ClCompile Include="Exit.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneRetry.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjRetry.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneClear.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjClear.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Nezuana.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
@@ -171,11 +159,50 @@
     <ClCompile Include="KarakuriBlock.cpp">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClCompile>
-    <ClCompile Include="Scenesetumei.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="ObjEnemy.cpp">
+      <Filter>ソース ファイル\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjClear.cpp">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="Psyuriken.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameOver.cpp">
+      <Filter>ソース ファイル\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ソース ファイル\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRetry.cpp">
+      <Filter>ソース ファイル\Retry</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRetry.cpp">
+      <Filter>ソース ファイル\Retry</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
     <ClCompile Include="Objsetumei.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\setumei</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenesetumei.cpp">
+      <Filter>ソース ファイル\setumei</Filter>
+    </ClCompile>
+    <ClCompile Include="Fireenemy.cpp">
+      <Filter>ソース ファイル\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="HamEnemy.cpp">
+      <Filter>ソース ファイル\enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,9 +251,6 @@
     <ClInclude Include="GameL\WinInputs.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Scroll.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -244,9 +268,6 @@
     </ClInclude>
     <ClInclude Include="smokeball.h">
       <Filter>ソース ファイル\Ninzya</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Block.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
@@ -284,38 +305,11 @@
     <ClInclude Include="Karakuri.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGameOver.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameOver.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Psyuriken.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Dsyuriken.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
     <ClInclude Include="Exit.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneRetry.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjRetry.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneClear.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjClear.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Nezuana.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
@@ -329,11 +323,50 @@
     <ClInclude Include="KarakuriBlock.h">
       <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <Filter>ソース ファイル\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjClear.h">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Psyuriken.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameOver.h">
+      <Filter>ソース ファイル\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ソース ファイル\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRetry.h">
+      <Filter>ソース ファイル\Retry</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRetry.h">
+      <Filter>ソース ファイル\Retry</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
     <ClInclude Include="Objsetumei.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\setumei</Filter>
     </ClInclude>
     <ClInclude Include="Scenesetumei.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\setumei</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireenemy.h">
+      <Filter>ソース ファイル\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="HamEnemy.h">
+      <Filter>ソース ファイル\enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
