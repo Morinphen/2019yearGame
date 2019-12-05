@@ -236,6 +236,7 @@ void CObjBlock::BlockHit
 	}
 }
 
+//‚¤‚¿çê—p“–‚½‚è”»’è
 void CObjBlock::UBlockHit
 (
 	float* x, float* y, bool* flag,

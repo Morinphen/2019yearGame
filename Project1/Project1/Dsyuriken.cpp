@@ -101,7 +101,7 @@ void CObjDsyuriken::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr|| hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr)
 	{
 		Audio::Start(11);
 		//“G‚ÌˆÊ’u‚ðŽæ“¾
@@ -110,7 +110,6 @@ void CObjDsyuriken::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
 
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
