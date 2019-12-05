@@ -136,9 +136,6 @@ void CObjMBlock::Action()
 				hero->SetX(hero->GetWX());
 				hero->SetY(hero->GetWY());
 
-				hero->WDflag(false);
-				hero->Dflag(false);
-
 				if (hero->GetX() > 600)
 				{
 					scroll->SetScrooll(-(hero->GetX() - (600)));
@@ -164,6 +161,8 @@ void CObjMBlock::Action()
 			{
 				deadtime = 0;
 				Fdead = false;
+				hero->WDflag(false);
+				hero->Dflag(false);
 			}
 
 		}
@@ -187,6 +186,9 @@ void CObjMBlock::Action()
 		//ヒットボックス削除
 		if (HitBox_ON == true)
 		{
+			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+			hero->WDflag(false);
+			hero->Dflag(false);
 			HitBox_ON = false;
 			Hits::DeleteHitBox(this);
 			Fdead = false;
