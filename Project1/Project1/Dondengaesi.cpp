@@ -46,6 +46,7 @@ void CObjDonden::Init()
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
+				D_tag[a][2] = scroll->m_map[i][j];
 				a++;
 			}
 		}

@@ -159,10 +159,10 @@ void CObjMBlock::Action()
 
 			else if(deadtime > 80)
 			{
-				deadtime = 0;
 				Fdead = false;
 				hero->WDflag(false);
 				hero->Dflag(false);
+				deadtime = 0;
 			}
 
 		}
@@ -194,7 +194,6 @@ void CObjMBlock::Action()
 			Fdead = false;
 			deadtime = 0;
 		}
-
 	}
 }
 //ƒhƒ[

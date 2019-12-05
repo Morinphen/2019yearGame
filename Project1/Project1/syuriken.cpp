@@ -101,7 +101,6 @@ void CObjSyuriken::Action()
 	{
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
 		syuriken_time = 0;
 	}
 	
@@ -109,7 +108,6 @@ void CObjSyuriken::Action()
 	{
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
 	}
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
 }
