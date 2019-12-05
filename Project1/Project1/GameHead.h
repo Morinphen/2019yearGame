@@ -37,7 +37,9 @@ enum OBJ_NAME
 	OBJ_NEZUANA,
 	OBJ_NEZUBLOCK,
 	OBJ_KARAKURIBLOCK,
-	OBJ_SETUMEI
+	OBJ_SETUMEI,
+	OBJ_FIREENEMY,
+	OBJ_HAMENEMY,
 };
 //------------------------------------------------
 
@@ -103,6 +105,8 @@ struct UserData
 #include"Karakuri.h"
 #include"Psyuriken.h"
 #include"Dsyuriken.h"
+#include"HamEnemy.h"
+#include"Fireenemy.h"
 
 #include"ObjTitle.h"
 #include"ObjGameOver.h"
