@@ -138,7 +138,7 @@ void CObjEnemy::Action()
 		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 	}
 	//ブロック衝突で向きを変更
-	if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false)
+/*	if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false)
 	{
 		m_move = true;
 		crhitbox = true;
@@ -149,7 +149,7 @@ void CObjEnemy::Action()
 		m_move = false;
 		crhitbox = true;
 		m_posture_time = 0;
-	}
+	}*/
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
 		CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
