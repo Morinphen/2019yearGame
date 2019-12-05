@@ -108,7 +108,7 @@ void CObjPsyuriken::Draw()
 	dstb.m_right = 100.0f;
 	dstb.m_bottom = 120.0f;
 	//•`‰æ
-	Draw::Draw(36, &srcb, &dstb, c, 0.0f);
+	Draw::Draw(32, &srcb, &dstb, c, 0.0f);
 
 	RECT_F srcm_u; //•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dstm_u; //•`‰ææ•\Ž¦ˆÊ’u
@@ -166,7 +166,7 @@ void CObjPsyuriken::Draw()
 	dstd.m_right = 278.0f;
 	dstd.m_bottom = 84.0f;
 	//•`‰æ
-	Draw::Draw(25, &srcd, &dstd, c, 0.0f);
+	Draw::Draw(21, &srcd, &dstd, c, 0.0f);
 
 	RECT_F srcz; //•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dstz; //•`‰ææ•\Ž¦ˆÊ’u
@@ -192,7 +192,7 @@ void CObjPsyuriken::Draw()
 	dstz.m_right = 342.0f;
 	dstz.m_bottom = 84.0f;
 	//•`‰æ
-	Draw::Draw(25, &srcz, &dstz, c, 0.0f);
+	Draw::Draw(21, &srcz, &dstz, c, 0.0f);
 	RECT_F dstt; //•`‰ææ•\Ž¦ˆÊ’u
 
 	//•\Ž¦ˆÊ’u‚ÌÝ’è
@@ -201,7 +201,7 @@ void CObjPsyuriken::Draw()
 	dstt.m_right = 1200.0f;
 	dstt.m_bottom = 120.0f;
 	//•`‰æ
-	Draw::Draw(36, &srcb, &dstt, c2, 0.0f);
+	Draw::Draw(32, &srcb, &dstt, c2, 0.0f);
 	if (hero->GetCF() == true)
 	{
 		RECT_F srcg; //•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
@@ -218,7 +218,7 @@ void CObjPsyuriken::Draw()
 		dstg.m_bottom = 100.0f;
 
 		//•`‰æ
-		Draw::Draw(35, &srcg, &dstg, c, 0.0f);
+		Draw::Draw(31, &srcg, &dstg, c, 0.0f);
 	}
 	RECT_F dstn_b; //•`‰ææ•\Ž¦ˆÊ’u
 
@@ -228,7 +228,7 @@ void CObjPsyuriken::Draw()
 	dstn_b.m_right = 900.0f;
 	dstn_b.m_bottom = 120.0f;
 	//•`‰æ
-	Draw::Draw(36, &srcb, &dstn_b, c2, 0.0f);
+	Draw::Draw(32, &srcb, &dstn_b, c2, 0.0f);
 	n_m = hero->GetN_M();
 	if (n_m>=0)
 	{
@@ -268,6 +268,6 @@ void CObjPsyuriken::Draw()
 		dstn_m.m_right = 860.0f;
 		dstn_m.m_bottom = 120.0f;
 		//•`‰æ
-		Draw::Draw(37, &srcn_m, &dstn_m, c, 0.0f);
+		Draw::Draw(33, &srcn_m, &dstn_m, c, 0.0f);
 	}
 }

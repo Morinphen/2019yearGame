@@ -217,12 +217,12 @@ void CObjHamEnemy::Draw()
 		srcs.m_bottom = 300.0f;
 		//•\¦ˆÊ’u‚Ìİ’è
 		dsts.m_top = dst.m_top;
-		dsts.m_left = dst.m_left ;
+		dsts.m_left = dst.m_left;
 		dsts.m_right = dst.m_right + 166.0f;
 		dsts.m_bottom = dst.m_bottom;
 	}
 	//•`‰æ
-	Draw::Draw(32, &srcs, &dsts, c, 0.0f);
+	Draw::Draw(28, &srcs, &dsts, c, 0.0f);
 	/*if(find==true)
 	{
 		//Ø‚èæ‚èˆÊ’u‚Ìİ’è

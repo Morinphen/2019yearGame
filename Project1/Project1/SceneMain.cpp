@@ -60,7 +60,6 @@ void CSceneMain::InitScene()
 	Audio::Start(0);
 
 	//外部グラフィックファイル読み込み
-	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
 	Draw::LoadImage(L"Zimen_t.jpg", 1, TEX_SIZE_512);
 	Draw::LoadImage(L"Kabe2.jpg", 2, TEX_SIZE_512);
 	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
@@ -81,20 +80,20 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
 	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
 	Draw::LoadImage(L"kaginawa.png", 20, TEX_SIZE_512);
-	Draw::LoadImage(L"ninzya1.png", 25, TEX_SIZE_512);
-	Draw::LoadImage(L"Zimen_y.jpg", 26, TEX_SIZE_512);
-	Draw::LoadImage(L"Moemasu.jpg", 27, TEX_SIZE_512);
-	Draw::LoadImage(L"uguisu.png", 28, TEX_SIZE_512);
-	Draw::LoadImage(L"nezuana.png", 29, TEX_SIZE_512);
-	Draw::LoadImage(L"turi.png", 30, TEX_SIZE_512);
-	Draw::LoadImage(L"goal.png", 31, TEX_SIZE_512);
-	Draw::LoadImage(L"sikaku.png", 32, TEX_SIZE_512);
-	Draw::LoadImage(L"kemuri.png", 33, TEX_SIZE_1024);
-	Draw::LoadImage(L"nezumi.png", 34, TEX_SIZE_512);
-	Draw::LoadImage(L"makimo_a.png", 35, TEX_SIZE_512);
-	Draw::LoadImage(L"mode_back.jpg", 36, TEX_SIZE_512);
-	Draw::LoadImage(L"magic.png", 37, TEX_SIZE_1024);
-	Draw::LoadImage(L"haken.png", 38, TEX_SIZE_512);
+	Draw::LoadImage(L"ninzya1.png", 21, TEX_SIZE_512);
+	Draw::LoadImage(L"Zimen_y.jpg", 22, TEX_SIZE_512);
+	Draw::LoadImage(L"Moemasu.jpg", 23, TEX_SIZE_512);
+	Draw::LoadImage(L"uguisu.png", 24, TEX_SIZE_512);
+	Draw::LoadImage(L"nezuana.png", 25, TEX_SIZE_512);
+	Draw::LoadImage(L"turi.png", 26, TEX_SIZE_512);
+	Draw::LoadImage(L"goal.png", 27, TEX_SIZE_512);
+	Draw::LoadImage(L"sikaku.png", 28, TEX_SIZE_512);
+	Draw::LoadImage(L"kemuri.png", 29, TEX_SIZE_1024);
+	Draw::LoadImage(L"nezumi.png", 30, TEX_SIZE_512);
+	Draw::LoadImage(L"makimo_a.png", 31, TEX_SIZE_512);
+	Draw::LoadImage(L"mode_back.jpg", 32, TEX_SIZE_512);
+	Draw::LoadImage(L"magic.png", 33, TEX_SIZE_1024);
+	Draw::LoadImage(L"haken.png", 34, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
