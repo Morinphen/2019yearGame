@@ -258,6 +258,8 @@ void CObjHero::Action()
 						ball = true;
 					}
 				}
+				//忍術モード解除で土遁解除
+				doton = false;
 			}
 
 			//妖術モード
@@ -305,7 +307,6 @@ void CObjHero::Action()
 
 		}
 	}
-
 	//うちかぎを使用しているとき
 	else if (U_flag == true)
 	{
