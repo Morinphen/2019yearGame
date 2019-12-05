@@ -36,16 +36,15 @@ void CScenesetumei::InitScene()
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 
-	Audio::LoadAudio(0, L"gameclear.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"setumei.wav", SOUND_TYPE::BACK_MUSIC);
 
 	float v = Audio::VolumeMaster(-0.5);
 	v = Audio::VolumeMaster((1.0 - v));
 	v = Audio::VolumeMaster(-0.5);
 	Audio::Start(0);
 
-	//説明オブジェクト作成
-	CObjsetumei* obj = new CObjsetumei();//タイトルオブジェクト作成
-	Objs::InsertObj(obj, OBJ_SETUMEI, 10);//主人公オブジェクト登録
+	CObjsetumei* obj = new CObjsetumei();//説明オブジェクト作成
+	Objs::InsertObj(obj, OBJ_SETUMEI, 10);//説明オブジェクト登録
 }
 
 void CScenesetumei::Scene()

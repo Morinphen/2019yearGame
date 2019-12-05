@@ -16,6 +16,7 @@ void CObjPsyuriken::Init()
 {
 	ps = 0;
 	re = 0;
+	n_m = -1;
 }
 
 //アクション
@@ -127,7 +128,7 @@ void CObjPsyuriken::Draw()
 	RECT_F srcm; //描画元切り取り位置
 	RECT_F dstm; //描画先表示位置
 
-	if (mode == false)
+	if (mode == true)
 	{
 		srcm.m_top = 256.0f;
 		srcm.m_left = 0.0f;
@@ -218,5 +219,55 @@ void CObjPsyuriken::Draw()
 
 		//描画
 		Draw::Draw(35, &srcg, &dstg, c, 0.0f);
+	}
+	RECT_F dstn_b; //描画先表示位置
+
+	//表示位置の設定
+	dstn_b.m_top = 0.0f;
+	dstn_b.m_left = 750.0f;
+	dstn_b.m_right = 900.0f;
+	dstn_b.m_bottom = 120.0f;
+	//描画
+	Draw::Draw(36, &srcb, &dstn_b, c2, 0.0f);
+	n_m = hero->GetN_M();
+	if (n_m>=0)
+	{
+		RECT_F srcn_m; //描画元切り取り位置
+		RECT_F dstn_m; //描画先表示位置
+		if (n_m < 4)
+		{
+			srcn_m.m_top = 0.0f;
+			srcn_m.m_left = 0.0f + (184.0f*n_m);;
+			srcn_m.m_right =184.0+(184.0f*n_m);
+			if (n_m == 1 || n_m == 3)
+			{
+				srcn_m.m_bottom = 350.0f;
+			}
+			else
+			{
+				srcn_m.m_bottom = 512.0f;
+			}
+		}
+		else if (n_m < 8)
+		{
+			srcn_m.m_top = 512.0f;
+			srcn_m.m_left = 0.0f + (184.0f*n_m);;
+			srcn_m.m_right = 184.0 + (184.0f*n_m);
+			if (n_m == 7)
+			{
+				srcn_m.m_bottom = 1024.0f;
+			}
+			else
+			{
+				srcn_m.m_bottom = 862.0f;
+			}
+		}
+		//表示位置の設定
+		dstn_m.m_top = 0.0f;
+		dstn_m.m_left = 790.0f;
+		dstn_m.m_right = 860.0f;
+		dstn_m.m_bottom = 120.0f;
+		//描画
+		Draw::Draw(37, &srcn_m, &dstn_m, c, 0.0f);
 	}
 }

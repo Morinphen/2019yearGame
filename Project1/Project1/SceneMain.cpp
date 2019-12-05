@@ -66,7 +66,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
 	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
 	Draw::LoadImage(L"Donden.png", 5, TEX_SIZE_512);
-	Draw::LoadImage(L"kemuridama.png", 6, TEX_SIZE_512);
+	Draw::LoadImage(L"smokeball.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
 	Draw::LoadImage(L"Kaginawablock.png", 8, TEX_SIZE_512);
 	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
@@ -93,6 +93,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"nezumi.png", 34, TEX_SIZE_512);
 	Draw::LoadImage(L"makimo_a.png", 35, TEX_SIZE_512);
 	Draw::LoadImage(L"mode_back.jpg", 36, TEX_SIZE_512);
+	Draw::LoadImage(L"magic.png", 37, TEX_SIZE_1024);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
@@ -144,6 +145,12 @@ void CSceneMain::InitScene()
 			else if (map[i][j] >=30&& map[i][j] <= 50)
 			{
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
+				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+			}
+
+			else if (map[i][j] == 12)
+			{
+				CObjDonden*objd = new CObjDonden(j * 64, i * 64, map[i][j], true);
 				Objs::InsertObj(objd, OBJ_DONDEN, 3);
 			}
 

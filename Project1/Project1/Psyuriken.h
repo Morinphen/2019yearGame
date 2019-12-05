@@ -17,4 +17,5 @@ private:
 	int ps;
 	int re;
 	bool mode;
+	float n_m;
 };

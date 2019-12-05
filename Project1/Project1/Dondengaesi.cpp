@@ -46,18 +46,13 @@ void CObjDonden::Init()
 			{
 				D_tag[a][0] = i;
 				D_tag[a][1] = j;
+				D_tag[a][2] = scroll->m_map[i][j];
 				a++;
 			}
 		}
 	}
-	if (hide == true)
-	{
-		Pworp = Worp((a));
-	}
-	else
-	{
-		Pworp = TagWorp((a));
-	}
+
+	Pworp = TagWorp((a));
 
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅

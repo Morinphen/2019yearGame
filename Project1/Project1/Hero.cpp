@@ -31,6 +31,7 @@ void CObjHero::Init()
 	W_cat = 1.0f;
 	W_cat2 = 0.0f;
 
+	n_m = -1;
 	green = 1.0f;
 	change = false;
 	c_stop = false;
@@ -112,6 +113,10 @@ void CObjHero::Action()
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			//Cボタンを押しているとダッシュ
+			if (change == true)
+			{
+				n_m = 5;
+			}
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx += 0.5f;
 				m_ani_time++;
@@ -120,6 +125,10 @@ void CObjHero::Action()
 		}
 
 		else if (Input::GetVKey(VK_LEFT) == true) {
+			if (change == true)
+			{
+				n_m = 5;
+			}
 			//Cボタンを押しているとダッシュ
 			if (Input::GetVKey('C') == true && m_hit_down == true) {
 				m_vx -= 0.5f;
@@ -174,10 +183,16 @@ void CObjHero::Action()
 			if (Input::GetVKey('Q'))
 			{
 				if (c_stop == false) {
-					if(green!=0.0f)
+					if (green != 0.0f)
+					{
+						n_m = 5;
 						green = 0.0f;
+					}
 					else
+					{
+						n_m = -1;
 						green = 1.0f;
+					}
 					change = change ? false : true;
 					c_stop = true;
 					Audio::Start(20);
@@ -195,6 +210,7 @@ void CObjHero::Action()
 				{
 					if (s_atack == false) {
 						if (psyuriken > 0) {
+							n_m = 0;
 							Audio::Start(1);
 							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
 							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
@@ -218,6 +234,7 @@ void CObjHero::Action()
 				else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
 				{
 					if (s_atack == false) {
+						n_m = 1;
 						CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
 						s_atack = true;
@@ -235,6 +252,7 @@ void CObjHero::Action()
 				{
 					if (ball == false)
 					{
+						n_m = 3;
 						CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
 						ball = true;
@@ -248,6 +266,7 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
+						n_m = 4;
 						Audio::Start(16);
 						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_HINOTAMA, 10);
@@ -259,6 +278,7 @@ void CObjHero::Action()
 				{
 					if (s_atack == false)
 					{
+						n_m = 6;
 						doton = doton ? false : true;
 						s_atack = true;
 					}
@@ -268,6 +288,7 @@ void CObjHero::Action()
 				{
 					if (s_atack == false && nezumi == false)
 					{
+						n_m = 7;
 						CObjNezumi* obj_n = new CObjNezumi(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_n, OBJ_HAMUTARO, 10);
 						s_atack = true;
@@ -296,6 +317,7 @@ void CObjHero::Action()
 		m_vy = 0;
 
 		Ninzyutu = true;
+		n_m = 2;
 
 		if (Input::GetVKey(VK_RIGHT) == true) {
 			Rightwalk();
@@ -311,7 +333,7 @@ void CObjHero::Action()
 		Ninzyutu = false;
 	}
 
-	//死亡したとき
+	//水で死亡したとき
 	if (Wdead == true) {
 		dead = true;
 		if (d_ani_frame < 4) {
