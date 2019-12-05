@@ -37,6 +37,8 @@ private:
 
 	//アニメーション用ハム太郎の向き
 	bool a_pos;
+	//ハム太郎の前に何かギミックがあるかどうか
+	bool g_m;
 
 	int map_data[46][100];
 

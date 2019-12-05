@@ -94,6 +94,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"makimo_a.png", 35, TEX_SIZE_512);
 	Draw::LoadImage(L"mode_back.jpg", 36, TEX_SIZE_512);
 	Draw::LoadImage(L"magic.png", 37, TEX_SIZE_1024);
+	Draw::LoadImage(L"haken.png", 38, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
