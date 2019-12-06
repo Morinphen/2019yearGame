@@ -55,6 +55,8 @@ void CObjHero::Init()
 
 	dead = false;
 	Wdead = false;
+	dead_s = false;
+	deadtime = 0;
 
 	psyuriken = 5;
 
@@ -90,6 +92,10 @@ void CObjHero::Action()
 	{
 		Scene::SetScene(new CSceneRetry);
 	}
+	if (dead_s == true)
+	{
+		deadtime += 1;
+	}
 	//敵の位置を取得
 	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	//ブロックとの当たり判定
@@ -103,9 +109,11 @@ void CObjHero::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
 		&m_vx, &m_vy
 	);
-
+   if(dead_s==false)
+   {
 	//主人公が死んでおらず、うちかぎを使用しておらず、投げ縄の移動中ではないとき
-	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead==false && nezumi == false&& hero_stop==false) {
+	if (W_cat == 1.0f&&nawa_ido == false && U_flag == false && dead == false && nezumi == false && hero_stop == false)
+	{
 		Ninzyutu = false;
 		U_scroll = false;
 		d_ani_frame = 0;
@@ -317,8 +325,9 @@ void CObjHero::Action()
 
 		}
 	}
+ }
 	//うちかぎを使用しているとき
-	else if (U_flag == true)
+	if (U_flag == true)
 	{
 		pb->UBlockHit(&m_x, &m_y,&U_scroll,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right,
@@ -426,25 +435,30 @@ void CObjHero::Action()
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false||
 		hit->CheckObjNameHit(OBJ_HAMENEMY) != nullptr&&smokeh == false)
 	{
-		remain -= 1;
-		SetX(GetWX());
-		SetY(GetWY());
-		if (GetX() < 500) {
-			scroll->SetScrooll(-(GetX() - (500)));
-		}
-		else if (GetX() > 600) {
-			scroll->SetScrooll(-(GetX() - (600)));
-		}
+		if (deadtime > 180)
+		{
+			remain -= 1;
+			SetX(GetWX());
+			SetY(GetWY());
+			if (GetX() < 500) {
+				scroll->SetScrooll(-(GetX() - (500)));
+			}
+			else if (GetX() > 600) {
+				scroll->SetScrooll(-(GetX() - (600)));
+			}
 
-		if (GetY() < 80) {
-			scroll->SetYScrooll(-(GetY() - (80)));
-		}
-		else if (GetY() > 500) {
-			scroll->SetYScrooll(-(GetY() - (500)));
-		}
+			if (GetY() < 80) {
+				scroll->SetYScrooll(-(GetY() - (80)));
+			}
+			else if (GetY() > 500) {
+				scroll->SetYScrooll(-(GetY() - (500)));
+			}
 
-		WDflag(false);
-		Dflag(false);
+			WDflag(false);
+			Dflag(false);
+			dead_s = false;
+			deadtime = 0;
+		}
 
 	}
 
@@ -482,49 +496,93 @@ void CObjHero::Draw()
 	float c[4] = { green,1.0f,green,1.0f + aa };
 	RECT_F src;
 	RECT_F dst;
+	if (dead_s == false)
+	{
+		if (U_flag == false && Wdead == false) {
+			src.m_top = 64.0f;
+			src.m_left = 64.0f*(m_ani_frame*W_cat);
+			src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
+			src.m_bottom = 128.0f;
+		}
 
-	if (U_flag == false && Wdead == false) {
-		src.m_top = 64.0f;
-		src.m_left = 64.0f*(m_ani_frame*W_cat);
-		src.m_right = 64.0f*((m_ani_frame*W_cat + 1));
-		src.m_bottom = 128.0f;
-	}
+		else if (Wdead == true) {
+			src.m_top = 128.0f;
+			src.m_left = 64.0f*(d_ani_frame*W_cat);
+			src.m_right = 64.0f*((d_ani_frame*W_cat + 1));
+			src.m_bottom = 196.0f;
+		}
 
-	else if (Wdead == true) {
-		src.m_top = 128.0f;
-		src.m_left = 64.0f*(d_ani_frame*W_cat);
-		src.m_right = 64.0f*((d_ani_frame*W_cat + 1));
-		src.m_bottom = 196.0f;
-	}
+		else {
+			src.m_top = 0.0f;
+			src.m_left = 64.0f*(m_ani_frame*W_cat + 1);
+			src.m_right = 64.0f*((m_ani_frame*W_cat));
+			src.m_bottom = 64.0f;
+		}
 
-	else {
-		src.m_top = 0.0f;
-		src.m_left = 64.0f*(m_ani_frame*W_cat+1);
-		src.m_right = 64.0f*((m_ani_frame*W_cat));
-		src.m_bottom = 64.0f;
-	}
+		if (Wdead == false) {
+			dst.m_top = 0.0f + m_y;
+			dst.m_bottom = 64.0f + m_y;
+		}
 
-	if (Wdead == false) {
-		dst.m_top = 0.0f + m_y;
-		dst.m_bottom = 64.0f + m_y;
-	}
+		else {
+			dst.m_top = 0.0f + m_y - 48;
+			dst.m_bottom = 64.0f + m_y - 48;
+		}
 
-	else {
-		dst.m_top = 0.0f + m_y - 48;
-		dst.m_bottom = 64.0f + m_y - 48;
-	}
+		if (m_posture == 0) {
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+		}
+		else
+		{
+			dst.m_left = (64.0f*m_posture) + W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) - W_cat2 + m_x;
+		}
 
-	if (m_posture == 0) {
-		dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
-		dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+		Draw::Draw(11, &src, &dst, c, 0.0f);
 	}
 	else
 	{
-		dst.m_left = (64.0f*m_posture) + W_cat2 + m_x;
-		dst.m_right = (64.0f - 64.0f*m_posture) - W_cat2 + m_x;
+		if (deadtime < 120)
+		{
+			float c2[4] = { 1.0f,1.0f,1.0f,0.0f };
+			src.m_top = 0.0f;
+			src.m_left = 0.0;
+			src.m_right = 712.0f;
+			src.m_bottom = 256.0f;
+			dst.m_top = 0.0f + m_y-128;
+			dst.m_bottom = 64.0f + m_y;
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x-64;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+			Draw::Draw(29, &src, &dst, c, 0.0f);
+		}
+		else if (deadtime > 120 && deadtime < 180&&m_posture == 0)
+		{
+			float c2[4] = { 1.0f,1.0f,1.0f,0.0f };
+			src.m_top = 0.0f;
+			src.m_left = 64.0;
+			src.m_right = 0.0f;
+			src.m_bottom = 64.0f;
+			dst.m_top = 0.0f + m_y;
+			dst.m_bottom = 64.0f + m_y;
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+			Draw::Draw(35, &src, &dst, c, 0.0f);
+		}
+		else if (deadtime > 100 && deadtime < 150 && m_posture == 1)
+		{
+			float c2[4] = { 1.0f,1.0f,1.0f,0.0f };
+			src.m_top = 0.0f;
+			src.m_left = 0.0;
+			src.m_right = 64.0f;
+			src.m_bottom = 64.0f;
+			dst.m_top = 0.0f + m_y;
+			dst.m_bottom = 64.0f + m_y;
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+			Draw::Draw(35, &src, &dst, c, 0.0f);
+		}
 	}
-
-	Draw::Draw(11, &src, &dst, c, 0.0f);
 }
 
 //右に歩かせる

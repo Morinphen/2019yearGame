@@ -68,7 +68,8 @@ public:
 	void Dflag(bool b) { dead = b; }
 	void WDflag(bool b) { Wdead = b; }
 	bool GetWDflag() { return Wdead; }
-
+	void Dflag_s(bool b) { dead_s = b; }
+	bool GetDflag_s() { return dead_s; }
 	//主人公の当たり判定の状態を外部から変更する
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
@@ -159,6 +160,8 @@ private:
 	//死亡フラグ
 	bool dead;
 	bool Wdead;
+	bool dead_s;
+	float deadtime;
 
 	int d_ani_time;
 	int d_ani_frame;

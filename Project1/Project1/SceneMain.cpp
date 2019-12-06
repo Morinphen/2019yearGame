@@ -94,10 +94,11 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"mode_back.jpg", 32, TEX_SIZE_512);
 	Draw::LoadImage(L"magic.png", 33, TEX_SIZE_1024);
 	Draw::LoadImage(L"haken.png", 34, TEX_SIZE_512);
+	Draw::LoadImage(L"km.png", 35, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
 	int map[46][100];
 	int count = 1;
