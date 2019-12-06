@@ -14,8 +14,8 @@ public:
 	void Action();//アクション
 	void Draw(); //ドロー
 
-	float GetX() { return m_px; }
-	float GetY() { return m_py; }
+	float GetX()  { return m_px; }
+	float GetY()  { return m_py; }
 	float GetVX() { return m_vx; }
 	float GetVY() { return m_vy; }
 	float GetMV() { return m_move; }
