@@ -131,10 +131,20 @@ void CSceneMain::InitScene()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (map[i][j] == 3)
+			if (map[i][j] == 81)
 			{
 				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
 				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+			}
+			else if (map[i][j] == 82)
+			{
+				CObjFireEnemy* obje = new CObjFireEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_FIREENEMY, 6);
+			}
+			else if(map[i][j] == 83)
+			{
+				CObjHamEnemy* obje = new CObjHamEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
 			}
 			else if (map[i][j] == 4)
 			{
