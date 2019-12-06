@@ -24,6 +24,7 @@ public:
 	void SetY(float y) { m_py = y; }
 	void SetVX(float vx) { m_vx = vx; }
 	void SetVY(float vy) { m_vy = vy; }
+	void SetM_P(float x) { m_posture = x; }
 
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
