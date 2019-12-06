@@ -64,7 +64,7 @@ void CObjBlock::Draw()
 				}
 				else if (m_map[i][j] == 2)
 				{
-					Draw::Draw(26, &src, &dst, c, 0.0f);
+					Draw::Draw(22, &src, &dst, c, 0.0f);
 				}
 			}
 		}

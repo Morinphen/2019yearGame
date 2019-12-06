@@ -265,7 +265,7 @@ void CObjFireEnemy::Draw()
 		dsts.m_bottom = dst.m_bottom;
 	}
 	//•`‰æ
-	Draw::Draw(32, &srcs, &dsts, c, 0.0f);
+	Draw::Draw(28, &srcs, &dsts, c, 0.0f);
 	/*if(find==true)
 	{
 	//Ø‚èæ‚èˆÊ’u‚Ìİ’è
