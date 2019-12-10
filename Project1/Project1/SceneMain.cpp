@@ -134,13 +134,13 @@ void CSceneMain::InitScene()
 		{
 			if (map[i][j] == 81)
 			{
-				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+				CObjEnemy* objne = new CObjEnemy(j * 64, i * 64);
+				Objs::InsertObj(objne, OBJ_ENEMY, 6);
 			}
 			else if (map[i][j] == 83)
 			{
-				CObjFireEnemy* obje = new CObjFireEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_FIREENEMY, 6);
+				CObjFireEnemy* objfe = new CObjFireEnemy(j * 64, i * 64);
+				Objs::InsertObj(objfe, OBJ_FIREENEMY, 6);
 			}
 			else if(map[i][j] == 85|| map[i][j] == 86)
 			{

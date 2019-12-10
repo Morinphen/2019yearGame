@@ -79,7 +79,7 @@ void CObjEnemy::Action()
 		m_posture_time = 0;
 	}
 	//通常速度
-	m_speed_power = 0.5f;
+	m_speed_power = 0.3f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hr->GetDflag_s()==false)
@@ -98,13 +98,6 @@ void CObjEnemy::Action()
 			m_posture = 0.0f;
 			m_ani_time += 1;
 		}
-
-		else
-		{
-			m_ani_frame = 1;
-			m_ani_time = 0;
-		}
-
 		if (m_ani_time > m_ani_max_time)
 		{
 			m_ani_frame += 1;
@@ -140,10 +133,51 @@ void CObjEnemy::Action()
 		{
 			hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 		}
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find==false)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find==false&&hr->Getsmoke_h()==false)
 	{
 		find = true;
 		hr->Dflag_s(true);
+	}
+	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
+	{
+		CObjHinotama* sy = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+		sm_x = sy->GetX();
+		p = sy->GetP();
+		if (m_move == true)//敵左向き
+		{
+			if (p == true)//手裏剣左向き
+			{
+				Audio::Start(14);
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+			}
+			else if (sm_x + 2.0 >= m_px)
+			{
+				Audio::Start(14);
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+			}
+		}
+		else
+		{
+			if (p == true)//手裏剣左向き
+			{
+				if (sm_x - 2.0 <= m_px)
+				{
+					Audio::Start(14);
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
+					sy->SetT(true);
+				}
+			}
+			else//手裏剣右向き
+			{
+				Audio::Start(14);
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+				sy->SetT(true);
+			}
+		}
 	}
 	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
@@ -154,9 +188,7 @@ void CObjEnemy::Action()
 		{
 			if (p == true)//手裏剣左向き
 			{
-					Audio::Start(14);
-					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
+				    Audio::Start(14);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
@@ -166,8 +198,6 @@ void CObjEnemy::Action()
 				if (sm_x +2.0>=m_px)
 				{
 					Audio::Start(14);
-					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
@@ -181,8 +211,6 @@ void CObjEnemy::Action()
 				if (sm_x - 2.0 <= m_px)
 				{
 					Audio::Start(14);
-					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
@@ -191,8 +219,6 @@ void CObjEnemy::Action()
 			else//手裏剣右向き
 			{
 					Audio::Start(14);
-					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
@@ -217,8 +243,8 @@ void CObjEnemy::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 65.0f;
-	src.m_left = 448.0f*AniData[m_ani_frame]-64;
-	src.m_right = 448.0f*AniData[m_ani_frame];
+	src.m_left = 64.0f*AniData[m_ani_frame];
+	src.m_right = 64.0f*AniData[m_ani_frame]+64;
 	src.m_bottom = 128.0f;
 
 	//ブロック情報を持ってくる
