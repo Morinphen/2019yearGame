@@ -39,6 +39,7 @@ void CObjEnemy::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 	crhitbox = true;
+	stop = false;
 	de = false;
 }
 
@@ -82,7 +83,7 @@ void CObjEnemy::Action()
 	m_speed_power = 0.3f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (hr->GetDflag_s()==false)
+	if (hr->GetDflag_s()==false||stop==false)
 	{
 		//•ûŒü
 		if (m_move == false)

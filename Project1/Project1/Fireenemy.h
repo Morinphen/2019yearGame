@@ -31,7 +31,7 @@ public:
 	void SetRight(bool b) { m_hit_right = b; }
 	void SetF(bool b) { find = b; }
 	void SetD(bool b) { de = b; }
-
+	void Setstop(bool b) { stop = b; }
 private:
 	float m_px; //位置
 	float m_py;
@@ -42,7 +42,7 @@ private:
 	bool find;
 	bool m_move;
 	bool de;
-
+	bool stop;
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム
 	int m_posture_time;//姿勢変えるまでの時間
