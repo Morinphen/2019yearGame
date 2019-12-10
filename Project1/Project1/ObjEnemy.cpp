@@ -141,9 +141,9 @@ void CObjEnemy::Action()
 	}
 	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
 	{
-		CObjHinotama* sy = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
-		sm_x = sy->GetX();
-		p = sy->GetP();
+		CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+		sm_x = sa->GetX();
+		p = sa->GetP();
 		if (m_move == true)//“G¶Œü‚«
 		{
 			if (p == true)//è— Œ•¶Œü‚«
@@ -151,24 +151,26 @@ void CObjEnemy::Action()
 				Audio::Start(14);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
+				sa->SetT(true);
 			}
 			else if (sm_x + 2.0 >= m_px)
 			{
 				Audio::Start(14);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
+				sa->SetT(true);
 			}
 		}
 		else
 		{
 			if (p == true)//è— Œ•¶Œü‚«
 			{
-				if (sm_x - 2.0 <= m_px)
+				if (sm_x - 2.0<= m_px)
 				{
 					Audio::Start(14);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
-					sy->SetT(true);
+					sa->SetT(true);
 				}
 			}
 			else//è— Œ•‰EŒü‚«
@@ -176,7 +178,7 @@ void CObjEnemy::Action()
 				Audio::Start(14);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
-				sy->SetT(true);
+				sa->SetT(true);
 			}
 		}
 	}

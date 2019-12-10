@@ -154,30 +154,26 @@ void CObjFireEnemy::Action()
 	}
 	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
 	{
-		CObjHinotama* sy = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
-		sm_x = sy->GetX();
-		p = sy->GetP();
+		CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+		sm_x = sa->GetX();
+		p = sa->GetP();
 		if (m_move == true)//“G¶Œü‚«
 		{
 			if (p == true)//Žè— Œ•¶Œü‚«
 			{
 				Audio::Start(14);
-				CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-				Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
-				sy->SetT(true);
+				sa->SetT(true);
 			}
 			else//Žè— Œ•‰EŒü‚«
 			{
 				if (sm_x + 2.0 >= m_px)
 				{
 					Audio::Start(14);
-					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
-					sy->SetT(true);
+					sa->SetT(true);
 				}
 			}
 		}
@@ -188,21 +184,17 @@ void CObjFireEnemy::Action()
 				if (sm_x - 2.0 <= m_px)
 				{
 					Audio::Start(14);
-					CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-					Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
-					sy->SetT(true);
+					sa->SetT(true);
 				}
 			}
 			else//Žè— Œ•‰EŒü‚«
 			{
 				Audio::Start(14);
-				CObjDsyuriken*objn = new CObjDsyuriken(m_px, m_py);
-				Objs::InsertObj(objn, OBJ_DSYURIKEN, 3);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
-				sy->SetT(true);
+				sa->SetT(true);
 			}
 		}
 	}
