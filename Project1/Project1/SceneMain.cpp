@@ -132,15 +132,27 @@ void CSceneMain::InitScene()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (map[i][j] == 81)
+			if (map[i][j] == 81 || map[i][j] == 82)
 			{
 				CObjEnemy* objne = new CObjEnemy(j * 64, i * 64);
 				Objs::InsertObj(objne, OBJ_ENEMY, 6);
+				
+				if (map[i][j] == 82)
+				{
+					CObjEnemy* en = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+					en->Setestop(true);
+				}
 			}
-			else if (map[i][j] == 83)
+			else if (map[i][j] == 83 || map[i][j] == 84)
 			{
 				CObjFireEnemy* objfe = new CObjFireEnemy(j * 64, i * 64);
 				Objs::InsertObj(objfe, OBJ_FIREENEMY, 6);
+				
+				if (map[i][j] == 84)
+				{
+					CObjFireEnemy* fen = (CObjFireEnemy*)Objs::GetObj(OBJ_FIREENEMY);
+					fen->Setfestop(true);
+				}
 			}
 			else if(map[i][j] == 85|| map[i][j] == 86)
 			{
@@ -156,6 +168,22 @@ void CSceneMain::InitScene()
 				else
 				{
 					hen->SetM_P(0.0);
+				}
+			}
+			else if (map[i][j] == 87 || map[i][j] == 88)
+			{
+				CObjMuscleEnemy* obje = new CObjMuscleEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_MUSCLEENEMY, 6);
+				CObjMuscleEnemy* men = (CObjMuscleEnemy*)Objs::GetObj(OBJ_MUSCLEENEMY);
+				//‰EŒü‚«
+				if (map[i][j] == 87)
+				{
+					men->SetM_P(1.0);
+				}
+				//¶Œü‚«
+				else
+				{
+					men->SetM_P(0.0);
 				}
 			}
 			else if (map[i][j] == 4)
