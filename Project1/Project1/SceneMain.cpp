@@ -137,15 +137,26 @@ void CSceneMain::InitScene()
 				CObjEnemy* objne = new CObjEnemy(j * 64, i * 64);
 				Objs::InsertObj(objne, OBJ_ENEMY, 6);
 			}
-			else if (map[i][j] == 82)
+			else if (map[i][j] == 83)
 			{
 				CObjFireEnemy* objfe = new CObjFireEnemy(j * 64, i * 64);
 				Objs::InsertObj(objfe, OBJ_FIREENEMY, 6);
 			}
-			else if(map[i][j] == 83)
+			else if(map[i][j] == 85|| map[i][j] == 86)
 			{
-				CObjHamEnemy* objne = new CObjHamEnemy(j * 64, i * 64);
-				Objs::InsertObj(objne, OBJ_HAMENEMY, 6);
+				CObjHamEnemy* obje = new CObjHamEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
+				CObjHamEnemy* hen = (CObjHamEnemy*)Objs::GetObj(OBJ_HAMENEMY);
+				//‰EŒü‚«
+				if (map[i][j] == 85)
+				{
+					hen->SetM_P(1.0);
+				}
+				//¶Œü‚«
+				else
+				{
+					hen->SetM_P(0.0);
+				}
 			}
 			else if (map[i][j] == 4)
 			{
