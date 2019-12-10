@@ -10,18 +10,18 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjHamEnemy::CObjHamEnemy(int x, int y)
+CObjMuscleEnemy::CObjMuscleEnemy(int x, int y)
 {
 	m_px = x;
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjHamEnemy::Init()
+void CObjMuscleEnemy::Init()
 {
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 0.0f;//右向き0.0f　左向き1.0f
+	m_posture = 1.0f;//右向き0.0f　左向き1.0f
 	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする
@@ -29,7 +29,7 @@ void CObjHamEnemy::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション間隔幅
 	hit_hm = false;
-	m_move = true;    //true=左　false=右
+	m_move = false;    //true=左　false=右
 
 	find = false;
 	//blockとの衝突状態確認用
@@ -44,10 +44,10 @@ void CObjHamEnemy::Init()
 }
 
 //アクション
-void CObjHamEnemy::Action()
+void CObjMuscleEnemy::Action()
 {
-    //表示画面内の時
-    CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	//表示画面内の時
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (crhitbox == true)
 	{
 		Hits::DeleteHitBox(this);
@@ -63,53 +63,11 @@ void CObjHamEnemy::Action()
 	);
 
 	//通常速度
-	m_speed_power = 0.3f;
+	m_speed_power = 0.0f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hr->GetDflag_s() == false)
 	{
-		if (hit_hm == true)
-		{
-			//方向
-			if (m_move == false)
-			{
-				m_vx += m_speed_power;
-				m_posture = 1.0f;
-				m_ani_time += 1;
-			}
-
-			else if (m_move == true)
-			{
-				m_vx -= m_speed_power;
-				m_posture = 0.0f;
-				m_ani_time += 1;
-			}
-
-			else
-			{
-				m_ani_frame = 1;
-				m_ani_time = 0;
-			}
-
-			if (m_ani_time > m_ani_max_time)
-			{
-				m_ani_frame += 1;
-				m_ani_time = 0;
-			}
-
-			if (m_ani_frame == 4)
-			{
-				m_ani_frame = 0;
-			}
-
-			m_posture_time += 1;
-
-			//摩擦
-			m_vx += -(m_vx*0.098);
-
-			//自由落下運動
-			m_vy += 9.8 / (16.0f);
-		}
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
@@ -140,31 +98,12 @@ void CObjHamEnemy::Action()
 			find = true;
 			hr->Dflag_s(true);
 		}
-		//ハム太郎衝突で向きを変更
-		if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == false||
-			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == false)
-		{
-			Hits::DeleteHitBox(this);
-			hit_hm = true;
-			m_move = true;
-			crhitbox = true;
-			m_posture_time = 0;
-		}
-		else if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true&&hm->GetA_M()==true||
-			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == true)
-		{
-			Hits::DeleteHitBox(this);
-			hit_hm = true;
-			m_move = false;
-			crhitbox = true;
-			m_posture_time = 0;
-		}	
 	}
 	//表示画面外の時
 	else
 	{
 		//ヒットボックス削除
-		if (HitBox_ON == true&&hit_hm==true)
+		if (HitBox_ON == true && hit_hm == true)
 		{
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
@@ -176,9 +115,8 @@ void CObjHamEnemy::Action()
 		}
 	}
 }
-
 //ドロー
-void CObjHamEnemy::Draw()
+void CObjMuscleEnemy::Draw()
 {
 	int AniData[4] =
 	{
@@ -186,15 +124,15 @@ void CObjHamEnemy::Draw()
 	};
 
 	//描画カラー情報
-	float c[4] = {1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-	//切り取り位置の設定
+				//切り取り位置の設定
 	src.m_top = 65.0f;
-	src.m_left = 256.0f + 64 * AniData[m_ani_frame];
-	src.m_right = 320.0f + 64 * AniData[m_ani_frame];
+	src.m_left = 448.0f;
+	src.m_right = 512.0f;
 	src.m_bottom = 128.0f;
 
 	//ブロック情報を持ってくる
@@ -219,8 +157,8 @@ void CObjHamEnemy::Draw()
 		srcs.m_bottom = 300.0f;
 		//表示位置の設定
 		dsts.m_top = dst.m_top;
-		dsts.m_left = dst.m_left-230.0f;
-		dsts.m_right = dst.m_right+64;
+		dsts.m_left = dst.m_left - 230.0f;
+		dsts.m_right = dst.m_right + 64;
 		dsts.m_bottom = dst.m_bottom;
 	}
 	else
@@ -237,7 +175,7 @@ void CObjHamEnemy::Draw()
 	}
 	//描画
 	Draw::Draw(28, &srcs, &dsts, c, 0.0f);
-	if(find==true)
+	if (find == true)
 	{
 		RECT_F src_h;
 		RECT_F dst_h;
@@ -247,10 +185,10 @@ void CObjHamEnemy::Draw()
 		src_h.m_bottom = 32.0f;
 
 		//表示位置の設定
-		dst_h.m_top = dst.m_top-64.0f;
+		dst_h.m_top = dst.m_top - 64.0f;
 		dst_h.m_left = dst.m_left;
 		dst_h.m_right = dst.m_right;
-		dst_h.m_bottom = dst.m_bottom-64.0f;
+		dst_h.m_bottom = dst.m_bottom - 64.0f;
 
 		Draw::Draw(34, &src_h, &dst_h, c, 0.0f);
 	}

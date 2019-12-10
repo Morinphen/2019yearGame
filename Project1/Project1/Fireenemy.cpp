@@ -82,7 +82,7 @@ void CObjFireEnemy::Action()
 		m_posture_time = 0;
 	}
 	//通常速度
-	m_speed_power = 0.5f;
+	m_speed_power = 0.3f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hr->GetDflag_s() == false)
@@ -146,7 +146,7 @@ void CObjFireEnemy::Action()
 	{
 		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 	}
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
 	{
 		find = true;
 		hr->Dflag_s(true);
@@ -216,16 +216,16 @@ void CObjFireEnemy::Draw()
 	};
 
 	//描画カラー情報
-	float c[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
 				//切り取り位置の設定
-	src.m_top = 65.0f;
-	src.m_left = 448.0f*AniData[m_ani_frame] - 64;
-	src.m_right = 448.0f*AniData[m_ani_frame];
-	src.m_bottom = 128.0f;
+	src.m_top = 321.0f;
+	src.m_left = 64.0f*AniData[m_ani_frame];
+	src.m_right = 64.0f*AniData[m_ani_frame]+64;
+	src.m_bottom = 384.0f;
 
 	//ブロック情報を持ってくる
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);

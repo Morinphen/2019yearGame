@@ -82,6 +82,8 @@ public:
 	bool GetLeft() { return m_hit_left; }
 	bool GetRight() { return m_hit_right; }
 
+	//ålŒö‚Ì‰Œ“–‚½‚è”»’è‚ğŠO•”‚É“n‚·
+	bool Getsmoke_h() { return smokeh; }
 	//“y“Ù‚ÌpŠm”F
 	bool GetDoton() { return doton; }
 

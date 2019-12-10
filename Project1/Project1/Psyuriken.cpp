@@ -46,54 +46,13 @@ void CObjPsyuriken::Draw()
 	//表示位置の設定
 	dstf.m_top = 0.0f;
 	dstf.m_left = 100.0f;
-	dstf.m_right = 580.0f;
+	dstf.m_right = 380.0f;
 	dstf.m_bottom = 100.0f;
 	//描画
 	Draw::Draw(19, &srcf, &dstf, c, 0.0f);
-
-	RECT_F src; //描画元切り取り位置
-	RECT_F dst; //描画先表示位置
-
-	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 128.0f;
-	src.m_bottom = 64.0f;
-
-	//表示位置の設定
-	dst.m_top = 20.0f;
-	dst.m_left = 350.0f;
-	dst.m_right = 478.0f;
-	dst.m_bottom = 84.0f;
-	//描画
-	Draw::Draw(17, &src, &dst, c, 0.0f);
+	
 	//主人公の情報を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	RECT_F srcs; //描画元切り取り位置
-	RECT_F dsts; //描画先表示位置
-	ps=hero->GetPS();
-	//切り取り位置の設定
-	if (ps > 3)
-	{
-		srcs.m_top = 2.0f;
-		srcs.m_left = 130.0f + 64*(5-ps);
-		srcs.m_right = 191.0f + 64 * (5-ps);
-		srcs.m_bottom = 64.0f;
-	}
-	else
-	{
-		srcs.m_top = 2.0f;
-		srcs.m_left = 130.0f + 64 * (5-ps);
-		srcs.m_right = 184.0f + 64 * (5-ps);
-		srcs.m_bottom = 64.0f;
-	}
-	//表示位置の設定
-	dsts.m_top = 20.0f;
-	dsts.m_left = 478.0f;
-	dsts.m_right = 542.0f;
-	dsts.m_bottom = 84.0f;
-	//描画
-	Draw::Draw(17, &srcs, &dsts, c, 0.0f);
 	
 	RECT_F srcb; //描画元切り取り位置
 	RECT_F dstb; //描画先表示位置

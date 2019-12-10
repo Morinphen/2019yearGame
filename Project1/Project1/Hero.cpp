@@ -58,7 +58,6 @@ void CObjHero::Init()
 	dead_s = false;
 	deadtime = 0;
 
-	psyuriken = 5;
 
 	d_ani_time = 0;
 	d_ani_frame = 0;
@@ -217,7 +216,6 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
-						if (psyuriken > 0) {
 							n_m = 0;
 							Audio::Start(1);
 							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
@@ -233,8 +231,6 @@ void CObjHero::Action()
 								CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
 								sy->SetP(false);
 							}
-							psyuriken -= 1;
-						}
 					}
 				}
 
@@ -545,33 +541,20 @@ void CObjHero::Draw()
 	{
 		if (deadtime < 120)
 		{
-			float c2[4] = { 1.0f,1.0f,1.0f,0.0f };
+			float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
 			src.m_top = 0.0f;
 			src.m_left = 0.0;
 			src.m_right = 712.0f;
 			src.m_bottom = 256.0f;
 			dst.m_top = 0.0f + m_y-128;
 			dst.m_bottom = 64.0f + m_y;
-			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x-64;
-			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
-			Draw::Draw(29, &src, &dst, c, 0.0f);
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x-128;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x+64;
+			Draw::Draw(29, &src, &dst, c2, 0.0f);
 		}
-		else if (deadtime > 120 && deadtime < 180&&m_posture == 0)
+		else if (deadtime > 120 && deadtime < 180&&m_posture == 1)
 		{
-			float c2[4] = { 1.0f,1.0f,1.0f,0.0f };
-			src.m_top = 0.0f;
-			src.m_left = 64.0;
-			src.m_right = 0.0f;
-			src.m_bottom = 64.0f;
-			dst.m_top = 0.0f + m_y;
-			dst.m_bottom = 64.0f + m_y;
-			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
-			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
-			Draw::Draw(35, &src, &dst, c, 0.0f);
-		}
-		else if (deadtime > 100 && deadtime < 150 && m_posture == 1)
-		{
-			float c2[4] = { 1.0f,1.0f,1.0f,0.0f };
+			float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
 			src.m_top = 0.0f;
 			src.m_left = 0.0;
 			src.m_right = 64.0f;
@@ -580,7 +563,20 @@ void CObjHero::Draw()
 			dst.m_bottom = 64.0f + m_y;
 			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
 			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
-			Draw::Draw(35, &src, &dst, c, 0.0f);
+			Draw::Draw(35, &src, &dst, c2, 0.0f);
+		}
+		else if (deadtime > 120 && deadtime < 180 && m_posture == 0)
+		{
+			float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
+			src.m_top = 0.0f;
+			src.m_left = 0.0;
+			src.m_right = 64.0f;
+			src.m_bottom = 64.0f;
+			dst.m_top = 0.0f + m_y;
+			dst.m_bottom = 64.0f + m_y;
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+			Draw::Draw(35, &src, &dst, c2, 0.0f);
 		}
 	}
 }

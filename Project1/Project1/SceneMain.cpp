@@ -98,7 +98,7 @@ void CSceneMain::InitScene()
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
 
 	int map[46][100];
 	int count = 1;
@@ -134,18 +134,18 @@ void CSceneMain::InitScene()
 		{
 			if (map[i][j] == 81)
 			{
-				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+				CObjEnemy* objne = new CObjEnemy(j * 64, i * 64);
+				Objs::InsertObj(objne, OBJ_ENEMY, 6);
 			}
 			else if (map[i][j] == 82)
 			{
-				CObjFireEnemy* obje = new CObjFireEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_FIREENEMY, 6);
+				CObjFireEnemy* objfe = new CObjFireEnemy(j * 64, i * 64);
+				Objs::InsertObj(objfe, OBJ_FIREENEMY, 6);
 			}
 			else if(map[i][j] == 83)
 			{
-				CObjHamEnemy* obje = new CObjHamEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
+				CObjHamEnemy* objne = new CObjHamEnemy(j * 64, i * 64);
+				Objs::InsertObj(objne, OBJ_HAMENEMY, 6);
 			}
 			else if (map[i][j] == 4)
 			{
