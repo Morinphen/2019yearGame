@@ -22,7 +22,7 @@ void CObjEnemy::Init()
 {
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;//右向き0.0f　左向き1.0f
+	m_posture = 0.0f;//右向き0.0f　左向き1.0f
 	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする

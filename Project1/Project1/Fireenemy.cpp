@@ -22,7 +22,7 @@ void CObjFireEnemy::Init()
 {
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;//右向き0.0f　左向き1.0f
+	m_posture = 0.0f;//右向き0.0f　左向き1.0f
 	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする
@@ -143,7 +143,7 @@ void CObjFireEnemy::Action()
 	{
 		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
 	}
-	else if (m_move == false)
+	else
 	{
 		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 	}

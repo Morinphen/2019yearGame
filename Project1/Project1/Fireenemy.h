@@ -24,6 +24,7 @@ public:
 	void SetY(float y) { m_py = y; }
 	void SetVX(float vx) { m_vx = vx; }
 	void SetVY(float vy) { m_vy = vy; }
+	void Setm_p(float x) { m_posture = x; }
 
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
@@ -32,6 +33,7 @@ public:
 	void SetF(bool b) { find = b; }
 	void SetD(bool b) { de = b; }
 	void Setfestop(bool b) { stop = b; }
+	void Setm_m(bool b) { m_move = b; }
 private:
 	float m_px; //ˆÊ’u
 	float m_py;

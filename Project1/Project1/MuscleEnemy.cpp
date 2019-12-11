@@ -75,7 +75,7 @@ void CObjMuscleEnemy::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	if (m_posture==1.0f)
+	if (m_posture==0.0f)
 	{
 		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
 	}
@@ -129,7 +129,7 @@ void CObjMuscleEnemy::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-				//切り取り位置の設定
+	//切り取り位置の設定
 	src.m_top = 65.0f;
 	src.m_left = 448.0f;
 	src.m_right = 512.0f;
@@ -149,7 +149,7 @@ void CObjMuscleEnemy::Draw()
 
 	RECT_F srcs; //描画元切り取り位置
 	RECT_F dsts; //描画先表示位置
-	if (m_posture==1.0f)
+	if (m_posture==0.0f)
 	{
 		srcs.m_top = 0.0f;
 		srcs.m_left = 0.0f;

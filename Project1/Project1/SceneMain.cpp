@@ -98,7 +98,7 @@ void CSceneMain::InitScene()
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
 	int map[46][100];
 	int count = 1;
@@ -152,6 +152,8 @@ void CSceneMain::InitScene()
 				{
 					CObjFireEnemy* fen = (CObjFireEnemy*)Objs::GetObj(OBJ_FIREENEMY);
 					fen->Setfestop(true);
+					fen->Setm_p(1.0);
+					fen->Setm_m(false);
 				}
 			}
 			else if(map[i][j] == 85|| map[i][j] == 86)
@@ -160,7 +162,7 @@ void CSceneMain::InitScene()
 				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
 				CObjHamEnemy* hen = (CObjHamEnemy*)Objs::GetObj(OBJ_HAMENEMY);
 				//右向き
-				if (map[i][j] == 85)
+				if (map[i][j] == 86)
 				{
 					hen->SetM_P(1.0);
 				}
