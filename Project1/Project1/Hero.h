@@ -61,6 +61,8 @@ public:
 	bool GetINawa() { return nawa_ido; }
 	void Uflag(bool b) { U_flag = b; }
 
+	float GetPushb() { return pushb; }
+
 	//主人公の虫獣遁のフラグを設定
 	void HamuSetUP(bool b) { nezumi = b; }
 
@@ -133,7 +135,8 @@ private:
 
 	int jamptime;
 	float jamppower;
-
+	//主人公が何階にいるか
+	int pushb;
 	//手裏剣の所持数
 	int psyuriken;
 

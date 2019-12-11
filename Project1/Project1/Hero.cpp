@@ -57,7 +57,7 @@ void CObjHero::Init()
 	Wdead = false;
 	dead_s = false;
 	deadtime = 0;
-
+	pushb=0;
 
 	d_ani_time = 0;
 	d_ani_frame = 0;
@@ -155,7 +155,7 @@ void CObjHero::Action()
 		{
 			if (jamptime == 0)
 				jamptime++;
-
+			pushb = 2;
 			Audio::Start(2);
 			jamppower += 8.0f;
 		}
@@ -203,6 +203,7 @@ void CObjHero::Action()
 					change = change ? false : true;
 					c_stop = true;
 					Audio::Start(20);
+					pushb = 0;
 				}
 			}
 			else
@@ -218,6 +219,7 @@ void CObjHero::Action()
 					if (s_atack == false) {
 							n_m = 0;
 							Audio::Start(1);
+							pushb = 1;
 							CObjSyuriken* obj_s = new CObjSyuriken(m_x, m_y, m_posture);
 							Objs::InsertObj(obj_s, OBJ_SYURIKEN, 10);
 							s_atack = true;
@@ -238,6 +240,7 @@ void CObjHero::Action()
 				else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
 				{
 					if (s_atack == false) {
+						pushb = 4;
 						n_m = 1;
 						CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
@@ -256,6 +259,7 @@ void CObjHero::Action()
 				{
 					if (ball == false)
 					{
+						pushb = 3;
 						n_m = 3;
 						CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
@@ -272,6 +276,7 @@ void CObjHero::Action()
 				if (Input::GetVKey('Z'))
 				{
 					if (s_atack == false) {
+						pushb = 1;
 						n_m = 4;
 						Audio::Start(16);
 						CObjHinotama* obj_s = new CObjHinotama(m_x, m_y, m_posture);
@@ -294,6 +299,7 @@ void CObjHero::Action()
 				{
 					if (s_atack == false)
 					{
+						pushb = 3;
 						n_m = 6;
 						doton = doton ? false : true;
 						s_atack = true;
@@ -304,6 +310,7 @@ void CObjHero::Action()
 				{
 					if (s_atack == false && nezumi == false)
 					{
+						pushb = 4;
 						n_m = 7;
 						CObjNezumi* obj_n = new CObjNezumi(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_n, OBJ_HAMUTARO, 10);

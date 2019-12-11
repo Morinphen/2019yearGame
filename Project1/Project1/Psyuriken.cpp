@@ -34,6 +34,9 @@ void CObjPsyuriken::Draw()
 	//•`‰ζƒJƒ‰[ξ•ρ
 	float c2[4] = { 1.0f,1.0f,1.0f,0.8f };
 
+	//•`‰ζƒJƒ‰[ξ•ρ
+	float c3[4] = { 1.0f,0.0f,0.0f,1.0f };
+
 	RECT_F srcf; //•`‰ζ³Ψ‚θζ‚θΚ’u
 	RECT_F dstf; //•`‰ζζ•\¦Κ’u
 
@@ -179,54 +182,173 @@ void CObjPsyuriken::Draw()
 		//•`‰ζ
 		Draw::Draw(31, &srcg, &dstg, c, 0.0f);
 	}
-	RECT_F dstn_b; //•`‰ζζ•\¦Κ’u
+	//”E‹οƒ‚[ƒhƒ{ƒ^ƒ“
+	if (hero->GetChange() == false)
+	{
+		//θ— •
+		RECT_F srcm_bta; //•`‰ζ³Ψ‚θζ‚θΚ’u
+		RECT_F dstm_bta; //•`‰ζζ•\¦Κ’u
+		srcm_bta.m_top = 125.0f;
+		srcm_bta.m_left = 240.0f;
+		srcm_bta.m_right = 362.0f;
+		srcm_bta.m_bottom = 245.0f;
+
+		//•\¦Κ’u‚Μέ’θ
+		dstm_bta.m_top = 700.0f;
+		dstm_bta.m_left = 1078.0f;
+		dstm_bta.m_right = 1200.0f;
+		dstm_bta.m_bottom = 820.0f;
+		if (hero->GetPushb() == 1)
+		{
+			//•`‰ζ
+			Draw::Draw(36, &srcm_bta, &dstm_bta, c3, 0.0f);
+		}
+		else
+		{
+			//•`‰ζ
+			Draw::Draw(36, &srcm_bta, &dstm_bta, c, 0.0f);
+		}
+		//‰‹Κ
+		RECT_F srcm_btx; //•`‰ζ³Ψ‚θζ‚θΚ’u
+		RECT_F dstm_btx; //•`‰ζζ•\¦Κ’u
+		srcm_btx.m_top = 125.0f;
+		srcm_btx.m_left = 0.0f;
+		srcm_btx.m_right = 120.0f;
+		srcm_btx.m_bottom = 245.0f;
+
+		//•\¦Κ’u‚Μέ’θ
+		dstm_btx.m_top = 700.0f;
+		dstm_btx.m_left = 850.0f;
+		dstm_btx.m_right = 970.0f;
+		dstm_btx.m_bottom = 820.0f;
+		if (hero->GetPushb() == 3)
+		{
+			//•`‰ζ
+			Draw::Draw(36, &srcm_btx, &dstm_btx, c3, 0.0f);
+		}
+		else
+		{
+			//•`‰ζ
+			Draw::Draw(36, &srcm_btx, &dstm_btx, c, 0.0f);
+		}
+		//ηκ“κ
+		RECT_F srcm_bty; //•`‰ζ³Ψ‚θζ‚θΚ’u
+		RECT_F dstm_bty; //•`‰ζζ•\¦Κ’u
+		srcm_bty.m_top = 0.0f;
+		srcm_bty.m_left = 130.0f;
+		srcm_bty.m_right = 245.0f;
+		srcm_bty.m_bottom = 115.0f;
+
+		//•\¦Κ’u‚Μέ’θ
+		dstm_bty.m_top = 620.0f;
+		dstm_bty.m_left = 968.0f;
+		dstm_bty.m_right = 1083.0f;
+		dstm_bty.m_bottom = 735.0f;
+		if (hero->GetPushb() == 4)
+		{
+			//•`‰ζ
+			Draw::Draw(36, &srcm_bty, &dstm_bty, c3, 0.0f);
+		}
+		else
+		{
+			//•`‰ζ
+			Draw::Draw(36, &srcm_bty, &dstm_bty, c, 0.0f);
+		}
+	}
+	else
+	{
+		//‰Ξ“Ω
+		RECT_F srcm_bta; //•`‰ζ³Ψ‚θζ‚θΚ’u
+		RECT_F dstm_bta; //•`‰ζζ•\¦Κ’u
+		srcm_bta.m_top = 125.0f;
+		srcm_bta.m_left = 240.0f;
+		srcm_bta.m_right = 362.0f;
+		srcm_bta.m_bottom = 245.0f;
+
+		//•\¦Κ’u‚Μέ’θ
+		dstm_bta.m_top = 700.0f;
+		dstm_bta.m_left = 1078.0f;
+		dstm_bta.m_right = 1200.0f;
+		dstm_bta.m_bottom = 820.0f;
+		if (hero->GetPushb() == 1)
+		{
+			//•`‰ζ
+			Draw::Draw(37, &srcm_bta, &dstm_bta, c3, 0.0f);
+		}
+		else
+		{
+			//•`‰ζ
+			Draw::Draw(37, &srcm_bta, &dstm_bta, c, 0.0f);
+		}
+		//“y“Ω
+		RECT_F srcm_btx; //•`‰ζ³Ψ‚θζ‚θΚ’u
+		RECT_F dstm_btx; //•`‰ζζ•\¦Κ’u
+		srcm_btx.m_top = 125.0f;
+		srcm_btx.m_left = 0.0f;
+		srcm_btx.m_right = 120.0f;
+		srcm_btx.m_bottom = 245.0f;
+
+		//•\¦Κ’u‚Μέ’θ
+		dstm_btx.m_top = 700.0f;
+		dstm_btx.m_left = 850.0f;
+		dstm_btx.m_right = 970.0f;
+		dstm_btx.m_bottom = 820.0f;
+		if (hero->GetPushb() == 3)
+		{
+			//•`‰ζ
+			Draw::Draw(37, &srcm_btx, &dstm_btx, c3, 0.0f);
+		}
+		else
+		{
+			//•`‰ζ
+			Draw::Draw(37, &srcm_btx, &dstm_btx, c, 0.0f);
+		}
+		//’b“Ω
+		RECT_F srcm_bty; //•`‰ζ³Ψ‚θζ‚θΚ’u
+		RECT_F dstm_bty; //•`‰ζζ•\¦Κ’u
+		srcm_bty.m_top = 0.0f;
+		srcm_bty.m_left = 130.0f;
+		srcm_bty.m_right = 245.0f;
+		srcm_bty.m_bottom = 115.0f;
+
+		//•\¦Κ’u‚Μέ’θ
+		dstm_bty.m_top = 620.0f;
+		dstm_bty.m_left = 968.0f;
+		dstm_bty.m_right = 1083.0f;
+		dstm_bty.m_bottom = 735.0f;
+		if (hero->GetPushb() == 4)
+		{
+			//•`‰ζ
+			Draw::Draw(37, &srcm_bty, &dstm_bty, c3, 0.0f);
+		}
+		else
+		{
+			//•`‰ζ
+			Draw::Draw(37, &srcm_bty, &dstm_bty, c, 0.0f);
+		}
+	}
+	//ƒWƒƒƒ“ƒv
+	RECT_F srcm_btb; //•`‰ζ³Ψ‚θζ‚θΚ’u
+	RECT_F dstm_btb; //•`‰ζζ•\¦Κ’u
+	srcm_btb.m_top = 240.0f;
+	srcm_btb.m_left = 130.0f;
+	srcm_btb.m_right = 245.0f;
+	srcm_btb.m_bottom = 362.0f;
 
 	//•\¦Κ’u‚Μέ’θ
-	dstn_b.m_top = 0.0f;
-	dstn_b.m_left = 750.0f;
-	dstn_b.m_right = 900.0f;
-	dstn_b.m_bottom = 120.0f;
-	//•`‰ζ
-	Draw::Draw(32, &srcb, &dstn_b, c2, 0.0f);
-	n_m = hero->GetN_M();
-	if (n_m>=0)
+	dstm_btb.m_top = 778.0f;
+	dstm_btb.m_left = 968.0f;
+	dstm_btb.m_right = 1083.0f;
+	dstm_btb.m_bottom = 900.0f;
+	if (hero->GetPushb() == 2)
 	{
-		RECT_F srcn_m; //•`‰ζ³Ψ‚θζ‚θΚ’u
-		RECT_F dstn_m; //•`‰ζζ•\¦Κ’u
-		if (n_m < 4)
-		{
-			srcn_m.m_top = 0.0f;
-			srcn_m.m_left = 0.0f + (184.0f*n_m);;
-			srcn_m.m_right =184.0+(184.0f*n_m);
-			if (n_m == 1 || n_m == 3)
-			{
-				srcn_m.m_bottom = 350.0f;
-			}
-			else
-			{
-				srcn_m.m_bottom = 512.0f;
-			}
-		}
-		else if (n_m < 8)
-		{
-			srcn_m.m_top = 512.0f;
-			srcn_m.m_left = 0.0f + (184.0f*n_m);;
-			srcn_m.m_right = 184.0 + (184.0f*n_m);
-			if (n_m == 7)
-			{
-				srcn_m.m_bottom = 1024.0f;
-			}
-			else
-			{
-				srcn_m.m_bottom = 862.0f;
-			}
-		}
-		//•\¦Κ’u‚Μέ’θ
-		dstn_m.m_top = 0.0f;
-		dstn_m.m_left = 790.0f;
-		dstn_m.m_right = 860.0f;
-		dstn_m.m_bottom = 120.0f;
 		//•`‰ζ
-		Draw::Draw(33, &srcn_m, &dstn_m, c, 0.0f);
+		Draw::Draw(36, &srcm_btb, &dstm_btb, c3, 0.0f);
 	}
+	else
+	{
+		//•`‰ζ
+		Draw::Draw(36, &srcm_btb, &dstm_btb, c, 0.0f);
+	}
+
 }
