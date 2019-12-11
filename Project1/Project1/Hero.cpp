@@ -269,7 +269,6 @@ void CObjHero::Action()
 				//忍術モード解除で土遁解除
 				doton = false;
 			}
-
 			//妖術モード
 			else {
 				//火遁
