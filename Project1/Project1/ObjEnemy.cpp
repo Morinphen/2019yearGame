@@ -83,7 +83,7 @@ void CObjEnemy::Action()
 	m_speed_power = 0.3f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (hr->GetDflag_s()==false||stop==false)
+	if (find==false&&stop==false)
 	{
 		//方向
 		if (m_move == false)
@@ -118,10 +118,10 @@ void CObjEnemy::Action()
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
-		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
-		{
-			find = false;
-		}
+	}
+	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+	{
+		find = false;
 	}
 		//ブロック情報を持ってくる
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

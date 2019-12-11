@@ -86,7 +86,7 @@ void CObjFireEnemy::Action()
 	m_speed_power = 0.3f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (hr->GetDflag_s() == false || stop == false)
+	if (find==false && stop == false)
 	{
 		//•ûŒü
 		if (m_move == false)
@@ -131,10 +131,10 @@ void CObjFireEnemy::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 
-		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
-		{
-			find = false;
-		}
+	}
+	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+	{
+		find = false;
 	}
 	//ƒuƒƒbƒNî•ñ‚ğ‚Á‚Ä‚­‚é
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
