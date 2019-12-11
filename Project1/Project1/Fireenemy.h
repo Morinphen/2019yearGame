@@ -31,7 +31,7 @@ public:
 	void SetRight(bool b) { m_hit_right = b; }
 	void SetF(bool b) { find = b; }
 	void SetD(bool b) { de = b; }
-	void Setfestop(bool b) { stop = b; }
+	void Setestop(bool b) { stop = b; }
 private:
 	float m_px; //ˆÊ’u
 	float m_py;

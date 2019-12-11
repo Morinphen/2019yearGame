@@ -82,11 +82,6 @@ void CObjHinotama::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
 	//ƒuƒƒbƒN‚Æ‚Ì“–‚½‚è”»’è
 	if (Animation == false)
 	{

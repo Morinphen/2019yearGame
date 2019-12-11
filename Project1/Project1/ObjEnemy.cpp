@@ -83,7 +83,7 @@ void CObjEnemy::Action()
 	m_speed_power = 0.3f;
 	m_ani_max_time = 4;
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (hr->GetDflag_s()==false||stop==false)
+	if (find==false&&stop==false)
 	{
 		//方向
 		if (m_move == false)
@@ -118,10 +118,10 @@ void CObjEnemy::Action()
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
-		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
-		{
-			find = false;
-		}
+	}
+	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+	{
+		find = false;
 	}
 		//ブロック情報を持ってくる
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -141,9 +141,9 @@ void CObjEnemy::Action()
 	}
 	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
 	{
-		CObjHinotama* sy = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
-		sm_x = sy->GetX();
-		p = sy->GetP();
+		CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+		sm_x = sa->GetX();
+		p = sa->GetP();
 		if (m_move == true)//敵左向き
 		{
 			if (p == true)//手裏剣左向き
@@ -151,24 +151,26 @@ void CObjEnemy::Action()
 				Audio::Start(14);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
+				sa->SetT(true);
 			}
 			else if (sm_x + 2.0 >= m_px)
 			{
 				Audio::Start(14);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
+				sa->SetT(true);
 			}
 		}
 		else
 		{
 			if (p == true)//手裏剣左向き
 			{
-				if (sm_x - 2.0 <= m_px)
+				if (sm_x - 2.0<= m_px)
 				{
 					Audio::Start(14);
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
-					sy->SetT(true);
+					sa->SetT(true);
 				}
 			}
 			else//手裏剣右向き
@@ -176,7 +178,7 @@ void CObjEnemy::Action()
 				Audio::Start(14);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
-				sy->SetT(true);
+				sa->SetT(true);
 			}
 		}
 	}
