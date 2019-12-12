@@ -7,9 +7,14 @@
 
 #include"GameHead.h"
 #include"Objsetumei.h"
+#include"main.h"
 
 //使用するネームスぺース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE s_state;
+
 
 //イニシャライズ
 void CObjsetumei::Init()
@@ -20,8 +25,11 @@ void CObjsetumei::Init()
 //アクション
 void CObjsetumei::Action()
 {
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &s_state);
+
 	//エンターキーを押してシーン:タイトルに移行する
-	if (Input::GetVKey(VK_RETURN) == true)
+	if (Input::GetVKey(VK_RETURN) == true||s_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
 	{
 		if (m_key_flag == true)
 		{

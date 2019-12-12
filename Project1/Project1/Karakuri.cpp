@@ -6,9 +6,13 @@
 #include"GameHead.h"
 #include"GameL\HitBoxManager.h"
 #include"GameL\Audio.h"
+#include"main.h"
 
 //使用するネームスペース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE k_state;
 
 CObjKarakuri::CObjKarakuri(int x, int y,int n)
 {
@@ -32,6 +36,9 @@ void CObjKarakuri::Init()
 //アクション
 void CObjKarakuri::Action()
 {
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &k_state);
+
 	////表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
@@ -45,7 +52,8 @@ void CObjKarakuri::Action()
 
 		//レバー作動
 		CHitBox* hit = Hits::GetHitBox(this);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false||
+			hit->CheckObjNameHit(OBJ_HERO) != nullptr&&k_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&&on_off == false)
 		{
 			Audio::Start(6);
 			on_off = true;
