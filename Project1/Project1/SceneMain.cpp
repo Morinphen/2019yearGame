@@ -291,12 +291,12 @@ void CSceneMain::InitScene()
 				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 51 || map[i][j] == 52)
+			else if (map[i][j] == 51 || map[i][j] == 52||map[i][j]==53)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
-			else if (map[i][j] == 57 || map[i][j] == 58)
+			else if (map[i][j] == 57 || map[i][j] == 58||map[i][j]==59)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
