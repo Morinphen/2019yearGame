@@ -147,6 +147,14 @@ void CObjFireEnemy::Action()
 	{
 		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 	}
+	if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
+	{
+		hatena = true;
+	}
+	else
+	{
+		hatena = false;
+	}
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
 	{
 		find = true;
@@ -276,5 +284,22 @@ void CObjFireEnemy::Draw()
 	dst_h.m_bottom = dst.m_bottom-64.0f;
 
 	Draw::Draw(34, &src_h, &dst_h, c, 0.0f);
+ }
+ if (hatena == true)
+ {
+	 RECT_F src_h;
+	 RECT_F dst_h;
+	 src_h.m_top = 0.0f;
+	 src_h.m_left = 0.0f;
+	 src_h.m_right = 32.0f;
+	 src_h.m_bottom = 48.0f;
+
+	 //ï\é¶à íuÇÃê›íË
+	 dst_h.m_top = dst.m_top - 64.0f;
+	 dst_h.m_left = dst.m_left;
+	 dst_h.m_right = dst.m_right;
+	 dst_h.m_bottom = dst.m_bottom - 64.0f;
+
+	 Draw::Draw(41, &src_h, &dst_h, c, 0.0f);
  }
 }
