@@ -5,6 +5,10 @@
 #include"Hero.h"
 #include"GameL\HitBoxManager.h"
 #include"GameL\Audio.h"
+#include"main.h"
+
+//ゲームパッド用
+XINPUT_STATE state;
 
 //使用するネームスペース
 using namespace GameL;
@@ -65,6 +69,10 @@ void CObjHero::Init()
 	doton=false;
 	nezumi = false;
 
+	kaginawa_point = false;
+
+	kaginawa_go = false;
+
 	hero_stop = false;
 
 	w_x = 400;
@@ -103,6 +111,8 @@ void CObjHero::Action()
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//ブロックとの当たり判定
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &state);
 
 	pb->BlockHit(&m_x, &m_y, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
@@ -118,26 +128,28 @@ void CObjHero::Action()
 		d_ani_frame = 0;
 		d_ani_time = 0;
 
-		if (Input::GetVKey(VK_RIGHT) == true) {
+		if (Input::GetVKey(VK_RIGHT) == true|| state.Gamepad.sThumbLX > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) {
 			//Cボタンを押しているとダッシュ
 			if (change == true)
 			{
 				n_m = 5;
 			}
-			if (Input::GetVKey('C') == true && m_hit_down == true) {
+			if (Input::GetVKey('C') == true && m_hit_down == true||
+				state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER && m_hit_down == true) {
 				m_vx += 0.5f;
 				m_ani_time++;
 			}
 			Rightwalk();
 		}
 
-		else if (Input::GetVKey(VK_LEFT) == true) {
+		else if (Input::GetVKey(VK_LEFT) == true|| state.Gamepad.sThumbLX < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) {
 			if (change == true)
 			{
 				n_m = 5;
 			}
 			//Cボタンを押しているとダッシュ
-			if (Input::GetVKey('C') == true && m_hit_down == true) {
+			if (Input::GetVKey('C') == true && m_hit_down == true||
+				state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER && m_hit_down == true) {
 				m_vx -= 0.5f;
 				m_ani_time++;
 			}
@@ -151,7 +163,8 @@ void CObjHero::Action()
 		}
 
 		//ジャンプ
-		if (Input::GetVKey('X') && m_hit_down == true)
+		if (Input::GetVKey('X') && m_hit_down == true||
+			state.Gamepad.wButtons & XINPUT_GAMEPAD_A && m_hit_down == true)
 		{
 			if (jamptime == 0)
 				jamptime++;
@@ -187,7 +200,7 @@ void CObjHero::Action()
 		if (nawa_stop == false || nezumi == false) {
 
 			//シノビチェンジ
-			if (Input::GetVKey('Q'))
+			if (Input::GetVKey('Q')||state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)
 			{
 				if (c_stop == false) {
 					if (green != 0.0f)
@@ -214,7 +227,7 @@ void CObjHero::Action()
 			//忍具モード時
 			if (change == false) {
 				//攻撃
-				if (Input::GetVKey('Z'))
+				if (Input::GetVKey('Z')|| state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
 				{
 					if (s_atack == false) {
 							n_m = 0;
@@ -236,43 +249,54 @@ void CObjHero::Action()
 					}
 				}
 
-				//鉤縄
-				else if (Input::GetVKey('V') && nawa_stop == false && m_hit_down == true)
+				//鉤縄(ポインター)
+				else if (Input::GetVKey('V') && m_hit_down == true||
+					state.Gamepad.wButtons & XINPUT_GAMEPAD_Y && m_hit_down == true )
 				{
-					if (s_atack == false) {
+					if (s_atack == false && nawa_stop == false) {
 						pushb = 4;
 						n_m = 1;
 						CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
 						s_atack = true;
 						nawa_stop = true;
+						kaginawa_point = true;
 					}
 				}
 
-				else
-				{
-					s_atack = false;
-				}
-
 				//煙玉
-				if (Input::GetVKey('D'))
+				else if (Input::GetVKey('D')||state.Gamepad.wButtons & XINPUT_GAMEPAD_X)
 				{
-					if (ball == false)
+					if (ball == false && s_atack == false)
 					{
 						pushb = 3;
 						n_m = 3;
 						CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+						s_atack = true;
 						ball = true;
 					}
 				}
+				else
+				{
+					s_atack = false;
+				}
+
+				//鉤縄(発射)
+				if (Input::GetVKey('V') && s_atack == false && kaginawa_point == true || 
+					state.Gamepad.wButtons & XINPUT_GAMEPAD_Y && s_atack == false && kaginawa_point == true)
+				{
+					kaginawa_point = false;
+					kaginawa_go = true;
+				}
+
 				//忍術モード解除で土遁解除
 				doton = false;
 			}
 			//妖術モード
 			else {
 				//火遁
-				if (Input::GetVKey('Z'))
+				if (Input::GetVKey('Z') || state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
 				{
 					if (s_atack == false) {
 						pushb = 1;
@@ -293,8 +317,8 @@ void CObjHero::Action()
 						}
 					}
 				}
-
-				else if (Input::GetVKey('S'))
+				//土遁
+				else if (Input::GetVKey('S') || state.Gamepad.wButtons & XINPUT_GAMEPAD_X)
 				{
 					if (s_atack == false)
 					{
@@ -304,8 +328,9 @@ void CObjHero::Action()
 						s_atack = true;
 					}
 				}
-
-				else if (Input::GetVKey('D') && m_hit_down == true)
+				//虫獣遁
+				else if (Input::GetVKey('D') && m_hit_down == true||
+					state.Gamepad.wButtons & XINPUT_GAMEPAD_Y&& m_hit_down == true)
 				{
 					if (s_atack == false && nezumi == false)
 					{
@@ -317,7 +342,6 @@ void CObjHero::Action()
 						nezumi = true;
 					}
 				}
-
 				else
 				{
 					s_atack = false;
@@ -602,3 +626,4 @@ void CObjHero::Leftwalk()
 	m_ani_time++;
 	m_posture = 1.0f;
 }
+

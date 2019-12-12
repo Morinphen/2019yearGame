@@ -6,9 +6,13 @@
 
 #include"GameHead.h"
 #include"ObjTitle.h"
+#include"main.h"
 
 //使用するネームスぺース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE r_state;
 
 //イニシャライズ
 void CObjRetry::Init()
@@ -20,16 +24,19 @@ void CObjRetry::Init()
 //アクション
 void CObjRetry::Action()
 {
-	if (Input::GetVKey(VK_UP) == true)
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &r_state);
+
+	if (Input::GetVKey(VK_UP) == true||r_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
 	{
 		m_posture = true;
 	}
-	else if (Input::GetVKey(VK_DOWN) == true)
+	else if (Input::GetVKey(VK_DOWN) == true||r_state.Gamepad.sThumbLY < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
 	{
 		m_posture = false;
 	}
 	//エンターキーを押してシーン:ゲームオーバーかメインに移行する
-	if (Input::GetVKey(VK_RETURN) == true)
+	if (Input::GetVKey(VK_RETURN) == true||r_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
 	{
 		if (m_key_flag == true)
 		{
