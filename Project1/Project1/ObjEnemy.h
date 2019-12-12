@@ -43,6 +43,7 @@ private:
 	bool m_move;
 	bool de;
 	bool stop;
+	bool hatena;
 
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム

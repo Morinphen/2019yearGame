@@ -45,6 +45,7 @@ private:
 	bool de;
 	bool hit_hm;
 	bool hit_HA;
+	bool hatena;
 
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム
