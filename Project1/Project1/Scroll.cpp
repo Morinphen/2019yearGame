@@ -76,7 +76,7 @@ void CObjScroll::Draw()
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
 	dst.m_right = 1200.0f;
-	dst.m_bottom = 800.0f;
+	dst.m_bottom = 620.0f;
 	Draw::Draw(2, &src, &dst, c, 0.0f);
 }
 

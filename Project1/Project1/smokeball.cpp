@@ -146,7 +146,7 @@ void CObjSmokeball::Draw()
 					dst.m_right = (64.0f*m_posture + m_x + scroll->GetScroll()) + (64.0f*j);
 					dst.m_bottom = (64.0f + m_y + scroll->GetYScroll()) - (64.0f*i);
 
-					Draw::Draw(33, &src, &dst, cn, 0);
+					Draw::Draw(29, &src, &dst, cn, 0);
 			}
 		}
 	}

@@ -211,7 +211,7 @@ void CObjNezumi::Draw()
 	dst.m_left = m_x + m_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_right = dst.m_left + Dimax;
 	dst.m_bottom = dst.m_top + Dimax;
-	Draw::Draw(34, &src, &dst, c, 0.0f);
+	Draw::Draw(30, &src, &dst, c, 0.0f);
 	if (g_m == true)
 	{
 		RECT_F src_h;
@@ -226,7 +226,7 @@ void CObjNezumi::Draw()
 		dst_h.m_right = dst.m_left + Dimax;
 		dst_h.m_bottom = dst.m_top + Dimax - 32.0f;
 
-		Draw::Draw(38, &src_h, &dst_h, c, 0.0f);
+		Draw::Draw(34, &src_h, &dst_h, c, 0.0f);
 	}
 }
 

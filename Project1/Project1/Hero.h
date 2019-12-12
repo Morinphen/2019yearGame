@@ -69,6 +69,8 @@ public:
 	void SetKNgo_ok(bool b) { kaginawa_go = b; }
 	void SetKNpoint(bool b) { kaginawa_point = b; }
 
+	float GetPushb() { return pushb; }
+
 	//主人公の虫獣遁のフラグを設定
 	void HamuSetUP(bool b) { nezumi = b; }
 
@@ -76,7 +78,8 @@ public:
 	void Dflag(bool b) { dead = b; }
 	void WDflag(bool b) { Wdead = b; }
 	bool GetWDflag() { return Wdead; }
-
+	void Dflag_s(bool b) { dead_s = b; }
+	bool GetDflag_s() { return dead_s; }
 	//主人公の当たり判定の状態を外部から変更する
 	void SetUP(bool b) { m_hit_up = b; }
 	void SetDown(bool b) { m_hit_down = b; }
@@ -89,6 +92,8 @@ public:
 	bool GetLeft() { return m_hit_left; }
 	bool GetRight() { return m_hit_right; }
 
+	//主人公の煙当たり判定を外部に渡す
+	bool Getsmoke_h() { return smokeh; }
 	//土遁の術確認
 	bool GetDoton() { return doton; }
 
@@ -139,7 +144,8 @@ private:
 
 	int jamptime;
 	float jamppower;
-
+	//主人公が何階にいるか
+	int pushb;
 	//手裏剣の所持数
 	int psyuriken;
 
@@ -168,6 +174,8 @@ private:
 	//死亡フラグ
 	bool dead;
 	bool Wdead;
+	bool dead_s;
+	float deadtime;
 
 	int d_ani_time;
 	int d_ani_frame;
