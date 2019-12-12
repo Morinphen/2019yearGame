@@ -254,6 +254,7 @@ void CObjHero::Action()
 					state.Gamepad.wButtons & XINPUT_GAMEPAD_Y && m_hit_down == true )
 				{
 					if (s_atack == false && nawa_stop == false) {
+						pushb = 4;
 						n_m = 1;
 						CObjKaginawa* obj_s = new CObjKaginawa(m_x, m_y, m_posture);
 						Objs::InsertObj(obj_s, OBJ_KAGINAWA, 10);
@@ -316,8 +317,8 @@ void CObjHero::Action()
 						}
 					}
 				}
-
-				else if (Input::GetVKey('S'))
+				//“y“Ù
+				else if (Input::GetVKey('S') || state.Gamepad.wButtons & XINPUT_GAMEPAD_X)
 				{
 					if (s_atack == false)
 					{
