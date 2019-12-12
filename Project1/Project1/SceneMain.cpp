@@ -106,6 +106,10 @@ void CSceneMain::InitScene()
 	int size;               //ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
+	unique_ptr<wchar_t> p2;  //ステージ情報のポインター
+	int size2;               //ステージ情報の大きさ
+	p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
+
 	int map[46][100];
 	int count = 1;
 
@@ -124,6 +128,28 @@ void CSceneMain::InitScene()
 			else
 			{
 				count += 3;
+			}
+		}
+	}
+
+	int map2[46][100];
+	int count2 = 1;
+
+	for (int i = 0; i < 46; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			int w2 = 0;
+			swscanf_s(&p2.get()[count2], L"%d", &w2);
+
+			map2[i][j] = w2;
+			if (w2 < 10)
+			{
+				count2 += 2;
+			}
+			else
+			{
+				count2 += 3;
 			}
 		}
 	}
