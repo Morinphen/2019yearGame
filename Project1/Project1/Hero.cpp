@@ -203,7 +203,7 @@ void CObjHero::Action()
 					change = change ? false : true;
 					c_stop = true;
 					Audio::Start(20);
-					pushb = 0;
+					pushb = 5;
 				}
 			}
 			else

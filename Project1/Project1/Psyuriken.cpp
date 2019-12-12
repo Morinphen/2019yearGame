@@ -182,7 +182,7 @@ void CObjPsyuriken::Draw()
 		//描画
 		Draw::Draw(31, &srcg, &dstg, c, 0.0f);
 	}
-	//忍具モードボタン
+//忍具モードボタン
 	if (hero->GetChange() == false)
 	{
 		//手裏剣
@@ -195,8 +195,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bta.m_top = 700.0f;
-		dstm_bta.m_left = 1078.0f;
-		dstm_bta.m_right = 1200.0f;
+		dstm_bta.m_left = 978.0f;
+		dstm_bta.m_right = 1100.0f;
 		dstm_bta.m_bottom = 820.0f;
 		if (hero->GetPushb() == 1)
 		{
@@ -218,8 +218,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_btx.m_top = 700.0f;
-		dstm_btx.m_left = 850.0f;
-		dstm_btx.m_right = 970.0f;
+		dstm_btx.m_left = 750.0f;
+		dstm_btx.m_right = 870.0f;
 		dstm_btx.m_bottom = 820.0f;
 		if (hero->GetPushb() == 3)
 		{
@@ -241,8 +241,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bty.m_top = 620.0f;
-		dstm_bty.m_left = 968.0f;
-		dstm_bty.m_right = 1083.0f;
+		dstm_bty.m_left = 868.0f;
+		dstm_bty.m_right = 983.0f;
 		dstm_bty.m_bottom = 735.0f;
 		if (hero->GetPushb() == 4)
 		{
@@ -267,8 +267,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bta.m_top = 700.0f;
-		dstm_bta.m_left = 1078.0f;
-		dstm_bta.m_right = 1200.0f;
+		dstm_bta.m_left = 978.0f;
+		dstm_bta.m_right = 1100.0f;
 		dstm_bta.m_bottom = 820.0f;
 		if (hero->GetPushb() == 1)
 		{
@@ -290,8 +290,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_btx.m_top = 700.0f;
-		dstm_btx.m_left = 850.0f;
-		dstm_btx.m_right = 970.0f;
+		dstm_btx.m_left = 750.0f;
+		dstm_btx.m_right = 870.0f;
 		dstm_btx.m_bottom = 820.0f;
 		if (hero->GetPushb() == 3)
 		{
@@ -313,8 +313,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bty.m_top = 620.0f;
-		dstm_bty.m_left = 968.0f;
-		dstm_bty.m_right = 1083.0f;
+		dstm_bty.m_left = 868.0f;
+		dstm_bty.m_right = 983.0f;
 		dstm_bty.m_bottom = 735.0f;
 		if (hero->GetPushb() == 4)
 		{
@@ -337,8 +337,8 @@ void CObjPsyuriken::Draw()
 
 	//表示位置の設定
 	dstm_btb.m_top = 778.0f;
-	dstm_btb.m_left = 968.0f;
-	dstm_btb.m_right = 1083.0f;
+	dstm_btb.m_left = 868.0f;
+	dstm_btb.m_right = 983.0f;
 	dstm_btb.m_bottom = 900.0f;
 	if (hero->GetPushb() == 2)
 	{
@@ -350,5 +350,29 @@ void CObjPsyuriken::Draw()
 		//描画
 		Draw::Draw(36, &srcm_btb, &dstm_btb, c, 0.0f);
 	}
+	
 
+	//ジャンプ
+RECT_F srcm_btm; //描画元切り取り位置
+RECT_F dstm_btm; //描画先表示位置
+srcm_btm.m_top = 0.0f;
+srcm_btm.m_left = 0.0f;
+srcm_btm.m_right = 99.0f;
+srcm_btm.m_bottom = 178.0f;
+
+//表示位置の設定
+dstm_btm.m_top = 620.0f;
+dstm_btm.m_left = 1100.0f;
+dstm_btm.m_right = 1200.0f;
+dstm_btm.m_bottom = 750.0f;
+if (hero->GetPushb() == 5)
+{
+	//描画
+	Draw::Draw(38, &srcm_btm, &dstm_btm, c3, 0.0f);
+}
+else
+{
+	//描画
+	Draw::Draw(38, &srcm_btm, &dstm_btm, c, 0.0f);
+}
 }
