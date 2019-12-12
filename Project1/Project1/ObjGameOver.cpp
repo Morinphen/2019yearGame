@@ -6,9 +6,13 @@
 
 #include"GameHead.h"
 #include"ObjTitle.h"
+#include"main.h"
 
 //使用するネームスぺース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE g_state;
 
 //イニシャライズ
 void CObjGameOver::Init()
@@ -19,8 +23,11 @@ void CObjGameOver::Init()
 //アクション
 void CObjGameOver::Action()
 {
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &g_state);
+
 	//エンターキーを押してシーン:タイトルに移行する
-	if (Input::GetVKey(VK_RETURN) == true)
+	if (Input::GetVKey(VK_RETURN) == true ||g_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
 	{
 		if (m_key_flag == true)
 		{

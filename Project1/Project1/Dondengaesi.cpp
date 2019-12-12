@@ -5,9 +5,13 @@
 #include"Dondengaesi.h"
 #include"GameL\HitBoxManager.h"
 #include"GameL\Audio.h"
+#include"main.h"
 
 //使用するネームスペース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE d_state;
 
 CObjDonden::CObjDonden(int x, int y, int namber, bool b)
 {
@@ -63,6 +67,9 @@ void CObjDonden::Init()
 //アクション
 void CObjDonden::Action()
 {
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &d_state);
+
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
@@ -94,7 +101,8 @@ void CObjDonden::Action()
 				bool stop;
 				stop = h->GetNawa();
 				//↑入力をされたとき、アニメーションを開始
-				if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false)
+				if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false||
+					d_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&& s_down == true && stop == false && N_stop == false)
 				{
 					if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 						Audio::Start(4);

@@ -42,6 +42,9 @@ public:
 	void SetWX(float x) { w_x = x; }
 	void SetWY(float y) { w_y = y; }
 
+	//主人公のアタックフラグを返す
+	bool GetS_atack(){ return s_atack; }
+
 	bool GetCF() { return Cflag; }
 	//主人公の残機数を渡す
 	float GetRE() { return remain; }
@@ -60,6 +63,11 @@ public:
 	bool GetNawa() { return nawa_stop; }
 	bool GetINawa() { return nawa_ido; }
 	void Uflag(bool b) { U_flag = b; }
+
+	//主人公が鉤縄を投げたフラグを渡す
+	bool GetKNgo() { return kaginawa_go; }
+	void SetKNgo_ok(bool b) { kaginawa_go = b; }
+	void SetKNpoint(bool b) { kaginawa_point = b; }
 
 	//主人公の虫獣遁のフラグを設定
 	void HamuSetUP(bool b) { nezumi = b; }
@@ -89,6 +97,7 @@ public:
 
 	//どの道具か術を使ったかを外部に渡す
 	float GetN_M() { return n_m; }
+
 	//右に歩く
 	void Rightwalk();
 	void Leftwalk();
@@ -165,6 +174,12 @@ private:
 
 	//土遁の術
 	bool doton;
+
+	//kaginawa判別フラグ(ポインターが出てるかしらべる)
+	bool kaginawa_point;
+
+	//鉤縄発射フラグ
+	bool kaginawa_go;
 
 	//主人公の動きを止める
 	bool hero_stop;

@@ -5,6 +5,10 @@
 #include"Kaginawa.h"
 #include"GameL\HitBoxManager.h"
 #include"GameL\Audio.h"
+#include"main.h"
+
+//ゲームパッド用
+XINPUT_STATE kn_state;
 
 //使用するネームスペース
 using namespace GameL;
@@ -51,6 +55,9 @@ void CObjKaginawa::Action()
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	float r = 3.14f / 180.0f;
+
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &kn_state);
 
 	//スクロールした分だけ
 	float bm_x = m_x - (h->GetX() + 200);
@@ -104,8 +111,8 @@ void CObjKaginawa::Action()
 	bool Mode;
 	Mode = h->GetChange();
 
-	//Aボタンをクリックしたとき、鍵縄を発射する
-	if (Input::GetVKey('A'))
+	//Yボタンをクリックしたとき、鍵縄を発射する
+	if (h->GetKNgo()==true/*Input::GetVKey('A')&&h->GetS_atack()==false|| kn_state.Gamepad.wButtons & XINPUT_GAMEPAD_Y&&h->GetS_atack() == false*/)
 	{
 		Audio::Start(7);
 		float a = abs(m_x - h->GetX());
@@ -113,6 +120,7 @@ void CObjKaginawa::Action()
 		CObjNagenawa* obj_s = new CObjNagenawa(h->GetX(), h->GetY(), m_muki, a, b);
 		Objs::InsertObj(obj_s, OBJ_NAGENAWA, 10);
 		h->Setstop(true);
+		h->SetKNgo_ok(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -121,6 +129,7 @@ void CObjKaginawa::Action()
 	else if (h->Ninzyutu == true || Mode==true)
 	{
 		h->ReSetN(false);
+		h->SetKNpoint(false);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

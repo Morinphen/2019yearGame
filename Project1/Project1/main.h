@@ -15,5 +15,8 @@
 //ウィンドウゲームタイトル名
 #define GAME_NAME L"ライブラリ"
 
-
-
+//ゲームパッド用宣言
+#pragma comment(lib,"xinput.lib")
+#include<Windows.h>
+#include<Xinput.h>
+#define XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  7849
