@@ -190,7 +190,7 @@ void CObjEnemy::Action()
 			}
 		}
 	}
-	if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
+	else if (hit->CheckObjNameHit(OBJ_SYURIKEN) != nullptr)
 	{
 		CObjSyuriken* sy = (CObjSyuriken*)Objs::GetObj(OBJ_SYURIKEN);
 		sm_x = sy->GetX();
