@@ -27,13 +27,14 @@ void CObjTBlock::Init()
 	l_scroll = 0.0f;
 	n = 0;
 
-	modecheck = false;//モード切替
+	modecheck = 1;//モード切替
 	Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
 	HitBox_ON = true;
 }
 //アクション
 void CObjTBlock::Action()
 {
+	//画面内処理
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
@@ -41,7 +42,10 @@ void CObjTBlock::Action()
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
+			if(modecheck==1)
+				Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
+			else
+				Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_TURIBLOCK2, 1);
 		}
 
 		//主人公の位置を取得
@@ -53,7 +57,6 @@ void CObjTBlock::Action()
 		l_scroll = scroll->GetYScroll();
 
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_TURIBLOCK);
-
 
 		//要素番号を安俵に変更
 		float x = m_x;
@@ -72,10 +75,10 @@ void CObjTBlock::Action()
 
 		CHitBox* hit = Hits::GetHitBox(this);
 
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&modecheck != 3)
 		{
 			//主人公と当たったらフラグをオンに
-			modecheck = true;
+			modecheck = 2;
 
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_TURIBLOCK2, 1);
@@ -84,6 +87,7 @@ void CObjTBlock::Action()
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 	}
 
+	//画面外処理
 	else
 	{
 		//ヒットボックス削除
@@ -96,17 +100,24 @@ void CObjTBlock::Action()
 	}
 
 	//ブロックを落とす
-	if (modecheck == true)
+	if (modecheck == 2)
 	{
 		m_y += 4;
 		n++;
-		//落ちきったら元の位置に戻す
+		//落ちきったら止める
 		if (n / 38 == 3)
 		{
 			n = 0;
-			modecheck = false;
-			m_x = sm_x;
-			m_y = sm_y;
+			modecheck=3;
+		}
+	}
+	//ブロックを元に戻す
+	else if (modecheck == 3)
+	{
+		m_y -= 2;
+		if (sm_y == m_y)
+		{
+			modecheck = 1;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
 		}
