@@ -158,12 +158,12 @@ void CObjPsyuriken::Draw()
 	RECT_F dstt; //描画先表示位置
 
 	//表示位置の設定
-	dstt.m_top = 0.0f;
+	dstt.m_top = 780.0f;
 	dstt.m_left = 1100.0f;
 	dstt.m_right = 1200.0f;
-	dstt.m_bottom = 120.0f;
+	dstt.m_bottom = 900.0f;
 	//描画
-	Draw::Draw(32, &srcb, &dstt, c2, 0.0f);
+	Draw::Draw(32, &srcb, &dstt, c, 0.0f);
 	if (hero->GetCF() == true)
 	{
 		RECT_F srcg; //描画元切り取り位置
@@ -174,10 +174,10 @@ void CObjPsyuriken::Draw()
 		srcg.m_bottom = 512.0f;
 
 		//表示位置の設定
-		dstg.m_top = 20.0f;
+		dstg.m_top = 800.0f;
 		dstg.m_left = 1110.0f;
 		dstg.m_right = 1190.0f;
-		dstg.m_bottom = 100.0f;
+		dstg.m_bottom = 880.0f;
 
 		//描画
 		Draw::Draw(31, &srcg, &dstg, c, 0.0f);
@@ -375,4 +375,75 @@ else
 	//描画
 	Draw::Draw(38, &srcm_btm, &dstm_btm, c, 0.0f);
 }
+RECT_F srcmn; //描画元切り取り位置
+RECT_F dstmn; //描画先表示位置
+srcmn.m_top = 0.0f;
+srcmn.m_left = 0.0f;
+srcmn.m_right = 512.0f;
+srcmn.m_bottom = 365.0f;
+
+//表示位置の設定
+dstmn.m_top = 620.0f;
+dstmn.m_left = 0.0f;
+dstmn.m_right = 750.0f;
+dstmn.m_bottom = 900.0f;
+
+//描画
+Draw::Draw(39, &srcmn, &dstmn, c, 0.0f);
+CObjScroll* sc = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+RECT_F srcm_n; //描画元切り取り位置
+RECT_F dstm_n; //描画先表示位置
+srcm_n.m_top = 0.0f;
+srcm_n.m_left = 0.0f;
+srcm_n.m_right = 200.0f;
+srcm_n.m_bottom = 200.0f;
+ys = sc->GetYScroll()+2320;
+//表示位置の設定
+dstm_n.m_top = 875.0f -(ys/10.5);
+dstm_n.m_left = 55.0f-(sc->GetScroll()/8.6)-(sc->GetMNScroll()/8.6);
+dstm_n.m_right = 75.0f - (sc->GetScroll()/8.6) - (sc->GetMNScroll()/8.6);
+dstm_n.m_bottom = 895.0f - (ys / 10.5);
+if (sc->GetYScroll() > -250)
+{
+	fs = 4;
+}
+else if (sc->GetYScroll() > -750)
+{
+	fs = 3;
+}
+else if (sc->GetYScroll() > -1260)
+{
+	fs = 2;
+}
+else if (sc->GetYScroll() > -1760)
+{
+	fs = 1;
+}
+else
+{
+	fs = 0;
+}
+//描画
+Draw::Draw(18, &srcm_n, &dstm_n, c, 0.0f);
+RECT_F dstf_m; //描画先表示位置
+//表示位置の設定
+dstf_m.m_top = 0.0f;
+dstf_m.m_left = 1100.0f;
+dstf_m.m_right = 1200.0f;
+dstf_m.m_bottom = 120.0f;
+//描画
+Draw::Draw(32, &srcb, &dstf_m, c, 0.0f);
+RECT_F srcf_n; //描画元切り取り位置
+RECT_F dstf_n; //描画先表示位置
+srcf_n.m_top = 30.0f;
+srcf_n.m_left = 35.0f+(fs*90);
+srcf_n.m_right = 90.0f + (fs *90);
+srcf_n.m_bottom = 140.0f;
+//表示位置の設定
+dstf_n.m_top =10.0f;
+dstf_n.m_left = 1110;
+dstf_n.m_right = 1190;
+dstf_n.m_bottom = 100.0f;
+//描画
+Draw::Draw(40, &srcf_n, &dstf_n, c, 0.0f);
 }

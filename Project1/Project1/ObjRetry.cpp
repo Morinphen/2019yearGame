@@ -71,7 +71,7 @@ void CObjRetry::Draw()
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
 	dst.m_right = 1200.0f;
-	dst.m_bottom = 600.0f;
+	dst.m_bottom = 900.0f;
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
@@ -88,18 +88,18 @@ void CObjRetry::Draw()
 	if (m_posture == true)
 	{
 		//表示位置の設定
-		dsts.m_top = 160.0f;
+		dsts.m_top = 250.0f;
 		dsts.m_left = 350.0f;
 		dsts.m_right =414.0f;
-		dsts.m_bottom =224.0f;
+		dsts.m_bottom =314.0f;
 	}
 	else if (m_posture == false)
 	{
 		//表示位置の設定
-		dsts.m_top = 360.0f;
+		dsts.m_top = 560.0f;
 		dsts.m_left = 350.0f;
 		dsts.m_right = 414.0f;
-		dsts.m_bottom =424.0f;
+		dsts.m_bottom =624.0f;
 	}
 	//描画
 	Draw::Draw(1, &srcs, &dsts, c, 0.0f);

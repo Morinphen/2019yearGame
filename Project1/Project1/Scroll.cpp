@@ -21,6 +21,7 @@ void CObjScroll::Init()
 {
 	m_scroll = 64.0f;
 	l_scroll = 64.0f*-35.0f;
+	mn_scroll = 0.0f;
 	//l_scroll = 64.0f*-30.0f;
 }
 //アクション
@@ -31,6 +32,14 @@ void CObjScroll::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
+	if (hx > 500 && hx < 600)
+	{
+		mn_scroll = 500 - hx;
+	}
+	if (hy > 80 && hy < 500)
+	{
+		mn_scroll = 500 - hx;
+	}
 
 	//後方スクロールライン
 	if (hx < 500)

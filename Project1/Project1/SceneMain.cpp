@@ -98,6 +98,8 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"botan.png", 36, TEX_SIZE_512);
 	Draw::LoadImage(L"botan2.png", 37, TEX_SIZE_512);
 	Draw::LoadImage(L"modebotan.png", 38, TEX_SIZE_512);
+	Draw::LoadImage(L"minimap.png", 39, TEX_SIZE_512);
+	Draw::LoadImage(L"floor.png", 40, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ

@@ -14,6 +14,8 @@ public:
 	void Action();//アクション
 	void Draw();//ドロー
 private:
+	int ys;
+	int fs;
 	int ps;
 	int re;
 	bool mode;
