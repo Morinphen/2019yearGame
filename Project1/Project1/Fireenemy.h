@@ -51,7 +51,7 @@ private:
 	int m_posture_time;//姿勢変えるまでの時間
 	int sm_x;//手裏剣のx座標
 	bool p;//手裏剣の向き
-
+	bool hit_o;
 	bool crhitbox;
 	float m_speed_power; //スピードパワー
 	float m_ani_max_time; //アニメーション動作間隔最大値
