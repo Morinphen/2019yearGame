@@ -62,6 +62,7 @@ void CObjHero::Init()
 	dead_s = false;
 	deadtime = 0;
 	pushb=0;
+	syurikend = true;
 
 	d_ani_time = 0;
 	d_ani_frame = 0;
@@ -229,7 +230,8 @@ void CObjHero::Action()
 				//çUåÇ
 				if (Input::GetVKey('Z')|| state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
 				{
-					if (s_atack == false) {
+					if (s_atack == false&&syurikend==true) {
+						    syurikend = false;
 							n_m = 0;
 							Audio::Start(1);
 							pushb = 1;
