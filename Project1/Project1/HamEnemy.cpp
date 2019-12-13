@@ -21,7 +21,7 @@ void CObjHamEnemy::Init()
 {
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 0.0f;//右向き0.0f　左向き1.0f
+	m_posture = 1.0f;//右向き0.0f　左向き1.0f
 	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする
@@ -41,6 +41,7 @@ void CObjHamEnemy::Init()
 	de = false;
 	HitBox_ON = true;
 	hit_HA = false;
+	hit_o = false;
 }
 
 //アクション
@@ -140,23 +141,25 @@ void CObjHamEnemy::Action()
 			hr->Dflag_s(true);
 		}
 		//ハム太郎衝突で向きを変更
-		if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == false||
-			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == false)
+		if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == false &&hit_o==false||
+			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == false && hit_o == false)
 		{
 			Hits::DeleteHitBox(this);
 			hit_hm = true;
 			m_move = true;
 			crhitbox = true;
 			m_posture_time = 0;
+			hit_o = true;
 		}
-		else if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true&&hm->GetA_M()==true||
-			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == true)
+		else if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true&&hm->GetA_M()==true && hit_o == false ||
+			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == true && hit_o == false)
 		{
 			Hits::DeleteHitBox(this);
 			hit_hm = true;
 			m_move = false;
 			crhitbox = true;
 			m_posture_time = 0;
+			hit_o = true;
 		}	
 		if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
 		{

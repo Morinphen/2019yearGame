@@ -101,6 +101,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"minimap.png", 39, TEX_SIZE_512);
 	Draw::LoadImage(L"floor.png", 40, TEX_SIZE_512);
 	Draw::LoadImage(L"hatena.png", 41, TEX_SIZE_512);
+	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
