@@ -150,6 +150,9 @@ private:
 	//手裏剣の所持数
 	int psyuriken;
 	bool syurikend;
+	//火球チャージ
+	bool fires;
+	float firetime;
 
 	//攻撃等の制限用変数
 	bool s_atack;

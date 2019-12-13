@@ -51,6 +51,9 @@ void CObjHero::Init()
 	smokeh = false;
 	U_flag = false;
 
+	fires = true;
+	firetime = 0.0;
+
 	Ninzyutu = false;
 
 	Cflag = false;
@@ -300,7 +303,8 @@ void CObjHero::Action()
 				//‰Î“Ù
 				if (Input::GetVKey('Z') || state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
 				{
-					if (s_atack == false) {
+					if (s_atack == false && fires == true) {
+						fires = false;
 						pushb = 1;
 						n_m = 4;
 						Audio::Start(16);
@@ -513,7 +517,15 @@ void CObjHero::Action()
 		WDflag(false);
 		Dflag(false);
 	}
-
+	if (fires == false)
+	{
+		firetime += 1;
+	}
+	if (fires == false && firetime == 120)
+	{
+		firetime = 0;
+		fires = true;
+	}
 	hit->SetPos(m_x, m_y);
 }
 
@@ -610,6 +622,21 @@ void CObjHero::Draw()
 			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
 			Draw::Draw(35, &src, &dst, c2, 0.0f);
 		}
+	}
+	if (fires ==false)
+	{
+		RECT_F srck;
+		RECT_F dstk;
+		float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
+		srck.m_top = 0.0f;
+		srck.m_left = 0.0;
+		srck.m_right = 346.0f;
+		srck.m_bottom = 512.0f;
+		dstk.m_top = 0.0f + m_y - 64;
+		dstk.m_bottom = 64.0f + m_y - 64;
+		dstk.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+		dstk.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+		Draw::Draw(43, &srck, &dstk, c2, 0.0f);
 	}
 }
 

@@ -120,6 +120,14 @@ void CObjMakimono::Action()
 
 			if (getflag == true)
 			{
+				if (hero->GetRE() == 1)
+				{
+					hero->SetRE(-2);
+				}
+				else if (hero->GetRE() == 2)
+				{
+					hero->SetRE(-1);
+				}
 				Audio::Start(11);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
