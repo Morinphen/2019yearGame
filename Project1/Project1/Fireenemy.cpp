@@ -41,6 +41,7 @@ void CObjFireEnemy::Init()
 	crhitbox = true;
 	de = false;
 	stop=false;
+	hit_o = false;
 }
 
 //アクション
@@ -160,7 +161,7 @@ void CObjFireEnemy::Action()
 		find = true;
 		hr->Dflag_s(true);
 	}
-	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr&&hit_o ==false)
 	{
 		CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
 		sm_x = sa->GetX();
@@ -173,6 +174,7 @@ void CObjFireEnemy::Action()
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
+				hit_o = true;
 			}
 			else//手裏剣右向き
 			{
@@ -182,6 +184,7 @@ void CObjFireEnemy::Action()
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
+					hit_o = true;
 				}
 			}
 		}
@@ -195,6 +198,7 @@ void CObjFireEnemy::Action()
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
+					hit_o = true;
 				}
 			}
 			else//手裏剣右向き
@@ -203,6 +207,7 @@ void CObjFireEnemy::Action()
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
+				hit_o = true;
 			}
 		}
 	}
