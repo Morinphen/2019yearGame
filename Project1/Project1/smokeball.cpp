@@ -74,11 +74,11 @@ void CObjSmokeball::Action()
 		{
 			Audio::Start(10);
 			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*9, 64*2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
+			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*11, 64*2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
 		}
 		//ヒットボックス更新
 		hit = Hits::GetHitBox(this);
-		hit->SetPos(m_x - 64 * 3 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
+		hit->SetPos(m_x - 64 * 4 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
 		smoke_time++;
 		if (smoke_time / 60 == 5)
 		{
