@@ -6,9 +6,13 @@
 
 #include"GameHead.h"
 #include"ObjTitle.h"
+#include"main.h"
 
 //使用するネームスぺース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE r_state;
 
 //イニシャライズ
 void CObjRetry::Init()
@@ -20,16 +24,19 @@ void CObjRetry::Init()
 //アクション
 void CObjRetry::Action()
 {
-	if (Input::GetVKey(VK_UP) == true)
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &r_state);
+
+	if (Input::GetVKey(VK_UP) == true||r_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
 	{
 		m_posture = true;
 	}
-	else if (Input::GetVKey(VK_DOWN) == true)
+	else if (Input::GetVKey(VK_DOWN) == true||r_state.Gamepad.sThumbLY < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
 	{
 		m_posture = false;
 	}
 	//エンターキーを押してシーン:ゲームオーバーかメインに移行する
-	if (Input::GetVKey(VK_RETURN) == true)
+	if (Input::GetVKey(VK_RETURN) == true||r_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
 	{
 		if (m_key_flag == true)
 		{
@@ -71,7 +78,7 @@ void CObjRetry::Draw()
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
 	dst.m_right = 1200.0f;
-	dst.m_bottom = 600.0f;
+	dst.m_bottom = 900.0f;
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
@@ -88,18 +95,18 @@ void CObjRetry::Draw()
 	if (m_posture == true)
 	{
 		//表示位置の設定
-		dsts.m_top = 160.0f;
+		dsts.m_top = 250.0f;
 		dsts.m_left = 350.0f;
 		dsts.m_right =414.0f;
-		dsts.m_bottom =224.0f;
+		dsts.m_bottom =314.0f;
 	}
 	else if (m_posture == false)
 	{
 		//表示位置の設定
-		dsts.m_top = 360.0f;
+		dsts.m_top = 560.0f;
 		dsts.m_left = 350.0f;
 		dsts.m_right = 414.0f;
-		dsts.m_bottom =424.0f;
+		dsts.m_bottom =624.0f;
 	}
 	//描画
 	Draw::Draw(1, &srcs, &dsts, c, 0.0f);

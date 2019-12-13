@@ -60,7 +60,6 @@ void CSceneMain::InitScene()
 	Audio::Start(0);
 
 	//外部グラフィックファイル読み込み
-	Draw::LoadImage(L"hero.png", 0, TEX_SIZE_512);
 	Draw::LoadImage(L"Zimen_t.jpg", 1, TEX_SIZE_512);
 	Draw::LoadImage(L"Kabe2.jpg", 2, TEX_SIZE_512);
 	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
@@ -81,23 +80,35 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
 	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
 	Draw::LoadImage(L"kaginawa.png", 20, TEX_SIZE_512);
-	Draw::LoadImage(L"ninzya1.png", 25, TEX_SIZE_512);
-	Draw::LoadImage(L"Zimen_y.jpg", 26, TEX_SIZE_512);
-	Draw::LoadImage(L"Moemasu.jpg", 27, TEX_SIZE_512);
-	Draw::LoadImage(L"uguisu.png", 28, TEX_SIZE_512);
-	Draw::LoadImage(L"nezuana.png", 29, TEX_SIZE_512);
-	Draw::LoadImage(L"turi.png", 30, TEX_SIZE_512);
-	Draw::LoadImage(L"goal.png", 31, TEX_SIZE_512);
-	Draw::LoadImage(L"sikaku.png", 32, TEX_SIZE_512);
-	Draw::LoadImage(L"kemuri.png", 33, TEX_SIZE_1024);
-	Draw::LoadImage(L"nezumi.png", 34, TEX_SIZE_512);
-	Draw::LoadImage(L"makimo_a.png", 35, TEX_SIZE_512);
-	Draw::LoadImage(L"mode_back.jpg", 36, TEX_SIZE_512);
-	Draw::LoadImage(L"magic.png", 37, TEX_SIZE_1024);
+	Draw::LoadImage(L"ninzya1.png", 21, TEX_SIZE_512);
+	Draw::LoadImage(L"Zimen_y.jpg", 22, TEX_SIZE_512);
+	Draw::LoadImage(L"Moemasu.jpg", 23, TEX_SIZE_512);
+	Draw::LoadImage(L"uguisu.png", 24, TEX_SIZE_512);
+	Draw::LoadImage(L"nezuana.png", 25, TEX_SIZE_512);
+	Draw::LoadImage(L"turi.png", 26, TEX_SIZE_512);
+	Draw::LoadImage(L"goal.png", 27, TEX_SIZE_512);
+	Draw::LoadImage(L"sikaku.png", 28, TEX_SIZE_512);
+	Draw::LoadImage(L"kemuri.png", 29, TEX_SIZE_1024);
+	Draw::LoadImage(L"nezumi.png", 30, TEX_SIZE_512);
+	Draw::LoadImage(L"makimo_a.png", 31, TEX_SIZE_512);
+	Draw::LoadImage(L"mode_back.jpg", 32, TEX_SIZE_512);
+	Draw::LoadImage(L"magic.png", 33, TEX_SIZE_1024);
+	Draw::LoadImage(L"haken.png", 34, TEX_SIZE_512);
+	Draw::LoadImage(L"km.png", 35, TEX_SIZE_512);
+	Draw::LoadImage(L"botan.png", 36, TEX_SIZE_512);
+	Draw::LoadImage(L"botan2.png", 37, TEX_SIZE_512);
+	Draw::LoadImage(L"modebotan.png", 38, TEX_SIZE_512);
+	Draw::LoadImage(L"minimap.png", 39, TEX_SIZE_512);
+	Draw::LoadImage(L"floor.png", 40, TEX_SIZE_512);
+	Draw::LoadImage(L"hatena.png", 41, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
+
+	unique_ptr<wchar_t> p2;  //ステージ情報のポインター
+	int size2;               //ステージ情報の大きさ
+	p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
 
 	int map[46][100];
 	int count = 1;
@@ -121,6 +132,28 @@ void CSceneMain::InitScene()
 		}
 	}
 
+	int map2[46][100];
+	int count2 = 1;
+
+	for (int i = 0; i < 46; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			int w2 = 0;
+			swscanf_s(&p2.get()[count2], L"%d", &w2);
+
+			map2[i][j] = w2;
+			if (w2 < 10)
+			{
+				count2 += 2;
+			}
+			else
+			{
+				count2 += 3;
+			}
+		}
+	}
+
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
 	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
@@ -131,10 +164,61 @@ void CSceneMain::InitScene()
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (map[i][j] == 3)
+			if (map[i][j] == 81 || map[i][j] == 82)
 			{
-				CObjEnemy* obje = new CObjEnemy(j * 64, i * 64);
-				Objs::InsertObj(obje, OBJ_ENEMY, 6);
+				CObjEnemy* objne = new CObjEnemy(j * 64, i * 64);
+				Objs::InsertObj(objne, OBJ_ENEMY, 6);
+				
+				if (map[i][j] == 82)
+				{
+					CObjEnemy* en = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+					en->Setestop(true);
+				}
+			}
+			else if (map[i][j] == 83 || map[i][j] == 84)
+			{
+				CObjFireEnemy* objfe = new CObjFireEnemy(j * 64, i * 64);
+				Objs::InsertObj(objfe, OBJ_FIREENEMY, 6);
+				
+				if (map[i][j] == 84)
+				{
+					CObjFireEnemy* fen = (CObjFireEnemy*)Objs::GetObj(OBJ_FIREENEMY);
+					fen->Setfestop(true);
+					fen->Setm_p(1.0);
+					fen->Setm_m(false);
+				}
+			}
+			else if(map[i][j] == 85|| map[i][j] == 86)
+			{
+				CObjHamEnemy* obje = new CObjHamEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
+				CObjHamEnemy* hen = (CObjHamEnemy*)Objs::GetObj(OBJ_HAMENEMY);
+				//右向き
+				if (map[i][j] == 86)
+				{
+					hen->SetM_P(1.0);
+				}
+				//左向き
+				else
+				{
+					hen->SetM_P(0.0);
+				}
+			}
+			else if (map[i][j] == 87 || map[i][j] == 88)
+			{
+				CObjMuscleEnemy* obje = new CObjMuscleEnemy(j * 64, i * 64);
+				Objs::InsertObj(obje, OBJ_MUSCLEENEMY, 6);
+				CObjMuscleEnemy* men = (CObjMuscleEnemy*)Objs::GetObj(OBJ_MUSCLEENEMY);
+				//右向き
+				if (map[i][j] == 87)
+				{
+					men->SetM_P(1.0);
+				}
+				//左向き
+				else
+				{
+					men->SetM_P(0.0);
+				}
 			}
 			else if (map[i][j] == 4)
 			{
@@ -207,12 +291,12 @@ void CSceneMain::InitScene()
 				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 51 || map[i][j] == 52)
+			else if (map[i][j] == 51 || map[i][j] == 52||map[i][j]==53)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
-			else if (map[i][j] == 57 || map[i][j] == 58)
+			else if (map[i][j] == 57 || map[i][j] == 58||map[i][j]==59)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);

@@ -45,6 +45,8 @@ void CObjNezumi::Init()
 
 	Dimax = 32;
 
+	g_m = false;
+
 	hamstop = false;
 	naki = false;
 	hamnam=0;
@@ -209,7 +211,23 @@ void CObjNezumi::Draw()
 	dst.m_left = m_x + m_scroll + 32.0f + (32.0f - Dimax);
 	dst.m_right = dst.m_left + Dimax;
 	dst.m_bottom = dst.m_top + Dimax;
-	Draw::Draw(34, &src, &dst, c, 0.0f);
+	Draw::Draw(30, &src, &dst, c, 0.0f);
+	if (g_m == true)
+	{
+		RECT_F src_h;
+		RECT_F dst_h;
+		src_h.m_top = 0.0f;
+		src_h.m_left = 0.0f;
+		src_h.m_right = 32.0f;
+		src_h.m_bottom = 32.0f;
+
+		dst_h.m_top = m_y + l_scroll + 32.0f + (32.0f - Dimax) - 32.0f;
+		dst_h.m_left = m_x + m_scroll + 32.0f + (32.0f - Dimax);
+		dst_h.m_right = dst.m_left + Dimax;
+		dst_h.m_bottom = dst.m_top + Dimax - 32.0f;
+
+		Draw::Draw(34, &src_h, &dst_h, c, 0.0f);
+	}
 }
 
 bool CObjNezumi::mapsarch(int x, int y, int muki)
@@ -232,8 +250,11 @@ bool CObjNezumi::mapsarch(int x, int y, int muki)
 		y -= 64;
 	}
 
-	if (map_data[mp_y][mp_x] == 0 || map_data[mp_y][mp_x] == 4 || map_data[mp_y][mp_x] == 11)
+	if (map_data[mp_y][mp_x] == 0 || map_data[mp_y][mp_x] == 4 || map_data[mp_y][mp_x] == 11|| 
+		map_data[mp_y][mp_x] == 12)
 	{
+		Audio::Start(13);
+		g_m = true;
 		flag = true;
 		if (a_pos == true)
 		{
@@ -247,6 +268,7 @@ bool CObjNezumi::mapsarch(int x, int y, int muki)
 	}
 	else
 	{
+		g_m = false;
 		flag = false;
 	}
 	return flag;
@@ -281,7 +303,7 @@ int CObjNezumi::mapplace(int x, int y, int muki)
 			break;
 		for (int j = mp_y - 3; j < mp_y+3; j++)
 		{
-			if (map_data[j][i] == 57 || map_data[j][i] == 58)
+			if (map_data[j][i] == 57 || map_data[j][i] == 58||map_data[j][i]==59)
 			{
 				rflag = map_data[j][i];
 				stop = true;

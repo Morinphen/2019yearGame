@@ -130,6 +130,6 @@ void CObjExit::Draw()
 	dst.m_right = dst.m_left + 128.0f;
 	dst.m_bottom = dst.m_top + 192.0f;
 
-	Draw::Draw(31, &src, &dst, c, 0.0f);
+	Draw::Draw(27, &src, &dst, c, 0.0f);
 
 }

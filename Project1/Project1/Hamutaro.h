@@ -17,9 +17,11 @@ public:
 	void Draw();//どろー
 
 	//ハム太郎が歩けるかどうかを判定
-	bool mapsarch(int x,int y,int muki);
+	bool mapsarch(int x, int y, int muki);
 	//ハム太郎の現在地を返す
 	int mapplace(int x, int y, int muki);
+
+	bool GetA_M(){ return a_pos; }
 private:
 	float m_x;
 	float m_vx;
@@ -37,6 +39,8 @@ private:
 
 	//アニメーション用ハム太郎の向き
 	bool a_pos;
+	//ハム太郎の前に何かギミックがあるかどうか
+	bool g_m;
 
 	int map_data[46][100];
 

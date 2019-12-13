@@ -68,6 +68,11 @@ void CObjHonoBlock::Action()
 			}
 		}
 
+		if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
+		{
+			enzyou = true;
+		}
+
 		//ˆê’è‚ÌŽžŠÔ‚ª‚½‚Â‚ÆÁ–Å
 		if (m_ani_frame == 6)
 		{
@@ -75,11 +80,6 @@ void CObjHonoBlock::Action()
 			pb->Deletemap(m_x, m_y);
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
-		}
-
-		if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
-		{
-			enzyou = true;
 		}
 
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
@@ -119,7 +119,7 @@ void CObjHonoBlock::Draw()
 		dst.m_right = dst.m_left + 64.0f;
 		dst.m_bottom = dst.m_top + 64.0f;
 
-		Draw::Draw(27, &src, &dst, c, 0.0f);
+		Draw::Draw(23, &src, &dst, c, 0.0f);
 		if (enzyou == true)
 			Draw::Draw(13, &src, &dst, c, 0.0f);
 	}

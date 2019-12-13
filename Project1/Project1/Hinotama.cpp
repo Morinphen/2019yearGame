@@ -82,7 +82,6 @@ void CObjHinotama::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
 	//ブロックとの当たり判定
 	if (Animation == false)
 	{
@@ -99,7 +98,11 @@ void CObjHinotama::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
+	if (t_h == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
