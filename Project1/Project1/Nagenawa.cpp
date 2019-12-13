@@ -104,6 +104,7 @@ void CObjNagenawa::Action()
 
 	m_y += m_vy;
 
+
 	m_scroll = scroll->GetScroll();
 	l_scroll = scroll->GetYScroll();
 
@@ -118,57 +119,97 @@ void CObjNagenawa::Draw()
 	RECT_F dst;
 
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjScroll* s = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
-	/*//vector‚Ìì¬
-	float vx = (m_x + (-m_scroll)) - h->GetX();
-	float vy = (m_y + (-l_scroll)) - h->GetY();
+	//vector‚Ìì¬
+	float vx = (m_x) - h->GetX();
+	float vy = (m_y) - h->GetY();
 
 	//Šp“x‚ğ‹‚ß‚é
-	float r = atan2(vy, vx);
+	float r = atan2(-vy, vx);
 	r = r * 180 / 3.14;
 
 	if (r < 0)
 		r = 360.0f - abs(r);
 
 	float ar = atan2(m_vy, m_vx)*3.14 / 180;
+	if (ar < 0)
+	{
+		ar = 360 - abs(ar);
+	}
 
 	float br = 3.14 / 180;
 
-	float a = abs(m_vy);
-	float b = abs(m_vx);
+	float ix = m_vx;
+	float iy = m_vy;
 
-	Nawa += (a + b);
+	int p_y = 0;
+	int plus = 10;
+
+	for (int i = vy; i < -10; i += plus)
+	{
+		p_y++;
+		//r += 0.2f;
+		plus += 10;
+	}
+
+	/*if (r < ar)
+	{
+		ix = ix*cos(-br) - iy*sin(-br);
+		iy = iy*cos(-br) + ix*sin(-br);
+	}
+
+	else
+	{
+		ix = ix*cos(br) - iy*sin(br);
+		iy = iy*cos(br) + ix*sin(br);
+	}
+*/
+	float a = vx;
+	float b = abs(vy);
+
+	Nawa = (a + b) + p_y;
+
+	if (Nawa >m_x - h->GetX() + 64 && Nawa >m_y - h->GetY() + 98)
+	{
+		Nawa = m_x - h->GetX() + 64;
+	}
 
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = Nawa;
 	src.m_bottom = 64.0f;
 
-	float aka = 0;
-
-	for (float i = -r * 6; i < -180; i += 180)
-	{
-		aka = i + 180;
-	}
-
-	float iy = vy + 64;
+	//for (float i = iy; i < 0.0; i+=10)
+	//{
+	//	r+=1.5;
+	//	iy += 0.0f;
+	//	ix --;
+	//}
 
 	if (iy > 0)
 	{
 		iy = 0.0f;
 	}
 
-	if (iy < -32.0f)
-	{
-		//iy = -32.0f;
-	}
+	//if (iy < -32.0f)
+	//{
+	//	//iy = -32.0f;
+	//}
 
-	dst.m_top = iy + h->GetY();
-	dst.m_left = 20.0f + h->GetX();
-	dst.m_right = Nawa + h->GetX();
+	float akasa;
+	float kasana;
+
+	kasana= h->GetY();
+
+	akasa = (iy - (r * p_y) / 3) + h->GetY();
+
+	dst.m_top = akasa;
+	dst.m_left = (ix - (m_muki*p_y * 3) + 32) + h->GetX();
+	dst.m_right = (Nawa + h->GetX());
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	Draw::Draw(7, &src, &dst, d, -r*6);*/
+	Draw::Draw(7, &src, &dst, d, r);
 
 	//çê•”•ª‚Ì•`‰æ
 	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
