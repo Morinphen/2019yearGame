@@ -107,9 +107,9 @@ void CSceneMain::InitScene()
 	int size;               //ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
-	unique_ptr<wchar_t> p2;  //ステージ情報のポインター
-	int size2;               //ステージ情報の大きさ
-	p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
+	//unique_ptr<wchar_t> p2;  //ステージ情報のポインター
+	//int size2;               //ステージ情報の大きさ
+	//p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
 
 	int map[46][100];
 	int count = 1;
@@ -133,27 +133,27 @@ void CSceneMain::InitScene()
 		}
 	}
 
-	int map2[46][100];
-	int count2 = 1;
+	//int map2[46][100];
+	//int count2 = 1;
 
-	for (int i = 0; i < 46; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			int w2 = 0;
-			swscanf_s(&p2.get()[count2], L"%d", &w2);
+	//for (int i = 0; i < 46; i++)
+	//{
+	//	for (int j = 0; j < 100; j++)
+	//	{
+	//		int w2 = 0;
+	//		swscanf_s(&p2.get()[count2], L"%d", &w2);
 
-			map2[i][j] = w2;
-			if (w2 < 10)
-			{
-				count2 += 2;
-			}
-			else
-			{
-				count2 += 3;
-			}
-		}
-	}
+	//		map2[i][j] = w2;
+	//		if (w2 < 10)
+	//		{
+	//			count2 += 2;
+	//		}
+	//		else
+	//		{
+	//			count2 += 3;
+	//		}
+	//	}
+	//}
 
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
@@ -194,12 +194,12 @@ void CSceneMain::InitScene()
 				CObjHamEnemy* obje = new CObjHamEnemy(j * 64, i * 64);
 				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
 				CObjHamEnemy* hen = (CObjHamEnemy*)Objs::GetObj(OBJ_HAMENEMY);
-				//右向き
-				if (map[i][j] == 86)
+				//左向き
+				if (map[i][j] == 85)
 				{
 					hen->SetM_P(1.0);
 				}
-				//左向き
+				//右向き
 				else
 				{
 					hen->SetM_P(0.0);
