@@ -40,7 +40,7 @@ void CObjUguBlock::Action()
 		if (HitBox_ON == false)
 		{
 			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_UGUBLOCK, 1);
+			Hits::SetHitBox(this, m_x, m_y, 62, 62, ELEMENT_BLACK, OBJ_UGUBLOCK, 1);
 		}
 
 		//ålŒö‚ÌˆÊ’u‚ğæ“¾

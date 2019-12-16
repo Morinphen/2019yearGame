@@ -37,6 +37,7 @@ public:
 	float GetPS() { return psyuriken; }
 	//主人公の手裏剣の所持数を外部から変更する
 	void SetPS(float x) { psyuriken = psyuriken+x; }
+	void SetSD(bool b) { syurikend = b; }
 
 	//主人公のリスタート位置を外部から変更する
 	void SetWX(float x) { w_x = x; }
@@ -148,6 +149,10 @@ private:
 	int pushb;
 	//手裏剣の所持数
 	int psyuriken;
+	bool syurikend;
+	//火球チャージ
+	bool fires;
+	float firetime;
 
 	//攻撃等の制限用変数
 	bool s_atack;

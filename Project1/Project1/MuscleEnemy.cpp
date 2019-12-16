@@ -106,6 +106,10 @@ void CObjMuscleEnemy::Action()
 		{
 			hatena = false;
 		}
+		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+		{
+			find = false;
+		}
 	}
 	//•\Ž¦‰æ–ÊŠO‚ÌŽž
 	else
