@@ -112,6 +112,7 @@ void CSceneMain::InitScene()
 	//int size2;               //ステージ情報の大きさ
 	//p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
 
+
 	int map[46][100];
 	int count = 1;
 

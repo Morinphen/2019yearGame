@@ -627,13 +627,13 @@ void CObjHero::Draw()
 	{
 		RECT_F srck;
 		RECT_F dstk;
-		float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
+		float c2[4] = { 1.0f,1.0f,1.0f,(1.0f-firetime/120) };
 		srck.m_top = 0.0f;
 		srck.m_left = 0.0;
 		srck.m_right = 346.0f;
 		srck.m_bottom = 512.0f;
-		dstk.m_top = 0.0f + m_y - 64;
-		dstk.m_bottom = 64.0f + m_y - 64;
+		dstk.m_top = (0.0f + m_y - 64)+(64*(1-firetime / 120));
+		dstk.m_bottom = (64.0f + m_y - 64) + (64 * (1 - firetime / 120));
 		dstk.m_left = (64.0f*m_posture) - W_cat2 + m_x;
 		dstk.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
 		Draw::Draw(43, &srck, &dstk, c2, 0.0f);
