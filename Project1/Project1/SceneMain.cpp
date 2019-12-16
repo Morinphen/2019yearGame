@@ -106,11 +106,12 @@ void CSceneMain::InitScene()
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
 	//unique_ptr<wchar_t> p2;  //ステージ情報のポインター
 	//int size2;               //ステージ情報の大きさ
 	//p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
+
 
 	int map[46][100];
 	int count = 1;
