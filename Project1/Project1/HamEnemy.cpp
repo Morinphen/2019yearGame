@@ -200,22 +200,11 @@ void CObjHamEnemy::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
-	if (m_posture == 0.0f)
-	{
 		//切り取り位置の設定
 		src.m_top = 65.0f;
 		src.m_left = 256.0f + 64 * AniData[m_ani_frame];
 		src.m_right = 320.0f + 64 * AniData[m_ani_frame];
 		src.m_bottom = 128.0f;
-	}
-	else
-	{
-		//切り取り位置の設定
-		src.m_top = 65.0f;
-		src.m_left = 320.0f + 64 * AniData[m_ani_frame];
-		src.m_right = 256.0f + 64 * AniData[m_ani_frame];
-		src.m_bottom = 128.0f;
-	}
 	//ブロック情報を持ってくる
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
