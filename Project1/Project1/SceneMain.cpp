@@ -316,12 +316,7 @@ void CSceneMain::InitScene()
 	//主人公オブジェクト作成
 	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
-	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (maptype == true)
-	{
-		hr->Cflag = true;
-	}
-
+	
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
@@ -329,6 +324,16 @@ void CSceneMain::InitScene()
 	//手裏剣所持数オブジェクト作成
 	CObjPsyuriken*objp= new CObjPsyuriken();//主人公オブジェクト作成
 	Objs::InsertObj(objp, OBJ_PSYURIKEN, 10);
+
+	//マップ移動のさいの調整
+	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	if (maptype == true)
+	{
+		hr->Cflag = true;
+		scroll->SetScrooll(64 * -90.0f);
+		scroll->SetYScrooll(64 * -0.0f);
+	}
 }
 
 //ゲームメイン実行中メソッド
