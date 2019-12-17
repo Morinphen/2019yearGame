@@ -316,6 +316,11 @@ void CSceneMain::InitScene()
 	//主人公オブジェクト作成
 	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
+	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	if (maptype == true)
+	{
+		hr->Cflag = true;
+	}
 
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
