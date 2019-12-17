@@ -30,28 +30,32 @@ void CObjNezublock::Init()
 //アクション
 void CObjNezublock::Action()
 {
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
+	// 表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
-
-	CObjNezuana* Nezu = (CObjNezuana*)Objs::GetObj(Namber);
-	dflag = Nezu->GetDnamber();
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-
-	if (dflag == true)
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
-		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->Deletemap(m_x, m_y);
+		//主人公の位置を取得
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		float hx = hero->GetX();
+		float hy = hero->GetY();
 
-		Hits::DeleteHitBox(this);
-		this->SetStatus(false);
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
+
+		CObjNezuana* Nezu = (CObjNezuana*)Objs::GetObj(Namber);
+		dflag = Nezu->GetDnamber();
+
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+
+		if (dflag == true)
+		{
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->Deletemap(m_x, m_y);
+
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+		}
 	}
 }
 
