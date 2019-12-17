@@ -584,7 +584,7 @@ void CObjHero::Draw()
 		}
 		else
 		{
-			Draw::Draw(42, &src, &dst, c, 0.0f);
+			Draw::Draw(44, &src, &dst, c, 0.0f);
 		}
 		
 	}

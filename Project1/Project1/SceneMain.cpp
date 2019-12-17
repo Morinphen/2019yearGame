@@ -103,7 +103,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"hatena.png", 41, TEX_SIZE_512);
 	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
 	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
-	Draw::LoadImage(L"ninzya2.png", 42, TEX_SIZE_512);
+	Draw::LoadImage(L"ninzya2.png", 44, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
