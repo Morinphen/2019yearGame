@@ -19,8 +19,8 @@ CObjScroll::CObjScroll(int map[46][100])
 //イニシャライズ
 void CObjScroll::Init()
 {
-	m_scroll = 64.0f*-90.0f;
-	l_scroll = 64.0f*-0.0f;
+	m_scroll = 64.0f*-1.0f;
+	l_scroll = 64.0f*-35.0f;
 	mn_scroll = 0.0f;
 }
 //アクション

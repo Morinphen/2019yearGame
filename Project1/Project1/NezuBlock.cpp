@@ -66,15 +66,20 @@ void CObjNezublock::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	//ブロック表示
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	// 表示画面内の時
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
+	{
+		//ブロック表示
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
 
-	dst.m_top = m_y + l_scroll;
-	dst.m_left = m_x + m_scroll;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
-	Draw::Draw(22, &src, &dst, c, 0.0f);
+		dst.m_top = m_y + l_scroll;
+		dst.m_left = m_x + m_scroll;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
+		Draw::Draw(22, &src, &dst, c, 0.0f);
+	}
 }
