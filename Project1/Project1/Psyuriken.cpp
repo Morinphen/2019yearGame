@@ -182,7 +182,22 @@ void CObjPsyuriken::Draw()
 		//•`‰æ
 		Draw::Draw(31, &srcg, &dstg, c, 0.0f);
 	}
-//”E‹ïƒ‚[ƒhƒ{ƒ^ƒ“
+	//Žè— Œ•
+	RECT_F srcm_btn; //•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
+	RECT_F dstm_btn; //•`‰ææ•\Ž¦ˆÊ’u
+	srcm_btn.m_top = 0.0f;
+	srcm_btn.m_left = 0.0f;
+	srcm_btn.m_right = 448.0f;
+	srcm_btn.m_bottom = 449.0f;
+
+	//•\Ž¦ˆÊ’u‚ÌÝ’è
+	dstm_btn.m_top = 620.0f;
+	dstm_btn.m_left = 750.0f;
+	dstm_btn.m_right = 1100.0f;
+	dstm_btn.m_bottom = 900.0f;
+	//•`‰æ
+	Draw::Draw(42, &srcm_btn, &dstm_btn, c, 0.0f);
+    //”E‹ïƒ‚[ƒhƒ{ƒ^ƒ“
 	if (hero->GetChange() == false)
 	{
 		//Žè— Œ•

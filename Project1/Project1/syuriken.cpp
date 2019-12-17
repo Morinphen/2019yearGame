@@ -96,9 +96,10 @@ void CObjSyuriken::Action()
 	}
 
 	syuriken_time++;
-
-	if (syuriken_time==120.0f)
+	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	if (syuriken_time==100.0f)
 	{
+		hr->SetSD(true);
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
 		syuriken_time = 0;
@@ -106,6 +107,7 @@ void CObjSyuriken::Action()
 	
 	if (t_h == true)
 	{
+		hr->SetSD(true);
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
 	}

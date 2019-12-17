@@ -101,15 +101,18 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"minimap.png", 39, TEX_SIZE_512);
 	Draw::LoadImage(L"floor.png", 40, TEX_SIZE_512);
 	Draw::LoadImage(L"hatena.png", 41, TEX_SIZE_512);
+	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
+	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya2.png", 42, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
 
-	unique_ptr<wchar_t> p2;  //ステージ情報のポインター
-	int size2;               //ステージ情報の大きさ
-	p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
+	//unique_ptr<wchar_t> p2;  //ステージ情報のポインター
+	//int size2;               //ステージ情報の大きさ
+	//p2 = Save::ExternalDataOpen(L"NIN2.csv", &size2);//外部データ読み込み
+
 
 	int map[46][100];
 	int count = 1;
@@ -133,27 +136,27 @@ void CSceneMain::InitScene()
 		}
 	}
 
-	int map2[46][100];
-	int count2 = 1;
+	//int map2[46][100];
+	//int count2 = 1;
 
-	for (int i = 0; i < 46; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			int w2 = 0;
-			swscanf_s(&p2.get()[count2], L"%d", &w2);
+	//for (int i = 0; i < 46; i++)
+	//{
+	//	for (int j = 0; j < 100; j++)
+	//	{
+	//		int w2 = 0;
+	//		swscanf_s(&p2.get()[count2], L"%d", &w2);
 
-			map2[i][j] = w2;
-			if (w2 < 10)
-			{
-				count2 += 2;
-			}
-			else
-			{
-				count2 += 3;
-			}
-		}
-	}
+	//		map2[i][j] = w2;
+	//		if (w2 < 10)
+	//		{
+	//			count2 += 2;
+	//		}
+	//		else
+	//		{
+	//			count2 += 3;
+	//		}
+	//	}
+	//}
 
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
@@ -194,12 +197,12 @@ void CSceneMain::InitScene()
 				CObjHamEnemy* obje = new CObjHamEnemy(j * 64, i * 64);
 				Objs::InsertObj(obje, OBJ_HAMENEMY, 6);
 				CObjHamEnemy* hen = (CObjHamEnemy*)Objs::GetObj(OBJ_HAMENEMY);
-				//右向き
-				if (map[i][j] == 86)
+				//左向き
+				if (map[i][j] == 85)
 				{
 					hen->SetM_P(1.0);
 				}
-				//左向き
+				//右向き
 				else
 				{
 					hen->SetM_P(0.0);
@@ -282,22 +285,22 @@ void CSceneMain::InitScene()
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
 				Objs::InsertObj(objex, OBJ_EXIT, 3);
 			}
-			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62)
+			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62|| map[i][j] == 66 || map[i][j] == 67 || map[i][j] == 68)
 			{
 				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
+			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65|| map[i][j] == 69 || map[i][j] == 70 || map[i][j] == 71)
 			{
 				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 51 || map[i][j] == 52)
+			else if (map[i][j] == 51 || map[i][j] == 52||map[i][j]==53|| map[i][j] == 90)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
-			else if (map[i][j] == 57 || map[i][j] == 58)
+			else if (map[i][j] == 57 || map[i][j] == 58||map[i][j]==59|| map[i][j] == 96)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
