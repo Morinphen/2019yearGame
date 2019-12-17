@@ -277,10 +277,20 @@ void CObjHamEnemy::Draw()
 	{
 		RECT_F src_h;
 		RECT_F dst_h;
-		src_h.m_top = 0.0f;
-		src_h.m_left = 32.0f;
-		src_h.m_right = 0.0f;
-		src_h.m_bottom = 48.0f;
+		if (m_move == true)
+		{
+			src_h.m_top = 0.0f;
+			src_h.m_left = 32.0f;
+			src_h.m_right = 0.0f;
+			src_h.m_bottom = 48.0f;
+		}
+		else
+		{
+			src_h.m_top = 0.0f;
+			src_h.m_left = 0.0f;
+			src_h.m_right = 32.0f;
+			src_h.m_bottom = 48.0f;
+		}
 
 		//ï\é¶à íuÇÃê›íË
 		dst_h.m_top = dst.m_top - 64.0f;
