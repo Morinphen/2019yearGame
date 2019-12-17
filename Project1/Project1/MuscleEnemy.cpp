@@ -141,12 +141,22 @@ void CObjMuscleEnemy::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-	//切り取り位置の設定
-	src.m_top = 65.0f;
-	src.m_left = 448.0f;
-	src.m_right = 512.0f;
-	src.m_bottom = 128.0f;
-
+	if (m_posture == 0)
+	{
+		//切り取り位置の設定
+		src.m_top = 65.0f;
+		src.m_left = 448.0f;
+		src.m_right = 512.0f;
+		src.m_bottom = 128.0f;
+	}
+	else
+	{
+		//切り取り位置の設定
+		src.m_top = 65.0f;
+		src.m_left = 512.0f;
+		src.m_right = 448.0f;
+		src.m_bottom = 128.0f;
+	}
 	//ブロック情報を持ってくる
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 

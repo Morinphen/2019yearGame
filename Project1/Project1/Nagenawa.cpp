@@ -171,7 +171,7 @@ void CObjNagenawa::Draw()
 	Draw::Draw(7, &src, &dst, d, -r*6);*/
 
 	//ηκ•”•ª‚Μ•`‰ζ
-	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	if (h->GetMP() == 0)
 	{

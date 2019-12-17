@@ -583,9 +583,35 @@ void CObjHero::Draw()
 	}
 	else
 	{
+		if (deadtime < 180 && m_posture == 1)
+		{
+			float c3[4] = { 1.0f,1.0f,1.0f,1.0f };
+			src.m_top = 0.0f;
+			src.m_left = 0.0;
+			src.m_right = 64.0f;
+			src.m_bottom = 64.0f;
+			dst.m_top = 0.0f + m_y;
+			dst.m_bottom = 64.0f + m_y;
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+			Draw::Draw(35, &src, &dst, c3, 0.0f);
+		}
+		else if (deadtime < 180 && m_posture == 0)
+		{
+			float c3[4] = { 1.0f,1.0f,1.0f,1.0f };
+			src.m_top = 0.0f;
+			src.m_left = 64.0f;
+			src.m_right = 0.0f;
+			src.m_bottom = 64.0f;
+			dst.m_top = 0.0f + m_y;
+			dst.m_bottom = 64.0f + m_y;
+			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
+			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
+			Draw::Draw(35, &src, &dst, c3, 0.0f);
+		}
 		if (deadtime < 120)
 		{
-			float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
+			float c2[4] = { 1.0f,1.0f,1.0f,(1.0f - deadtime / 180) };
 			src.m_top = 0.0f;
 			src.m_left = 0.0;
 			src.m_right = 712.0f;
@@ -595,32 +621,6 @@ void CObjHero::Draw()
 			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x-128;
 			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x+64;
 			Draw::Draw(29, &src, &dst, c2, 0.0f);
-		}
-		else if (deadtime > 120 && deadtime < 180&&m_posture == 1)
-		{
-			float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
-			src.m_top = 0.0f;
-			src.m_left = 0.0;
-			src.m_right = 64.0f;
-			src.m_bottom = 64.0f;
-			dst.m_top = 0.0f + m_y;
-			dst.m_bottom = 64.0f + m_y;
-			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
-			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
-			Draw::Draw(35, &src, &dst, c2, 0.0f);
-		}
-		else if (deadtime > 120 && deadtime < 180 && m_posture == 0)
-		{
-			float c2[4] = { 1.0f,1.0f,1.0f,1.0f };
-			src.m_top = 0.0f;
-			src.m_left = 0.0;
-			src.m_right = 64.0f;
-			src.m_bottom = 64.0f;
-			dst.m_top = 0.0f + m_y;
-			dst.m_bottom = 64.0f + m_y;
-			dst.m_left = (64.0f*m_posture) - W_cat2 + m_x;
-			dst.m_right = (64.0f - 64.0f*m_posture) + W_cat2 + m_x;
-			Draw::Draw(35, &src, &dst, c2, 0.0f);
 		}
 	}
 	if (fires ==false)

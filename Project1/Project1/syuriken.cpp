@@ -78,7 +78,6 @@ void CObjSyuriken::Action()
 			&m_vx, &m_vy
 		);
 	}
-
 	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
 	{
 		Hits::DeleteHitBox(this);
@@ -94,10 +93,9 @@ void CObjSyuriken::Action()
 		m_y += m_vy;
 		syuriken_time = 0;
 	}
-
-	syuriken_time++;
 	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (syuriken_time==100.0f)
+	syuriken_time++;
+	if (syuriken_time==80.0f)
 	{
 		hr->SetSD(true);
 		Hits::DeleteHitBox(this);

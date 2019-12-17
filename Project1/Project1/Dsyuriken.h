@@ -30,6 +30,7 @@ public:
 private:
 	int m_x;
 	int m_y;
+	float deadtime;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数

@@ -107,7 +107,7 @@ void CObjSmokeball::Action()
 void CObjSmokeball::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float cn[4] = { 1.0f,1.0f,1.0f,0.8f };
+	float cn[4] = { 1.0f,1.0f,1.0f,(1-smoke_time/300) };
 	RECT_F src;
 	RECT_F dst;
 

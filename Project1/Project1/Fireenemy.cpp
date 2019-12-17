@@ -175,6 +175,8 @@ void CObjFireEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 			else//Žè— Œ•‰EŒü‚«
 			{
@@ -185,6 +187,8 @@ void CObjFireEnemy::Action()
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
 					hit_o = true;
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 		}
@@ -199,6 +203,8 @@ void CObjFireEnemy::Action()
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
 					hit_o = true;
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 			else//Žè— Œ•‰EŒü‚«
@@ -208,6 +214,8 @@ void CObjFireEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 		}
 	}
