@@ -41,7 +41,8 @@ enum OBJ_NAME
 	OBJ_FIREENEMY,
 	OBJ_HAMENEMY,
 	OBJ_MUSCLEENEMY,
-	OBJ_KANBAN
+	OBJ_KANBAN,
+	OBJ_MAPCHANGE
 };
 //------------------------------------------------
 
@@ -117,6 +118,7 @@ struct UserData
 #include"ObjRetry.h"
 #include"ObjClear.h"
 #include"Objsetumei.h"
+#include"ObjMapchange.h"
 #include"Exit.h"
 #include"Nezuana.h"
 #include"NezuBlock.h"
@@ -130,6 +132,7 @@ struct UserData
 #include"SceneRetry.h"
 #include"SceneClear.h"
 #include"Scenesetumei.h"
+#include"SceneMapchange.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

@@ -6,9 +6,10 @@ using namespace GameL;
 class CSceneMain:public CScene
 {
 public:
-	CSceneMain();
+	CSceneMain(bool b);
 	~CSceneMain();
 	void InitScene();
 	void Scene();
 private:
+	bool maptype;
 };

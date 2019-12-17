@@ -34,7 +34,7 @@ void CObjsetumei::Action()
 		if (m_key_flag == true)
 		{
 			Audio::Start(0);
-			Scene::SetScene(new CSceneMain());
+			Scene::SetScene(new CSceneMain(false));
 			m_key_flag = false;
 		}
 	}

@@ -131,8 +131,8 @@ void CObjMakimono::Action()
 				Audio::Start(11);
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
+				Scene::SetScene(new CSceneMapchange);
 			}
-
 			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 		}
 		//•\Ž¦‰æ–ÊŠO‚ÌŽž
