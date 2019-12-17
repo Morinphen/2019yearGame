@@ -162,6 +162,8 @@ void CObjEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 			else if (sm_x + 2.0 >= m_px)
 			{
@@ -170,6 +172,8 @@ void CObjEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px,m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 		}
 		else
@@ -183,6 +187,8 @@ void CObjEnemy::Action()
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
 					hit_o = true;
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 			else//Žè— Œ•‰EŒü‚«
@@ -192,6 +198,8 @@ void CObjEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 		}
 	}
@@ -208,6 +216,8 @@ void CObjEnemy::Action()
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 			else//Žè— Œ•‰EŒü‚«
 			{
@@ -217,6 +227,8 @@ void CObjEnemy::Action()
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 		}
@@ -230,6 +242,8 @@ void CObjEnemy::Action()
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 			else//Žè— Œ•‰EŒü‚«
@@ -238,6 +252,8 @@ void CObjEnemy::Action()
 					this->SetStatus(false);
 					Hits::DeleteHitBox(this);
 					sy->SetT(true);
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 		}
 	}

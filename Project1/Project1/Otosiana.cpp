@@ -135,14 +135,25 @@ void CObjOtosiana::Action()
 //ドロー
 void CObjOtosiana::Draw()
 {
-	float c[4] = { 0.9f,0.9f,0.9f,1.0f };
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//土遁中で見た目変化
+	float c[4] = { 0.9f,0.9f,0.9f,doton };
+	if (hero->GetDoton() == false)
+	{
+		doton = 1.0f;
+	}
+	else
+	{
+		doton = 0.3f;
+	}
+	
 	RECT_F src;
 	RECT_F dst;
 
-	// 表示画面内の時&土遁中消える
+	// 表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (scroll->Inscrooll_check(m_x, m_y) == true && hero->GetDoton() == false)
+	
+	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
 
 		//ブロック表示

@@ -44,7 +44,7 @@ private:
 	bool de;
 	bool stop;
 	bool hatena;
-
+	
 	int m_ani_time; //アニメーション
 	int m_ani_frame;//描画フレーム
 	int m_posture_time;//姿勢変えるまでの時間
