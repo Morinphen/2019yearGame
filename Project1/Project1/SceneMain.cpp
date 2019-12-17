@@ -107,7 +107,7 @@ void CSceneMain::InitScene()
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
 
 	//unique_ptr<wchar_t> p2;  //ステージ情報のポインター
 	//int size2;               //ステージ情報の大きさ
@@ -216,11 +216,13 @@ void CSceneMain::InitScene()
 				//右向き
 				if (map[i][j] == 87)
 				{
+					men->Set_MOVE(true);
 					men->SetM_P(1.0);
 				}
 				//左向き
 				else
 				{
+					men->Set_MOVE(false);
 					men->SetM_P(0.0);
 				}
 			}
