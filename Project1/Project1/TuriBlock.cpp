@@ -86,7 +86,6 @@ void CObjTBlock::Action()
 
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 	}
-
 	//‰æ–ÊŠOˆ—
 	else
 	{

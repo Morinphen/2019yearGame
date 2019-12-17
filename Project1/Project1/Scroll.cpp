@@ -20,7 +20,8 @@ CObjScroll::CObjScroll(int map[46][100])
 void CObjScroll::Init()
 {
 	m_scroll = 64.0f;
-	l_scroll = 64.0f*-35.0f;
+	//l_scroll = 64.0f*-35.0f;
+	l_scroll = 64.0f*-0.0f;
 	mn_scroll = 0.0f;
 	//l_scroll = 64.0f*-30.0f;
 }
@@ -95,7 +96,7 @@ bool CObjScroll::Inscrooll_check(int x, int y)
 	if (x+64 >= -m_scroll&&
 		x    <= WINDOW_SIZE_W-m_scroll&&
 		y+64 >= -l_scroll&&
-		y    <= WINDOW_SIZE_H-l_scroll)
+		y    <= 600-l_scroll)
 		return true;
 	else
 		false;

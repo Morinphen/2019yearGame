@@ -303,7 +303,7 @@ int CObjNezumi::mapplace(int x, int y, int muki)
 			break;
 		for (int j = mp_y - 3; j < mp_y+3; j++)
 		{
-			if (map_data[j][i] == 57 || map_data[j][i] == 58||map_data[j][i]==59|| map_data[j][i] == 96)
+			if (map_data[j][i] == 57 || map_data[j][i] == 58||map_data[j][i]==59|| map_data[j][i] == 96 || map_data[j][i] == 97)
 			{
 				rflag = map_data[j][i];
 				stop = true;
