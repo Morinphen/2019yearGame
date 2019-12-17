@@ -40,7 +40,8 @@ enum OBJ_NAME
 	OBJ_SETUMEI,
 	OBJ_FIREENEMY,
 	OBJ_HAMENEMY,
-	OBJ_MUSCLEENEMY
+	OBJ_MUSCLEENEMY,
+	OBJ_KANBAN
 };
 //------------------------------------------------
 
@@ -109,6 +110,7 @@ struct UserData
 #include"HamEnemy.h"
 #include"Fireenemy.h"
 #include"MuscleEnemy.h"
+#include"kanban.h"
 
 #include"ObjTitle.h"
 #include"ObjGameOver.h"

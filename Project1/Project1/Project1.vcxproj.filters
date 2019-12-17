@@ -207,6 +207,9 @@
     <ClCompile Include="MuscleEnemy.cpp">
       <Filter>ソース ファイル\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="kanban.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -373,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="MuscleEnemy.h">
       <Filter>ソース ファイル\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kanban.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
