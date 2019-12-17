@@ -103,10 +103,11 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"hatena.png", 41, TEX_SIZE_512);
 	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
 	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
+	Draw::LoadImage(L"ninzya2.png", 44, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"NIN.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"NIN2.csv", &size);//外部データ読み込み
 
 	//unique_ptr<wchar_t> p2;  //ステージ情報のポインター
 	//int size2;               //ステージ情報の大きさ
@@ -284,22 +285,22 @@ void CSceneMain::InitScene()
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
 				Objs::InsertObj(objex, OBJ_EXIT, 3);
 			}
-			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62)
+			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62|| map[i][j] == 66 || map[i][j] == 67 || map[i][j] == 68)
 			{
 				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65)
+			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65|| map[i][j] == 69 || map[i][j] == 70 || map[i][j] == 71)
 			{
 				CObjKarakuriblock*objk = new CObjKarakuriblock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objk, map[i][j], 3);
 			}
-			else if (map[i][j] == 51 || map[i][j] == 52||map[i][j]==53)
+			else if (map[i][j] == 51 || map[i][j] == 52||map[i][j]==53|| map[i][j] == 90)
 			{
 				CObjNezublock*objne = new CObjNezublock(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objne, map[i][j], 3);
 			}
-			else if (map[i][j] == 57 || map[i][j] == 58||map[i][j]==59)
+			else if (map[i][j] == 57 || map[i][j] == 58||map[i][j]==59|| map[i][j] == 96)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);

@@ -533,7 +533,7 @@ void CObjHero::Action()
 void CObjHero::Draw()
 {
 	float aa = (W_cat2/50);
-	float c[4] = { green,1.0f,green,1.0f + aa };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f + aa };
 	RECT_F src;
 	RECT_F dst;
 	if (dead_s == false)
@@ -578,8 +578,15 @@ void CObjHero::Draw()
 			dst.m_left = (64.0f*m_posture) + W_cat2 + m_x;
 			dst.m_right = (64.0f - 64.0f*m_posture) - W_cat2 + m_x;
 		}
-
-		Draw::Draw(11, &src, &dst, c, 0.0f);
+		if (green == 1)
+		{
+			Draw::Draw(11, &src, &dst, c, 0.0f);
+		}
+		else
+		{
+			Draw::Draw(44, &src, &dst, c, 0.0f);
+		}
+		
 	}
 	else
 	{

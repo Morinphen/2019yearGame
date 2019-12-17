@@ -161,7 +161,7 @@ void CObjHamEnemy::Action()
 			m_posture_time = 0;
 			hit_o = true;
 		}	
-		if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
+		else if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
 		{
 			hatena = true;
 		}
@@ -180,7 +180,7 @@ void CObjHamEnemy::Action()
 			this->SetStatus(false);
 			HitBox_ON = false;
 		}
-		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+		else if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
 		{
 			find = false;
 		}
