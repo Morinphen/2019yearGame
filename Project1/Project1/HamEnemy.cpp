@@ -21,7 +21,7 @@ void CObjHamEnemy::Init()
 {
 	m_vx = 0.0f;//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 0.0f;//右向き0.0f　左向き1.0f
+	m_posture = 1.0f;//右向き0.0f　左向き1.0f
 	m_posture_time = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1; //静止フレームを初期にする
@@ -200,13 +200,11 @@ void CObjHamEnemy::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
-
-	//切り取り位置の設定
-	src.m_top = 65.0f;
-	src.m_left = 256.0f + 64 * AniData[m_ani_frame];
-	src.m_right = 320.0f + 64 * AniData[m_ani_frame];
-	src.m_bottom = 128.0f;
-
+		//切り取り位置の設定
+		src.m_top = 65.0f;
+		src.m_left = 256.0f + 64 * AniData[m_ani_frame];
+		src.m_right = 320.0f + 64 * AniData[m_ani_frame];
+		src.m_bottom = 128.0f;
 	//ブロック情報を持ってくる
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
@@ -268,10 +266,20 @@ void CObjHamEnemy::Draw()
 	{
 		RECT_F src_h;
 		RECT_F dst_h;
-		src_h.m_top = 0.0f;
-		src_h.m_left = 32.0f;
-		src_h.m_right = 0.0f;
-		src_h.m_bottom = 48.0f;
+		if (m_move == true)
+		{
+			src_h.m_top = 0.0f;
+			src_h.m_left = 32.0f;
+			src_h.m_right = 0.0f;
+			src_h.m_bottom = 48.0f;
+		}
+		else
+		{
+			src_h.m_top = 0.0f;
+			src_h.m_left = 0.0f;
+			src_h.m_right = 32.0f;
+			src_h.m_bottom = 48.0f;
+		}
 
 		//表示位置の設定
 		dst_h.m_top = dst.m_top - 64.0f;

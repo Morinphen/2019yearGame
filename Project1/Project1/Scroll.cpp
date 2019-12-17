@@ -94,7 +94,7 @@ bool CObjScroll::Inscrooll_check(int x, int y)
 	if (x+64 >= -m_scroll&&
 		x    <= WINDOW_SIZE_W-m_scroll&&
 		y+64 >= -l_scroll&&
-		y    <= WINDOW_SIZE_H-l_scroll)
+		y    <= 600-l_scroll)
 		return true;
 	else
 		false;
