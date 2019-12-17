@@ -42,6 +42,7 @@ void CObjSyuriken::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
+	syurikenhit = false;
 	Animation = false;
 
 	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 16, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
@@ -85,7 +86,7 @@ void CObjSyuriken::Action()
 		m_hit_right = false;
 		m_hit_up = false;
 		Animation = true;
-
+		syurikenhit = true;
 		Audio::Start(17);
 
 		m_vx = -4.0f*m_muki;
@@ -109,7 +110,10 @@ void CObjSyuriken::Action()
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
 	}
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
+	if (syurikenhit == false)
+	{
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
+	}
 }
 
 //ドロー
