@@ -33,6 +33,7 @@ private:
 	float grabty;
 	//縄の長さ用変数
 	float Nawa;
+	float miku;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
