@@ -57,7 +57,7 @@ void CObjsetumei::Draw()
 	src.m_top = 0.0f;
 	src.m_left = 00.0f;
 	src.m_right = 1024.0f;
-	src.m_bottom = 682.0f;
+	src.m_bottom = 768.0f;
 
 	//ï\é¶à íuÇÃê›íË
 	dst.m_top = 0.0f;
