@@ -5,36 +5,34 @@
 #include"GameL\SceneManager.h"
 #include"GameL\Audio.h"
 
-#include"GameHead.h"
-#include"Objsetumei.h"
 #include"main.h"
+#include"GameHead.h"
+#include"ObjTitle.h"
 
 //使用するネームスぺース
 using namespace GameL;
 
 //ゲームパッド用
-XINPUT_STATE s_state;
-
+XINPUT_STATE mc_state;
 
 //イニシャライズ
-void CObjsetumei::Init()
+void CObjMapchange::Init()
 {
 	m_key_flag = false;
 }
 
 //アクション
-void CObjsetumei::Action()
+void CObjMapchange::Action()
 {
 	//ゲームパッド用
-	DWORD dwResult = XInputGetState(0, &s_state);
+	DWORD dwResult = XInputGetState(0, &mc_state);
 
 	//エンターキーを押してシーン:タイトルに移行する
-	if (Input::GetVKey(VK_RETURN) == true||s_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
+	if (Input::GetVKey(VK_RETURN) == true || mc_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
 	{
 		if (m_key_flag == true)
 		{
-			Audio::Start(0);
-			Scene::SetScene(new CSceneMain(false));
+			Scene::SetScene(new CSceneMain(true));
 			m_key_flag = false;
 		}
 	}
@@ -45,7 +43,7 @@ void CObjsetumei::Action()
 }
 
 //ドロー
-void CObjsetumei::Draw()
+void CObjMapchange::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -57,7 +55,7 @@ void CObjsetumei::Draw()
 	src.m_top = 0.0f;
 	src.m_left = 00.0f;
 	src.m_right = 1024.0f;
-	src.m_bottom = 768.0f;
+	src.m_bottom = 552.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f;

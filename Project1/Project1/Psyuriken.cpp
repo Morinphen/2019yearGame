@@ -191,7 +191,7 @@ void CObjPsyuriken::Draw()
 	srcm_btn.m_bottom = 449.0f;
 
 	//表示位置の設定
-	dstm_btn.m_top = 620.0f;
+	dstm_btn.m_top = 600.0f;
 	dstm_btn.m_left = 750.0f;
 	dstm_btn.m_right = 1100.0f;
 	dstm_btn.m_bottom = 900.0f;
@@ -255,7 +255,7 @@ void CObjPsyuriken::Draw()
 		srcm_bty.m_bottom = 115.0f;
 
 		//表示位置の設定
-		dstm_bty.m_top = 620.0f;
+		dstm_bty.m_top = 600.0f;
 		dstm_bty.m_left = 868.0f;
 		dstm_bty.m_right = 983.0f;
 		dstm_bty.m_bottom = 735.0f;
@@ -327,7 +327,7 @@ void CObjPsyuriken::Draw()
 		srcm_bty.m_bottom = 115.0f;
 
 		//表示位置の設定
-		dstm_bty.m_top = 620.0f;
+		dstm_bty.m_top = 600.0f;
 		dstm_bty.m_left = 868.0f;
 		dstm_bty.m_right = 983.0f;
 		dstm_bty.m_bottom = 735.0f;
@@ -376,7 +376,7 @@ srcm_btm.m_right = 99.0f;
 srcm_btm.m_bottom = 178.0f;
 
 //表示位置の設定
-dstm_btm.m_top = 620.0f;
+dstm_btm.m_top = 600.0f;
 dstm_btm.m_left = 1100.0f;
 dstm_btm.m_right = 1200.0f;
 dstm_btm.m_bottom = 750.0f;
@@ -398,7 +398,7 @@ srcmn.m_right = 512.0f;
 srcmn.m_bottom = 365.0f;
 
 //表示位置の設定
-dstmn.m_top = 620.0f;
+dstmn.m_top = 600.0f;
 dstmn.m_left = 0.0f;
 dstmn.m_right = 750.0f;
 dstmn.m_bottom = 900.0f;
@@ -414,10 +414,10 @@ srcm_n.m_right = 200.0f;
 srcm_n.m_bottom = 200.0f;
 ys = sc->GetYScroll()+2320;
 //表示位置の設定
-dstm_n.m_top = 875.0f -(ys/10.5);
+dstm_n.m_top = 875.0f -(ys/10);
 dstm_n.m_left = 55.0f-(sc->GetScroll()/8.6)-(sc->GetMNScroll()/8.6);
 dstm_n.m_right = 75.0f - (sc->GetScroll()/8.6) - (sc->GetMNScroll()/8.6);
-dstm_n.m_bottom = 895.0f - (ys / 10.5);
+dstm_n.m_bottom = 895.0f - (ys / 10);
 if (sc->GetYScroll() > -250)
 {
 	fs = 4;

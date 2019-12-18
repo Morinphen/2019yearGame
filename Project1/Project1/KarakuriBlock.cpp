@@ -45,6 +45,15 @@ void CObjKarakuriblock::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 
+		//レバーが起動したら自分を消す
+		CObjKarakuri* karakuri = (CObjKarakuri*)Objs::GetObj(num);
+		if (karakuri->GetON_OFF() == true)
+		{
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->Deletemap(m_x, m_y);
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+		}
 	}
 	//表示画面外の時
 	else
@@ -56,15 +65,7 @@ void CObjKarakuriblock::Action()
 			Hits::DeleteHitBox(this);
 		}
 	}
-	//レバーが起動したら自分を消す
-	CObjKarakuri* karakuri = (CObjKarakuri*)Objs::GetObj(num);
-	if (karakuri->GetON_OFF()==true)
-	{
-		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->Deletemap(m_x, m_y);
-		Hits::DeleteHitBox(this);
-		this->SetStatus(false);
-	}
+	
 
 }
 

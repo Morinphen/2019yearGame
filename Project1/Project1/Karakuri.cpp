@@ -90,7 +90,7 @@ void CObjKarakuri::Draw()
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
 		//ƒŒƒo[‚ÌŒü‚«‚ğŒˆ‚ß‚é
-		if (num == 61)
+		if (num == 61||num==62)
 		{
 			if (on_off == false)
 			{

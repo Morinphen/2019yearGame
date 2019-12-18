@@ -5,11 +5,15 @@
 #include"GameL\SceneManager.h"
 #include"GameL\Audio.h"
 
+#include"main.h"
 #include"GameHead.h"
 #include"ObjTitle.h"
 
 //使用するネームスぺース
 using namespace GameL;
+
+//ゲームパッド用
+XINPUT_STATE c_state;
 
 //イニシャライズ
 void CObjClear::Init()
@@ -20,8 +24,11 @@ void CObjClear::Init()
 //アクション
 void CObjClear::Action()
 {
+	//ゲームパッド用
+	DWORD dwResult = XInputGetState(0, &c_state);
+
 	//エンターキーを押してシーン:タイトルに移行する
-	if (Input::GetVKey(VK_RETURN) == true)
+	if (Input::GetVKey(VK_RETURN) == true || c_state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
 	{
 		if (m_key_flag == true)
 		{

@@ -42,6 +42,7 @@ void CObjSyuriken::Init()
 	m_speed_power = 0.5f;//通常速度
 	m_ani_max_time = 4;//アニメーション感覚幅
 
+	syurikenhit = false;
 	Animation = false;
 
 	Hits::SetHitBox(this, m_x + m_scroll, m_y + l_scroll + 16, 64, 32, ELEMENT_ITEM, OBJ_SYURIKEN, 1);
@@ -78,7 +79,6 @@ void CObjSyuriken::Action()
 			&m_vx, &m_vy
 		);
 	}
-
 	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
 	{
 		Hits::DeleteHitBox(this);
@@ -86,7 +86,7 @@ void CObjSyuriken::Action()
 		m_hit_right = false;
 		m_hit_up = false;
 		Animation = true;
-
+		syurikenhit = true;
 		Audio::Start(17);
 
 		m_vx = -4.0f*m_muki;
@@ -94,10 +94,9 @@ void CObjSyuriken::Action()
 		m_y += m_vy;
 		syuriken_time = 0;
 	}
-
-	syuriken_time++;
 	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (syuriken_time==100.0f)
+	syuriken_time++;
+	if (syuriken_time==80.0f)
 	{
 		hr->SetSD(true);
 		Hits::DeleteHitBox(this);
@@ -111,7 +110,10 @@ void CObjSyuriken::Action()
 		Hits::DeleteHitBox(this);
 		this->SetStatus(false);
 	}
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
+	if (syurikenhit == false)
+	{
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
+	}
 }
 
 //ドロー

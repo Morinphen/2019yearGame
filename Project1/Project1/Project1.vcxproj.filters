@@ -40,6 +40,9 @@
     <Filter Include="ソース ファイル\setumei">
       <UniqueIdentifier>{a14537a0-28dc-4127-a90f-2c1cca09b94b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Mapchange">
+      <UniqueIdentifier>{be8bd172-e9b5-4c0b-82e0-ff1455ba100d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -207,6 +210,15 @@
     <ClCompile Include="MuscleEnemy.cpp">
       <Filter>ソース ファイル\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="kanban.cpp">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMapchange.cpp">
+      <Filter>ソース ファイル\Mapchange</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMapchange.cpp">
+      <Filter>ソース ファイル\Mapchange</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -373,6 +385,15 @@
     </ClInclude>
     <ClInclude Include="MuscleEnemy.h">
       <Filter>ソース ファイル\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kanban.h">
+      <Filter>ソース ファイル\Mapgimic</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMapchange.h">
+      <Filter>ソース ファイル\Mapchange</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMapchange.h">
+      <Filter>ソース ファイル\Mapchange</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

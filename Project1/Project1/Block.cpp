@@ -102,7 +102,7 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1 || m_map[i][j] == 2 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j]==10 || m_map[i][j] == 51 || m_map[i][j] == 52 || m_map[i][j] == 63 || m_map[i][j] == 64 || m_map[i][j] == 65)
+			if (m_map[i][j] == 1 || m_map[i][j] == 2 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j]==10 || m_map[i][j] == 51 || m_map[i][j] == 52 || m_map[i][j] == 53 || m_map[i][j] == 63 || m_map[i][j] == 64 || m_map[i][j] == 65 || m_map[i][j] == 69 || m_map[i][j] == 70 || m_map[i][j] == 71 || m_map[i][j] == 90||m_map[i][j] == 91)
 			{
 				//—v‘f”Ô†‚ðÀ•W‚É•ÏX
 				float bx = j*64.0f;

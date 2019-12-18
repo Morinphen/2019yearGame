@@ -46,7 +46,7 @@ void CObjRetry::Action()
 			}
 			else if (m_posture == false)
 			{
-				Scene::SetScene(new CSceneMain());
+				Scene::SetScene(new CSceneMain(false));
 			}
 			m_key_flag = false;
 		}

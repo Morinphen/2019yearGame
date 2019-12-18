@@ -175,6 +175,8 @@ void CObjFireEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 			else//手裏剣右向き
 			{
@@ -185,6 +187,8 @@ void CObjFireEnemy::Action()
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
 					hit_o = true;
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 		}
@@ -199,6 +203,8 @@ void CObjFireEnemy::Action()
 					Hits::DeleteHitBox(this);
 					sa->SetT(true);
 					hit_o = true;
+					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
 			}
 			else//手裏剣右向き
@@ -208,6 +214,8 @@ void CObjFireEnemy::Action()
 				Hits::DeleteHitBox(this);
 				sa->SetT(true);
 				hit_o = true;
+				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 		}
 	}
@@ -294,10 +302,20 @@ void CObjFireEnemy::Draw()
  {
 	 RECT_F src_h;
 	 RECT_F dst_h;
-	 src_h.m_top = 0.0f;
-	 src_h.m_left = 0.0f;
-	 src_h.m_right = 32.0f;
-	 src_h.m_bottom = 48.0f;
+	 if (m_move == true)
+	 {
+		 src_h.m_top = 0.0f;
+		 src_h.m_left = 32.0f;
+		 src_h.m_right = 0.0f;
+		 src_h.m_bottom = 48.0f;
+	 }
+	 else
+	 {
+		 src_h.m_top = 0.0f;
+		 src_h.m_left = 0.0f;
+		 src_h.m_right = 32.0f;
+		 src_h.m_bottom = 48.0f;
+	 }
 
 	 //表示位置の設定
 	 dst_h.m_top = dst.m_top - 64.0f;

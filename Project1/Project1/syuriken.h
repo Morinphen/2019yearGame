@@ -28,6 +28,7 @@ private:
 	bool m_po;//向き　true=左　false=右
 	bool t_h;//敵に当たったフラグ
 	CHitBox* hit;
+	bool syurikenhit;
 
 	int m_ani_time;//アニメーションフレーム
 	int m_ani_frame;//描画フレーム
