@@ -146,10 +146,10 @@ void CObjNagenawa::Draw()
 	int p_y = 0;
 	int plus = 10;
 
-	for (int i = vy; i < -10; i += plus)
+	for (int i = vy; i < -100; i += plus)
 	{
-		p_y+=2;
-		plus += 10;
+		p_y+=1;
+		plus += 100;
 	}
 
 	/*if (r < ar)
@@ -170,7 +170,10 @@ void CObjNagenawa::Draw()
 	float a = m_x - h->GetX();
 	float b = abs(m_y - h->GetY());
 
-	Nawa = (a + (b*m_muki));
+	if(m_muki==1)
+		Nawa = sqrt((a*a)+(b*b));
+	else
+		Nawa = sqrt((a*a) + (b*b))-32;
 
 	//if (Nawa >m_x - h->GetX() + 64 && Nawa >m_y - h->GetY())
 	//{
@@ -202,29 +205,29 @@ void CObjNagenawa::Draw()
 	float akasa;
 	float kasana;
 
-
 	kasana= h->GetY();
 
 	if(m_muki==1)
-		akasa = (iy - (r * p_y) / 3) + h->GetY();
+		//akasa = (iy - (r * p_y)) + h->GetY();
+		akasa = (m_y + h->GetY()) / 2;
 	else
-		akasa = (iy - ((r - ((r - 90.0f) * 2))* p_y) / 3) + h->GetY();
+		akasa = (m_y + h->GetY()) / 2;
 
 	dst.m_top = akasa;
 	if (m_muki == 1) {
-		dst.m_left = (ix - (m_muki*p_y * 6) + 32) + h->GetX();
-		dst.m_right = (Nawa + h->GetX());
+		dst.m_left = h->GetX() + (m_y - h->GetY())/4;
+		dst.m_right = (Nawa*m_muki + h->GetX());
 	}
 	else {
-		dst.m_left = (ix - (m_muki*p_y * 3) + 32) + h->GetX();
-		dst.m_right = (Nawa + h->GetX()+32);
+		dst.m_left = h->GetX() + 32 - (m_y - h->GetY()) / 4;
+		dst.m_right = (Nawa*m_muki + h->GetX());
 	}
 	dst.m_bottom = dst.m_top + 64.0f;
 
 	Draw::Draw(7, &src, &dst, d, r);
 
 	//ηκ•”•ª‚Μ•`‰ζ
-	float c[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	if (h->GetMP() == 0)
 	{
@@ -242,8 +245,8 @@ void CObjNagenawa::Draw()
 	}
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = 64.0f + m_x;
-	dst.m_bottom = 64.0f + m_y;
+	dst.m_right = dst.m_left + 64.0f;
+	dst.m_bottom = dst.m_top + 64.0f;
 
 	//dst.m_top = (-b + h->GetY());
 	//dst.m_left = (a + h->GetX());
