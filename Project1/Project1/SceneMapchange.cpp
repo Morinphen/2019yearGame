@@ -30,9 +30,9 @@ CSceneMapchange::~CSceneMapchange()
 //ゲームメイン初期化メソッド
 void CSceneMapchange::InitScene()
 {
-	/*Draw::LoadImage(L"clear.png", 0, TEX_SIZE_1024);
-	Font::SetStrTex(L"ニンカツ");
-*/
+	Draw::LoadImage(L"change.png", 0, TEX_SIZE_1024);
+	//Font::SetStrTex(L"ニンカツ");
+
 	//マップ切り替えオブジェクト作成
 	CObjMapchange* objmc = new CObjMapchange();//マップ切り替えオブジェクト作成
 	Objs::InsertObj(objmc, OBJ_MAPCHANGE, 10);//マップ切り替えオブジェクト登録
