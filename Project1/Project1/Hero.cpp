@@ -495,7 +495,7 @@ void CObjHero::Action()
 //}
 
 	//“Vˆä‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F
-	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&dead==false)
 	{
 		remain -= 1;
 		SetX(GetWX());

@@ -266,7 +266,7 @@ void CObjHamEnemy::Draw()
 	{
 		RECT_F src_h;
 		RECT_F dst_h;
-		if (m_move == true)
+		if (m_posture == 0.0f)
 		{
 			src_h.m_top = 0.0f;
 			src_h.m_left = 32.0f;

@@ -37,6 +37,21 @@ void CObjPsyuriken::Draw()
 	//描画カラー情報
 	float c3[4] = { 1.0f,0.0f,0.0f,1.0f };
 
+	RECT_F srcm_ba; //描画元切り取り位置
+	RECT_F dstm_ba; //描画先表示位置
+	srcm_ba.m_top = 0.0f;
+	srcm_ba.m_left = 50.0f;
+	srcm_ba.m_right = 448.0f;
+	srcm_ba.m_bottom = 449.0f;
+
+	//表示位置の設定
+	dstm_ba.m_top = 600.0f;
+	dstm_ba.m_left = 750.0f;
+	dstm_ba.m_right = 1200.0f;
+	dstm_ba.m_bottom = 900.0f;
+	//描画
+	Draw::Draw(42, &srcm_ba, &dstm_ba, c, 0.0f);
+
 	RECT_F srcf; //描画元切り取り位置
 	RECT_F dstf; //描画先表示位置
 
