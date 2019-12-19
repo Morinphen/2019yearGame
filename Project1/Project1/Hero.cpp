@@ -295,6 +295,7 @@ void CObjHero::Action()
 					kaginawa_go = true;
 				}
 
+
 				//”Epƒ‚[ƒh‰ğœ‚Å“y“Ù‰ğœ
 				doton = false;
 			}
