@@ -429,10 +429,10 @@ srcm_n.m_right = 200.0f;
 srcm_n.m_bottom = 200.0f;
 ys = sc->GetYScroll()+2320;
 //•\¦ˆÊ’u‚Ìİ’è
-dstm_n.m_top = 875.0f -(ys/10);
+dstm_n.m_top = 875.0f -(ys/9.8);
 dstm_n.m_left = 55.0f-(sc->GetScroll()/8.6)-(sc->GetMNScroll()/8.6);
 dstm_n.m_right = 75.0f - (sc->GetScroll()/8.6) - (sc->GetMNScroll()/8.6);
-dstm_n.m_bottom = 895.0f - (ys / 10);
+dstm_n.m_bottom = 895.0f - (ys / 9.8);
 if (sc->GetYScroll() > -250)
 {
 	fs = 4;
