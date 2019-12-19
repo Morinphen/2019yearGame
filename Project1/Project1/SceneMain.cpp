@@ -104,11 +104,12 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
 	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya2.png", 44, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban.png", 45, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_syuriken.png", 46, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_syuriken2.png", 47, TEX_SIZE_512);
-
 	Draw::LoadImage(L"minimap2.png", 45, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban.png", 46, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_syuriken.png", 47, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_syuriken2.png", 48, TEX_SIZE_512);
+	
+	
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ

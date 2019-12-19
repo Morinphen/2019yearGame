@@ -99,7 +99,7 @@ void CObjkanban::Draw()
 			dst.m_right = dst.m_left + 64.0f;
 			dst.m_bottom = dst.m_top + 64.0f;
 			
-			Draw::Draw(45, &src, &dst, c, 0.0f);
+			Draw::Draw(46, &src, &dst, c, 0.0f);
 			
 		}
 		else
@@ -119,9 +119,9 @@ void CObjkanban::Draw()
 			if (type == 120)
 			{
 				if (flashing == false)
-					Draw::Draw(46, &src, &dst, c, 0.0f);
-				else
 					Draw::Draw(47, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(48, &src, &dst, c, 0.0f);
 			}
 		}
 		
