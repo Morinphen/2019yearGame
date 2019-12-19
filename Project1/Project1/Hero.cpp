@@ -463,11 +463,7 @@ void CObjHero::Action()
 		smokeh = false;
 	}
 
-	//敵と当たっているかどうか確認
-	/*if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false||
-		hit->CheckObjNameHit(OBJ_HAMENEMY) != nullptr&&smokeh == false)
-	{*/
-		if (deadtime > 180)
+	if (deadtime > 180)
 		{
 			remain -= 1;
 			SetX(GetWX());
@@ -492,10 +488,8 @@ void CObjHero::Action()
 			deadtime = 0;
 		}
 
-//}
-
 	//天井と当たっているかどうか確認
-	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&dead==false)
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&dead_s==false)
 	{
 		remain -= 1;
 		SetX(GetWX());
