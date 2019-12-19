@@ -12,4 +12,5 @@ public:
 	void Scene();
 private:
 	bool maptype;
+	bool Remap;
 };

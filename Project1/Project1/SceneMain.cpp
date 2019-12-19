@@ -18,6 +18,7 @@ using namespace GameL;
 CSceneMain::CSceneMain(bool b)
 {
 	maptype = b;
+	Remap = false;
 }
 
 //デストラクタ
@@ -330,6 +331,11 @@ void CSceneMain::InitScene()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	if (maptype == true)
 	{
+		if (Remap == false) {
+			hr->SetWX(64 * 95.0f);
+			hr->SetWY(64 * 5.0f);
+			Remap = true;
+		}
 		hr->Cflag = true;
 		scroll->SetScrooll(64 * -90.0f);
 		scroll->SetYScrooll(64 * -0.0f);

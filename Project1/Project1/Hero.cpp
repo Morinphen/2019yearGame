@@ -27,8 +27,10 @@ void CObjHero::Init()
 	m_y = 600;
 	m_vx = 0;
 	m_vy = 0;
+	r = 0.0f;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
 	remain = 3;//残機
+	A_count = 0;
 
 	jamptime = 0;
 	jamppower = 0.0f;
@@ -131,6 +133,7 @@ void CObjHero::Action()
 		U_scroll = false;
 		d_ani_frame = 0;
 		d_ani_time = 0;
+		r = 0.0f;
 
 		if (Input::GetVKey(VK_RIGHT) == true|| state.Gamepad.sThumbLX > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) {
 			//Cボタンを押しているとダッシュ
@@ -223,10 +226,9 @@ void CObjHero::Action()
 					pushb = 5;
 				}
 			}
-			else
-			{
-				c_stop = false;
-			}
+
+			if (c_stop == true)
+				Animation();
 
 			//忍具モード時
 			if (change == false) {
@@ -580,11 +582,11 @@ void CObjHero::Draw()
 		}
 		if (green == 1)
 		{
-			Draw::Draw(11, &src, &dst, c, 0.0f);
+			Draw::Draw(11, &src, &dst, c, r);
 		}
 		else
 		{
-			Draw::Draw(44, &src, &dst, c, 0.0f);
+			Draw::Draw(44, &src, &dst, c, r);
 		}
 		
 	}
@@ -661,5 +663,22 @@ void CObjHero::Leftwalk()
 	m_vx -= 0.5f;
 	m_ani_time++;
 	m_posture = 1.0f;
+}
+
+void CObjHero::Animation()
+{
+	if (W_cat2 > -1.0f) {
+		W_cat2 -= 2;
+	}
+	else {
+		W_cat2 += 2;
+	}
+	A_count++;
+
+	if (A_count == 50) {
+		A_count = 0;
+		W_cat2 = 1.0f;
+		c_stop = false;
+	}
 }
 

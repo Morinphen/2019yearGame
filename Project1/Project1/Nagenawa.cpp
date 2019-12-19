@@ -34,6 +34,7 @@ void CObjNagenawa::Init()
 	grabty = m_vy;
 
 	Nawa = 0;
+	r = 0;
 
 	//m_vy = -15;
 
@@ -70,6 +71,8 @@ void CObjNagenawa::Action()
 		h->NawaIdo(true);
 		h->SetNX(m_x - h->GetX());
 		h->SetNY(a - 20);
+		r = Angle();
+		h->SetAngle(r);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -122,8 +125,8 @@ void CObjNagenawa::Draw()
 	CObjScroll* s = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
 	//vector‚Ìì¬
-	float vx = (m_x) - h->GetX();
-	float vy = (m_y) - h->GetY();
+	float vx = (m_x)-h->GetX();
+	float vy = (m_y)-h->GetY();
 
 	//Šp“x‚ğ‹‚ß‚é
 	float r = atan2(-vy, vx);
@@ -148,7 +151,7 @@ void CObjNagenawa::Draw()
 
 	for (int i = vy; i < -100; i += plus)
 	{
-		p_y+=1;
+		p_y += 1;
 		plus += 100;
 	}
 
@@ -164,16 +167,16 @@ void CObjNagenawa::Draw()
 		iy = iy*cos(br) + ix*sin(br);
 	}
 */
-	//float a = vx;
-	//float b = abs(vy);
+//float a = vx;
+//float b = abs(vy);
 
 	float a = m_x - h->GetX();
 	float b = abs(m_y - h->GetY());
 
-	if(m_muki==1)
-		Nawa = sqrt((a*a)+(b*b));
+	if (m_muki == 1)
+		Nawa = sqrt((a*a) + (b*b));
 	else
-		Nawa = sqrt((a*a) + (b*b))-32;
+		Nawa = sqrt((a*a) + (b*b)) - 32;
 
 	//if (Nawa >m_x - h->GetX() + 64 && Nawa >m_y - h->GetY())
 	//{
@@ -205,9 +208,9 @@ void CObjNagenawa::Draw()
 	float akasa;
 	float kasana;
 
-	kasana= h->GetY();
+	kasana = h->GetY();
 
-	if(m_muki==1)
+	if (m_muki == 1)
 		//akasa = (iy - (r * p_y)) + h->GetY();
 		akasa = (m_y + h->GetY()) / 2;
 	else
@@ -215,7 +218,7 @@ void CObjNagenawa::Draw()
 
 	dst.m_top = akasa;
 	if (m_muki == 1) {
-		dst.m_left = h->GetX() + (m_y - h->GetY())/4;
+		dst.m_left = h->GetX() + (m_y - h->GetY()) / 4;
 		dst.m_right = (Nawa*m_muki + h->GetX());
 	}
 	else {
@@ -254,4 +257,31 @@ void CObjNagenawa::Draw()
 	//dst.m_bottom = dst.m_top + 64.0f;
 
 	Draw::Draw(20, &src, &dst, c, 0.0f);
+}
+
+float CObjNagenawa::Angle()
+{
+	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	//vector‚Ìì¬
+	float vx = (m_x)-h->GetX();
+	float vy = (m_y)-h->GetY();
+
+	//Šp“x‚ğ‹‚ß‚é
+	float rr = atan2(-vy, vx);
+	rr = rr * 180 / 3.14;
+
+	if (rr < 0)
+		rr = 360.0f - abs(rr);
+
+	if (rr > 90)
+	{
+		rr -= 90;
+	}
+
+	rr = rr / 2;
+
+	rr = -(rr*m_muki);
+
+	return rr;
 }

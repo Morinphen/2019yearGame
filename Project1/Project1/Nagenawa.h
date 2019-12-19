@@ -15,6 +15,7 @@ public:
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
+	float Angle();//主人公との角度を求める
 
 	int Pworp;
 private:
@@ -34,6 +35,8 @@ private:
 	//縄の長さ用変数
 	float Nawa;
 	float miku;
+	//主人公との角度
+	float r;
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数

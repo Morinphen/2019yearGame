@@ -14,6 +14,7 @@ public:
 	void Init();//いにしゃらいず
 	void Action();//あくしょん
 	void Draw();//どろー
+	void Animation();//あにめーしょん
 
 	//現在の座標を渡す
 	float GetX() { return m_x; }
@@ -59,6 +60,7 @@ public:
 	void ReSetN(bool b) { nawa_stop = b; }
 	void SetNX(float x) { n_x = x; }
 	void SetNY(float y) { n_y = y; }
+	void SetAngle(float re) { r = re; }
 
 	//主人公の鉤縄を使用している状態を渡す
 	bool GetNawa() { return nawa_stop; }
@@ -138,6 +140,9 @@ private:
 	float n_m;//寸前に何を使ったか
 	float g_x;//グローバルX位置
 	float g_y;//グローバルY位置
+
+	float r;//主人公の角度
+	int A_count;
 
 	//リスタート用位置
 	float w_x;
