@@ -133,9 +133,11 @@ void CObjHamEnemy::Action()
 			HitBox_ON = true;
 			Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_HAMENEMY, 1);
 		}
-		//ブロック情報を持ってくる
+		//ネズミ情報を持ってくる
 		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
+		//どんでん返し情報取得
+		CObjDonden* donden = (CObjDonden*)Objs::GetObj(OBJ_DONDEN);
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && donden->Wanimation_check() == false)
 		{
 			find = true;
 			hr->Dflag_s(true);

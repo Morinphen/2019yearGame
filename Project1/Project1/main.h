@@ -19,4 +19,4 @@
 #pragma comment(lib,"xinput.lib")
 #include<Windows.h>
 #include<Xinput.h>
-#define XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  7849
+#define XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  32000
