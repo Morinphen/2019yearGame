@@ -54,7 +54,7 @@ void CObjkanban::Action()
 		l_scroll = scroll->GetYScroll();
 
 		num++;
-		if (num/60 == 2)
+		if (num/60 == 1)
 		{
 			num = 0.0f;
 			flashing = flashing ? false : true;
@@ -122,6 +122,30 @@ void CObjkanban::Draw()
 					Draw::Draw(47, &src, &dst, c, 0.0f);
 				else
 					Draw::Draw(48, &src, &dst, c, 0.0f);
+			}
+			//モードチェンジ
+			else if(type == 121)
+			{
+				if (flashing == false)
+					Draw::Draw(49, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(50, &src, &dst, c, 0.0f);
+			}
+			//走る
+			else if (type == 122)
+			{
+				if (flashing == false)
+					Draw::Draw(51, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(52, &src, &dst, c, 0.0f);
+			}
+			//木箱燃やす
+			else if (type == 123)
+			{
+				if (flashing == false)
+					Draw::Draw(53, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(54, &src, &dst, c, 0.0f);
 			}
 		}
 		

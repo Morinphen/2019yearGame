@@ -108,7 +108,12 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"kanban.png", 46, TEX_SIZE_512);
 	Draw::LoadImage(L"kanban_syuriken.png", 47, TEX_SIZE_512);
 	Draw::LoadImage(L"kanban_syuriken2.png", 48, TEX_SIZE_512);
-	
+	Draw::LoadImage(L"kanban_type.png", 49, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_type2.png", 50, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_run.png", 51, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_run2.png", 52, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_hinotama.png", 53, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_hinotama2.png", 54, TEX_SIZE_512);
 	
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
@@ -146,6 +151,8 @@ void CSceneMain::InitScene()
 	}
 
 	map[44][5] = 20;
+
+	map[44][9] = 23;
 
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
@@ -296,7 +303,7 @@ void CSceneMain::InitScene()
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
 			}
-			else if (map[i][j] == 20)
+			else if (map[i][j] == 20|| map[i][j] == 21 || map[i][j] == 22 || map[i][j] == 23)
 			{
 				CObjkanban*objka = new CObjkanban(j * 64, i * 64, map[i][j]+100);
 				Objs::InsertObj(objka, map[i][j]+100, 3);
