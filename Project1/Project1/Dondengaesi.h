@@ -16,6 +16,8 @@ public:
 	void Action();//あくしょん
 	void Draw();//どろー
 
+	bool Wanimation_check();
+
 	int Pworp;
 private:
 
@@ -44,7 +46,7 @@ private:
 	//主人公の位置の確認
 	bool s_down;
 
-	//どんでん返しで隠す
+	//どんでん返しを隠す
 	bool hide;
 
 	int D_tag[50][3];//ペアのどんでん返しを探す

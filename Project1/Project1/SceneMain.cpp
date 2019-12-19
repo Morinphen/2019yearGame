@@ -104,6 +104,10 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
 	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya2.png", 44, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban.png", 45, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_syuriken.png", 46, TEX_SIZE_512);
+	Draw::LoadImage(L"kanban_syuriken2.png", 47, TEX_SIZE_512);
+
 	Draw::LoadImage(L"minimap2.png", 45, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
@@ -140,27 +144,7 @@ void CSceneMain::InitScene()
 		}
 	}
 
-	//int map2[46][100];
-	//int count2 = 1;
-
-	//for (int i = 0; i < 46; i++)
-	//{
-	//	for (int j = 0; j < 100; j++)
-	//	{
-	//		int w2 = 0;
-	//		swscanf_s(&p2.get()[count2], L"%d", &w2);
-
-	//		map2[i][j] = w2;
-	//		if (w2 < 10)
-	//		{
-	//			count2 += 2;
-	//		}
-	//		else
-	//		{
-	//			count2 += 3;
-	//		}
-	//	}
-	//}
+	map[44][5] = 20;
 
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
@@ -310,6 +294,11 @@ void CSceneMain::InitScene()
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
+			}
+			else if (map[i][j] == 20)
+			{
+				CObjkanban*objka = new CObjkanban(j * 64, i * 64, map[i][j]+100);
+				Objs::InsertObj(objka, map[i][j]+100, 3);
 			}
 		}
 	}

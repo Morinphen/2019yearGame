@@ -309,3 +309,12 @@ int CObjDonden::TagWorp(int a)
 
 	return data2[0];
 }
+
+//どんでん返しアニメーション中か調べる（false==していない,true==している）
+bool CObjDonden::Wanimation_check()
+{
+	if (Wanimation == false && Wanimation2 == false)
+		return false;
+	else
+		return true;
+}

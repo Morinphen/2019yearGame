@@ -21,8 +21,12 @@ private:
 	bool flashing;//点滅させる
 	float num;//秒間カウント用
 
+	bool hit_hero;//主人公と重なっているか確認
+
 	int m_x;
 	int m_y;
+
+	bool HitBox_ON;//画面内なら付与
 
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
