@@ -108,6 +108,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"kanban_syuriken.png", 46, TEX_SIZE_512);
 	Draw::LoadImage(L"kanban_syuriken2.png", 47, TEX_SIZE_512);
 
+	Draw::LoadImage(L"minimap2.png", 45, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
@@ -305,7 +306,7 @@ void CSceneMain::InitScene()
 	//主人公オブジェクト作成
 	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
-
+	
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
@@ -313,6 +314,18 @@ void CSceneMain::InitScene()
 	//手裏剣所持数オブジェクト作成
 	CObjPsyuriken*objp= new CObjPsyuriken();//主人公オブジェクト作成
 	Objs::InsertObj(objp, OBJ_PSYURIKEN, 10);
+
+	//マップ移動のさいの調整
+	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	CObjPsyuriken* psyu = (CObjPsyuriken*)Objs::GetObj(OBJ_PSYURIKEN);
+	if (maptype == true)
+	{
+		hr->Cflag = true;
+		scroll->SetScrooll(64 * -90.0f);
+		scroll->SetYScrooll(64 * -0.0f);
+		psyu->SetChange(true);
+	}
 }
 
 //ゲームメイン実行中メソッド

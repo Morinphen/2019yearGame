@@ -117,11 +117,11 @@ void CObjHamEnemy::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	if (m_move == true)
+	if (m_posture == 0.0f)
 	{
 		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
 	}
-	else if (m_move == false)
+	else if (m_posture == 1.0f)
 	{
 		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
 	}
@@ -221,7 +221,7 @@ void CObjHamEnemy::Draw()
 
 	RECT_F srcs; //描画元切り取り位置
 	RECT_F dsts; //描画先表示位置
-	if (m_move == true)
+	if (m_posture == 0.0f)
 	{
 		srcs.m_top = 0.0f;
 		srcs.m_left = 0.0f;
@@ -268,7 +268,7 @@ void CObjHamEnemy::Draw()
 	{
 		RECT_F src_h;
 		RECT_F dst_h;
-		if (m_move == true)
+		if (m_posture == 0.0f)
 		{
 			src_h.m_top = 0.0f;
 			src_h.m_left = 32.0f;
