@@ -120,7 +120,9 @@ void CObjEnemy::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 	}
-	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+	//‚Ç‚ñ‚Å‚ñ•Ô‚µî•ñŽæ“¾
+	CObjDonden* donden = (CObjDonden*)Objs::GetObj(OBJ_DONDEN);
+	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true && donden->Wanimation_check() == false)
 	{
 		find = false;
 	}

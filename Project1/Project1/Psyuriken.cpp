@@ -17,6 +17,7 @@ void CObjPsyuriken::Init()
 	ps = 0;
 	re = 0;
 	n_m = -1;
+	change = false;
 }
 
 //ƒAƒNƒVƒ‡ƒ“
@@ -149,27 +150,21 @@ void CObjPsyuriken::Draw()
 	RECT_F dstz; //•`‰ææ•\¦ˆÊ’u
 	re = hero->GetRE();
 	//Ø‚èæ‚èˆÊ’u‚Ìİ’è
-	if (re > 3)
-	{
-		srcz.m_top = 2.0f;
-		srcz.m_left = 130.0f + 64 * (5 - re);
-		srcz.m_right = 191.0f + 64 * (5 - re);
-		srcz.m_bottom = 64.0f;
-	}
-	else
-	{
-		srcz.m_top = 2.0f;
-		srcz.m_left = 130.0f + 64 * (5 - re);
-		srcz.m_right = 184.0f + 64 * (5 - re);
-		srcz.m_bottom = 64.0f;
-	}
+	/*srcz.m_top = 2.0f;
+	srcz.m_left = 130.0f + 64 * (5 - re);
+	srcz.m_right = 184.0f + 64 * (5 - re);
+	srcz.m_bottom = 64.0f;*/
+	srcz.m_top = 30.0f;
+	srcz.m_left = 35.0f+90*(re-1);
+	srcz.m_right = 90.0f + 90 * (re-1);
+	srcz.m_bottom = 70.0f;
 	//•\¦ˆÊ’u‚Ìİ’è
 	dstz.m_top = 20.0f;
 	dstz.m_left = 278.0f;
-	dstz.m_right = 342.0f;
-	dstz.m_bottom = 84.0f;
+	dstz.m_right = 360.0f;
+	dstz.m_bottom = 70.0f;
 	//•`‰æ
-	Draw::Draw(21, &srcz, &dstz, c, 0.0f);
+	Draw::Draw(40, &srcz, &dstz, c, 0.0f);
 	RECT_F dstt; //•`‰ææ•\¦ˆÊ’u
 
 	//•\¦ˆÊ’u‚Ìİ’è
@@ -405,21 +400,42 @@ else
 	//•`‰æ
 	Draw::Draw(38, &srcm_btm, &dstm_btm, c, 0.0f);
 }
-RECT_F srcmn; //•`‰æŒ³Ø‚èæ‚èˆÊ’u
-RECT_F dstmn; //•`‰ææ•\¦ˆÊ’u
-srcmn.m_top = 0.0f;
-srcmn.m_left = 0.0f;
-srcmn.m_right = 512.0f;
-srcmn.m_bottom = 365.0f;
+if (change == false)
+{
+	RECT_F srcmn; //•`‰æŒ³Ø‚èæ‚èˆÊ’u
+	RECT_F dstmn; //•`‰ææ•\¦ˆÊ’u
+	srcmn.m_top = 0.0f;
+	srcmn.m_left = 0.0f;
+	srcmn.m_right = 512.0f;
+	srcmn.m_bottom = 365.0f;
 
-//•\¦ˆÊ’u‚Ìİ’è
-dstmn.m_top = 600.0f;
-dstmn.m_left = 0.0f;
-dstmn.m_right = 750.0f;
-dstmn.m_bottom = 900.0f;
+	//•\¦ˆÊ’u‚Ìİ’è
+	dstmn.m_top = 600.0f;
+	dstmn.m_left = 0.0f;
+	dstmn.m_right = 750.0f;
+	dstmn.m_bottom = 900.0f;
 
-//•`‰æ
-Draw::Draw(39, &srcmn, &dstmn, c, 0.0f);
+	//•`‰æ
+	Draw::Draw(39, &srcmn, &dstmn, c, 0.0f);
+}
+else
+{
+	RECT_F srcmn; //•`‰æŒ³Ø‚èæ‚èˆÊ’u
+	RECT_F dstmn; //•`‰ææ•\¦ˆÊ’u
+	srcmn.m_top = 0.0f;
+	srcmn.m_left = 0.0f;
+	srcmn.m_right = 512.0f;
+	srcmn.m_bottom = 365.0f;
+
+	//•\¦ˆÊ’u‚Ìİ’è
+	dstmn.m_top = 600.0f;
+	dstmn.m_left = 0.0f;
+	dstmn.m_right = 750.0f;
+	dstmn.m_bottom = 900.0f;
+
+	//•`‰æ
+	Draw::Draw(45, &srcmn, &dstmn, c, 0.0f);
+}
 CObjScroll* sc = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 RECT_F srcm_n; //•`‰æŒ³Ø‚èæ‚èˆÊ’u
 RECT_F dstm_n; //•`‰ææ•\¦ˆÊ’u
@@ -429,10 +445,10 @@ srcm_n.m_right = 200.0f;
 srcm_n.m_bottom = 200.0f;
 ys = sc->GetYScroll()+2320;
 //•\¦ˆÊ’u‚Ìİ’è
-dstm_n.m_top = 875.0f -(ys/10);
+dstm_n.m_top = 875.0f -(ys/9.8);
 dstm_n.m_left = 55.0f-(sc->GetScroll()/8.6)-(sc->GetMNScroll()/8.6);
 dstm_n.m_right = 75.0f - (sc->GetScroll()/8.6) - (sc->GetMNScroll()/8.6);
-dstm_n.m_bottom = 895.0f - (ys / 10);
+dstm_n.m_bottom = 895.0f - (ys / 9.8);
 if (sc->GetYScroll() > -250)
 {
 	fs = 4;
