@@ -93,7 +93,7 @@ void CObjMuscleEnemy::Action()
 		}
 		//ƒuƒƒbƒNî•ñ‚ðŽ‚Á‚Ä‚­‚é
 		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
 		{
 			find = true;
 			hr->Dflag_s(true);
@@ -106,9 +106,7 @@ void CObjMuscleEnemy::Action()
 		{
 			hatena = false;
 		}
-		//‚Ç‚ñ‚Å‚ñ•Ô‚µî•ñŽæ“¾
-		CObjDonden* donden = (CObjDonden*)Objs::GetObj(OBJ_DONDEN);
-		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true && donden->Wanimation_check() == false)
+		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
 		{
 			find = false;
 		}

@@ -15,9 +15,6 @@ public:
 	void Init();//Ç¢Ç…ÇµÇ·ÇÁÇ¢Ç∏
 	void Action();//Ç†Ç≠ÇµÇÂÇÒ
 	void Draw();//Ç«ÇÎÅ[
-
-	bool Wanimation_check();
-
 	int Pworp;
 private:
 
