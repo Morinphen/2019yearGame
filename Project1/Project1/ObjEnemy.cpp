@@ -120,7 +120,7 @@ void CObjEnemy::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 	}
-	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true && hr->Sworp == false)
 	{
 		find = false;
 	}

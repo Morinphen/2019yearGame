@@ -68,7 +68,6 @@ void CObjFireEnemy::Action()
 		&m_vx, &m_vy
 	);
 
-
 	//ブロック衝突で向きを変更
 	if (m_hit_left == true && m_hit_right == false || m_posture_time>150 && m_move == false)
 	{
@@ -156,11 +155,12 @@ void CObjFireEnemy::Action()
 	{
 		hatena = false;
 	}
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
 	{
 		find = true;
 		hr->Dflag_s(true);
 	}
+
 	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr&&hit_o ==false)
 	{
 		CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);

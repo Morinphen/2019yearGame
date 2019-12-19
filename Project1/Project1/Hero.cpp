@@ -297,6 +297,7 @@ void CObjHero::Action()
 					kaginawa_go = true;
 				}
 
+
 				//”Epƒ‚[ƒh‰ðœ‚Å“y“Ù‰ðœ
 				doton = false;
 			}
@@ -465,11 +466,7 @@ void CObjHero::Action()
 		smokeh = false;
 	}
 
-	//“G‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F
-	/*if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&smokeh==false||
-		hit->CheckObjNameHit(OBJ_HAMENEMY) != nullptr&&smokeh == false)
-	{*/
-		if (deadtime > 180)
+	if (deadtime > 180)
 		{
 			remain -= 1;
 			SetX(GetWX());
@@ -494,10 +491,8 @@ void CObjHero::Action()
 			deadtime = 0;
 		}
 
-//}
-
 	//“Vˆä‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©Šm”F
-	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&dead_s==false)
 	{
 		remain -= 1;
 		SetX(GetWX());

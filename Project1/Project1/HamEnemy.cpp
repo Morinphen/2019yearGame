@@ -133,9 +133,9 @@ void CObjHamEnemy::Action()
 			HitBox_ON = true;
 			Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_HAMENEMY, 1);
 		}
-		//ブロック情報を持ってくる
+		//ネズミ情報を持ってくる
 		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
 		{
 			find = true;
 			hr->Dflag_s(true);
@@ -266,7 +266,7 @@ void CObjHamEnemy::Draw()
 	{
 		RECT_F src_h;
 		RECT_F dst_h;
-		if (m_move == true)
+		if (m_posture == 0.0f)
 		{
 			src_h.m_top = 0.0f;
 			src_h.m_left = 32.0f;

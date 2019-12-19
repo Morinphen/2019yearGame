@@ -13,11 +13,13 @@ public:
 	void Init();//イニシャライズ
 	void Action();//アクション
 	void Draw();//ドロー
+	void SetChange(bool b) { change = b; }
 private:
 	int ys;
 	int fs;
 	int ps;
 	int re;
 	bool mode;
+	bool change;
 	float n_m;
 };

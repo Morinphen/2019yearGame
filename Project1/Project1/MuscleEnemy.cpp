@@ -93,7 +93,7 @@ void CObjMuscleEnemy::Action()
 		}
 		//ƒuƒƒbƒNî•ñ‚ðŽ‚Á‚Ä‚­‚é
 		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
 		{
 			find = true;
 			hr->Dflag_s(true);
