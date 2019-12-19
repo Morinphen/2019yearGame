@@ -104,6 +104,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
 	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
 	Draw::LoadImage(L"ninzya2.png", 44, TEX_SIZE_512);
+	Draw::LoadImage(L"minimap2.png", 45, TEX_SIZE_512);
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
 	int size;               //ステージ情報の大きさ
@@ -328,11 +329,13 @@ void CSceneMain::InitScene()
 	//マップ移動のさいの調整
 	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+	CObjPsyuriken* psyu = (CObjPsyuriken*)Objs::GetObj(OBJ_PSYURIKEN);
 	if (maptype == true)
 	{
 		hr->Cflag = true;
 		scroll->SetScrooll(64 * -90.0f);
 		scroll->SetYScrooll(64 * -0.0f);
+		psyu->SetChange(true);
 	}
 }
 

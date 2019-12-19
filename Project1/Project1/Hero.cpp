@@ -28,7 +28,7 @@ void CObjHero::Init()
 	m_vx = 0;
 	m_vy = 0;
 	m_posture = 0.0f;//右向き0.0ｆ、左向き1.0f
-	remain = 3;//残機
+	remain = 5;//残機
 
 	jamptime = 0;
 	jamppower = 0.0f;
