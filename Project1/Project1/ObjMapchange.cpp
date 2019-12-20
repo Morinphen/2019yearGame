@@ -21,6 +21,7 @@ void CObjMapchange::Init()
 	m_key_flag = false;
 	time = 0;
 	mtime = 0;
+	Audio::Start(0);
 }
 
 //ƒAƒNƒVƒ‡ƒ“

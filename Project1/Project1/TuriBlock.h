@@ -48,4 +48,6 @@ private:
 
 	//画面内の時のみヒットボックスをつける
 	bool HitBox_ON;
+
+	bool stop;
 };

@@ -137,6 +137,7 @@ void CObjEnemy::Action()
 		}
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find==false&&hr->Getsmoke_h()==false)
 	{
+		Audio::Start(23);
 		find = true;
 		hr->Dflag_s(true);
 	}

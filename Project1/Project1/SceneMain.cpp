@@ -53,6 +53,9 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(18, L"sword-slash4.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(19, L"sadou.wav", SOUND_TYPE::EFFECT);
 	Audio::LoadAudio(20, L"change.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(21, L"hamenemy.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(22, L"turi.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(23, L"kemuri.wav", SOUND_TYPE::EFFECT);
 	//É{ÉäÉÖÅ[ÉÄÇ1.5Ç…ëùÇ‚Ç∑
 	float v = Audio::VolumeMaster(-0.5);
 	v = Audio::VolumeMaster((1.0 - v));

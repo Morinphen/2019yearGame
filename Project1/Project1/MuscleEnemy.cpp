@@ -95,6 +95,7 @@ void CObjMuscleEnemy::Action()
 		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
 		{
+			Audio::Start(23);
 			find = true;
 			hr->Dflag_s(true);
 		}

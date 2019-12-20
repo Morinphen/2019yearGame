@@ -6,6 +6,7 @@
 #include"GameHead.h"
 #include "TuriBlock.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -21,6 +22,7 @@ CObjTBlock::CObjTBlock(int x, int y)
 //イニシャライズ
 void CObjTBlock::Init()
 {
+	stop = false;
 	m_ani_frame = 0;
 	m_ani_time = 0;
 	m_scroll = 0.0f;
@@ -101,6 +103,11 @@ void CObjTBlock::Action()
 	//ブロックを落とす
 	if (modecheck == 2)
 	{
+		if (stop == false)
+		{
+			Audio::Start(22);
+			stop = true;
+		}
 		m_y += 4;
 		n++;
 		//落ちきったら止める

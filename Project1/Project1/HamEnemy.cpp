@@ -137,6 +137,7 @@ void CObjHamEnemy::Action()
 		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
 		{
+			Audio::Start(23);
 			find = true;
 			hr->Dflag_s(true);
 		}
@@ -144,6 +145,7 @@ void CObjHamEnemy::Action()
 		if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == false &&hit_o==false||
 			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == false && hit_o == false)
 		{
+			Audio::Start(21);
 			Hits::DeleteHitBox(this);
 			hit_hm = true;
 			m_move = true;
@@ -154,6 +156,7 @@ void CObjHamEnemy::Action()
 		else if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true&&hm->GetA_M()==true && hit_o == false ||
 			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == true && hit_o == false)
 		{
+			Audio::Start(21);
 			Hits::DeleteHitBox(this);
 			hit_hm = true;
 			m_move = false;
