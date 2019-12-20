@@ -83,6 +83,7 @@ void CObjMapchange::Draw()
 	dstj.m_bottom = 800.0f;
 	if (time > 200)
 	{
+		Audio::Stop(0);
 		dstj.m_left = 200.0f;
 		dstj.m_right = 1000.0f;
 	}
