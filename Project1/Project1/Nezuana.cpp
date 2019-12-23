@@ -43,23 +43,21 @@ void CObjNezuana::Action()
 	l_scroll = scroll->GetYScroll();
 
 	//•\¦‰æ–Ê“à‚Ì
-	if (scroll->Inscrooll_check(m_x, m_y) == true)
+	
+	if (flag == true)
 	{
-		if (flag == true)
-		{
-			testc = 0.0f;
-			Dnamber = true;
-			if (stop == false) {
-				Audio::Start(19);
-				Hits::DeleteHitBox(this);
-				stop = true;
-			}
+		testc = 0.0f;
+		Dnamber = true;
+		if (stop == false) {
+			Audio::Start(19);
+			Hits::DeleteHitBox(this);
+			stop = true;
 		}
-		else
-		{
-			CHitBox* hit = Hits::GetHitBox(this);
-			hit->SetPos(m_x + m_scroll + 18, m_y + l_scroll + 32);
-		}
+	}
+	else
+	{
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_x + m_scroll + 18, m_y + l_scroll + 32);
 	}
 }
 //ƒhƒ[
