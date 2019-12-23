@@ -147,6 +147,62 @@ void CObjkanban::Draw()
 				else
 					Draw::Draw(54, &src, &dst, c, 0.0f);
 			}
+			//どんでん返し
+			else if (type == 124)
+			{
+				if (flashing == false)
+					Draw::Draw(55, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(56, &src, &dst, c, 0.0f);
+			}
+			//土遁
+			else if (type == 125)
+			{
+				if (flashing == false)
+					Draw::Draw(57, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(58, &src, &dst, c, 0.0f);
+			}
+			//ネズミ
+			else if (type == 126)
+			{
+				if (flashing == false)
+					Draw::Draw(59, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(60, &src, &dst, c, 0.0f);
+			}
+			//煙玉
+			else if (type == 127)
+			{
+				if (flashing == false)
+					Draw::Draw(61, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(62, &src, &dst, c, 0.0f);
+			}
+			//縄鉤
+			else if (type == 128)
+			{
+				if (flashing == false)
+					Draw::Draw(63, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(64, &src, &dst, c, 0.0f);
+			}
+			//レバー
+			else if (type == 129)
+			{
+				if (flashing == false)
+					Draw::Draw(65, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(66, &src, &dst, c, 0.0f);
+			}
+			//ジャンプ
+			else if (type == 115)
+			{
+				if (flashing == false)
+					Draw::Draw(67, &src, &dst, c, 0.0f);
+				else
+					Draw::Draw(68, &src, &dst, c, 0.0f);
+			}
 		}
 		
 		

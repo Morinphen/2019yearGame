@@ -32,7 +32,7 @@ CScenesetumei::~CScenesetumei()
 //ゲームメイン初期化メソッド
 void CScenesetumei::InitScene()
 {
-	Draw::LoadImage(L"setumei.png", 0, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\setumei.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 

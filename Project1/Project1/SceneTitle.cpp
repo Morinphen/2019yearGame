@@ -32,7 +32,7 @@ CSceneTitle::~CSceneTitle()
 //ゲームメイン初期化メソッド
 void CSceneTitle::InitScene()
 {
-	Draw::LoadImage(L"title.png", 0, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\title.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 	Audio::LoadAudio(0, L"title.wav", SOUND_TYPE::BACK_MUSIC);

@@ -33,9 +33,9 @@ void CSceneMapchange::InitScene()
 	//外部オーディオファイル読み込み
 	Audio::LoadAudio(0, L"z.wav", SOUND_TYPE::BACK_MUSIC);
 
-	Draw::LoadImage(L"gt.png", 0, TEX_SIZE_1024);
-	Draw::LoadImage(L"jou.png", 1, TEX_SIZE_1024);
-	Draw::LoadImage(L"mo.png", 2, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\gt.png", 0, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\jou.png", 1, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\mo.png", 2, TEX_SIZE_1024);
 	//Font::SetStrTex(L"ニンカツ");
 
 	//マップ切り替えオブジェクト作成
