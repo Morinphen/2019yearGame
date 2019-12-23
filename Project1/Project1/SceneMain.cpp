@@ -67,6 +67,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sozai\\Zimen_t.jpg", 1, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\Kabe2.jpg", 2, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\Syuriken.png", 3, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\char_p_ninja012.png", 4, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\Donden.png", 5, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\smokeball.png", 6, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\nawa.png", 7, TEX_SIZE_512);
