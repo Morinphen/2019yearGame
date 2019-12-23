@@ -76,6 +76,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sozai\\kagidume.jpg",10, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\ninzya.png", 11, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\hinotama.png", 12, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\enzyou.png", 13, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\mizu.jpg", 14, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\makimono.png", 15, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\karakuri.png", 16, TEX_SIZE_512);
