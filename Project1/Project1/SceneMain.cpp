@@ -167,18 +167,6 @@ void CSceneMain::InitScene()
 		}
 	}
 
-	map[44][5] = 20;
-	map[44][7] = 21;
-	map[44][9] = 22;
-	map[44][11] = 23;
-	map[44][13] = 24;
-	map[44][15] = 25;
-	map[44][17] = 26;
-	map[44][19] = 27;
-	map[44][21] = 28;
-	map[44][23] = 29;
-	map[44][25] = 15;
-
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
 	Objs::InsertObj(obj_s, OBJ_SCROLL, 1);
