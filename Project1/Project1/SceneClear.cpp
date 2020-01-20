@@ -30,7 +30,7 @@ CSceneClear::~CSceneClear()
 //ゲームメイン初期化メソッド
 void CSceneClear::InitScene()
 {
-	Draw::LoadImage(L"clear.png", 0, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\clear.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 

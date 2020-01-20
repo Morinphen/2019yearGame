@@ -64,60 +64,74 @@ void CSceneMain::InitScene()
 	Audio::Start(0);
 
 	//外部グラフィックファイル読み込み
-	Draw::LoadImage(L"Zimen_t.jpg", 1, TEX_SIZE_512);
-	Draw::LoadImage(L"Kabe2.jpg", 2, TEX_SIZE_512);
-	Draw::LoadImage(L"Syuriken.png", 3, TEX_SIZE_512);
-	Draw::LoadImage(L"char_p_ninja012.png", 4, TEX_SIZE_512);
-	Draw::LoadImage(L"Donden.png", 5, TEX_SIZE_512);
-	Draw::LoadImage(L"smokeball.png", 6, TEX_SIZE_512);
-	Draw::LoadImage(L"nawa.png", 7, TEX_SIZE_512);
-	Draw::LoadImage(L"Kaginawablock.png", 8, TEX_SIZE_512);
-	Draw::LoadImage(L"target.png", 9, TEX_SIZE_512);
-	Draw::LoadImage(L"kagidume.jpg",10, TEX_SIZE_512);
-	Draw::LoadImage(L"ninzya.png", 11, TEX_SIZE_512);
-	Draw::LoadImage(L"hinotama.png", 12, TEX_SIZE_512);
-	Draw::LoadImage(L"enzyou.png", 13, TEX_SIZE_512);
-	Draw::LoadImage(L"mizu.jpg", 14, TEX_SIZE_512);
-	Draw::LoadImage(L"makimono.png", 15, TEX_SIZE_512);
-	Draw::LoadImage(L"karakuri.png", 16, TEX_SIZE_512);
-	Draw::LoadImage(L"syuriken1.png", 17, TEX_SIZE_512);
-	Draw::LoadImage(L"mode.png", 18, TEX_SIZE_512);
-	Draw::LoadImage(L"frame.png", 19, TEX_SIZE_512);
-	Draw::LoadImage(L"kaginawa.png", 20, TEX_SIZE_512);
-	Draw::LoadImage(L"ninzya1.png", 21, TEX_SIZE_512);
-	Draw::LoadImage(L"Zimen_y.jpg", 22, TEX_SIZE_512);
-	Draw::LoadImage(L"Moemasu.jpg", 23, TEX_SIZE_512);
-	Draw::LoadImage(L"uguisu.png", 24, TEX_SIZE_512);
-	Draw::LoadImage(L"nezuana.png", 25, TEX_SIZE_512);
-	Draw::LoadImage(L"turi.png", 26, TEX_SIZE_512);
-	Draw::LoadImage(L"goal.png", 27, TEX_SIZE_512);
-	Draw::LoadImage(L"sikaku.png", 28, TEX_SIZE_512);
-	Draw::LoadImage(L"kemuri.png", 29, TEX_SIZE_1024);
-	Draw::LoadImage(L"nezumi.png", 30, TEX_SIZE_512);
-	Draw::LoadImage(L"makimo_a.png", 31, TEX_SIZE_512);
-	Draw::LoadImage(L"mode_back.jpg", 32, TEX_SIZE_512);
-	Draw::LoadImage(L"magic.png", 33, TEX_SIZE_1024);
-	Draw::LoadImage(L"haken.png", 34, TEX_SIZE_512);
-	Draw::LoadImage(L"km.png", 35, TEX_SIZE_512);
-	Draw::LoadImage(L"botan.png", 36, TEX_SIZE_512);
-	Draw::LoadImage(L"botan2.png", 37, TEX_SIZE_512);
-	Draw::LoadImage(L"modebotan.png", 38, TEX_SIZE_512);
-	Draw::LoadImage(L"minimap.png", 39, TEX_SIZE_512);
-	Draw::LoadImage(L"floor.png", 40, TEX_SIZE_512);
-	Draw::LoadImage(L"hatena.png", 41, TEX_SIZE_512);
-	Draw::LoadImage(L"sousa.png", 42, TEX_SIZE_512);
-	Draw::LoadImage(L"fire.png", 43, TEX_SIZE_512);
-	Draw::LoadImage(L"ninzya2.png", 44, TEX_SIZE_512);
-	Draw::LoadImage(L"minimap2.png", 45, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban.png", 46, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_syuriken.png", 47, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_syuriken2.png", 48, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_type.png", 49, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_type2.png", 50, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_run.png", 51, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_run2.png", 52, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_hinotama.png", 53, TEX_SIZE_512);
-	Draw::LoadImage(L"kanban_hinotama2.png", 54, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Zimen_t.jpg", 1, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Kabe2.jpg", 2, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Syuriken.png", 3, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\char_p_ninja012.png", 4, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Donden.png", 5, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\smokeball.png", 6, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\nawa.png", 7, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Kaginawablock.png", 8, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\target.png", 9, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kagidume.jpg",10, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\ninzya.png", 11, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\hinotama.png", 12, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\enzyou.png", 13, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\mizu.jpg", 14, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\makimono.png", 15, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\karakuri.png", 16, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\syuriken1.png", 17, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\mode.png", 18, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\frame.png", 19, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kaginawa.png", 20, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\ninzya1.png", 21, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Zimen_y.jpg", 22, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Moemasu.jpg", 23, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\uguisu.png", 24, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\nezuana.png", 25, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\turi.png", 26, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\goal.png", 27, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\sikaku.png", 28, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kemuri.png", 29, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\nezumi.png", 30, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\makimo_a.png", 31, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\mode_back.jpg", 32, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\magic.png", 33, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\haken.png", 34, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\km.png", 35, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\botan.png", 36, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\botan2.png", 37, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\modebotan.png", 38, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\minimap.png", 39, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\floor.png", 40, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\hatena.png", 41, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\sousa.png", 42, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\fire.png", 43, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\ninzya2.png", 44, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\minimap2.png", 45, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban.png", 46, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_syuriken.png", 47, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_syuriken2.png", 48, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_type.png", 49, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_type2.png", 50, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_run.png", 51, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_run2.png", 52, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_hinotama.png", 53, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_hinotama2.png", 54, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_donden.png", 55, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_donden2.png", 56, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_doton.png", 57, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_doton2.png", 58, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_hamutaro.png", 59, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_hamutaro2.png", 60, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_kemuri.png", 61, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_kemuri2.png", 62, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_nagenawa.png", 63, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_nagenawa2.png", 64, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_reba.png", 65, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_reba2.png", 66, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_zyanpu.png", 67, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\kanban_zyanpu2.png", 68, TEX_SIZE_512);
 	
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
@@ -153,10 +167,6 @@ void CSceneMain::InitScene()
 			}
 		}
 	}
-
-	map[44][5] = 20;
-
-	map[44][9] = 23;
 
 	//Scrollオブジェクト追加
 	CObjScroll* obj_s = new CObjScroll(map);
@@ -307,7 +317,8 @@ void CSceneMain::InitScene()
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
 				Objs::InsertObj(objn, map[i][j], 3);
 			}
-			else if (map[i][j] == 20|| map[i][j] == 21 || map[i][j] == 22 || map[i][j] == 23)
+			else if (map[i][j] == 20|| map[i][j] == 21 || map[i][j] == 22 || map[i][j] == 23 || map[i][j] == 24 || map[i][j] == 25
+					|| map[i][j] == 26 || map[i][j] == 27 || map[i][j] == 28 || map[i][j] == 29 || map[i][j] == 15)
 			{
 				CObjkanban*objka = new CObjkanban(j * 64, i * 64, map[i][j]+100);
 				Objs::InsertObj(objka, map[i][j]+100, 3);

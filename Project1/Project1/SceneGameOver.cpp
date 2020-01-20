@@ -30,7 +30,7 @@ CSceneGameOver::~CSceneGameOver()
 //ゲームメイン初期化メソッド
 void CSceneGameOver::InitScene()
 {
-	Draw::LoadImage(L"GameOver.png", 0, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\GameOver.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 	Audio::LoadAudio(0, L"gameover2.wav", SOUND_TYPE::BACK_MUSIC);

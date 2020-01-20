@@ -30,8 +30,8 @@ CSceneRetry::~CSceneRetry()
 //ゲームメイン初期化メソッド
 void CSceneRetry::InitScene()
 {
-	Draw::LoadImage(L"retry.png", 0, TEX_SIZE_1024);
-	Draw::LoadImage(L"ka.png", 1, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\retry.png", 0, TEX_SIZE_1024);
+	Draw::LoadImage(L"sozai\\ka.png", 1, TEX_SIZE_512);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 	Audio::LoadAudio(0, L"gameover.wav", SOUND_TYPE::BACK_MUSIC);
