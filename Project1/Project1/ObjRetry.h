@@ -8,7 +8,7 @@ using namespace GameL;
 class CObjRetry :public CObj
 {
 public:
-	CObjRetry() {};
+	CObjRetry(bool map);
 	~CObjRetry() {};
 	void Init();//イニシャライズ
 	void Action();//アクション
@@ -16,4 +16,5 @@ public:
 private:
 	bool m_key_flag;//キーフラグ
 	bool m_posture;//上か下か
+	bool m_type;//マップの状態を確認
 }; 

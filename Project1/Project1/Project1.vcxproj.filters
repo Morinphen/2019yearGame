@@ -362,9 +362,6 @@
     <ClInclude Include="ObjRetry.h">
       <Filter>ソース ファイル\Retry</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRetry.h">
-      <Filter>ソース ファイル\Retry</Filter>
-    </ClInclude>
     <ClInclude Include="ObjTitle.h">
       <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
@@ -394,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="ObjMapchange.h">
       <Filter>ソース ファイル\Mapchange</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRetry.h">
+      <Filter>ソース ファイル\Retry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
