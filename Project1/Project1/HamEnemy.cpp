@@ -49,143 +49,149 @@ void CObjHamEnemy::Action()
 {
     //表示画面内の時
     CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	if (crhitbox == true)
-	{
-		Hits::DeleteHitBox(this);
-		Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_HAMENEMY, 1);
-		crhitbox = false;
-	}
-	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//ブロックとの当たり判定
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, false, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-		&m_vx, &m_vy
-	);
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	//通常速度
-	m_speed_power = 0.3f;
-	m_ani_max_time = 4;
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (hr->GetDflag_s() == false)
-	{
-		if (hit_hm == true)
+	if (m_stop == false) {
+		if (crhitbox == true)
 		{
-			//方向
-			if (m_move == false)
-			{
-				m_vx += m_speed_power;
-				m_posture = 1.0f;
-				m_ani_time += 1;
-			}
+			Hits::DeleteHitBox(this);
+			Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_HAMENEMY, 1);
+			crhitbox = false;
+		}
+		CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		//ブロックとの当たり判定
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+		pb->BlockHit(&m_px, &m_py, false, true,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+			&m_vx, &m_vy
+		);
 
-			else if (m_move == true)
+		//通常速度
+		m_speed_power = 0.3f;
+		m_ani_max_time = 4;
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hr->GetDflag_s() == false)
+		{
+			if (hit_hm == true)
 			{
-				m_vx -= m_speed_power;
-				m_posture = 0.0f;
-				m_ani_time += 1;
-			}
+				//方向
+				if (m_move == false)
+				{
+					m_vx += m_speed_power;
+					m_posture = 1.0f;
+					m_ani_time += 1;
+				}
 
+				else if (m_move == true)
+				{
+					m_vx -= m_speed_power;
+					m_posture = 0.0f;
+					m_ani_time += 1;
+				}
+
+				else
+				{
+					m_ani_frame = 1;
+					m_ani_time = 0;
+				}
+
+				if (m_ani_time > m_ani_max_time)
+				{
+					m_ani_frame += 1;
+					m_ani_time = 0;
+				}
+
+				if (m_ani_frame == 4)
+				{
+					m_ani_frame = 0;
+				}
+
+				m_posture_time += 1;
+
+				//摩擦
+				m_vx += -(m_vx*0.098);
+			}
+			//自由落下運動
+			m_vy += 9.8 / (16.0f);
+			//位置の更新
+			m_px += m_vx;
+			m_py += m_vy;
+		}
+		//ブロック情報を持ってくる
+		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		if (m_posture == 0.0f)
+		{
+			hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
+		}
+		else if (m_posture == 1.0f)
+		{
+			hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
+		}
+		if (scroll->Inscrooll_check(m_px, m_py) == true)
+		{
+			//ヒットボックス生成
+			if (HitBox_ON == false)
+			{
+				HitBox_ON = true;
+				Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_HAMENEMY, 1);
+			}
+			//ネズミ情報を持ってくる
+			CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
+			{
+				Audio::Start(23);
+				find = true;
+				hr->Dflag_s(true);
+			}
+			//ハム太郎衝突で向きを変更
+			if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == false && hit_o == false ||
+				hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == false && hit_o == false)
+			{
+				Audio::Start(21);
+				Hits::DeleteHitBox(this);
+				hit_hm = true;
+				m_move = true;
+				crhitbox = true;
+				m_posture_time = 0;
+				hit_o = true;
+			}
+			else if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == true && hit_o == false ||
+				hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == true && hit_o == false)
+			{
+				Audio::Start(21);
+				Hits::DeleteHitBox(this);
+				hit_hm = true;
+				m_move = false;
+				crhitbox = true;
+				m_posture_time = 0;
+				hit_o = true;
+			}
+			else if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
+			{
+				hatena = true;
+			}
 			else
 			{
-				m_ani_frame = 1;
-				m_ani_time = 0;
+				hatena = false;
 			}
-
-			if (m_ani_time > m_ani_max_time)
-			{
-				m_ani_frame += 1;
-				m_ani_time = 0;
-			}
-
-			if (m_ani_frame == 4)
-			{
-				m_ani_frame = 0;
-			}
-
-			m_posture_time += 1;
-
-			//摩擦
-			m_vx += -(m_vx*0.098);
 		}
-		//自由落下運動
-		m_vy += 9.8 / (16.0f);
-		//位置の更新
-		m_px += m_vx;
-		m_py += m_vy;
-	}
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	if (m_posture == 0.0f)
-	{
-		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
-	}
-	else if (m_posture == 1.0f)
-	{
-		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
-	}
-	if (scroll->Inscrooll_check(m_px, m_py) == true)
-	{
-		//ヒットボックス生成
-		if (HitBox_ON == false)
-		{
-			HitBox_ON = true;
-			Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_HAMENEMY, 1);
-		}
-		//ネズミ情報を持ってくる
-		CObjNezumi* hm = (CObjNezumi*)Objs::GetObj(OBJ_HAMUTARO);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
-		{
-			Audio::Start(23);
-			find = true;
-			hr->Dflag_s(true);
-		}
-		//ハム太郎衝突で向きを変更
-		if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == false &&hit_o==false||
-			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true && hm->GetA_M() == false && hit_o == false)
-		{
-			Audio::Start(21);
-			Hits::DeleteHitBox(this);
-			hit_hm = true;
-			m_move = true;
-			crhitbox = true;
-			m_posture_time = 0;
-			hit_o = true;
-		}
-		else if (hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == true&&hm->GetA_M()==true && hit_o == false ||
-			hit->CheckObjNameHit(OBJ_HAMUTARO) != nullptr && m_move == false && hm->GetA_M() == true && hit_o == false)
-		{
-			Audio::Start(21);
-			Hits::DeleteHitBox(this);
-			hit_hm = true;
-			m_move = false;
-			crhitbox = true;
-			m_posture_time = 0;
-			hit_o = true;
-		}	
-		else if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
-		{
-			hatena = true;
-		}
+		//表示画面外の時
 		else
 		{
-			hatena = false;
-		}
-	}
-	//表示画面外の時
-	else
-	{
-		//ヒットボックス削除
-		if (HitBox_ON == true&&hit_hm==true)
-		{
-			Hits::DeleteHitBox(this);
-			this->SetStatus(false);
-			HitBox_ON = false;
-		}
-		else if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
-		{
-			find = false;
+			//ヒットボックス削除
+			if (HitBox_ON == true && hit_hm == true)
+			{
+				Hits::DeleteHitBox(this);
+				this->SetStatus(false);
+				HitBox_ON = false;
+			}
+			else if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+			{
+				find = false;
+			}
 		}
 	}
 }

@@ -29,13 +29,19 @@ void CObjDsyuriken::Init()
 void CObjDsyuriken::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
-	deadtime += 1;
-	if (deadtime == 100)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
+
+	if (m_stop == false) {
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
+		deadtime += 1;
+		if (deadtime == 100)
+		{
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
 	}
 }
 //ドロー

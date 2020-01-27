@@ -65,121 +65,127 @@ void CObjNezumi::Action()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	pb->BlockHit(&m_x, &m_y, false,false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-		&m_vx, &m_vy
-	);
+	if (m_stop == false) {
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
 
-	if (hamstop == false)
-	{
-		if (m_posture == 0)
+		pb->BlockHit(&m_x, &m_y, false, false,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+			&m_vx, &m_vy
+		);
+
+		if (hamstop == false)
 		{
-			m_x += speed;
-			m_ani_time += 1;
-			if (m_return == false)
+			if (m_posture == 0)
 			{
-				a_pos = true;
+				m_x += speed;
+				m_ani_time += 1;
+				if (m_return == false)
+				{
+					a_pos = true;
+				}
+
 			}
 
-		}
-
-		else if(m_posture==-1)
-		{
-			m_x += -speed;
-			m_ani_time += 1;
-			if (m_return == false)
+			else if (m_posture == -1)
 			{
-				a_pos = false;
-			}
-		}
-		else
-		{
-			m_ani_frame = 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_time > m_ani_max_time)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_frame == 4)
-		{
-			m_ani_frame = 0;
-			if (naki == true)
-			{
-				naki = false;
-				Audio::Start(9);
+				m_x += -speed;
+				m_ani_time += 1;
+				if (m_return == false)
+				{
+					a_pos = false;
+				}
 			}
 			else
 			{
-				naki = true;
+				m_ani_frame = 1;
+				m_ani_time = 0;
 			}
+
+			if (m_ani_time > m_ani_max_time)
+			{
+				m_ani_frame += 1;
+				m_ani_time = 0;
+			}
+
+			if (m_ani_frame == 4)
+			{
+				m_ani_frame = 0;
+				if (naki == true)
+				{
+					naki = false;
+					Audio::Start(9);
+				}
+				else
+				{
+					naki = true;
+				}
+			}
+
 		}
 
-	}
+		//マップ情報を確認する
+		if (m_return == false)
+			m_return = mapsarch(m_x, m_y, m_posture);
 
-	//マップ情報を確認する
-	if(m_return==false)
-		m_return = mapsarch(m_x,m_y,m_posture);
+		//一定時間移動すると帰ってくる
+		if (m_x > b_x + 300 || m_x + 300 < b_x ||
+			m_hit_left == true || m_hit_right == true)
+		{
+			if (m_return == false) {
+				m_return = true;
+				speed = -speed;
+				if (a_pos == true)
+				{
+					a_pos = false;
+				}
+				else
+				{
+					a_pos = true;
+				}
+			}
 
-	//一定時間移動すると帰ってくる
-	if (m_x > b_x + 300 || m_x + 300 < b_x ||
-		m_hit_left == true || m_hit_right==true)
-	{
-		if (m_return == false) {
-			m_return = true;
-			speed = -speed;
-			if (a_pos == true)
-			{
-				a_pos = false;
-			}
-			else
-			{
-				a_pos = true;
-			}
 		}
 
-	}
+		if (hit->CheckObjNameHit(OBJ_NEZUANA) != nullptr)
+		{
+			hamstop = true;
+		}
 
-	if (hit->CheckObjNameHit(OBJ_NEZUANA) != nullptr)
-	{
-		hamstop = true;
-	}
-
-	else if (b_x + 10 >= m_x && m_return == true &&
-		b_x - 10 <= m_x && m_return == true)
-	{
-		h->HamuSetUP(false);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-
-	else if (h->Ninzyutu == true)
-	{
-		h->HamuSetUP(false);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-
-	if (hamstop == true)
-	{
-		Dimax--;
-		if (Dimax == 0) {
-			hamnam = mapplace(m_x, m_y,m_posture);
-			CObjNezuana* ne = (CObjNezuana*)Objs::GetObj(hamnam);
-			ne->SetFlag(true);
+		else if (b_x + 10 >= m_x && m_return == true &&
+			b_x - 10 <= m_x && m_return == true)
+		{
 			h->HamuSetUP(false);
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
 		}
-	}
-	else {
-		hit->SetPos(m_x + m_scroll + 32.0f, m_y + l_scroll + 32.0f);
+
+		else if (h->Ninzyutu == true)
+		{
+			h->HamuSetUP(false);
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+
+		if (hamstop == true)
+		{
+			Dimax--;
+			if (Dimax == 0) {
+				hamnam = mapplace(m_x, m_y, m_posture);
+				CObjNezuana* ne = (CObjNezuana*)Objs::GetObj(hamnam);
+				ne->SetFlag(true);
+				h->HamuSetUP(false);
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+			}
+		}
+		else {
+			hit->SetPos(m_x + m_scroll + 32.0f, m_y + l_scroll + 32.0f);
+		}
 	}
 }
 //ドロー

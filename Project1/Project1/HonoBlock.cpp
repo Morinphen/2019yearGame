@@ -34,65 +34,71 @@ void CObjHonoBlock::Init()
 void CObjHonoBlock::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	if (scroll->Inscrooll_check(m_x, m_y) == true)
-	{
-		//ヒットボックス生成
-		if (HitBox_ON == false)
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
+
+	if (m_stop == false) {
+		if (scroll->Inscrooll_check(m_x, m_y) == true)
 		{
-			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_HONOBLOCK, 1);
-		}
-
-		//主人公の位置を取得
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-
-		m_scroll = scroll->GetScroll();
-		l_scroll = scroll->GetYScroll();
-
-		//要素番号を安俵に変更
-		float x = m_x;
-		float y = m_y;
-
-		CHitBox* hit = Hits::GetHitBox(this);
-
-		//火遁を受けると炎上アニメーションを発生
-		if (enzyou == true)
-		{
-			m_ani_time++;
-			if (m_ani_time == 6) {
-				Audio::Start(5);
-				m_ani_time = 0;
-				m_ani_frame++;
+			//ヒットボックス生成
+			if (HitBox_ON == false)
+			{
+				HitBox_ON = true;
+				Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_HONOBLOCK, 1);
 			}
+
+			//主人公の位置を取得
+			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+
+			m_scroll = scroll->GetScroll();
+			l_scroll = scroll->GetYScroll();
+
+			//要素番号を安俵に変更
+			float x = m_x;
+			float y = m_y;
+
+			CHitBox* hit = Hits::GetHitBox(this);
+
+			//火遁を受けると炎上アニメーションを発生
+			if (enzyou == true)
+			{
+				m_ani_time++;
+				if (m_ani_time == 6) {
+					Audio::Start(5);
+					m_ani_time = 0;
+					m_ani_frame++;
+				}
+			}
+
+			if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
+			{
+				enzyou = true;
+			}
+
+			//一定の時間がたつと消滅
+			if (m_ani_frame == 6)
+			{
+				CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+				pb->Deletemap(m_x, m_y);
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+			}
+
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+
 		}
-
-		if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
+		//表示画面外の時
+		else
 		{
-			enzyou = true;
-		}
-
-		//一定の時間がたつと消滅
-		if (m_ani_frame == 6)
-		{
-			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-			pb->Deletemap(m_x, m_y);
-			this->SetStatus(false);
-			Hits::DeleteHitBox(this);
-		}
-
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-
-	}
-	//表示画面外の時
-	else
-	{
-		//ヒットボックス削除
-		if (HitBox_ON == true)
-		{
-			HitBox_ON = false;
-			Hits::DeleteHitBox(this);
+			//ヒットボックス削除
+			if (HitBox_ON == true)
+			{
+				HitBox_ON = false;
+				Hits::DeleteHitBox(this);
+			}
 		}
 	}
 	

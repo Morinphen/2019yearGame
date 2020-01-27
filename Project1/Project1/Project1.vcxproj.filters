@@ -219,6 +219,9 @@
     <ClCompile Include="ObjMapchange.cpp">
       <Filter>ソース ファイル\Mapchange</Filter>
     </ClCompile>
+    <ClCompile Include="Many.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="SceneRetry.h">
       <Filter>ソース ファイル\Retry</Filter>
+    </ClInclude>
+    <ClInclude Include="Many.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

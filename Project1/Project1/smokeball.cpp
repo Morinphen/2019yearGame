@@ -49,57 +49,62 @@ void CObjSmokeball::Action()
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	//主人公情報取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	//玉の状態
-	if (modecheck == false)
-	{
-		//ブロックとの当たり判定
-		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y,false,false,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, true,
-			&m_vx, &m_vy
-		);
+	if (m_stop == false) {
 
-		m_x += m_vx;
-		m_y += m_vy;
-
-		//重力
-		if (m_vy < 20)
-			m_vy += 9.8f / 16.0f;
-	}
-	//煙の状態
-	else
-	{
-		if (smoke_time == 0)
+		//玉の状態
+		if (modecheck == false)
 		{
-			Audio::Start(10);
+			//ブロックとの当たり判定
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->BlockHit(&m_x, &m_y, false, false,
+				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, true,
+				&m_vx, &m_vy
+			);
+
+			m_x += m_vx;
+			m_y += m_vy;
+
+			//重力
+			if (m_vy < 20)
+				m_vy += 9.8f / 16.0f;
+		}
+		//煙の状態
+		else
+		{
+			if (smoke_time == 0)
+			{
+				Audio::Start(10);
+				Hits::DeleteHitBox(this);
+				Hits::SetHitBox(this, m_x - 64 * 4, m_y - 64, 64 * 11, 64 * 2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
+			}
+			//ヒットボックス更新
+			hit = Hits::GetHitBox(this);
+			hit->SetPos(m_x - 64 * 4 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
+			smoke_time++;
+			if (smoke_time / 60 == 5)
+			{
+				modecheck = false;
+				smoke_time = 0;
+				smokeball_delete = true;
+			}
+		}
+
+		//削除処理
+		if (smokeball_delete == true)
+		{
+			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x-64*4, m_y-64, 64*11, 64*2, ELEMENT_ITEM, OBJ_SMOKEBALL, 1);
+			hero->SetBallFlag(false);
 		}
-		//ヒットボックス更新
-		hit = Hits::GetHitBox(this);
-		hit->SetPos(m_x - 64 * 4 + scroll->GetScroll(), m_y - 64 + scroll->GetYScroll());
-		smoke_time++;
-		if (smoke_time / 60 == 5)
-		{
-			modecheck = false;
-			smoke_time = 0;
+
+		//削除範囲
+		if (m_y > 3000)
 			smokeball_delete = true;
-		}
 	}
-
-	//削除処理
-	if (smokeball_delete == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-		hero->SetBallFlag(false);
-	}
-
-	//削除範囲
-	if (m_y > 3000)
-		smokeball_delete = true;
-
 	
 }
 

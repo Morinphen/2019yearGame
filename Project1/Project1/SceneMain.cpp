@@ -77,7 +77,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sozai\\ninzya.png", 11, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\hinotama.png", 12, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\enzyou.png", 13, TEX_SIZE_512);
-	Draw::LoadImage(L"sozai\\mizu.jpg", 14, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\ManyMozi.png", 14, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\makimono.png", 15, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\karakuri.png", 16, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\syuriken1.png", 17, TEX_SIZE_512);
@@ -132,6 +132,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"sozai\\kanban_reba2.png", 66, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\kanban_zyanpu.png", 67, TEX_SIZE_512);
 	Draw::LoadImage(L"sozai\\kanban_zyanpu2.png", 68, TEX_SIZE_512);
+	Draw::LoadImage(L"sozai\\Many.png", 69, TEX_SIZE_512);
 	
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;  //ステージ情報のポインター
@@ -329,6 +330,10 @@ void CSceneMain::InitScene()
 	//主人公オブジェクト作成
 	CObjHero*obj = new CObjHero();//主人公オブジェクト作成
 	Objs::InsertObj(obj, OBJ_HERO, 4);
+
+	//メニューオブジェクト作成
+	CObjMany*objm = new CObjMany();//主人公オブジェクト作成
+	Objs::InsertObj(objm, OBJ_MANY, 100);
 	
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);

@@ -52,66 +52,73 @@ void CObjNagenawa::Action()
 
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	float aa, bb;
-	//ブロックの当たり判定を行う当たれば消滅させる
-	pb->BlockHit(&m_x, &m_y, true, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-		&m_vx, &m_vy
-	);
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	bool Mode;
-	Mode = h->GetChange();
+	if (m_stop == false) {
 
-	//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
-	if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
-	{
-		Audio::Start(12);
-		float a = abs(m_y - h->GetY());
-		h->ReSetN(false);
-		h->NawaIdo(true);
-		h->SetNX(m_x - h->GetX());
-		h->SetNY(a - 20);
-		r = Angle();
-		h->SetAngle(r);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		float aa, bb;
+		//ブロックの当たり判定を行う当たれば消滅させる
+		pb->BlockHit(&m_x, &m_y, true, false,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+			&m_vx, &m_vy
+		);
+
+		bool Mode;
+		Mode = h->GetChange();
+
+		//縄ブロックに当たった時、縄を消滅させ、主人公を移動させる
+		if (hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr)
+		{
+			Audio::Start(12);
+			float a = abs(m_y - h->GetY());
+			h->ReSetN(false);
+			h->NawaIdo(true);
+			h->SetNX(m_x - h->GetX());
+			h->SetNY(a - 20);
+			r = Angle();
+			h->SetAngle(r);
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+
+		else if (m_hit_up == true ||
+			m_hit_down == true ||
+			m_hit_left == true ||
+			m_hit_right == true ||
+			m_y > 700.0f)
+		{
+			Audio::Start(12);
+			float a = abs(m_y - h->GetY());
+			h->ReSetN(false);
+			h->Setstop(false);
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+		///////////////////////////////////////////////////////
+
+		//縄が出現しているときに一定の行動を行った場合、消滅させる
+		else if (h->Ninzyutu == true || Mode == true)
+		{
+			h->ReSetN(false);
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+
+		m_x += m_vx*m_muki;
+
+		//重力
+		m_vy += (-grabty / 3) / 16.0f;
+
+		m_y += m_vy;
+
+
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
+
+		hit->SetPos(m_x, m_y);
 	}
-
-	else if (m_hit_up == true ||
-		m_hit_down == true ||
-		m_hit_left == true ||
-		m_hit_right == true ||
-		m_y > 700.0f)
-	{
-		Audio::Start(12);
-		float a = abs(m_y - h->GetY());
-		h->ReSetN(false);
-		h->Setstop(false);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-	///////////////////////////////////////////////////////
-
-	//縄が出現しているときに一定の行動を行った場合、消滅させる
-	else if (h->Ninzyutu == true || Mode == true)
-	{
-		h->ReSetN(false);
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-
-	m_x += m_vx*m_muki;
-
-	//重力
-	m_vy += (-grabty / 3) / 16.0f;
-
-	m_y += m_vy;
-
-
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
-
-	hit->SetPos(m_x, m_y);
 }
 //ドロー
 void CObjNagenawa::Draw()
@@ -247,7 +254,7 @@ void CObjNagenawa::Draw()
 		src.m_bottom = 36.0f;
 	}
 	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
+	dst.m_left = 0.0f + m_x + 64.0f;
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 

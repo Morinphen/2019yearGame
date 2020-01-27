@@ -42,7 +42,8 @@ enum OBJ_NAME
 	OBJ_HAMENEMY,
 	OBJ_MUSCLEENEMY,
 	OBJ_KANBAN,
-	OBJ_MAPCHANGE
+	OBJ_MAPCHANGE,
+	OBJ_MANY,
 };
 //------------------------------------------------
 
@@ -112,6 +113,7 @@ struct UserData
 #include"Fireenemy.h"
 #include"MuscleEnemy.h"
 #include"kanban.h"
+#include"Many.h"
 
 #include"ObjTitle.h"
 #include"ObjGameOver.h"

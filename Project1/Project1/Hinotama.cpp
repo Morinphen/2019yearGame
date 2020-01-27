@@ -48,62 +48,68 @@ void CObjHinotama::Init()
 void CObjHinotama::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	m_x += m_vx;
-	m_y += m_vy;
+	if (m_stop == false) {
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
 
-	m_ani_time++;
+		m_x += m_vx;
+		m_y += m_vy;
 
-	if (m_ani_time == 4)
-	{
-		m_ani_frame++;
-		m_ani_time = 0;
-		if (m_ani_frame == 4)
-			m_ani_frame = 0;
-	}
+		m_ani_time++;
 
-	if (Animation == false) {
-		//m_vx += 1.0f;
-		hit = Hits::GetHitBox(this);
-	}
+		if (m_ani_time == 4)
+		{
+			m_ani_frame++;
+			m_ani_time = 0;
+			if (m_ani_frame == 4)
+				m_ani_frame = 0;
+		}
 
-	else {
-		m_vy += 9.8f / 16.0f;
-		spen += 30.0f;
-	}
+		if (Animation == false) {
+			//m_vx += 1.0f;
+			hit = Hits::GetHitBox(this);
+		}
 
-	//ブロックに当たった時、消滅させる
-	if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
-		hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
-		hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-	//ブロックとの当たり判定
-	if (Animation == false)
-	{
-		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y, false, false,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-			&m_vx, &m_vy
-		);
-	}
+		else {
+			m_vy += 9.8f / 16.0f;
+			spen += 30.0f;
+		}
 
-	//一定の区間を超えたとき、時、消滅させる
-	if (m_x > 10000 || m_x<-200 || m_y > 7000)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		//ブロックに当たった時、消滅させる
+		if (m_hit_left == true || m_hit_right == true || m_hit_up == true ||
+			hit->CheckObjNameHit(OBJ_NBLOCK) != nullptr ||
+			hit->CheckObjNameHit(OBJ_HONOBLOCK) != nullptr)
+		{
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+		//ブロックとの当たり判定
+		if (Animation == false)
+		{
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->BlockHit(&m_x, &m_y, false, false,
+				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+				&m_vx, &m_vy
+			);
+		}
+
+		//一定の区間を超えたとき、時、消滅させる
+		if (m_x > 10000 || m_x < -200 || m_y > 7000)
+		{
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+		if (t_h == true)
+		{
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+		}
+		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 	}
-	if (t_h == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-	hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 }
 //ドロー
 void CObjHinotama::Draw()
