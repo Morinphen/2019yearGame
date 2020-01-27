@@ -98,11 +98,14 @@ void CObjDonden::Action()
 			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 			{
 				red = 0.0f;
-				bool stop;
+				bool stop;//投げ縄を投げていないかどうか確認
+				bool hamustop;//鼠が出ていないか確認
 				stop = h->GetNawa();
+				hamustop = h->GetHamu();
 				//↑入力をされたとき、アニメーションを開始
 				if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false||
-					d_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&& s_down == true && stop == false && N_stop == false)
+					d_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&& s_down == true && 
+					stop == false && N_stop == false && hamustop==false)
 				{
 					if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
 						Audio::Start(4);

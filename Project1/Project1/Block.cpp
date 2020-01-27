@@ -323,6 +323,117 @@ void CObjBlock::UBlockHit
 	}
 }
 
+void CObjBlock::BBlockHit
+(
+	float* x, float* y,
+	bool*up, bool* down, bool* left, bool* right,
+	float *vx, float *vy
+)
+{
+	//主人公の衝突確認用フラグの初期化
+	*up = false;
+	*down = false;
+	*left = false;
+	*right = false;
+
+	//m_mapの全要素にアクセス
+	for (int i = 0; i < 46; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (m_map[i][j] == 1 || m_map[i][j] == 2 || m_map[i][j] == 6 || m_map[i][j] == 8 || m_map[i][j] == 10 || m_map[i][j] == 51 || m_map[i][j] == 52 || m_map[i][j] == 53 || m_map[i][j] == 63 || m_map[i][j] == 64 || m_map[i][j] == 65 || m_map[i][j] == 69 || m_map[i][j] == 70 || m_map[i][j] == 71 || m_map[i][j] == 90 || m_map[i][j] == 91)
+			{
+				//要素番号を座標に変更
+				float bx = j*64.0f;
+				float by = i*64.0f;
+
+				float m_s = 0;
+				float l_s = 0;
+
+				//オブジェクトとブロックの当たり判定
+				if ((*x + (-m_s) + 64.0f > bx) && (*x + (-m_s) < bx + 64.0f) && (*y + (-l_s) + 64.0f > by) && (*y + (-l_s) < by + 64.0f))
+				{
+					//上下左右判定
+
+					//vectorの作成
+					float rvx = (*x + (-m_s)) - bx;
+					float rvy = (*y + (-l_s)) - by;
+
+					//長さを求める
+					float len = sqrt(rvx*rvx + rvy * rvy);
+
+					//角度を求める
+					float r = atan2(rvy, rvx);
+					r = r*180.0f / 3.14f;
+
+					if (r <= 0.0f)
+						r = abs(r);
+					else
+						r = 360.0f - abs(r);
+
+					//lenがある一定の長さのより短い場合判定に入る
+					if (len < 88.0f)
+					{
+						//角度で上下左右を判定
+						if ((r < 45 && r>0) || r > 315)
+						{
+							//右
+							*right = true;//煙玉の左の部分が衝突しているか
+							*x = bx + 64.0f + (m_s);//ブロックに位置-煙玉の幅
+							*vx = -(*vx)*0.0f;//-VX*反発係数
+						}
+
+						if (r > 45 && r < 135)
+						{
+							//上
+							*down = true;//主人公の下の部分が衝突しているか
+							*y = by - 64.0f + (l_s);//ブロックに位置-主人公の幅
+							*vy = 0.0f;
+						}
+
+						if (r > 135 && r < 225)
+						{
+							//左
+							*left = true;//煙玉の右の部分が衝突しているか
+							*x = bx - 64.0f + (m_s);//ブロックに位置-煙玉の幅
+							*vx = -(*vx)*0.0f;//-VX*反発係数
+						}
+
+						//if (r > 225 && r < 315)
+						//{
+						//	//下
+						//	*up = true;//煙玉の上の部分が衝突しているか
+						//	//*y = by + 64.0f + (l_s);//ブロックの位置+煙玉の幅
+						//	if (*vy < 0)
+						//	{
+						//		*vy = 0.0f;
+						//	}
+						//}
+					}
+				}
+			}
+		}
+	}
+}
+
+void CObjBlock::Setmap(int i, int j)
+{
+
+	int ai = i / 64 ;
+	int aj = j / 64;
+	if (m_map[ai][aj] == 8 && m_map[ai + 1][aj] == 0 && (ai+1)*64<=i+10)
+	{
+		m_map[ai][aj] = 0;
+		m_map[ai + 1][aj] = 8;
+		//while (m_map[i + a][j] == 0)
+		//{
+		//	m_map[i + a][j] = 8;
+		//	m_map[i + a - 1][j] = 0;
+		//	a++;
+		//}
+	}
+}
+
 void CObjBlock::Deletemap(int x, int y)
 {
 	int ax = x / 64;

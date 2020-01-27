@@ -40,7 +40,7 @@ void CSceneMapchange::InitScene()
 
 	//マップ切り替えオブジェクト作成
 	CObjMapchange* objmc = new CObjMapchange();//マップ切り替えオブジェクト作成
-	Objs::InsertObj(objmc, OBJ_MAPCHANGE, 10);//マップ切り替えオブジェクト登録
+	Objs::InsertObj(objmc, OBJ_MAPCHANGE, 11);//マップ切り替えオブジェクト登録
 }
 
 void CSceneMapchange::Scene()

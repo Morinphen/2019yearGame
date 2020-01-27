@@ -30,8 +30,15 @@ public:
 private:
 	
 
-	int m_x;
-	int m_y;
+	float m_x;
+	float m_y;
+
+	//元々いた場所を保存する
+	float b_x;
+	float b_y;
+
+	float m_vx;
+	float m_vy;
 
 	int m_map[10][100];
 
@@ -45,4 +52,10 @@ private:
 
 	//画面内の時のみヒットボックスをつける
 	bool HitBox_ON;
+
+	//blockとの衝突状態確認用
+	bool m_hit_up;
+	bool m_hit_down;
+	bool m_hit_left;
+	bool m_hit_right;
 };

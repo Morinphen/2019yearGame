@@ -118,7 +118,7 @@ void CObjKaginawa::Action()
 		float a = abs(m_x - h->GetX());
 		float b = abs(m_y - h->GetY());
 		CObjNagenawa* obj_s = new CObjNagenawa(h->GetX(), h->GetY(), m_muki, a, b);
-		Objs::InsertObj(obj_s, OBJ_NAGENAWA, 10);
+		Objs::InsertObj(obj_s, OBJ_NAGENAWA, 3);
 		h->Setstop(true);
 		h->SetKNgo_ok(false);
 		this->SetStatus(false);

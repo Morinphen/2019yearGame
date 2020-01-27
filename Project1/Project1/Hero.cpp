@@ -279,7 +279,7 @@ void CObjHero::Action()
 						pushb = 3;
 						n_m = 3;
 						CObjSmokeball* obj_s = new CObjSmokeball(m_x, m_y, m_posture);
-						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 10);
+						Objs::InsertObj(obj_s, OBJ_SMOKEBALL, 5);
 						s_atack = true;
 						ball = true;
 					}

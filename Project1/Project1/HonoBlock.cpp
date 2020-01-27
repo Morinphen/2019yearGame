@@ -22,6 +22,9 @@ void CObjHonoBlock::Init()
 {
 	m_scroll = 0.0f;
 	l_scroll = 0.0f;
+
+	m_vx = 0;
+	m_vy = 0;
 	enzyou = false;
 
 	m_ani_time = 0;
@@ -29,6 +32,12 @@ void CObjHonoBlock::Init()
 
 	Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_HONOBLOCK, 1);
 	HitBox_ON = true;
+
+	//blockとの衝突状態確認用
+	m_hit_up = false;
+	m_hit_down = false;
+	m_hit_left = false;
+	m_hit_right = false;
 }
 //アクション
 void CObjHonoBlock::Action()
@@ -43,6 +52,16 @@ void CObjHonoBlock::Action()
 			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_HONOBLOCK, 1);
 		}
 
+		//ブロックとの当たり判定
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		pb->BBlockHit(&m_x, &m_y,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right,
+			&m_vx, &m_vy
+		);
+
+		pb->Setmap(m_y, m_x);
+
 		//主人公の位置を取得
 		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		float hx = hero->GetX();
@@ -50,6 +69,8 @@ void CObjHonoBlock::Action()
 
 		m_scroll = scroll->GetScroll();
 		l_scroll = scroll->GetYScroll();
+
+		//pb->Setmap(m_x, m_y);
 
 		//要素番号を安俵に変更
 		float x = m_x;
@@ -84,6 +105,13 @@ void CObjHonoBlock::Action()
 
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 
+		//重力
+		if (m_vy < 10)
+			m_vy += 9.8f / 16.0f;
+
+		m_x += m_vx;
+
+		m_y += m_vy;
 	}
 	//表示画面外の時
 	else
@@ -95,7 +123,7 @@ void CObjHonoBlock::Action()
 			Hits::DeleteHitBox(this);
 		}
 	}
-	
+
 }
 //ドロー
 void CObjHonoBlock::Draw()
