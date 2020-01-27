@@ -9,10 +9,11 @@ using namespace GameL;
 class CSceneRetry :public CScene
 {
 public:
-	CSceneRetry();
+	CSceneRetry(bool map);
 	~CSceneRetry();
 	void InitScene();//ゲームリトライの初期化メソッド
 	void Scene();    //ゲームリトライの実行中メソッド
 private:
+	bool m_type;//マップの状態を確認
 
 };

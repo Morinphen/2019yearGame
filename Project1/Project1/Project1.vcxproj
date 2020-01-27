@@ -138,6 +138,7 @@
     <ClCompile Include="KarakuriBlock.cpp" />
     <ClCompile Include="Makimono.cpp" />
     <ClCompile Include="Karakuri.cpp" />
+    <ClCompile Include="Many.cpp" />
     <ClCompile Include="MizuBlock.cpp" />
     <ClCompile Include="MuscleEnemy.cpp" />
     <ClCompile Include="ObjClear.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="KarakuriBlock.h" />
     <ClInclude Include="Makimono.h" />
     <ClInclude Include="Karakuri.h" />
+    <ClInclude Include="Many.h" />
     <ClInclude Include="MizuBlock.h" />
     <ClInclude Include="MuscleEnemy.h" />
     <ClInclude Include="ObjClear.h" />

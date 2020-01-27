@@ -3,6 +3,7 @@
 #include"GameL\WinInputs.h"
 #include"GameL\SceneManager.h"
 #include"GameL\SceneObjManager.h"
+#include"GameL\WinInputs.h"
 #include"GameHead.h"
 #include"Scroll.h"
 #include"GameL\HitBoxManager.h"
@@ -54,17 +55,16 @@ void CObjScroll::Action()
 		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
 	}
 
-	//上方スクロールライン
 	if (hy < 80)
 	{
 		hero->SetY(80);//主人公はラインを超えないように
 		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
 	}
 
-	//下方スクロールライン
+	////下方スクロールライン
 	if (hy > 500 && l_scroll>-64*46)
 	{
-		hero->SetY(500);//主人公はラインを超えないように
+	    hero->SetY(500);//主人公はラインを超えないように
 		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
 	}
 

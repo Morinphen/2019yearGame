@@ -15,7 +15,6 @@ using namespace GameL;
 //ゲームパッド用
 XINPUT_STATE t_state;
 
-
 //イニシャライズ
 void CObjTitle::Init()
 {

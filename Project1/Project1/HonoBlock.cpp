@@ -43,14 +43,19 @@ void CObjHonoBlock::Init()
 void CObjHonoBlock::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	if (scroll->Inscrooll_check(m_x, m_y) == true)
-	{
-		//ヒットボックス生成
-		if (HitBox_ON == false)
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
+
+	if (m_stop == false) {
+		if (scroll->Inscrooll_check(m_x, m_y) == true)
 		{
-			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_HONOBLOCK, 1);
-		}
+			//ヒットボックス生成
+			if (HitBox_ON == false)
+			{
+				HitBox_ON = true;
+				Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_HONOBLOCK, 1);
+			}
 
 		//ブロックとの当たり判定
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -67,8 +72,8 @@ void CObjHonoBlock::Action()
 		float hx = hero->GetX();
 		float hy = hero->GetY();
 
-		m_scroll = scroll->GetScroll();
-		l_scroll = scroll->GetYScroll();
+			m_scroll = scroll->GetScroll();
+			l_scroll = scroll->GetYScroll();
 
 		//pb->Setmap(m_x, m_y);
 
@@ -76,34 +81,34 @@ void CObjHonoBlock::Action()
 		float x = m_x;
 		float y = m_y;
 
-		CHitBox* hit = Hits::GetHitBox(this);
+			CHitBox* hit = Hits::GetHitBox(this);
 
-		//火遁を受けると炎上アニメーションを発生
-		if (enzyou == true)
-		{
-			m_ani_time++;
-			if (m_ani_time == 6) {
-				Audio::Start(5);
-				m_ani_time = 0;
-				m_ani_frame++;
+			//火遁を受けると炎上アニメーションを発生
+			if (enzyou == true)
+			{
+				m_ani_time++;
+				if (m_ani_time == 6) {
+					Audio::Start(5);
+					m_ani_time = 0;
+					m_ani_frame++;
+				}
 			}
-		}
 
-		if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
-		{
-			enzyou = true;
-		}
+			if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr)
+			{
+				enzyou = true;
+			}
 
-		//一定の時間がたつと消滅
-		if (m_ani_frame == 6)
-		{
-			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-			pb->Deletemap(m_x, m_y);
-			this->SetStatus(false);
-			Hits::DeleteHitBox(this);
-		}
+			//一定の時間がたつと消滅
+			if (m_ani_frame == 6)
+			{
+				CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+				pb->Deletemap(m_x, m_y);
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+			}
 
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
 
 		//重力
 		if (m_vy < 10)

@@ -35,41 +35,47 @@ void CObjkanban::Action()
 {
 	//表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	if (scroll->Inscrooll_check(m_x, m_y) == true)
-	{
-		//ヒットボックス生成
-		if (HitBox_ON == false)
-		{
-			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_KANBAN, 1);
-		}
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-		CHitBox* hit = Hits::GetHitBox(this);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-			hit_hero = true;
+	if (m_stop == false) {
+		if (scroll->Inscrooll_check(m_x, m_y) == true)
+		{
+			//ヒットボックス生成
+			if (HitBox_ON == false)
+			{
+				HitBox_ON = true;
+				Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_BLACK, OBJ_KANBAN, 1);
+			}
+
+			CHitBox* hit = Hits::GetHitBox(this);
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+				hit_hero = true;
+			else
+				hit_hero = false;
+
+			m_scroll = scroll->GetScroll();
+			l_scroll = scroll->GetYScroll();
+
+			num++;
+			if (num / 60 == 1)
+			{
+				num = 0.0f;
+				flashing = flashing ? false : true;
+			}
+
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+		}
+		//表示画面外の時
 		else
-			hit_hero = false;
-
-		m_scroll = scroll->GetScroll();
-		l_scroll = scroll->GetYScroll();
-
-		num++;
-		if (num/60 == 1)
 		{
-			num = 0.0f;
-			flashing = flashing ? false : true;
-		}
-
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-	}
-	//表示画面外の時
-	else
-	{
-		//ヒットボックス削除
-		if (HitBox_ON == true)
-		{
-			HitBox_ON = false;
-			Hits::DeleteHitBox(this);
+			//ヒットボックス削除
+			if (HitBox_ON == true)
+			{
+				HitBox_ON = false;
+				Hits::DeleteHitBox(this);
+			}
 		}
 	}
 }

@@ -219,6 +219,9 @@
     <ClCompile Include="ObjMapchange.cpp">
       <Filter>ソース ファイル\Mapchange</Filter>
     </ClCompile>
+    <ClCompile Include="Many.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -362,9 +365,6 @@
     <ClInclude Include="ObjRetry.h">
       <Filter>ソース ファイル\Retry</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRetry.h">
-      <Filter>ソース ファイル\Retry</Filter>
-    </ClInclude>
     <ClInclude Include="ObjTitle.h">
       <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
@@ -394,6 +394,12 @@
     </ClInclude>
     <ClInclude Include="ObjMapchange.h">
       <Filter>ソース ファイル\Mapchange</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRetry.h">
+      <Filter>ソース ファイル\Retry</Filter>
+    </ClInclude>
+    <ClInclude Include="Many.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

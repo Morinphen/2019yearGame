@@ -53,66 +53,72 @@ void CObjSyuriken::Action()
 {
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	CObjEnemy* en = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
-	m_scroll = scroll->GetScroll();
-	l_scroll = scroll->GetYScroll();
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	m_x += m_vx;
-	m_y += m_vy;
+	if (m_stop == false) {
+		m_scroll = scroll->GetScroll();
+		l_scroll = scroll->GetYScroll();
 
-	if (Animation == false) {
-		//m_vx += 1.0f;
-		spen -= 30.0f;
-		hit = Hits::GetHitBox(this);
-	}
-
-	else {
-		m_vy += 9.8f / 16.0f;
-		spen -= 60.0f;
-	}
-
-	//ブロックとの当たり判定
-	if (Animation == false)
-	{
-		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHit(&m_x, &m_y,false,false,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-			&m_vx, &m_vy
-		);
-	}
-	if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
-	{
-		Hits::DeleteHitBox(this);
-		m_hit_left = false;
-		m_hit_right = false;
-		m_hit_up = false;
-		Animation = true;
-		syurikenhit = true;
-		Audio::Start(17);
-
-		m_vx = -4.0f*m_muki;
-		m_vy = -10.0f;
+		m_x += m_vx;
 		m_y += m_vy;
-		syuriken_time = 0;
-	}
-	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	syuriken_time++;
-	if (syuriken_time==80.0f)
-	{
-		hr->SetSD(true);
-		Hits::DeleteHitBox(this);
-		this->SetStatus(false);
-		syuriken_time = 0;
-	}
-	
-	if (t_h == true)
-	{
-		hr->SetSD(true);
-		Hits::DeleteHitBox(this);
-		this->SetStatus(false);
-	}
-	if (syurikenhit == false)
-	{
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
+
+		if (Animation == false) {
+			//m_vx += 1.0f;
+			spen -= 30.0f;
+			hit = Hits::GetHitBox(this);
+		}
+
+		else {
+			m_vy += 9.8f / 16.0f;
+			spen -= 60.0f;
+		}
+
+		//ブロックとの当たり判定
+		if (Animation == false)
+		{
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->BlockHit(&m_x, &m_y, false, false,
+				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+				&m_vx, &m_vy
+			);
+		}
+		if (m_hit_left == true || m_hit_right == true || m_hit_up == true)
+		{
+			Hits::DeleteHitBox(this);
+			m_hit_left = false;
+			m_hit_right = false;
+			m_hit_up = false;
+			Animation = true;
+			syurikenhit = true;
+			Audio::Start(17);
+
+			m_vx = -4.0f*m_muki;
+			m_vy = -10.0f;
+			m_y += m_vy;
+			syuriken_time = 0;
+		}
+		CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		syuriken_time++;
+		if (syuriken_time == 80.0f)
+		{
+			hr->SetSD(true);
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+			syuriken_time = 0;
+		}
+
+		if (t_h == true)
+		{
+			hr->SetSD(true);
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+		}
+		if (syurikenhit == false)
+		{
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll + 16);
+		}
 	}
 }
 

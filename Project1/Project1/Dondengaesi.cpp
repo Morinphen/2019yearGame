@@ -73,23 +73,29 @@ void CObjDonden::Action()
 	CObjHero* h = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//表示画面内の時
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	if (scroll->Inscrooll_check(m_x, m_y) == true)
-	{
-		//ヒットボックス生成
-		if (HitBox_ON == false)
+
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
+
+	if (m_stop == false) {
+		if (scroll->Inscrooll_check(m_x, m_y) == true)
 		{
-			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_DONDEN, 1);
-		}
+			//ヒットボックス生成
+			if (HitBox_ON == false)
+			{
+				HitBox_ON = true;
+				Hits::SetHitBox(this, m_x, m_y, 64, 64, ELEMENT_ITEM, OBJ_DONDEN, 1);
+			}
 
-		CHitBox* hit = Hits::GetHitBox(this);
+			CHitBox* hit = Hits::GetHitBox(this);
 
-		m_scroll = scroll->GetScroll();
-		l_scroll = scroll->GetYScroll();
+			m_scroll = scroll->GetScroll();
+			l_scroll = scroll->GetYScroll();
 
-		//主人公の状態を持ってくる
-		s_down = h->GetDown();
-		N_stop = h->GetINawa();
+			//主人公の状態を持ってくる
+			s_down = h->GetDown();
+			N_stop = h->GetINawa();
 
 		//種類確認
 		if (hide == false || hide == true && h->GetDoton() == true)
@@ -113,91 +119,92 @@ void CObjDonden::Action()
 						h->W_cat2 -= 6.4f;
 						h->Sworp = true;
 
-						Wanimation = true;
+							Wanimation = true;
+						}
 					}
 				}
+
+				else
+				{
+					red = 1.0f;
+				}
 			}
 
-			else
+			//アニメーション前半開始時
+			if (Wanimation == true)
 			{
-				red = 1.0f;
+				//主人公をアニメーションさせ、ワープしている扱いに変更
+				h->W_cat2 -= 6.4f;
+				h->Sworp = true;
+				//一定のアニメーションが終わったとき
+				if (h->W_cat2 <= -64.0f)
+				{
+					//主人公の座標をワープ先に変更
+					h->SetX(D_tag[Pworp][1] * 64);
+					h->SetY(D_tag[Pworp][0] * 64);
+
+					//主人公のリスタート位置変更
+					h->SetWX(D_tag[Pworp][1] * 64);
+					h->SetWY(D_tag[Pworp][0] * 64);
+
+					scroll->SetScrooll(-(h->GetX() - (D_tag[Pworp][1] * 64)));
+					scroll->SetYScrooll(-(h->GetY() - (D_tag[Pworp][0] * 64)));
+
+					//前方スクロールライン
+					if (h->GetX() > 600)
+					{
+						scroll->SetScrooll(-(h->GetX() - (600)));
+						h->SetX(600);
+					}
+
+					else if (h->GetX() < 500)
+					{
+						scroll->SetScrooll(-(h->GetX() - (500)));
+						h->SetX(500);
+					}
+
+					if (h->GetY() < 80) {
+						scroll->SetYScrooll(-(h->GetY() - (80)));
+						h->SetY(80);
+					}
+					else if (h->GetY() > 500) {
+						scroll->SetYScrooll(-(h->GetY() - (500)));
+						h->SetY(500);
+					}
+
+					//アニメーション後半開始
+					h->W_cat2 = -64.0f;
+					Wanimation = false;
+					Wanimation2 = true;
+				}
+			}
+
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+		}
+		//表示画面外の時
+		else
+		{
+			//ヒットボックス削除
+			if (HitBox_ON == true)
+			{
+				HitBox_ON = false;
+				Hits::DeleteHitBox(this);
 			}
 		}
 
-		//アニメーション前半開始時
-		if (Wanimation == true)
+		//アニメーション後半開始時
+		if (Wanimation2 == true)
 		{
-			//主人公をアニメーションさせ、ワープしている扱いに変更
-			h->W_cat2 -= 6.4f;
+			h->W_cat2 += 6.4f;
 			h->Sworp = true;
-			//一定のアニメーションが終わったとき
-			if (h->W_cat2 <= -64.0f)
-			{
-				//主人公の座標をワープ先に変更
-				h->SetX(D_tag[Pworp][1] * 64);
-				h->SetY(D_tag[Pworp][0] * 64);
-
-				//主人公のリスタート位置変更
-				h->SetWX(D_tag[Pworp][1] * 64);
-				h->SetWY(D_tag[Pworp][0] * 64);
-
-				scroll->SetScrooll(-(h->GetX() - (D_tag[Pworp][1] * 64)));
-				scroll->SetYScrooll(-(h->GetY() - (D_tag[Pworp][0] * 64)));
-
-				//前方スクロールライン
-				if (h->GetX() > 600)
-				{
-					scroll->SetScrooll(-(h->GetX() - (600)));
-					h->SetX(600);
-				}
-
-				else if (h->GetX() < 500)
-				{
-					scroll->SetScrooll(-(h->GetX() - (500)));
-					h->SetX(500);
-				}
-
-				if (h->GetY() < 80) {
-					scroll->SetYScrooll(-(h->GetY() - (80)));
-					h->SetY(80);
-				}
-				else if (h->GetY() > 500) {
-					scroll->SetYScrooll(-(h->GetY() - (500)));
-					h->SetY(500);
-				}
-
-				//アニメーション後半開始
-				h->W_cat2 = -64.0f;
-				Wanimation = false;
-				Wanimation2 = true;
-			}
 		}
 
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-	}
-	//表示画面外の時
-	else
-	{
-		//ヒットボックス削除
-		if (HitBox_ON == true)
-		{
-			HitBox_ON = false;
-			Hits::DeleteHitBox(this);
+		//アニメーションが終わったとき
+		if (h->W_cat2 >= 0.0f) {
+			h->W_cat2 = 0.0f;
+			h->W_cat = 1.0f;
+			Wanimation2 = false;
 		}
-	}
-
-	//アニメーション後半開始時
-	if (Wanimation2 == true)
-	{
-		h->W_cat2 += 6.4f;
-		h->Sworp = true;
-	}
-
-	//アニメーションが終わったとき
-	if (h->W_cat2 >= 0.0f) {
-		h->W_cat2 = 0.0f;
-		h->W_cat = 1.0f;
-		Wanimation2 = false;
 	}
 }
 //ドロー

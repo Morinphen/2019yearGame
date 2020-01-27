@@ -14,6 +14,14 @@ using namespace GameL;
 //ゲームパッド用
 XINPUT_STATE r_state;
 
+//コンストラクタ
+CObjRetry::CObjRetry(bool map)
+{
+	m_key_flag = false;
+	m_posture = true;
+	m_type = map;
+}
+
 //イニシャライズ
 void CObjRetry::Init()
 {
@@ -46,7 +54,7 @@ void CObjRetry::Action()
 			}
 			else if (m_posture == false)
 			{
-				Scene::SetScene(new CSceneMain(false));
+				Scene::SetScene(new CSceneMain(m_type));
 			}
 			m_key_flag = false;
 		}

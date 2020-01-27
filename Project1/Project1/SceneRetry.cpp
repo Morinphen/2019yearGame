@@ -16,9 +16,9 @@ using namespace GameL;
 #include "GameHead.h"
 
 //コンストラクタ
-CSceneRetry::CSceneRetry()
+CSceneRetry::CSceneRetry(bool map)
 {
-
+	m_type = map;
 }
 
 // デストラクタ
@@ -43,7 +43,7 @@ void CSceneRetry::InitScene()
 	Audio::Start(0);
 
 	//リトライオブジェクト作成
-	CObjRetry* obj = new CObjRetry();//リトライオブジェクト作成
+	CObjRetry* obj = new CObjRetry(m_type);//リトライオブジェクト作成
 	Objs::InsertObj(obj, OBJ_RETRY, 10);//リトライオブジェクト登録
 }
 

@@ -47,141 +47,134 @@ void CObjFireEnemy::Init()
 //アクション
 void CObjFireEnemy::Action()
 {
-	if (crhitbox == true && m_move == true)
-	{
-		Hits::DeleteHitBox(this);
-		Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
-		crhitbox = false;
-	}
-	else if (crhitbox == true && m_move == false)
-	{
-		Hits::DeleteHitBox(this);
-		Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
-		crhitbox = false;
-	}
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
 
-	//ブロックとの当たり判定
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	pb->BlockHit(&m_px, &m_py, false, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
-		&m_vx, &m_vy
-	);
-
-	//ブロック衝突で向きを変更
-	if (m_hit_left == true && m_hit_right == false || m_posture_time>150 && m_move == false)
-	{
-		m_move = true;
-		crhitbox = true;
-		m_posture_time = 0;
-	}
-
-	if (m_hit_right == true && m_hit_left == false || m_posture_time>150 && m_move == true)
-	{
-		m_move = false;
-		crhitbox = true;
-		m_posture_time = 0;
-	}
-	//通常速度
-	m_speed_power = 0.3f;
-	m_ani_max_time = 4;
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (find==false && stop == false)
-	{
-		//方向
-		if (m_move == false)
+	if (m_stop == false) {
+		if (crhitbox == true && m_move == true)
 		{
-			m_vx += m_speed_power;
-			m_posture = 1.0f;
-			m_ani_time += 1;
+			Hits::DeleteHitBox(this);
+			Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+			crhitbox = false;
+		}
+		else if (crhitbox == true && m_move == false)
+		{
+			Hits::DeleteHitBox(this);
+			Hits::SetHitBox(this, m_px, m_py, 192, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+			crhitbox = false;
 		}
 
-		else if (m_move == true)
+		//ブロックとの当たり判定
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+		CObjHero* hr = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		pb->BlockHit(&m_px, &m_py, false, true,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, false,
+			&m_vx, &m_vy
+		);
+
+		//ブロック衝突で向きを変更
+		if (m_hit_left == true && m_hit_right == false || m_posture_time > 150 && m_move == false)
 		{
-			m_vx -= m_speed_power;
-			m_posture = 0.0f;
-			m_ani_time += 1;
+			m_move = true;
+			crhitbox = true;
+			m_posture_time = 0;
 		}
 
+		if (m_hit_right == true && m_hit_left == false || m_posture_time > 150 && m_move == true)
+		{
+			m_move = false;
+			crhitbox = true;
+			m_posture_time = 0;
+		}
+		//通常速度
+		m_speed_power = 0.3f;
+		m_ani_max_time = 4;
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (find == false && stop == false)
+		{
+			//方向
+			if (m_move == false)
+			{
+				m_vx += m_speed_power;
+				m_posture = 1.0f;
+				m_ani_time += 1;
+			}
+
+			else if (m_move == true)
+			{
+				m_vx -= m_speed_power;
+				m_posture = 0.0f;
+				m_ani_time += 1;
+			}
+
+			else
+			{
+				m_ani_frame = 1;
+				m_ani_time = 0;
+			}
+
+			if (m_ani_time > m_ani_max_time)
+			{
+				m_ani_frame += 1;
+				m_ani_time = 0;
+			}
+
+			if (m_ani_frame == 4)
+			{
+				m_ani_frame = 0;
+			}
+
+			m_posture_time += 1;
+			//摩擦
+			m_vx += -(m_vx*0.098);
+
+			//自由落下運動
+			m_vy += 9.8 / (16.0f);
+
+			//位置の更新
+			m_px += m_vx;
+			m_py += m_vy;
+
+		}
+		if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
+		{
+			find = false;
+		}
+		//ブロック情報を持ってくる
+		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		if (m_move == true)
+		{
+			hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
+		}
 		else
 		{
-			m_ani_frame = 1;
-			m_ani_time = 0;
+			hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
+		}
+		if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
+		{
+			hatena = true;
+		}
+		else
+		{
+			hatena = false;
+		}
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
+		{
+			Audio::Start(23);
+			find = true;
+			hr->Dflag_s(true);
 		}
 
-		if (m_ani_time > m_ani_max_time)
+		if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr&&hit_o == false)
 		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_frame == 4)
-		{
-			m_ani_frame = 0;
-		}
-
-		m_posture_time += 1;
-		//摩擦
-		m_vx += -(m_vx*0.098);
-
-		//自由落下運動
-		m_vy += 9.8 / (16.0f);
-
-		//位置の更新
-		m_px += m_vx;
-		m_py += m_vy;
-
-	}
-	if (hit->CheckObjNameHit(OBJ_HERO) == nullptr&&find == true)
-	{
-		find = false;
-	}
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	if (m_move == true)
-	{
-		hit->SetPos(m_px + block->GetScroll() - 128, m_py + block->GetYScroll());
-	}
-	else
-	{
-		hit->SetPos(m_px + block->GetScroll(), m_py + block->GetYScroll());
-	}
-	if (hit->CheckObjNameHit(OBJ_SMOKEBALL) != nullptr&&find == false)
-	{
-		hatena = true;
-	}
-	else
-	{
-		hatena = false;
-	}
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&find == false && hr->Getsmoke_h() == false && hr->Sworp == false)
-	{
-		Audio::Start(23);
-		find = true;
-		hr->Dflag_s(true);
-	}
-
-	if (hit->CheckObjNameHit(OBJ_HINOTAMA) != nullptr&&hit_o ==false)
-	{
-		CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
-		sm_x = sa->GetX();
-		p = sa->GetP();
-		if (m_move == true)//敵左向き
-		{
-			if (p == true)//手裏剣左向き
+			CObjHinotama* sa = (CObjHinotama*)Objs::GetObj(OBJ_HINOTAMA);
+			sm_x = sa->GetX();
+			p = sa->GetP();
+			if (m_move == true)//敵左向き
 			{
-				Audio::Start(14);
-				this->SetStatus(false);
-				Hits::DeleteHitBox(this);
-				sa->SetT(true);
-				hit_o = true;
-				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
-				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
-			}
-			else//手裏剣右向き
-			{
-				if (sm_x + 2.0 >= m_px)
+				if (p == true)//手裏剣左向き
 				{
 					Audio::Start(14);
 					this->SetStatus(false);
@@ -191,13 +184,36 @@ void CObjFireEnemy::Action()
 					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
 					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
+				else//手裏剣右向き
+				{
+					if (sm_x + 2.0 >= m_px)
+					{
+						Audio::Start(14);
+						this->SetStatus(false);
+						Hits::DeleteHitBox(this);
+						sa->SetT(true);
+						hit_o = true;
+						CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+						Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
+					}
+				}
 			}
-		}
-		else//敵右向き
-		{
-			if (p == true)//手裏剣左向き
+			else//敵右向き
 			{
-				if (sm_x - 2.0 <= m_px)
+				if (p == true)//手裏剣左向き
+				{
+					if (sm_x - 2.0 <= m_px)
+					{
+						Audio::Start(14);
+						this->SetStatus(false);
+						Hits::DeleteHitBox(this);
+						sa->SetT(true);
+						hit_o = true;
+						CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
+						Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
+					}
+				}
+				else//手裏剣右向き
 				{
 					Audio::Start(14);
 					this->SetStatus(false);
@@ -207,16 +223,6 @@ void CObjFireEnemy::Action()
 					CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
 					Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 				}
-			}
-			else//手裏剣右向き
-			{
-				Audio::Start(14);
-				this->SetStatus(false);
-				Hits::DeleteHitBox(this);
-				sa->SetT(true);
-				hit_o = true;
-				CObjDsyuriken* obj_s = new CObjDsyuriken(m_px, m_py);
-				Objs::InsertObj(obj_s, OBJ_DSYURIKEN, 10);
 			}
 		}
 	}

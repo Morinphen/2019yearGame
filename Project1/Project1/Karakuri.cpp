@@ -39,43 +39,48 @@ void CObjKarakuri::Action()
 	//ゲームパッド用
 	DWORD dwResult = XInputGetState(0, &k_state);
 
-	////表示画面内の時
-	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
-	if (scroll->Inscrooll_check(m_x, m_y) == true)
-	{
-		//ヒットボックス生成
-		if (HitBox_ON == false)
+	//メニュー用の情報取得
+	CObjMany* mn = (CObjMany*)Objs::GetObj(OBJ_MANY);
+	bool m_stop = mn->GetOpen();
+
+	if (m_stop == false) {
+		////表示画面内の時
+		CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
+		if (scroll->Inscrooll_check(m_x, m_y) == true)
 		{
-			HitBox_ON = true;
-			Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
-		}
+			//ヒットボックス生成
+			if (HitBox_ON == false)
+			{
+				HitBox_ON = true;
+				Hits::SetHitBox(this, m_x, m_y + 48, 64, 64, ELEMENT_BLACK, OBJ_KARAKURI, 1);
+			}
 
-		//レバー作動
-		CHitBox* hit = Hits::GetHitBox(this);
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true&&on_off==false||
-			hit->CheckObjNameHit(OBJ_HERO) != nullptr&&k_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&&on_off == false)
+			//レバー作動
+			CHitBox* hit = Hits::GetHitBox(this);
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&Input::GetVKey(VK_UP) == true && on_off == false ||
+				hit->CheckObjNameHit(OBJ_HERO) != nullptr&&k_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&&on_off == false)
+			{
+				Audio::Start(6);
+				on_off = true;
+			}
+
+			m_scroll = scroll->GetScroll();
+			l_scroll = scroll->GetYScroll();
+
+			hit->SetPos(m_x + m_scroll, m_y + l_scroll);
+
+		}
+		//表示画面外の時
+		else
 		{
-			Audio::Start(6);
-			on_off = true;
+			//ヒットボックス削除
+			if (HitBox_ON == true)
+			{
+				HitBox_ON = false;
+				Hits::DeleteHitBox(this);
+			}
 		}
-
-		m_scroll = scroll->GetScroll();
-		l_scroll = scroll->GetYScroll();
-
-		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
-
 	}
-	//表示画面外の時
-	else
-	{
-		//ヒットボックス削除
-		if (HitBox_ON == true)
-		{
-			HitBox_ON = false;
-			Hits::DeleteHitBox(this);
-		}
-	}
-	
 }
 
 //ドロー
