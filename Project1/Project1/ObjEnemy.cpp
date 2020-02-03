@@ -284,7 +284,7 @@ void CObjEnemy::Draw()
 	src.m_top = 65.0f;
 	src.m_left = 64.0f*AniData[m_ani_frame];
 	src.m_right = 64.0f*AniData[m_ani_frame]+64;
-	src.m_bottom = 128.0f;
+	src.m_bottom = 127.0f;
 
 	//ƒuƒƒbƒNî•ñ‚ğ‚Á‚Ä‚­‚é
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);

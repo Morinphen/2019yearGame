@@ -246,25 +246,25 @@ void CSceneMain::InitScene()
 			else if (map[i][j] >=30&& map[i][j] <= 50)
 			{
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64,map[i][j],false);
-				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+				Objs::InsertObj(objd, OBJ_DONDEN, 2);
 			}
 
 			else if (map[i][j] == 12)
 			{
 				CObjDonden*objd = new CObjDonden(j * 64, i * 64, map[i][j], true);
-				Objs::InsertObj(objd, OBJ_DONDEN, 3);
+				Objs::InsertObj(objd, OBJ_DONDEN, 2);
 			}
 
 			else if (map[i][j] == 6) 
 			{
 				CObjNBlock*objn = new CObjNBlock(j * 64, i * 64);
-				Objs::InsertObj(objn, OBJ_DONDEN, 3);
+				Objs::InsertObj(objn, OBJ_DONDEN, 2);
 			}
 
 			else if (map[i][j] == 7)
 			{
 				CObjUtikagi*obju = new CObjUtikagi(j * 64, i * 64);
-				Objs::InsertObj(obju, OBJ_DONDEN, 3);
+				Objs::InsertObj(obju, OBJ_DONDEN, 2);
 
 			}
 			else if (map[i][j] == 8)
@@ -291,17 +291,17 @@ void CSceneMain::InitScene()
 			else if (map[i][j] == 13)
 			{
 				CObjMakimono*objma = new CObjMakimono(j * 64, i * 64);
-				Objs::InsertObj(objma, OBJ_MAKIMONO, 3);
+				Objs::InsertObj(objma, OBJ_MAKIMONO, 2);
 			}
 			else if (map[i][j] == 14)
 			{
 				CObjExit*objex = new CObjExit(j * 64, i * 64);
-				Objs::InsertObj(objex, OBJ_EXIT, 3);
+				Objs::InsertObj(objex, OBJ_EXIT, 2);
 			}
 			else if (map[i][j] == 60|| map[i][j] == 61|| map[i][j] == 62|| map[i][j] == 66 || map[i][j] == 67 || map[i][j] == 68)
 			{
 				CObjKarakuri*objk = new CObjKarakuri(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objk, map[i][j], 3);
+				Objs::InsertObj(objk, map[i][j], 2);
 			}
 			else if (map[i][j] == 63 || map[i][j] == 64 || map[i][j] == 65|| map[i][j] == 69 || map[i][j] == 70 || map[i][j] == 71)
 			{
@@ -316,13 +316,13 @@ void CSceneMain::InitScene()
 			else if (map[i][j] == 57 || map[i][j] == 58||map[i][j]==59|| map[i][j] == 96 || map[i][j] == 97)
 			{
 				CObjNezuana*objn = new CObjNezuana(j * 64, i * 64, map[i][j]);
-				Objs::InsertObj(objn, map[i][j], 3);
+				Objs::InsertObj(objn, map[i][j], 2);
 			}
 			else if (map[i][j] == 20|| map[i][j] == 21 || map[i][j] == 22 || map[i][j] == 23 || map[i][j] == 24 || map[i][j] == 25
 					|| map[i][j] == 26 || map[i][j] == 27 || map[i][j] == 28 || map[i][j] == 29 || map[i][j] == 15)
 			{
 				CObjkanban*objka = new CObjkanban(j * 64, i * 64, map[i][j]+100);
-				Objs::InsertObj(objka, map[i][j]+100, 3);
+				Objs::InsertObj(objka, map[i][j]+100, 2);
 			}
 		}
 	}
@@ -337,7 +337,7 @@ void CSceneMain::InitScene()
 	
 	//Blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
-	Objs::InsertObj(objb, OBJ_BLOCK, 9);
+	Objs::InsertObj(objb, OBJ_BLOCK, 4);
 
 	//手裏剣所持数オブジェクト作成
 	CObjPsyuriken*objp= new CObjPsyuriken();//主人公オブジェクト作成

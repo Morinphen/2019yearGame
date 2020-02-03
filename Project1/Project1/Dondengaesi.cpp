@@ -97,24 +97,27 @@ void CObjDonden::Action()
 			s_down = h->GetDown();
 			N_stop = h->GetINawa();
 
-			//種類確認
-			if (hide == false || hide == true && h->GetDoton() == true)
+		//種類確認
+		if (hide == false || hide == true && h->GetDoton() == true)
+		{
+			//主人公が触れたとき
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 			{
-				//主人公が触れたとき
-				if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+				red = 0.0f;
+				bool stop;//投げ縄を投げていないかどうか確認
+				bool hamustop;//鼠が出ていないか確認
+				stop = h->GetNawa();
+				hamustop = h->GetHamu();
+				//↑入力をされたとき、アニメーションを開始
+				if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false||
+					d_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&& s_down == true && 
+					stop == false && N_stop == false && hamustop==false)
 				{
-					red = 0.0f;
-					bool stop;
-					stop = h->GetNawa();
-					//↑入力をされたとき、アニメーションを開始
-					if (Input::GetVKey(VK_UP) == true && s_down == true && stop == false && N_stop == false ||
-						d_state.Gamepad.sThumbLY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE&& s_down == true && stop == false && N_stop == false)
-					{
-						if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
-							Audio::Start(4);
-							h->W_cat = 0.0f;
-							h->W_cat2 -= 6.4f;
-							h->Sworp = true;
+					if (h->Sworp == false && Wanimation == false && Wanimation2 == false) {
+						Audio::Start(4);
+						h->W_cat = 0.0f;
+						h->W_cat2 -= 6.4f;
+						h->Sworp = true;
 
 							Wanimation = true;
 						}

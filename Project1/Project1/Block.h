@@ -30,6 +30,13 @@ public:
 		float *vx, float *vy
 	);
 
+	void CObjBlock::BBlockHit
+	(
+		float* x, float* y,
+		bool*up, bool* down, bool* left, bool* right,
+		float *vx, float *vy
+	);
+
 	void CObjBlock::UBlockHit
 	(
 		float* x, float* y, bool* flag,
@@ -37,6 +44,7 @@ public:
 		float *vx, float *vy
 	);
 
+	void Setmap(int i,int j);
 	void Deletemap(int x, int y);
 
 	////ålŒö‚Æ•Ç‚ÌŒğ·”»’è

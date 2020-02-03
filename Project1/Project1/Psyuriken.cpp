@@ -169,8 +169,8 @@ void CObjPsyuriken::Draw()
 
 	//表示位置の設定
 	dstt.m_top = 780.0f;
-	dstt.m_left = 1100.0f;
-	dstt.m_right = 1200.0f;
+	dstt.m_left = 750.0f;
+	dstt.m_right = 850.0f;
 	dstt.m_bottom = 900.0f;
 	//描画
 	Draw::Draw(32, &srcb, &dstt, c, 0.0f);
@@ -202,8 +202,8 @@ void CObjPsyuriken::Draw()
 
 	//表示位置の設定
 	dstm_btn.m_top = 600.0f;
-	dstm_btn.m_left = 750.0f;
-	dstm_btn.m_right = 1100.0f;
+	dstm_btn.m_left = 850.0f;
+	dstm_btn.m_right = 1200.0f;
 	dstm_btn.m_bottom = 900.0f;
 	//描画
 	Draw::Draw(42, &srcm_btn, &dstm_btn, c, 0.0f);
@@ -220,8 +220,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bta.m_top = 700.0f;
-		dstm_bta.m_left = 978.0f;
-		dstm_bta.m_right = 1100.0f;
+		dstm_bta.m_left = 1078.0f;
+		dstm_bta.m_right = 1200.0f;
 		dstm_bta.m_bottom = 820.0f;
 		if (hero->GetPushb() == 1)
 		{
@@ -243,8 +243,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_btx.m_top = 700.0f;
-		dstm_btx.m_left = 750.0f;
-		dstm_btx.m_right = 870.0f;
+		dstm_btx.m_left = 850.0f;
+		dstm_btx.m_right = 970.0f;
 		dstm_btx.m_bottom = 820.0f;
 		if (hero->GetPushb() == 3)
 		{
@@ -266,8 +266,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bty.m_top = 600.0f;
-		dstm_bty.m_left = 868.0f;
-		dstm_bty.m_right = 983.0f;
+		dstm_bty.m_left = 968.0f;
+		dstm_bty.m_right = 1083.0f;
 		dstm_bty.m_bottom = 735.0f;
 		if (hero->GetPushb() == 4)
 		{
@@ -292,8 +292,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bta.m_top = 700.0f;
-		dstm_bta.m_left = 978.0f;
-		dstm_bta.m_right = 1100.0f;
+		dstm_bta.m_left = 1078.0f;
+		dstm_bta.m_right = 1200.0f;
 		dstm_bta.m_bottom = 820.0f;
 		if (hero->GetPushb() == 1)
 		{
@@ -315,8 +315,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_btx.m_top = 700.0f;
-		dstm_btx.m_left = 750.0f;
-		dstm_btx.m_right = 870.0f;
+		dstm_btx.m_left = 850.0f;
+		dstm_btx.m_right = 970.0f;
 		dstm_btx.m_bottom = 820.0f;
 		if (hero->GetPushb() == 3)
 		{
@@ -338,8 +338,8 @@ void CObjPsyuriken::Draw()
 
 		//表示位置の設定
 		dstm_bty.m_top = 600.0f;
-		dstm_bty.m_left = 868.0f;
-		dstm_bty.m_right = 983.0f;
+		dstm_bty.m_left = 968.0f;
+		dstm_bty.m_right = 1083.0f;
 		dstm_bty.m_bottom = 735.0f;
 		if (hero->GetPushb() == 4)
 		{
@@ -362,8 +362,8 @@ void CObjPsyuriken::Draw()
 
 	//表示位置の設定
 	dstm_btb.m_top = 778.0f;
-	dstm_btb.m_left = 868.0f;
-	dstm_btb.m_right = 983.0f;
+	dstm_btb.m_left = 968.0f;
+	dstm_btb.m_right = 1083.0f;
 	dstm_btb.m_bottom = 900.0f;
 	if (hero->GetPushb() == 2)
 	{
@@ -387,8 +387,8 @@ srcm_btm.m_bottom = 178.0f;
 
 //表示位置の設定
 dstm_btm.m_top = 600.0f;
-dstm_btm.m_left = 1100.0f;
-dstm_btm.m_right = 1200.0f;
+dstm_btm.m_left = 750.0f;
+dstm_btm.m_right = 850.0f;
 dstm_btm.m_bottom = 750.0f;
 if (hero->GetPushb() == 5)
 {

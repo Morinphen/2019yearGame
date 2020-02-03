@@ -99,6 +99,8 @@ public:
 	bool Getsmoke_h() { return smokeh; }
 	//土遁の術確認
 	bool GetDoton() { return doton; }
+	//鼠が出ているか確認
+	bool GetHamu() { return nezumi; }
 
 	//主人公の戦闘スタイルを外部に渡す
 	bool GetMode() { return change; }

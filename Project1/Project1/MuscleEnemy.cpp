@@ -68,6 +68,12 @@ void CObjMuscleEnemy::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hr->GetDflag_s() == false)
 	{
+		//摩擦
+		m_vx += -(m_vx*0.098);
+
+		//自由落下運動
+		m_vy += 9.8 / (16.0f);
+
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
@@ -145,7 +151,7 @@ void CObjMuscleEnemy::Draw()
 	src.m_top = 65.0f;
 	src.m_left = 448.0f;
 	src.m_right = 512.0f;
-	src.m_bottom = 128.0f;
+	src.m_bottom = 127.0f;
 	//ブロック情報を持ってくる
 	CObjScroll* scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 
