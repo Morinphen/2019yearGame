@@ -117,8 +117,10 @@ void CObjKaginawa::Action()
 		bool Mode;
 		Mode = h->GetChange();
 
+		bool Nojamp = h->GetDown();
+
 		//Yボタンをクリックしたとき、鍵縄を発射する
-		if (h->GetKNgo() == true/*Input::GetVKey('A')&&h->GetS_atack()==false|| kn_state.Gamepad.wButtons & XINPUT_GAMEPAD_Y&&h->GetS_atack() == false*/)
+		if (h->GetKNgo() == true && Nojamp == true/*Input::GetVKey('A')&&h->GetS_atack()==false|| kn_state.Gamepad.wButtons & XINPUT_GAMEPAD_Y&&h->GetS_atack() == false*/)
 		{
 			Audio::Start(7);
 			float a = abs(m_x - h->GetX());

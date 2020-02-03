@@ -29,7 +29,7 @@ private:
 	float m_vy;
 
 	//“ê‚ÌŒü‚«
-	float m_muki;
+	int m_muki;
 	//“ê‚Ìd—Í—p•Ï”
 	float grabty;
 	//“ê‚Ì’·‚³—p•Ï”

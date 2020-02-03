@@ -656,7 +656,8 @@ void CObjHero::Rightwalk()
 {
 	m_vx += 0.5f;
 	m_ani_time++;
-	m_posture = 0.0f;
+	if(nawa_stop ==false)
+		m_posture = 0.0f;
 }
 
 //ç∂Ç…ï‡Ç©ÇπÇÈ
@@ -664,7 +665,8 @@ void CObjHero::Leftwalk()
 {
 	m_vx -= 0.5f;
 	m_ani_time++;
-	m_posture = 1.0f;
+	if (nawa_stop == false)
+		m_posture = 1.0f;
 }
 
 void CObjHero::Animation()
