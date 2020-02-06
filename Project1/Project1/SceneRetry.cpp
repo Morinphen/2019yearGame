@@ -34,7 +34,7 @@ void CSceneRetry::InitScene()
 	Draw::LoadImage(L"sozai\\ka.png", 1, TEX_SIZE_512);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
-	Audio::LoadAudio(0, L"gameover.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"music\\gameover.wav", SOUND_TYPE::BACK_MUSIC);
 
 	//バックミュージックスタート
 	float v = Audio::VolumeMaster(-0.3);

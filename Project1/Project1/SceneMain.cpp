@@ -31,31 +31,31 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	//外部オーディオファイル読み込み
-	Audio::LoadAudio(0, L"main.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"music\\main.wav", SOUND_TYPE::BACK_MUSIC);
 
-	Audio::LoadAudio(1, L"syuriken.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(2, L"jump.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(3, L"dash.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(4, L"donden.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(5, L"fire.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(6, L"gatyan.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(7, L"kaginawa nage.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(8, L"makimono.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(9, L"nezumi.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(10, L"smokeball.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(11, L"syuriken get.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(12, L"utikagi kaginawa.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(13, L"enemyfind.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(14, L"enemyhit.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(15, L"water.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(16, L"matti.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(17, L"key-drop1.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(18, L"sword-slash4.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(19, L"sadou.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(20, L"change.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(21, L"hamenemy.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(22, L"turi.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(23, L"kemuri.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(1, L"music\\syuriken.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(2, L"music\\jump.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(3, L"music\\dash.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(4, L"music\\donden.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(5, L"music\\fire.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(6, L"music\\gatyan.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(7, L"music\\kaginawa nage.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(8, L"music\\makimono.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(9, L"music\\nezumi.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(10, L"music\\smokeball.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(11, L"music\\syuriken get.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(12, L"music\\utikagi kaginawa.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(13, L"music\\enemyfind.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(14, L"music\\enemyhit.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(15, L"music\\water.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(16, L"music\\matti.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(17, L"music\\key-drop1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(18, L"music\\sword-slash4.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(19, L"music\\sadou.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(20, L"music\\change.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(21, L"music\\hamenemy.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(22, L"music\\turi.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(23, L"music\\kemuri.wav", SOUND_TYPE::EFFECT);
 	//ボリュームを1.5に増やす
 	float v = Audio::VolumeMaster(-0.5);
 	v = Audio::VolumeMaster((1.0 - v));

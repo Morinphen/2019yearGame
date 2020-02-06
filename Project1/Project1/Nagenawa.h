@@ -38,6 +38,9 @@ private:
 	//主人公との角度
 	float r;
 
+	//てすと
+	bool deletea;
+
 	float m_scroll;//左右スクロール用変数
 	float l_scroll;//上下スクロール用変数
 

@@ -35,6 +35,7 @@ void CObjNagenawa::Init()
 
 	Nawa = 0;
 	r = 0;
+	deletea = false;
 
 	//m_vy = -15;
 
@@ -87,7 +88,8 @@ void CObjNagenawa::Action()
 			m_hit_down == true ||
 			m_hit_left == true ||
 			m_hit_right == true ||
-			m_y > 700.0f)
+			m_y > 700.0f ||
+			deletea == true)
 		{
 			Audio::Start(12);
 			float a = abs(m_y - h->GetY());
@@ -113,6 +115,8 @@ void CObjNagenawa::Action()
 
 		m_y += m_vy;
 
+		if (m_y > h->GetY() + 16.0f)
+			deletea = true;
 
 		m_scroll = scroll->GetScroll();
 		l_scroll = scroll->GetYScroll();

@@ -24,7 +24,7 @@ void CObjHero::Init()
 	//ƒXƒNƒ[ƒ‹ξ•ρζ“Ύ
 	CObjScroll * scroll = (CObjScroll*)Objs::GetObj(OBJ_SCROLL);
 	m_x = 400;
-	m_y = 600;
+	m_y = 500;
 	m_vx = 0;
 	m_vy = 0;
 	r = 0.0f;
@@ -296,8 +296,8 @@ void CObjHero::Action()
 						}
 
 						//ηκ“κ(”­Λ)
-						if (Input::GetVKey('V') && s_atack == false && kaginawa_point == true ||
-							state.Gamepad.wButtons & XINPUT_GAMEPAD_Y && s_atack == false && kaginawa_point == true)
+						if (Input::GetVKey('V') && s_atack == false && kaginawa_point == true && m_hit_down == true ||
+							state.Gamepad.wButtons & XINPUT_GAMEPAD_Y && s_atack == false && kaginawa_point == true && m_hit_down == true)
 						{
 							kaginawa_point = false;
 							kaginawa_go = true;

@@ -35,9 +35,9 @@ void CSceneTitle::InitScene()
 	Draw::LoadImage(L"sozai\\title.png", 0, TEX_SIZE_1024);
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
-	Audio::LoadAudio(0, L"title.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"music\\title.wav", SOUND_TYPE::BACK_MUSIC);
 
-	Audio::LoadAudio(1, L"titleselect.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(1, L"music\\titleselect.wav", SOUND_TYPE::EFFECT);
 	//バックミュージックスタート
 	float v = Audio::VolumeMaster(-0.4);
 	v = Audio::VolumeMaster((1.0 - v));
