@@ -200,13 +200,13 @@ void CObjNagenawa::Draw()
 	{
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = 31.0f;
+		src.m_right = 30.0f;
 		src.m_bottom = 36.0f;
 	}
 	else
 	{
 		src.m_top = 0.0f;
-		src.m_left = 31.0f;
+		src.m_left = 30.0f;
 		src.m_right = 0.0f;
 		src.m_bottom = 36.0f;
 	}

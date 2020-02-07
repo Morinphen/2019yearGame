@@ -182,7 +182,7 @@ void CObjUguBlock::Draw()
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
 		//ブロック表示
-		src.m_top = 0.0f + ((m_ani_frame % 4)*64.0f);
+		src.m_top = -1.0f + ((m_ani_frame % 4)*64.0f);
 		src.m_left = 64.0f * 4;
 		src.m_right = 64.0f * 5;
 		src.m_bottom = 64.0f + ((m_ani_frame % 4)*64.0f);
