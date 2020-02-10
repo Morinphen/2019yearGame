@@ -117,7 +117,6 @@ void CObjMakimono::Action()
 		getflag = true;
 		hero->Cflag=true;
 	}
-
 			if (getflag == true)
 			{
 				Audio::Start(11);

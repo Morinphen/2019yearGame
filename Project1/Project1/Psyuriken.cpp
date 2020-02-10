@@ -185,8 +185,8 @@ void CObjPsyuriken::Draw()
 
 		//ï\é¶à íuÇÃê›íË
 		dstg.m_top = 800.0f;
-		dstg.m_left = 1110.0f;
-		dstg.m_right = 1190.0f;
+		dstg.m_left = 760.0f;
+		dstg.m_right = 840.0f;
 		dstg.m_bottom = 880.0f;
 
 		//ï`âÊ

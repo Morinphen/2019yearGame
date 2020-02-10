@@ -161,31 +161,4 @@ void CObjScroll::Donden_check(int x, int y)
 	hero->SetY(yy);
 
 	l_scroll = -(64*9)*Yz;
-
-	////後方スクロールライン
-	//if (xx < 500)
-	//{
-	//	hero->SetX(500);//主人公はラインを超えないように
-	//	m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
-	//}
-
-	//if (yy < 0)
-	//{
-	//	hero->SetY(0);//主人公はラインを超えないように
-	//	l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
-	//}
-
-	////前方スクロールライン
-	//if (xx > 600)
-	//{
-	//	hero->SetX(600);//主人公はラインを超えないように
-	//	m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
-	//}
-
-	//////下方スクロールライン
-	//if (yy > 500)
-	//{
-	//	hero->SetY(400);//主人公はラインを超えないように
-	//					//l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
-	//}
 }

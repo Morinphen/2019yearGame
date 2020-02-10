@@ -128,6 +128,7 @@ void CObjTBlock::Action()
 			m_y -= 2;
 			if (sm_y == m_y)
 			{
+				stop = false;
 				modecheck = 1;
 				Hits::DeleteHitBox(this);
 				Hits::SetHitBox(this, m_x, m_y, 64, 576, ELEMENT_BLACK, OBJ_TURIBLOCK, 1);
