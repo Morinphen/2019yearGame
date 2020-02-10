@@ -20,9 +20,8 @@ CObjScroll::CObjScroll(int map[46][100])
 //イニシャライズ
 void CObjScroll::Init()
 {
-	m_scroll = 64.0f*-80.0;
-	l_scroll = 64.0f*-0.0f;
-	//l_scroll = 64.0f*-30.0f;
+	m_scroll = 64.0f*-0.0f;
+	l_scroll = 64.0f*-36.0f;
 }
 //アクション
 void CObjScroll::Action()
@@ -62,10 +61,10 @@ void CObjScroll::Action()
 	}
 
 	////下方スクロールライン
-	if (hy > 600 && l_scroll>-64*46)
+	if (hy > 500 && l_scroll>-64*46)
 	{
-	    hero->SetY(10);//主人公はラインを超えないように
-		l_scroll -= 64*9;//主人公が本来動く分だけ動かす
+	    hero->SetY(500);//主人公はラインを超えないように
+		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
 	}
 
 }
