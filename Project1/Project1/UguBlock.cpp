@@ -117,16 +117,7 @@ void CObjUguBlock::Action()
 
 		if (uguisu == true)
 		{
-			m_ani_time++;
-			if (m_ani_time == 6) {
-				m_ani_time = 0;
-				m_ani_frame++;
-			}
 
-		}
-
-		if (m_ani_frame == 1)
-		{
 			Audio::Start(18);
 			hero->SetRE(1);
 			hero->SetVX(0);
@@ -152,6 +143,7 @@ void CObjUguBlock::Action()
 			hero->Dflag(false);
 			uguisu = false;
 			m_ani_frame = 0;
+			
 		}
 
 		hit->SetPos(m_x + m_scroll, m_y + l_scroll);
@@ -182,10 +174,10 @@ void CObjUguBlock::Draw()
 	if (scroll->Inscrooll_check(m_x, m_y) == true)
 	{
 		//ブロック表示
-		src.m_top = -1.0f + ((m_ani_frame % 4)*64.0f);
+		src.m_top = 0.5f;
 		src.m_left = 64.0f * 4;
 		src.m_right = 64.0f * 5;
-		src.m_bottom = 64.0f + ((m_ani_frame % 4)*64.0f);
+		src.m_bottom = 64.0f;
 
 		dst.m_top = m_y + l_scroll;
 		dst.m_left = m_x + m_scroll;

@@ -121,8 +121,8 @@ void CObjKarakuri::Draw()
 			{
 				//ブロック表示
 				src.m_top = 0.0f;
-				src.m_left = 64.0f;
-				src.m_right = -1.0f;
+				src.m_left = 63.0f;
+				src.m_right = 0.0f;
 				src.m_bottom = 64.0f;
 
 			}
@@ -130,8 +130,8 @@ void CObjKarakuri::Draw()
 			{
 				//ブロック表示
 				src.m_top = 64.0f;
-				src.m_left = 64.0f;
-				src.m_right = -1.0f;
+				src.m_left = 63.0f;
+				src.m_right = 0.0f;
 				src.m_bottom = 0.0f;
 			}
 		}
