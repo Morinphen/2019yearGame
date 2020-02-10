@@ -34,9 +34,9 @@ void CSceneClear::InitScene()
 	Font::SetStrTex(L"ニンカツ");
 	//外部オーディオファイル読み込み
 
-	Audio::LoadAudio(0, L"gameclear.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"music\\gameclear.wav", SOUND_TYPE::BACK_MUSIC);
 
-	Audio::LoadAudio(1, L"titleselect.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(1, L"music\\titleselect.wav", SOUND_TYPE::EFFECT);
 	float v = Audio::VolumeMaster(-0.5);
 	v = Audio::VolumeMaster((1.0 - v));
 	v = Audio::VolumeMaster(-0.5);

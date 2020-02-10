@@ -128,7 +128,6 @@ void CObjUguBlock::Action()
 		if (m_ani_frame == 1)
 		{
 			Audio::Start(18);
-			hero->SetRE(1);
 			hero->SetVX(0);
 			hero->SetVY(0);
 			hero->SetX(hero->GetWX());
@@ -148,6 +147,9 @@ void CObjUguBlock::Action()
 				scroll->SetYScrooll(-(hero->GetY() - (500)));
 			}
 
+			scroll->Resporn_check(m_x, m_y);
+
+			hero->SetRE(1);
 			hero->WDflag(false);
 			hero->Dflag(false);
 			uguisu = false;

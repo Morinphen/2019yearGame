@@ -82,7 +82,7 @@ void CObjHero::Init()
 	hero_stop = false;
 
 	w_x = 400;
-	w_y = 600-scroll->GetYScroll();
+	w_y = 500-scroll->GetYScroll();
 
 	m_ani_time = 0;
 	m_ani_frame = 0;//静止フレーム初期化
@@ -472,9 +472,9 @@ void CObjHero::Action()
 			smokeh = false;
 		}
 
+		//主人公がミスしたとき、リスポーンさせる
 		if (deadtime > 180)
 		{
-			remain -= 1;
 			SetX(GetWX());
 			SetY(GetWY());
 			if (GetX() < 500) {
@@ -491,6 +491,9 @@ void CObjHero::Action()
 				scroll->SetYScrooll(-(GetY() - (500)));
 			}
 
+			scroll->Resporn_check(m_x,m_y);
+
+			remain -= 1;
 			WDflag(false);
 			Dflag(false);
 			dead_s = false;
@@ -500,7 +503,6 @@ void CObjHero::Action()
 		//天井と当たっているかどうか確認
 		if (hit->CheckObjNameHit(OBJ_TURIBLOCK2) != nullptr&&dead_s == false)
 		{
-			remain -= 1;
 			SetX(GetWX());
 			SetY(GetWY());
 			if (GetX() < 500) {
@@ -517,9 +519,13 @@ void CObjHero::Action()
 				scroll->SetYScrooll(-(GetY() - (500)));
 			}
 
+			scroll->Resporn_check(m_x, m_y);
+
+			remain -= 1;
 			WDflag(false);
 			Dflag(false);
 		}
+
 		if (fires == false)
 		{
 			firetime += 1;

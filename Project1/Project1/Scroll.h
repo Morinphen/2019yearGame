@@ -23,6 +23,9 @@ public:
 
 	float GetMNScroll() { return mn_scroll; }
 	float GetLNScroll() { return ln_scroll; }
+
+	void Resporn_check(int x, int y);
+	void Donden_check(int x, int y);
 	bool Inscrooll_check(int x, int y);
 
 	int m_map[46][100];

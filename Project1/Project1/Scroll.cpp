@@ -20,8 +20,8 @@ CObjScroll::CObjScroll(int map[46][100])
 //イニシャライズ
 void CObjScroll::Init()
 {
-	m_scroll = 64.0f*-0.0f;
-	l_scroll = 64.0f*-36.0f;
+	m_scroll = 64.0f*-80.0;
+	l_scroll = 64.0f*-0.0f;
 	//l_scroll = 64.0f*-30.0f;
 }
 //アクション
@@ -58,7 +58,7 @@ void CObjScroll::Action()
 	if (hy < 0)
 	{
 		hero->SetY(500);//主人公はラインを超えないように
-		l_scroll += 64 * 8;//主人公が本来動く分だけ動かす
+		l_scroll += 64 * 9;//主人公が本来動く分だけ動かす
 	}
 
 	////下方スクロールライン
@@ -98,4 +98,53 @@ bool CObjScroll::Inscrooll_check(int x, int y)
 		return true;
 	else
 		false;
+}
+
+void CObjScroll::Resporn_check(int x, int y)
+{
+	//主人公の位置を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hx = hero->GetX();
+	float hy = hero->GetY();
+
+	if (hx > 500 && hx < 600)
+	{
+		mn_scroll = 500 - hx;
+	}
+	if (hy > 80 && hy < 500)
+	{
+		mn_scroll = 500 - hx;
+	}
+
+	//後方スクロールライン
+	if (hx < 500)
+	{
+		hero->SetX(500);//主人公はラインを超えないように
+		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
+	}
+
+	//前方スクロールライン
+	if (hx > 600)
+	{
+		hero->SetX(600);//主人公はラインを超えないように
+		m_scroll -= hero->GetVX();//主人公が本来動く分だけ動かす
+	}
+
+	if (hy < 0)
+	{
+		hero->SetY(0);//主人公はラインを超えないように
+		l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
+	}
+
+	////下方スクロールライン
+	if (hy > 500)
+	{
+		hero->SetY(400);//主人公はラインを超えないように
+		//l_scroll -= hero->GetVY();//主人公が本来動く分だけ動かす
+	}
+}
+
+void CObjScroll::Donden_check(int x, int y)
+{
+	;
 }
